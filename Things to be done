@@ -1,0 +1,2 @@
+# Adding django-filter app to filter view on basis of individual user check flag.
+# user Authentication, redirect according to group, view constrains and logout
