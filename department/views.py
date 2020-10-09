@@ -11,13 +11,13 @@ def add_show(request):
         if form.is_valid():
             cd = form.cleaned_data
             nm = cd['name']
-            dp = cd['department']
+            dp = cd['departments']
             em = cd['employer']
             dt = cd['date']
             pk = cd['package']
             rf = cd['ref_no']
             #model class object created (reg)
-            reg = Student(name=nm, department=dp, employer=em,date=dt, package=pk, ref_no=rf)
+            reg = Student(name=nm, departments=dp, employer=em,date=dt, package=pk, ref_no=rf)
             reg.save()
             messages.success(request, 'Added successfully')
             return HttpResponseRedirect('/')
@@ -26,8 +26,27 @@ def add_show(request):
         form = AddStudent()
 
     stud = Student.objects.all()
-    return render(request, 'placement/show_student.html',{'form':form,'stu':stud})
+    context = {
+        'header': 'Student Academic Performance',
+        'form':form,
+        'stu':stud
+    }
+    return render(request, 'department/add_show.html', context)
 
+# Update/Edit table item
+def update_data(request, id):
+    if request.method == 'POST' :
+        pi = Student.objects.get(pk=id)
+        form = AddStudent(request.POST, instance=pi)
+        if form.is_valid():
+            form.save()
+    else:
+        pi = Student.objects.get(pk=id)
+        form = AddStudent(instance=pi)
+    return render(request, 'department/update_row.html', {'form':form})
+    return HttpResponseRedirect('/')
+
+# Delete function
 def delete_data(request, id):
     if request.method == 'POST' :
         pi = Student.objects.get(pk=id)
