@@ -1,5 +1,5 @@
 {% extends 'department/base.html' %}
-{% block content %} 
+{% block content %}
 
 <div class="row">
     <div class="col-sm-8">
@@ -9,6 +9,19 @@
             {{form.as_p}}
             <input type="submit" class="btn btn-success" value="save changes">
             <a href="{% url 'add_show' %}" class="btn btn-info">Back to Home</a>
+            {% if messages %}
+            <ul class="messages">
+                {% for msg in messages %}
+                <li class="list-unstyled">
+                    <div class="alert alert-{{msg.level_tag}}" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>{{msg.message}}
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
         </form>
     </div>
 </div>

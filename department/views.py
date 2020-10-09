@@ -40,11 +40,11 @@ def update_data(request, id):
         form = AddStudent(request.POST, instance=pi)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Changes saved !')
     else:
         pi = Student.objects.get(pk=id)
         form = AddStudent(instance=pi)
     return render(request, 'department/update_row.html', {'form':form})
-    return HttpResponseRedirect('/')
 
 # Delete function
 def delete_data(request, id):
