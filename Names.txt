@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Student Academic Performance
     Student Result
 
@@ -17,3 +18,5 @@ Departmental Activities
     Faculty Development Programs
     Students Inter-Institute Participation
     Start-up
+=======
+>>>>>>> b539dab69cc5c1e726783ef2b1246333c5bd1355
