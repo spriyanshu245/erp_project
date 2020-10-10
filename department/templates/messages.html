@@ -1,0 +1,17 @@
+{% block messages %}
+
+{% if messages %}
+<ul class="messages">
+  {% for msg in messages %}
+  <li class="list-unstyled">
+    <div class="alert alert-{{msg.level_tag}}" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>{{msg.message}}
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{% endblock %}
