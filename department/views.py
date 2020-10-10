@@ -52,3 +52,6 @@ def delete_data(request, id):
         pi = Student.objects.get(pk=id)
         pi.delete()
         return HttpResponseRedirect('/')
+
+def dept_act_3(request):
+    return render(request, 'department/dept_act_3.html')
