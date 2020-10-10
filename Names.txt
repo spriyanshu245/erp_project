@@ -5,6 +5,15 @@ Departmental Activities
     Events Organized
     Events Organized (For Nearby Schools)
     Events Organized in assosiation with Professional bodies
+    	no (int) - No
+    	activity (char) - Name of Activity
+    	dept (char) - Name of Department
+    	pname (char) -    Resource Person Name & Contact details
+    	pcontact (char) - Resource Person Name & Contact details
+    	participants (int) - Number of Participants
+	fromdate (datefield) - Duration (From-To)
+	todate (datefield) - Duration (From-To)
+	
     Faculty Development Programs
     Students Inter-Institute Participation
     Start-up

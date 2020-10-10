@@ -1,0 +1,10 @@
+Student Academic Performance
+    Student Result
+
+Departmental Activities
+    Events Organized
+    Events Organized (For Nearby Schools)
+    Events Organized with Professional bodies
+    Faculty Development Programs
+    Students Inter-Institute Participation
+    Start-up

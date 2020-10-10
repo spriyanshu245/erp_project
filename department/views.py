@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
-from .forms import AddStudent
-from .models import Student
+from .forms import AddStudent, AddProEvent
+from .models import Student, ProEvent
 from django.contrib import messages
 
 # Create your views here.
@@ -54,4 +54,18 @@ def delete_data(request, id):
         return HttpResponseRedirect('/')
 
 def dept_act_3(request):
-    return render(request, 'department/dept_act_3.html')
+
+    form = AddProEvent()
+
+    if request.method == 'POST':
+        form = AddProEvent(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return dept_act_3(request)
+
+    context = {
+        'header': 'Departmental Activities',
+        'form' : form
+    }
+    
+    return render(request, 'department/dept_act_3.html', context)

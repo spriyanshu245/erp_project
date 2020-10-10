@@ -1,6 +1,6 @@
 from django.core import validators
 from django import forms
-from .models import Student
+from .models import Student, ProEvent
 
 
 class AddStudent(forms.ModelForm):
@@ -16,3 +16,8 @@ class AddStudent(forms.ModelForm):
             'package': forms.NumberInput(attrs={'class':'form-control'}),
             'ref_no': forms.NumberInput(attrs={'class':'form-control'}),
         }
+
+class AddProEvent(forms.ModelForm):
+    class Meta:
+        model = ProEvent
+        fields = ['activity','dept','pname','pcontact','participants','fromdate','todate']
