@@ -27,7 +27,7 @@ def add_show(request):
 
     stud = Student.objects.all()
     context = {
-        'header': 'Student Academic Performance',
+        'header': 'Student Result',
         'form':form,
         'stu':stud
     }
@@ -40,7 +40,7 @@ def update_data(request, id):
         form = AddStudent(request.POST, instance=pi)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Changes saved !')
+            messages.success(request, 'Changes Saved !')
     else:
         pi = Student.objects.get(pk=id)
         form = AddStudent(instance=pi)
@@ -54,18 +54,21 @@ def delete_data(request, id):
         return HttpResponseRedirect('/')
 
 def dept_act_3(request):
-
     form = AddProEvent()
-
     if request.method == 'POST':
         form = AddProEvent(request.POST)
         if form.is_valid():
             form.save(commit=True)
-            return dept_act_3(request)
+            messages.success(request, 'Added successfully')
+            return HttpResponseRedirect('department/dept_act_3.html')
+            #return dept_act_3(request)
+    else:
+        form = AddProEvent()
+    event = ProEvent.objects.all()
 
     context = {
         'header': 'Departmental Activities',
         'form' : form
+        #'event' : event
     }
-    
     return render(request, 'department/dept_act_3.html', context)

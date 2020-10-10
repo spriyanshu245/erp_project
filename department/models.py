@@ -10,7 +10,7 @@ DEPARTMENTS = (
 # Create your models here.
 
 class Department(models.Model):
-    department = models.CharField(primary_key=True, max_length=128)
+    department = models.CharField(primary_key=True, max_length=128,unique=True)
 
     def __str__(self):
         return self.department
@@ -29,12 +29,16 @@ class Student(models.Model):
 class ProEvent(models.Model):
     no = models.IntegerField()
     activity = models.CharField(max_length=150)
-    dept = models.ForeignKey(Department, on_delete=models.CASCADE)
+    dept = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
+    #dept = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
     pname = models.CharField(max_length=150)
     pcontact = models.IntegerField()
     participants = models.IntegerField()
-    fromdate = models.DateField()
-    todate = models.DateField()
+    fromdate = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
+    todate = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
+
+    def __str__(self):
+        return self.ProEvent
 
 
 

@@ -1,18 +1,10 @@
 {% extends 'department/base.html' %}
 
 {% block content %}
-{% include 'department/tabs.html' %} 
+{% include 'department/add_show_tabs.html' %} 
 
 <div class="row">
-  <div class="col-sm-4">
-    <h4 class="text-center alert alert-info">Add new Record</h4>
-    <form action="" method="POST">
-      {% csrf_token %}
-      {{form.as_p}}
-      <input type="submit" class="btn btn-success" value="Add" />
-      {% include 'messages.html' %}
-    </form>
-  </div>
+ {% include 'add_record.html' %}
   <div class="col-sm-8">
     {% if stu %}
      <h4 class="text-center alert alert-info"> {{header}} </h4> 
@@ -27,7 +19,8 @@
             <th scope="col">Package</th>
             <th scope="col">Reference</th>
             <th scope="col">Action</th>
-          </tr>        </thead>
+          </tr>
+        </thead>
         <tbody>
             {% for st in stu %}
           <tr>

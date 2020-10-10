@@ -2,6 +2,8 @@ from django.core import validators
 from django import forms
 from .models import Student, ProEvent
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 class AddStudent(forms.ModelForm):
     class Meta:
@@ -12,7 +14,7 @@ class AddStudent(forms.ModelForm):
             'name': forms.TextInput(attrs={'class':'form-control'}),
             'departments' : forms.Select(attrs={'class':'form-control'}),
             'employer': forms.TextInput(attrs={'class':'form-control'}),
-            'date' : forms.DateInput(format='%m/%d/%Y',attrs={'class':'form-control'}),
+            'date' : DateInput(attrs={'class':'form-control'}),
             'package': forms.NumberInput(attrs={'class':'form-control'}),
             'ref_no': forms.NumberInput(attrs={'class':'form-control'}),
         }
@@ -20,4 +22,4 @@ class AddStudent(forms.ModelForm):
 class AddProEvent(forms.ModelForm):
     class Meta:
         model = ProEvent
-        fields = ['activity','dept','pname','pcontact','participants','fromdate','todate']
+        fields = ['no','activity','dept','pname','pcontact','participants','fromdate','todate']
