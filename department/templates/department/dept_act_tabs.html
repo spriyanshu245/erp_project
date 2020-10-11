@@ -1,0 +1,20 @@
+{% block tabs %}
+  <div>
+    <h4 class="text-center alert alert-info">Departmental Activities</h4>
+  </div>
+  <div class="add_buttons">
+    <div class="button-group">
+      <a href="{% url 'dept_act_3' %}" class="btn btn-primary btn-md btn-trim" role="button"> TAB 1</a>
+      <a href="" class="btn btn-primary btn-md btn-trim" role="button"> TAB 2</a>
+      <a href="" class="btn btn-primary btn-md btn-trim" role="button"> TAB 3</a>
+      <a href="" class="btn btn-primary btn-md btn-trim" role="button"> TAB 4</a>
+      <a href="" class="btn btn-primary btn-md btn-trim" role="button"> TAB 5</a>
+      <a href="" class="btn btn-primary btn-md btn-trim" role="button"> TAB 6</a>
+    </div>
+  </div>
+  <div>
+    <h4 class="text-center alert alert-info">Currently Viewing {{ header }} Table</h4>
+  </div>
+{% endblock %}
+
+<!-- <a href="" class="btn btn-info btn-md btn-trim" role="button"> TAB 6</a> -->

@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
-from .forms import AddStudent
-from .models import Student
+from .forms import AddStudent, AddProEvent
+from .models import Student, ProEvent
 from django.contrib import messages
 
 # Create your views here.
@@ -27,10 +27,11 @@ def add_show(request):
 
     stud = Student.objects.all()
     context = {
-        'header': 'Student Academic Performance',
+        'header': 'Student Result',
         'form':form,
         'stu':stud
     }
+    
     return render(request, 'department/add_show.html', context)
 
 # Update/Edit table item
@@ -40,7 +41,7 @@ def update_data(request, id):
         form = AddStudent(request.POST, instance=pi)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Changes saved !')
+            messages.success(request, 'Changes Saved !')
     else:
         pi = Student.objects.get(pk=id)
         form = AddStudent(instance=pi)
@@ -53,5 +54,23 @@ def delete_data(request, id):
         pi.delete()
         return HttpResponseRedirect('/')
 
+
 def dept_act_3(request):
-    return render(request, 'department/dept_act_3.html')
+    form = AddProEvent()
+    if request.method == 'POST':
+        form = AddProEvent(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            messages.success(request, 'Added successfully')
+            return HttpResponseRedirect('/department/dept_act_3')
+            #return dept_act_3(request)
+    else:
+        form = AddProEvent()
+    event = ProEvent.objects.all
+
+    context = {
+        'header': 'Departmental Activities',
+        'form' : form,
+        'event' : event,        
+    }
+    return render(request, 'department/dept_act_3.html', context)
