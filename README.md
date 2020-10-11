@@ -26,3 +26,10 @@ git push
 
 
 ```
+Requirsd Installations :
+```
+djnago == 3.0 and above
+mysql server
+django-filters
+
+```
