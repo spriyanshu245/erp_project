@@ -28,7 +28,6 @@ class Student(models.Model):
     objects = models.Manager()
 
 class ProEvent(models.Model):
-    no = models.IntegerField()
     activity_name = models.CharField(max_length=150)
     department_name = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
     #department_name = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
