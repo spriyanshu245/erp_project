@@ -7,7 +7,7 @@ urlpatterns = [
     # url(r'^tab3$', tab3, name="TAB 3"),
 
     path('', views.add_show, name="add_show"),
-    path(r'^deptact3/', views.dept_act_3, name="dept_act_3"),
+    path('dept_act_3/', views.dept_act_3, name="dept_act_3"),
     path('delete/<int:id>/', views.delete_data, name="delete"),
     path('update/<int:id>/', views.update_data, name="update"),
 ]

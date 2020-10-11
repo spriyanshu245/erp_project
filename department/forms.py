@@ -22,4 +22,15 @@ class AddStudent(forms.ModelForm):
 class AddProEvent(forms.ModelForm):
     class Meta:
         model = ProEvent
-        fields = ['no','activity','dept','pname','pcontact','participants','fromdate','todate']
+        fields = ['no','activity_name','department_name','resourse_person_name','resourse_person_contact','no_of_participants','event_from_date','event_to_date']
+        #adding bootstrap classes to form inputs
+        widgets = {
+            'no': forms.TextInput(attrs={'class':'form-control'}),
+            'activity_name': forms.TextInput(attrs={'class':'form-control'}),
+            'department_name': forms.Select(attrs={'class':'form-control'}),
+            'resourse_person_name': forms.TextInput(attrs={'class':'form-control'}),
+            'resourse_person_contact': forms.TextInput(attrs={'class':'form-control'}),
+            'no_of_participants': forms.TextInput(attrs={'class':'form-control'}),
+            'event_from_date': DateInput(attrs={'class':'form-control'}),
+            'event_to_date': DateInput(attrs={'class':'form-control'}) 
+        }

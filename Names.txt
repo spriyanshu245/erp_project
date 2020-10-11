@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Student Academic Performance
     Student Result
 
@@ -7,16 +6,14 @@ Departmental Activities
     Events Organized (For Nearby Schools)
     Events Organized in assosiation with Professional bodies
     	no (int) - No
-    	activity (char) - Name of Activity
-    	dept (char) - Name of Department
-    	pname (char) -    Resource Person Name & Contact details
-    	pcontact (char) - Resource Person Name & Contact details
-    	participants (int) - Number of Participants
-	fromdate (datefield) - Duration (From-To)
-	todate (datefield) - Duration (From-To)
+    	activity_name (char) - Name of Activity
+    	department_name (char) - Name of Department
+    	resourse_person_name (char) -    Resource Person Name & Contact details
+    	resourse_person_contact (char) - Resource Person Name & Contact details
+    	no_of_participants (int) - Number of Participants
+		from (datefield) - Duration (From-To)
+		to (datefield) - Duration (From-To)
 	
     Faculty Development Programs
     Students Inter-Institute Participation
     Start-up
-=======
->>>>>>> b539dab69cc5c1e726783ef2b1246333c5bd1355

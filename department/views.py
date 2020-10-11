@@ -62,15 +62,15 @@ def dept_act_3(request):
         if form.is_valid():
             form.save(commit=True)
             messages.success(request, 'Added successfully')
-            return HttpResponseRedirect('department/dept_act_3.html')
+            return HttpResponseRedirect('/department/dept_act_3')
             #return dept_act_3(request)
     else:
         form = AddProEvent()
-    event = ProEvent.objects.all()
+    event = ProEvent.objects.all
 
     context = {
         'header': 'Departmental Activities',
-        'form' : form
-        #'event' : event
+        'form' : form,
+        'event' : event,        
     }
     return render(request, 'department/dept_act_3.html', context)

@@ -7,6 +7,7 @@ DEPARTMENTS = (
     ('Mechanical','Mechanical'),
     ('Civil','Civil'),
 )
+
 # Create your models here.
 
 class Department(models.Model):
@@ -28,17 +29,18 @@ class Student(models.Model):
 
 class ProEvent(models.Model):
     no = models.IntegerField()
-    activity = models.CharField(max_length=150)
-    dept = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
-    #dept = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
-    pname = models.CharField(max_length=150)
-    pcontact = models.IntegerField()
-    participants = models.IntegerField()
-    fromdate = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
-    todate = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
+    activity_name = models.CharField(max_length=150)
+    department_name = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
+    #department_name = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
+    resourse_person_name = models.CharField(max_length=150)
+    resourse_person_contact = models.IntegerField()
+    no_of_participants = models.IntegerField()
+    event_from_date = models.DateField(("From"), default=date.today,auto_now=False, auto_now_add=False)
+    event_to_date = models.DateField(("To"), default=date.today,auto_now=False, auto_now_add=False)
+    objects = models.Manager()
 
     def __str__(self):
-        return self.ProEvent
+        return self.activity_name
 
 
 
