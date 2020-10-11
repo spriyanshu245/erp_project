@@ -13,6 +13,7 @@ Student Academic Performance
 
 
 Departmental Activities
+<<<<<<< HEAD
     1] Events Organized
         table(dept_act_1) :
 
@@ -39,3 +40,20 @@ Departmental Activities
         
     6] Start-up
         table(dept_act_6) :
+=======
+    Events Organized
+    Events Organized (For Nearby Schools)
+    Events Organized in assosiation with Professional bodies
+    	no (int) - No
+    	activity_name (char) - Name of Activity
+    	department_name (char) - Name of Department
+    	resourse_person_name (char) -    Resource Person Name & Contact details
+    	resourse_person_contact (char) - Resource Person Name & Contact details
+    	no_of_participants (int) - Number of Participants
+		from (datefield) - Duration (From-To)
+		to (datefield) - Duration (From-To)
+	
+    Faculty Development Programs
+    Students Inter-Institute Participation
+    Start-up
+>>>>>>> 6c25f527a0db32069231207a5d15c3aa7c589418
