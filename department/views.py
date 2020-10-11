@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
-from .forms import AddStudent, AddProEvent
-from .models import Student, ProEvent
+from .forms import AddStudent, AddProEvent, AddStudPart
+from .models import Student, ProEvent, DeptStudPart
 from django.contrib import messages
 
 # Create your views here.
@@ -18,7 +18,7 @@ def add_show(request):
             rf = cd['ref_no']
             #model class object created (reg)
             reg = Student(name=nm, departments=dp, employer=em,date=dt, package=pk, ref_no=rf)
-            reg.save()
+            reg.save(commit=True)
             messages.success(request, 'Added successfully')
             return HttpResponseRedirect('/')
         form = AddStudent() 
@@ -40,7 +40,7 @@ def update_data(request, id):
         pi = Student.objects.get(pk=id)
         form = AddStudent(request.POST, instance=pi)
         if form.is_valid():
-            form.save()
+            form.save(commit=True)
             messages.success(request, 'Changes Saved !')
     else:
         pi = Student.objects.get(pk=id)
@@ -74,3 +74,22 @@ def dept_act_3(request):
         'event' : event,        
     }
     return render(request, 'department/dept_act_3.html', context)
+
+def dept_act_4(request):
+
+    form = AddStudPart()
+    if request.method == 'POST':
+        form = AddStudPart(request.POST)
+        if form.is_valid:
+            form.save(commit=True)
+            messages.success(request, 'Added successfully')
+            return HttpResponseRedirect('/department/dept_act_4')
+    event = DeptStudPart.objects.all()
+
+    context = {
+        'header': "Students Inter-Institute Participation",
+        'form': form,
+        'event': event,
+    }
+
+    return render(request, 'department/dept_act_4.html', context)

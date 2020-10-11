@@ -41,5 +41,16 @@ class ProEvent(models.Model):
     def __str__(self):
         return self.activity_name
 
+class DeptStudPart(models.Model):
+    student_name = models.CharField(max_length=150)
+    event_type = models.CharField(max_length=150)
+    event_name = models.CharField(max_length=150)
+    org_inst = models.CharField(max_length=264)
+    from_date = models.DateField(("From"), default=date.today,auto_now=False, auto_now_add=False)
+    to_date = models.DateField(("To"), default=date.today,auto_now=False, auto_now_add=False)
+    no_of_part = models.IntegerField(("No of Participants"))
+    level = models.CharField(max_length=150)
+    awards = models.CharField(("Recognition Awards"), max_length=264)
+
 
 
