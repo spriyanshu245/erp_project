@@ -1,22 +1,41 @@
-<<<<<<< HEAD
 Student Academic Performance
-    Student Result
+    1] Student Result
+        table(Student_Result) :
+
+        class (select) - Class
+        dept (select) - Department
+        exam (select) - Type of Examination
+        subject (select) - Name of Subject
+        exam_dt (DateFielsd) - Date of Examination
+        appeard (int) - No. of candidates Appeared
+        passed (int) - No. of candidates passed
+        perct (int) - Passing Pecentage
+
 
 Departmental Activities
-    Events Organized
-    Events Organized (For Nearby Schools)
-    Events Organized in assosiation with Professional bodies
-    	no (int) - No
+    1] Events Organized
+        table(dept_act_1) :
+
+    2] Events Organized (For Nearby Schools)
+        table(dept_act_2) :
+
+    3] Events Organized in assosiation with Professional bodies
+        table(dept_act_3) :
+
+        no (int) - No
     	activity (char) - Name of Activity
     	dept (char) - Name of Department
     	pname (char) -    Resource Person Name & Contact details
     	pcontact (char) - Resource Person Name & Contact details
     	participants (int) - Number of Participants
-	fromdate (datefield) - Duration (From-To)
-	todate (datefield) - Duration (From-To)
-	
-    Faculty Development Programs
-    Students Inter-Institute Participation
-    Start-up
-=======
->>>>>>> b539dab69cc5c1e726783ef2b1246333c5bd1355
+	    fromdate (datefield) - Duration (From-To)
+	    todate (datefield) - Duration (From-To)
+
+    4] Faculty Development Programs table(dept_act_2)
+        table(dept_act_4) :
+
+    5] Students Inter-Institute Participation
+        table(dept_act_5) :
+        
+    6] Start-up
+        table(dept_act_6) :
