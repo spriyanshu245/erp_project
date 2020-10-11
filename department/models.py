@@ -33,8 +33,8 @@ class ProEvent(models.Model):
     pname = models.CharField(max_length=150)
     pcontact = models.IntegerField()
     participants = models.IntegerField()
-    fromdate = models.DateField()
-    todate = models.DateField()
+    fromdate = models.DateField(("Date"), auto_now=False, auto_now_add=False)
+    todate = models.DateField(("Date"), auto_now=False, auto_now_add=False)
 
 
 

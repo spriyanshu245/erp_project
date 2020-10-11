@@ -31,6 +31,7 @@ def add_show(request):
         'form':form,
         'stu':stud
     }
+    
     return render(request, 'department/add_show.html', context)
 
 # Update/Edit table item
@@ -52,6 +53,7 @@ def delete_data(request, id):
         pi = Student.objects.get(pk=id)
         pi.delete()
         return HttpResponseRedirect('/')
+
 
 def dept_act_3(request):
 

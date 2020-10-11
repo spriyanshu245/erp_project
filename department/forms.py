@@ -2,7 +2,6 @@ from django.core import validators
 from django import forms
 from .models import Student, ProEvent
 
-
 class AddStudent(forms.ModelForm):
     class Meta:
         model = Student
