@@ -14,7 +14,7 @@ body {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: rgb(153, 238, 234);
+  background-color: rgb(34, 34, 39);
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -24,7 +24,7 @@ body {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 21px;
-  color: #2062f1;
+  color: #e0e0e0;
   display: block;
   transition: 0.3s;
 }
