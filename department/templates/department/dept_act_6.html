@@ -1,0 +1,46 @@
+{% extends 'department/base.html' %}
+
+{% block content %}
+{% include 'department/dept_act_tabs.html' %}
+
+<div class="row">
+    {% include 'add_record.html' %}
+    <div class="col-sm-8">
+        {% if event %}
+         <h4 class="text-center alert alert-info"> {{header}} </h4> 
+         <table class="table table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">Name of Start-up</th>
+                <th scope="col">Nature of Start-up</th>
+                <th scope="col">Date of commencement</th>
+                <th scope="col">Founder</th>
+                <th scope="col">LLP No.</th>
+                <th scope="col">Start-up website </th>
+                <th scope="col">Team members </th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for ev in event %}
+              <tr>
+                <th scope="row" style="text-align: center;">{{ev.id}}</th>
+                <td style="text-align: center;">{{ev.startup_name}}</td>
+                <td style="text-align: center;">{{ev.nature_startup}}</td>
+                <td style="text-align: center;">{{ev.date_commencement}}</td>
+                <td style="text-align: center;">{{ev.Founder}}</td>
+                <td style="text-align: center;">{{ev.LLP_no}}</td>
+                <td style="text-align: center;">{{ev.startup_web}}</td>
+                <td style="text-align: center;">{{ev.team_members}}</td>
+              </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+         {% else %}
+         <h4 class="text-center alert alert-warning">No Records Found !</h4>
+         {% endif %}
+      </div>
+</div>
+{% endblock content %}
+
+<h1>Events Organized in assosiation with Professional bodies</h1>

@@ -16,8 +16,10 @@ def add_show(request):
             dt = cd['date']
             pk = cd['package']
             rf = cd['ref_no']
+            ya = cd['year_admission']
+            yd = cd['year_down']
             #model class object created (reg)
-            reg = Student(name=nm, departments=dp, employer=em,date=dt, package=pk, ref_no=rf)
+            reg = Student(name=nm, departments=dp, employer=em,date=dt, package=pk, ref_no=rf,year_admission=ya,year_down=yd)
             reg.save(commit=True)
             messages.success(request, 'Added successfully')
             return HttpResponseRedirect('/')
@@ -93,3 +95,41 @@ def dept_act_4(request):
     }
 
     return render(request, 'department/dept_act_4.html', context)
+
+def dept_act_5(request):
+
+    form = AddStudPart()
+    if request.method == 'POST':
+        form = AddStudPart(request.POST)
+        if form.is_valid:
+            form.save(commit=True)
+            messages.success(request, 'Added successfully')
+            return HttpResponseRedirect('/department/dept_act_5')
+    event = DeptStudPart.objects.all()
+
+    context = {
+        'header': "Students Inter-Institute Participation",
+        'form': form,
+        'event': event,
+    }
+
+    return render(request, 'department/dept_act_5.html', context)
+
+def dept_act_6(request):
+
+    form = AddStudPart()
+    if request.method == 'POST':
+        form = AddStudPart(request.POST)
+        if form.is_valid:
+            form.save(commit=True)
+            messages.success(request, 'Added successfully')
+            return HttpResponseRedirect('/department/dept_act_6')
+    event = DeptStudPart.objects.all()
+
+    context = {
+        'header': "Students Inter-Institute Participation",
+        'form': form,
+        'event': event,
+    }
+
+    return render(request, 'department/dept_act_6.html', context)
