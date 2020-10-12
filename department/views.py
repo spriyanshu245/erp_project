@@ -83,7 +83,7 @@ def dept_act_5(request):
         if form.is_valid:
             form.save(commit=True)
             messages.success(request, 'Added successfully')
-            return HttpResponseRedirect('/department/dept_act_4')
+            return HttpResponseRedirect('/department/dept_act_5')
     event = DeptStudPart.objects.all()
 
     context = {
