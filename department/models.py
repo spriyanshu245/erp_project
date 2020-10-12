@@ -25,7 +25,8 @@ class Student(models.Model):
     date             = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
     package          = models.IntegerField(null=False, blank=False)
     ref_no           = models.IntegerField(null=False, blank=False)
-    year_admission   = models.IntegerField()
+    year_admission   = models.IntegerField(default=0)
+    #year of addmission 
     year_down        = models.IntegerField(default=0)
     # class calculation class=  currunt year - (year admission + year down) month june is middle factor
     objects          = models.Manager()

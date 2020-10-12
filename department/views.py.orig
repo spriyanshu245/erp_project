@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
-from .forms import AddStudent, AddProEvent, AddStudPart ,AddFDOP_Dept , AddStartUP
-from .models import Student, ProEvent, DeptStudPart , FacultyDevProOrg_Dep ,StartUp
+from .forms import AddStudent, AddProEvent, AddStudPart
+from .models import Student, ProEvent, DeptStudPart
 from django.contrib import messages
 
 # Create your views here.
@@ -77,7 +77,7 @@ def dept_act_3(request):
     }
     return render(request, 'department/dept_act_3.html', context)
 
-def dept_act_4(request):
+def dept_act_5(request):
 
     form = AddStudPart()
     if request.method == 'POST':
@@ -85,7 +85,7 @@ def dept_act_4(request):
         if form.is_valid:
             form.save(commit=True)
             messages.success(request, 'Added successfully')
-            return HttpResponseRedirect('/department/dept_act_4')
+            return HttpResponseRedirect('/department/dept_act_5')
     event = DeptStudPart.objects.all()
 
     context = {
@@ -94,18 +94,19 @@ def dept_act_4(request):
         'event': event,
     }
 
+<<<<<<< HEAD
     return render(request, 'department/dept_act_4.html', context)
 
 def dept_act_5(request):
 
-    form = AddFDOP_Dept()
+    form = AddStudPart()
     if request.method == 'POST':
-        form = AddFDOP_Dept(request.POST)
+        form = AddStudPart(request.POST)
         if form.is_valid:
             form.save(commit=True)
             messages.success(request, 'Added successfully')
             return HttpResponseRedirect('/department/dept_act_5')
-    event = FacultyDevProOrg_Dep.objects.all()
+    event = DeptStudPart.objects.all()
 
     context = {
         'header': "Students Inter-Institute Participation",
@@ -117,14 +118,14 @@ def dept_act_5(request):
 
 def dept_act_6(request):
 
-    form = AddStartUP()
+    form = AddStudPart()
     if request.method == 'POST':
-        form = AddStartUP(request.POST)
+        form = AddStudPart(request.POST)
         if form.is_valid:
             form.save(commit=True)
             messages.success(request, 'Added successfully')
             return HttpResponseRedirect('/department/dept_act_6')
-    event = StartUp.objects.all()
+    event = DeptStudPart.objects.all()
 
     context = {
         'header': "Students Inter-Institute Participation",
@@ -133,3 +134,6 @@ def dept_act_6(request):
     }
 
     return render(request, 'department/dept_act_6.html', context)
+=======
+    return render(request, 'department/dept_act_5.html', context)
+>>>>>>> 2c88b4dbc8242c7266e8003c164e98031e3377cb

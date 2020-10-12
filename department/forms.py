@@ -17,6 +17,8 @@ class AddStudent(forms.ModelForm):
             'date' : DateInput(attrs={'class':'form-control'}),
             'package': forms.NumberInput(attrs={'class':'form-control'}),
             'ref_no': forms.NumberInput(attrs={'class':'form-control'}),
+            'yearAdmission': forms.NumberInput(attrs={'class':'form-control'}),
+            'year Down': forms.NumberInput(attrs={'class':'form-control'}),
         }
 
 class AddProEvent(forms.ModelForm):
@@ -35,6 +37,41 @@ class AddProEvent(forms.ModelForm):
         }
 
 class AddStudPart(forms.ModelForm):
+    class Meta:
+        model = DeptStudPart
+        fields = ['student_name','event_type','event_name','org_inst','from_date','to_date','no_of_part','level','awards']
+        widgets = {
+            'student_name': forms.TextInput(attrs={'class':'form-control'}),
+            'event_type' : forms.TextInput(attrs={'class':'form-control'}),
+            'event_name': forms.TextInput(attrs={'class':'form-control'}),
+            'org_inst': forms.TextInput(attrs={'class':'form-control'}),
+            'from_date': DateInput(attrs={'class':'form-control'}),
+            'to_date': DateInput(attrs={'class':'form-control'}),
+            'no_of_part': forms.NumberInput(attrs={'class':'form-control'}),
+            'level': forms.TextInput(attrs={'class':'form-control'}),
+            'awards': forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+
+#Information about Faculty Development Programs organized by department 
+class AddFDOP_Dept(forms.ModelForm):
+    class Meta:
+        model = DeptStudPart
+        fields = ['student_name','event_type','event_name','org_inst','from_date','to_date','no_of_part','level','awards']
+        widgets = {
+            'student_name': forms.TextInput(attrs={'class':'form-control'}),
+            'event_type' : forms.TextInput(attrs={'class':'form-control'}),
+            'event_name': forms.TextInput(attrs={'class':'form-control'}),
+            'org_inst': forms.TextInput(attrs={'class':'form-control'}),
+            'from_date': DateInput(attrs={'class':'form-control'}),
+            'to_date': DateInput(attrs={'class':'form-control'}),
+            'no_of_part': forms.NumberInput(attrs={'class':'form-control'}),
+            'level': forms.TextInput(attrs={'class':'form-control'}),
+            'awards': forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+
+class AddStartUP(forms.ModelForm):
     class Meta:
         model = DeptStudPart
         fields = ['student_name','event_type','event_name','org_inst','from_date','to_date','no_of_part','level','awards']

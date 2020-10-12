@@ -34,11 +34,10 @@ Departmental Activities
     4] Faculty Development Programs table(dept_act_2)
         table(dept_act_4) :
 
-
-	program (char) - Name of Program
-	department (char) - Name of Department
-	sponsor (char) - Sponsoring Agency
-	Amt (int) - 
+        program (char) - Name of Program
+        department (char) - Name of Department
+        sponsor (char) - Sponsoring Agency
+        amt (int) - 
 
     5] Students Inter-Institute Participation
 	table(dept_act_5) :
