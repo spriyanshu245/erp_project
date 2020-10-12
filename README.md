@@ -40,6 +40,24 @@ python manage.py runserver
 
 End with an example of getting some data out of the system or using it for a little demo.
 
+to install mysql 
+```
+sudo apt install default-mysql-server default-mysql-client
+```
+after that create new user and password with database 
+```
+sudo mysql
+mysql > CREATE USER 'admin'@'localhost' IDENTIFIED BY 'password';
+mysql > CREATE DATABASE erp_project;
+mysql > GRANT ALL PRIVILEGES ON erp_project.* TO 'admin'@'localhost';
+```
+
+change creadentials in settings.py as
+host = localhost
+name / database = erp_project
+user = admin
+password =password
+
 ## Usage <a name = "usage"></a>
 
 Add notes about how to use the system.
