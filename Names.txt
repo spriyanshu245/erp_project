@@ -6,7 +6,7 @@ Student Academic Performance
         dept (select) - Department
         exam (select) - Type of Examination
         subject (select) - Name of Subject
-        exam_dt (DateFielsd) - Date of Examination
+        exam_dt (DateField) - Date of Examination
         appeard (int) - No. of candidates Appeared
         passed (int) - No. of candidates passed
         perct (int) - Passing Pecentage

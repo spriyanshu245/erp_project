@@ -8,15 +8,17 @@ class DateInput(forms.DateInput):
 class AddStudent(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ['name','departments','employer','date','package','ref_no']
+        fields = ['department','Class','exam_type','subject','date','appeared','passed','perct']
         #adding bootstrap classes to form inputs
         widgets = {
-            'name': forms.TextInput(attrs={'class':'form-control'}),
-            'departments' : forms.Select(attrs={'class':'form-control'}),
-            'employer': forms.TextInput(attrs={'class':'form-control'}),
+            'department' : forms.Select(attrs={'class':'form-control'}),
+            'Class' : forms.Select(attrs={'class':'form-control'}),
+            'exam_type': forms.TextInput(attrs={'class':'form-control'}),
+            'subject': forms.TextInput(attrs={'class':'form-control'}),
             'date' : DateInput(attrs={'class':'form-control'}),
-            'package': forms.NumberInput(attrs={'class':'form-control'}),
-            'ref_no': forms.NumberInput(attrs={'class':'form-control'}),
+            'appeared': forms.NumberInput(attrs={'class':'form-control'}),
+            'passed': forms.NumberInput(attrs={'class':'form-control'}),
+            'perct': forms.NumberInput(attrs={'class':'form-control'}),
         }
 
 class AddProEvent(forms.ModelForm):
