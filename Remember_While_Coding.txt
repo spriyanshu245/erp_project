@@ -1,0 +1,5 @@
+By default-
+
+    Django adds a Manager with the name objects to every Django model class
+
+

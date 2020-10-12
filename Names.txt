@@ -34,8 +34,25 @@ Departmental Activities
     4] Faculty Development Programs table(dept_act_2)
         table(dept_act_4) :
 
+
+	program (char) - Name of Program
+	department (char) - Name of Department
+	sponsor (char) - Sponsoring Agency
+	Amt (int) - 
+
     5] Students Inter-Institute Participation
-        table(dept_act_5) :
+	table(dept_act_5) :
+
+	id (Auto) - No
+        student_name (char) - Name of Student
+        event_type (char) - Type of Event
+        event_name (char) - Name of event
+        org_inst (char) - Organizing Institute/ University
+        fromdate (datefield) - Duration (From-To)
+        todate (datefield) - Duration (From-To)
+        no_of_part (int) - No of Participants
+        level (char) - **Level
+        awards (char 264) - Recognition Awards         (if any)
         
     6] Start-up
         table(dept_act_6) :
