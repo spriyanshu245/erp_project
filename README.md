@@ -1,6 +1,10 @@
 # erp_project
-here the way to clone
-
+here the way to clone <br>
+Make sure you have added ssh keys
+<Br>
+Use following for help <br>
+https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/connecting-to-github-with-ssh
+<Br><br>
 ```
 git clone git@github.com:spriyanshu245/erp_project.git
 
@@ -26,7 +30,7 @@ git push
 
 
 ```
-Requirsd Installations :
+Dependencies Installations :
 ```
 djnago == 3.0 and above
 mysql server
