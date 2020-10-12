@@ -75,7 +75,7 @@ def dept_act_3(request):
     }
     return render(request, 'department/dept_act_3.html', context)
 
-def dept_act_4(request):
+def dept_act_5(request):
 
     form = AddStudPart()
     if request.method == 'POST':
@@ -92,4 +92,4 @@ def dept_act_4(request):
         'event': event,
     }
 
-    return render(request, 'department/dept_act_4.html', context)
+    return render(request, 'department/dept_act_5.html', context)
