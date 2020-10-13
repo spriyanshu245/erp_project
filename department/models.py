@@ -83,6 +83,28 @@ class StudentResult(models.Model):
     perct = models.IntegerField(default=0,null=False, blank=False)
     objects = models.Manager()
 
+#1 Information about events organized by department
+class DeptEvent1(models.Model):
+    department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
+    event_type = models.CharField(("Event Type"),max_length=150)
+    event_name = models.CharField(("Event Name"),max_length=150)
+    guest_name = models.CharField(("Guest Name"),max_length=150)
+    school_cont = models.CharField(("School Contact Details"),max_length=250)
+    fac_name = models.CharField(("Faculty Name"),max_length=250)
+    part_no = models.IntegerField(("No of Participants"))
+    from_date = models.DateField(("From"), default=date.today,auto_now=False, auto_now_add=False)
+    to_date = models.DateField(("To"), default=date.today,auto_now=False, auto_now_add=False)
+
+#2 Information about events organized by department (For nearby schools only)
+class DeptEvent2(models.Model):
+    act_name = models.CharField(("Activity Name"),max_length=150)
+    school = models.CharField(max_length=150)
+    school_cont = models.CharField(("School Contact Details"),max_length=250)
+    fac_name = models.CharField(("Faculty Name"),max_length=250)
+    part_no = models.IntegerField(("No of Participants"))
+    from_date = models.DateField(("From"), default=date.today,auto_now=False, auto_now_add=False)
+    to_date = models.DateField(("To"), default=date.today,auto_now=False, auto_now_add=False)
+
 #3 Information about events organized by department in association with Professional bodies
 class DeptProEvent3(models.Model):
     department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
@@ -134,14 +156,7 @@ class DeptStartUp6(models.Model):
     team_members = models.CharField( max_length=500)
     #team_member isnt right
 
-class DeptEvent2(models.Model):
-    act_name = models.CharField(("Activity Name"),max_length=150)
-    school = models.CharField(max_length=150)
-    school_cont = models.CharField(("School Contact Details"),max_length=250)
-    fac_name = models.CharField(("Faculty Name"),max_length=250)
-    part_no = models.IntegerField(("No of Participants"))
-    from_date = models.DateField(("From"), default=date.today,auto_now=False, auto_now_add=False)
-    to_date = models.DateField(("To"), default=date.today,auto_now=False, auto_now_add=False)
+
 
 
 
