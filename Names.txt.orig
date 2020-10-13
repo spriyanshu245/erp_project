@@ -6,7 +6,7 @@ Student Academic Performance
         dept (select) - Department
         exam (select) - Type of Examination
         subject (select) - Name of Subject
-        exam_dt (DateField) - Date of Examination
+        exam_dt (DateFielsd) - Date of Examination
         appeard (int) - No. of candidates Appeared
         passed (int) - No. of candidates passed
         perct (int) - Passing Pecentage
@@ -34,6 +34,7 @@ Departmental Activities
     4] Faculty Development Programs table(dept_act_2)
         table(dept_act_4) :
 
+<<<<<<< HEAD
         id (auto) - No
         program (char) - Name of Program
         department (char) - Name of Department
@@ -43,6 +44,12 @@ Departmental Activities
         todate (datefield) - Duration (From-To)
         no_of_part (int) - No of Participants
         level (char) - **Level
+=======
+        program (char) - Name of Program
+        department (char) - Name of Department
+        sponsor (char) - Sponsoring Agency
+        amt (int) - 
+>>>>>>> sd_mess
 
     5] Students Inter-Institute Participation
 	table(dept_act_5) :
@@ -60,3 +67,16 @@ Departmental Activities
         
     6] Start-up
         table(dept_act_6) :
+    Events Organized
+    Events Organized (For Nearby Schools)
+    Events Organized in assosiation with Professional bodies
+
+    	no (int) - No
+    	activity_name (char) - Name of Activity
+    	department_name (char) - Name of Department
+    	resourse_person_name (char) -    Resource Person Name & Contact details
+    	resourse_person_contact (char) - Resource Person Name & Contact details
+    	no_of_participants (int) - Number of Participants
+		from (datefield) - Duration (From-To)
+		to (datefield) - Duration (From-To)
+	

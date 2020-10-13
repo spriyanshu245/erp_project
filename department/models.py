@@ -112,6 +112,31 @@ class DeptStudPart5(models.Model):
     level = models.CharField(max_length=150)
     awards = models.CharField(("Recognition Awards"), max_length=264)
 
+#Information about Faculty Development Programs organized by department 
+class FacultyDevProOrg_Dep(models.Model):
+    program_name = models.CharField(max_length=150)
+    department_name = models.CharField(max_length=150)
+    sponsoring_agency = models.CharField(max_length=150)
+    amm_sponsored = models.IntegerField(default=0)
+    from_date = models.DateField(("From"), default=date.today,auto_now=False, auto_now_add=False)
+    to_date = models.DateField(("To"), default=date.today,auto_now=False, auto_now_add=False)
+    no_of_part = models.IntegerField(("No of Participants"))
+    level = models.CharField(max_length=150)
+
+
+
+#Start-Up
+class StartUp(models.Model):
+    startup_name = models.CharField(max_length=150)
+    nature_startup = models.CharField(max_length=150)
+    date_commencement = models.CharField(max_length=150)
+    #TODO ^
+    Founder = models.CharField(max_length=150)
+    LLP_no = models.IntegerField()
+    startup_web = models.CharField(max_length=150)
+    team_members = models.CharField( max_length=500)
+    #team_member isnt right
+
 
 
 
