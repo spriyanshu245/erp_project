@@ -102,11 +102,12 @@ ENV/
 .mypy_cache/
 
 .DS_Store
-#*.sqlite3
+*.sqlite3
 media/
 *.pyc
 *.db
 *.pid
+db.sqlite3
 
 # Ignore Django Migrations in Development if you are working on team
 

@@ -72,7 +72,6 @@ class AddDeptStudPart5(forms.ModelForm):
             'to_date': DateInput(attrs={'class':'form-control'}),
             'no_of_participants': forms.NumberInput(attrs={'class':'form-control'}),
             'level': forms.TextInput(attrs={'class':'form-control'}),
-            'awards': forms.TextInput(attrs={'class':'form-control'}),
         }
 
 
