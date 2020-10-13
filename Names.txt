@@ -34,10 +34,15 @@ Departmental Activities
     4] Faculty Development Programs table(dept_act_2)
         table(dept_act_4) :
 
+        id (auto) - No
         program (char) - Name of Program
         department (char) - Name of Department
         sponsor (char) - Sponsoring Agency
-        amt (int) - 
+        amt (int) - Amount if Sponsored
+        fromdate (datefield) - Duration (From-To)
+        todate (datefield) - Duration (From-To)
+        no_of_part (int) - No of Participants
+        level (char) - **Level
 
     5] Students Inter-Institute Participation
 	table(dept_act_5) :
@@ -58,6 +63,7 @@ Departmental Activities
     Events Organized
     Events Organized (For Nearby Schools)
     Events Organized in assosiation with Professional bodies
+
     	no (int) - No
     	activity_name (char) - Name of Activity
     	department_name (char) - Name of Department
@@ -67,4 +73,3 @@ Departmental Activities
 		from (datefield) - Duration (From-To)
 		to (datefield) - Duration (From-To)
 	
-

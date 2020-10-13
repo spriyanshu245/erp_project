@@ -49,3 +49,5 @@ class AddStudPart(forms.ModelForm):
             'level': forms.TextInput(attrs={'class':'form-control'}),
             'awards': forms.TextInput(attrs={'class':'form-control'}),
         }
+
+        
