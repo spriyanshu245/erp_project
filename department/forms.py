@@ -1,6 +1,6 @@
 from django.core import validators
 from django import forms
-from .models import StudentNew, ProEvent,DeptFacDevProg4, DeptStudPart5, DeptStartUp6
+from .models import StudentNew, ProEvent,DeptFacDevProg4, DeptStudPart5, DeptStartUp6, DeptEvent2
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -82,4 +82,18 @@ class AddStartUp6(forms.ModelForm):
             'LLP_no': forms.NumberInput(attrs={'class':'form-control'}),
             'startup_web': forms.TextInput(attrs={'class':'form-control'}),
             'team_members': forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+class AddEvent2(forms.ModelForm):
+    class Meta:
+        model = DeptEvent2
+        fields = ['act_name','school','school_cont','fac_name','part_no','from_date','to_date']
+        widgets = {
+            'act_name': forms.TextInput(attrs={'class':'form-control'}),
+            'school': forms.TextInput(attrs={'class':'form-control'}),
+            'school_cont': forms.TextInput(attrs={'class':'form-control'}),
+            'fac_name': forms.TextInput(attrs={'class':'form-control'}),
+            'part_no': forms.NumberInput(attrs={'class':'form-control'}),
+            'from_date': DateInput(attrs={'class':'form-control'}),
+            'to_date': DateInput(attrs={'class':'form-control'}),
         }

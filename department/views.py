@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
-from .forms import AddStudentNew, AddProEvent,AddFacDevProg4, AddStudPart5, AddStartUp6
-from .models import StudentNew, ProEvent, DeptStudPart5, DeptFacDevProg4 ,DeptStartUp6
+from .forms import AddEvent2, AddStudentNew, AddProEvent,AddFacDevProg4, AddStudPart5, AddStartUp6
+from .models import DeptEvent2, StudentNew, ProEvent, DeptStudPart5, DeptFacDevProg4 ,DeptStartUp6
 from django.contrib import messages
 
 # Create your views here.
@@ -46,14 +46,24 @@ def delete_data(request, id):
 
 def dept_act_2(request):
 
+    form = AddEvent2()
+    if request.method == 'POST':
+        form = AddEvent2(request.POST)
+        if form.is_valid():
+            # No commit added
+            form.save(AddEvent2())
+            messages.success(request, "Added Succesfully")
+            return HttpResponseRedirect("/department/dept_act_2")
 
+    event = DeptEvent2.objects.all()
 
+    context = {
+        'header': "Events Organized (For nearby schools only)",
+        'form': form,
+        'event': event,
+    }
 
-
-
-
-    
-    return render(request, 'department/dept_act_2.html')
+    return render(request, 'department/dept_act_2.html', context)
 
 
 def dept_act_3(request):
@@ -133,3 +143,5 @@ def dept_act_6(request):
     }
 
     return render(request, 'department/dept_act_6.html', context)
+
+
