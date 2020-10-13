@@ -5,6 +5,7 @@ from django.contrib import messages
 
 # Create your views here.
 
+
 #-------------------------------------------------------------------------------------
 # for Adding and showing new entrys
 def add_show(request):
