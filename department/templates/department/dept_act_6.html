@@ -14,11 +14,11 @@
                 <th scope="col">No</th>
                 <th scope="col">Name of Start-up</th>
                 <th scope="col">Nature of Start-up</th>
-                <th scope="col">Date of commencement</th>
+                <th scope="col">Date of Commencement</th>
                 <th scope="col">Founder</th>
                 <th scope="col">LLP No.</th>
-                <th scope="col">Start-up website </th>
-                <th scope="col">Team members </th>
+                <th scope="col">Website</th>
+                <th scope="col">Team members</th>
               </tr>
             </thead>
             <tbody>
@@ -26,17 +26,18 @@
               <tr>
                 <th scope="row" style="text-align: center;">{{ev.id}}</th>
                 <td style="text-align: center;">{{ev.startup_name}}</td>
-                <td style="text-align: center;">{{ev.nature_startup}}</td>
-                <td style="text-align: center;">{{ev.date_commencement}}</td>
-                <td style="text-align: center;">{{ev.Founder}}</td>
+                <td style="text-align: center;">{{ev.startup_nature}}</td>
+                <td style="text-align: center;">{{ev.start_date}}</td>
+                <td style="text-align: center;">{{ev.founder}}</td>
                 <td style="text-align: center;">{{ev.LLP_no}}</td>
-                <td style="text-align: center;">{{ev.startup_web}}</td>
+                <td style="text-align: center;">{{ev.website}}</td>
                 <td style="text-align: center;">{{ev.team_members}}</td>
               </tr>
                 {% endfor %}
             </tbody>
           </table>
          {% else %}
+         <h4 class="text-center alert alert-info"> {{header}} </h4>
          <h4 class="text-center alert alert-warning">No Records Found !</h4>
          {% endif %}
       </div>

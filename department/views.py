@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
-from .forms import AddStudent, AddProEvent, AddStudPart
-from .models import StudentResult, DeptProEvent3, DeptStudPart5
+from .forms import *
+from .models import StudentResult, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
 from django.contrib import messages
 
 # Create your views here.
@@ -9,25 +9,13 @@ from django.contrib import messages
 # for Adding and showing new entrys
 def add_show(request):
     if request.method == 'POST':
-        form = AddStudentNew(request.POST)
+        form = AddStudentResult(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Added successfully')
             return HttpResponseRedirect('/')
-            
-            # cd = form.cleaned_data
-            # nm = cd['name']
-            # dp = cd['departments']
-            # em = cd['employer']
-            # dt = cd['date']
-            # pk = cd['package']
-            # rf = cd['ref_no']
-            # ya = cd['year_admission']
-            # yd = cd['year_down']
-            #model class object created (reg)
-            # reg = Student(name=nm, departments=dp, employer=em,date=dt, package=pk, ref_no=rf,year_admission=ya,year_down=yd)
-   
-    form = AddStudentNew()
+    else:
+        form = AddStudentResult()
 
     students = StudentResult.objects.all()
     context = {
@@ -42,13 +30,13 @@ def add_show(request):
 def update_data(request, id):
     if request.method == 'POST' :
         pi = StudentResult.objects.get(pk=id)
-        form = AddStudent(request.POST, instance=pi)
+        form = AddStudentResult(request.POST, instance=pi)
         if form.is_valid():
             form.save()
             messages.success(request, 'Changes Saved !')
     else:
         pi = StudentResult.objects.get(pk=id)
-        form = AddStudent(instance=pi)
+        form = AddStudentResult(instance=pi)
     return render(request, 'department/update_row.html', {'form':form})
 
 # Delete function
@@ -60,15 +48,16 @@ def delete_data(request, id):
 
 #------------------------------------------------------------------------------------
 def dept_act_3(request):
-    form = AddProEvent()
+    form = AddDeptProEvent3()
     if request.method == 'POST':
-        form = AddProEvent(request.POST)
+        form = AddDeptProEvent3(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Added successfully')
             return HttpResponseRedirect('/department/dept_act_3')
     else:
-        form = AddProEvent()
+        form = AddDeptProEvent3()
+
     event = DeptProEvent3.objects.all
 
     context = {
@@ -78,10 +67,31 @@ def dept_act_3(request):
     }
     return render(request, 'department/dept_act_3.html', context)
 
-def dept_act_5(request):
-    form = AddStudPart()
+#-------------------------------------------------------------------------------------
+def dept_act_4(request):
+    form = AddDeptFacultyDev4()
     if request.method == 'POST':
-        form = AddStudPart(request.POST)
+        form = AddDeptFacultyDev4(request.POST)
+        if form.is_valid:
+            form.save()
+            messages.success(request, 'Added successfully')
+            return HttpResponseRedirect('/department/dept_act_5')
+
+    event = DeptFacultyDev4.objects.all()
+
+    context = {
+        'header': "Departmental Faculty Development Programs",
+        'form': form,
+        'event': event,
+    }
+
+    return render(request, 'department/dept_act_4.html', context)
+
+#-------------------------------------------------------------------------------------
+def dept_act_5(request):
+    form = AddDeptStudPart5()
+    if request.method == 'POST':
+        form = AddDeptStudPart5(request.POST)
         if form.is_valid:
             form.save()
             messages.success(request, 'Added successfully')
@@ -89,47 +99,34 @@ def dept_act_5(request):
     event = DeptStudPart5.objects.all()
 
     context = {
-        'header': "Students Inter-Institute Participation",
-        'form': form,
-        'event': event,
-    }
-
-    return render(request, 'department/dept_act_4.html', context)
-
-def dept_act_5(request):
-
-    form = AddFDOP_Dept()
-    if request.method == 'POST':
-        form = AddFDOP_Dept(request.POST)
-        if form.is_valid:
-            form.save(commit=True)
-            messages.success(request, 'Added successfully')
-            return HttpResponseRedirect('/department/dept_act_5')
-    event = FacultyDevProOrg_Dep.objects.all()
-
-    context = {
-        'header': "Students Inter-Institute Participation",
+        'header': "Student's Inter-Institute Participation",
         'form': form,
         'event': event,
     }
 
     return render(request, 'department/dept_act_5.html', context)
 
+#-------------------------------------------------------------------------------------
 def dept_act_6(request):
 
-    form = AddStartUP()
+    form = AddDeptStartUp6()
     if request.method == 'POST':
-        form = AddStartUP(request.POST)
+        form = AddDeptStartUp6(request.POST)
         if form.is_valid:
-            form.save(commit=True)
+            form.save()
             messages.success(request, 'Added successfully')
             return HttpResponseRedirect('/department/dept_act_6')
-    event = StartUp.objects.all()
+
+    event = DeptStartUp6.objects.all()
 
     context = {
-        'header': "Students Inter-Institute Participation",
+        'header': "Start-Up",
         'form': form,
         'event': event,
     }
 
     return render(request, 'department/dept_act_6.html', context)
+
+    #-------------------------------------------------------------------------------------
+
+    

@@ -13,24 +13,23 @@
             <thead class="thead-dark">
               <tr>
                 <th scope="col">No</th>
+                <th scope="col">Department</th>
                 <th scope="col">Name of Program</th>
-                <th scope="col">Name of Department</th>
                 <th scope="col">Sponsoring Agency</th>
                 <th scope="col">Amount if Sponsored</th>
                 <th scope="col">Duration (From)</th>
                 <th scope="col">Duration (To)</th>
                 <th scope="col">No of Participants</th>
                 <th scope="col">Level</th>
-                <
               </tr>
             </thead>
             <tbody>
                 {% for ev in event %}
               <tr>
                 <th scope="row" style="text-align: center;">{{ev.id}}</th>
-                <td style="text-align: center;">{{ev.program_name}}</td>
-                <td style="text-align: center;">{{ev.department_name}}</td>
-                <td style="text-align: center;">{{ev.sponsoring_agency}}</td>
+                <td style="text-align: center;">{{ev.department}}</td>
+                <td style="text-align: center;">{{ev.program}}</td>
+                <td style="text-align: center;">{{ev.agency}}</td>
                 <td style="text-align: center;">{{ev.amm_sponsored}}</td>
                 <td style="text-align: center;">{{ev.from_date}}</td>
                 <td style="text-align: center;">{{ev.to_date}}</td>
@@ -41,6 +40,7 @@
             </tbody>
           </table>
          {% else %}
+         <h4 class="text-center alert alert-info"> {{header}} </h4>
          <h4 class="text-center alert alert-warning">No Records Found !</h4>
          {% endif %}
       </div>
