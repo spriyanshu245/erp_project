@@ -18,6 +18,8 @@
             <th scope="col">Date</th>
             <th scope="col">Package</th>
             <th scope="col">Reference</th>
+            <th scope="col">year_admission</th>
+            <th scope="col">year_down</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -31,6 +33,8 @@
             <td style="text-align: center;">{{st.date}}</td>
             <td style="text-align: center;">{{st.package}}</td>
             <td style="text-align: center;">{{st.ref_no}}</td>
+            <td style="text-align: center;">{{st.year_admission}}</td>
+            <td style="text-align: center;">{{st.year_down}}</td>
             <td>
                <a href="{% url 'update' st.id %}" class="btn btn-outline-secondary btn-sm">Update</a>
                <form action="{% url 'delete' st.id %}" method="POST" class="inline">

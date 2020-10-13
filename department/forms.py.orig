@@ -52,6 +52,9 @@ class AddStudPart(forms.ModelForm):
             'awards': forms.TextInput(attrs={'class':'form-control'}),
         }
 
+<<<<<<< HEAD
+        
+=======
 
 #Information about Faculty Development Programs organized by department 
 class AddFDOP_Dept(forms.ModelForm):
@@ -86,3 +89,4 @@ class AddStartUP(forms.ModelForm):
             'level': forms.TextInput(attrs={'class':'form-control'}),
             'awards': forms.TextInput(attrs={'class':'form-control'}),
         }
+>>>>>>> sd_mess
