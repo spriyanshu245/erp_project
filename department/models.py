@@ -72,12 +72,12 @@ class FacultyDevProOrg_Dep(models.Model):
 
 
 #Start-Up
-class StartUp(models.Model):
+class DeptStartUp6(models.Model):
     startup_name = models.CharField(max_length=150)
     nature_startup = models.CharField(max_length=150)
-    date_commencement = models.CharField(max_length=150)
+    date_commencement = models.DateField(default=date.today,auto_now=False, auto_now_add=False)
     #TODO ^
-    Founder = models.CharField(max_length=150)
+    founder = models.CharField(max_length=150)
     LLP_no = models.IntegerField()
     startup_web = models.CharField(max_length=150)
     team_members = models.CharField( max_length=500)

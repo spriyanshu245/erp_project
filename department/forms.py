@@ -1,6 +1,6 @@
 from django.core import validators
 from django import forms
-from .models import StudentNew, ProEvent, DeptStudPart
+from .models import StudentNew, ProEvent, DeptStudPart, DeptStartUp6
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -71,18 +71,16 @@ class AddFDOP_Dept(forms.ModelForm):
         }
 
 
-class AddStartUP(forms.ModelForm):
+class AddStartUp6(forms.ModelForm):
     class Meta:
-        model = DeptStudPart
-        fields = ['student_name','event_type','event_name','org_inst','from_date','to_date','no_of_part','level','awards']
+        model = DeptStartUp6
+        fields = ['startup_name','nature_startup','date_commencement','founder','LLP_no','startup_web','team_members']
         widgets = {
-            'student_name': forms.TextInput(attrs={'class':'form-control'}),
-            'event_type' : forms.TextInput(attrs={'class':'form-control'}),
-            'event_name': forms.TextInput(attrs={'class':'form-control'}),
-            'org_inst': forms.TextInput(attrs={'class':'form-control'}),
-            'from_date': DateInput(attrs={'class':'form-control'}),
-            'to_date': DateInput(attrs={'class':'form-control'}),
-            'no_of_part': forms.NumberInput(attrs={'class':'form-control'}),
-            'level': forms.TextInput(attrs={'class':'form-control'}),
-            'awards': forms.TextInput(attrs={'class':'form-control'}),
+            'startup_name': forms.TextInput(attrs={'class':'form-control'}),
+            'nature_startup' : forms.TextInput(attrs={'class':'form-control'}),
+            'date_commencement': forms.DateInput(attrs={'class':'form-control'}),
+            'founder': forms.TextInput(attrs={'class':'form-control'}),
+            'LLP_no': forms.NumberInput(attrs={'class':'form-control'}),
+            'startup_web': forms.TextInput(attrs={'class':'form-control'}),
+            'team_members': forms.TextInput(attrs={'class':'form-control'}),
         }

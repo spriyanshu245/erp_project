@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
-from .forms import AddStudentNew, AddProEvent, AddStudPart ,AddFDOP_Dept , AddStartUP
-from .models import StudentNew, ProEvent, DeptStudPart , FacultyDevProOrg_Dep ,StartUp
+from .forms import AddStudentNew, AddProEvent, AddStudPart ,AddFDOP_Dept , AddStartUp6
+from .models import StudentNew, ProEvent, DeptStudPart , FacultyDevProOrg_Dep ,DeptStartUp6
 from django.contrib import messages
 
 # Create your views here.
@@ -12,19 +12,7 @@ def add_show(request):
             form.save(commit=True)
             messages.success(request, 'Added successfully')
             return HttpResponseRedirect('/')
-            
-            # cd = form.cleaned_data
-            # nm = cd['name']
-            # dp = cd['departments']
-            # em = cd['employer']
-            # dt = cd['date']
-            # pk = cd['package']
-            # rf = cd['ref_no']
-            # ya = cd['year_admission']
-            # yd = cd['year_down']
-            #model class object created (reg)
-            # reg = Student(name=nm, departments=dp, employer=em,date=dt, package=pk, ref_no=rf,year_admission=ya,year_down=yd)
-   
+
     form = AddStudentNew()
 
     stud = StudentNew.objects.all()
@@ -55,6 +43,9 @@ def delete_data(request, id):
         pi = StudentNew.objects.get(pk=id)
         pi.delete()
         return HttpResponseRedirect('/')
+
+def dept_act_2(request):
+    return render(request, 'department/dept_act_2.html')
 
 
 def dept_act_3(request):
@@ -117,17 +108,18 @@ def dept_act_5(request):
 
 def dept_act_6(request):
 
-    form = AddStartUP()
+    form = AddStartUp6()
     if request.method == 'POST':
-        form = AddStartUP(request.POST)
+        form = AddStartUp6(request.POST)
         if form.is_valid:
             form.save(commit=True)
             messages.success(request, 'Added successfully')
             return HttpResponseRedirect('/department/dept_act_6')
-    event = StartUp.objects.all()
+
+    event = DeptStartUp6.objects.all()
 
     context = {
-        'header': "Students Inter-Institute Participation",
+        'header': "Start Up",
         'form': form,
         'event': event,
     }
