@@ -1,6 +1,6 @@
 from django.core import validators
 from django import forms
-from .models import StudentResult, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
+from .models import StudentResult,DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -21,7 +21,20 @@ class AddStudentResult(forms.ModelForm):
             'passed': forms.NumberInput(attrs={'class':'form-control'}),
             'percentage': forms.NumberInput(attrs={'class':'form-control'}),
         }
-
+# 
+class AddDeptEvent2(forms.ModelForm):
+    class Meta:
+        model = DeptEvent2
+        fields = ['act_name','school','school_cont','fac_name','part_no','from_date','to_date']
+        widgets = {
+            'act_name': forms.TextInput(attrs={'class':'form-control'}),
+            'school': forms.TextInput(attrs={'class':'form-control'}),
+            'school_cont': forms.TextInput(attrs={'class':'form-control'}),
+            'fac_name': forms.TextInput(attrs={'class':'form-control'}),
+            'part_no': forms.NumberInput(attrs={'class':'form-control'}),
+            'from_date': DateInput(attrs={'class':'form-control'}),
+            'to_date': DateInput(attrs={'class':'form-control'}),
+        }
 
 #3 Information about events organized by department in association with Professional bodies
 class AddDeptProEvent3(forms.ModelForm):
