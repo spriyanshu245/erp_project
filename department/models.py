@@ -16,8 +16,8 @@ class Department(models.Model):
     def __str__(self):
         return self.department
 
-class Student(models.Model):
-    id               = models.AutoField(primary_key=True)
+class StudentNew(models.Model):
+    # id               = models.AutoField(primary_key=True)
     name             = models.CharField(max_length = 150,null=False, blank=False)
     departments      = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
     # departments    = models.ForeignKey(Department, on_delete=models.CASCADE)
@@ -29,7 +29,7 @@ class Student(models.Model):
     #year of addmission 
     year_down        = models.IntegerField(default=0)
     # class calculation class=  currunt year - (year admission + year down) month june is middle factor
-    objects          = models.Manager()
+    # objects          = models.Manager()
 
 #Information about events organized by department in association with Professional bodies
 class ProEvent(models.Model):

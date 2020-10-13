@@ -1,14 +1,14 @@
 from django.core import validators
 from django import forms
-from .models import Student, ProEvent, DeptStudPart
+from .models import StudentNew, ProEvent, DeptStudPart
 
 class DateInput(forms.DateInput):
     input_type = 'date'
 
-class AddStudent(forms.ModelForm):
+class AddStudentNew(forms.ModelForm):
     class Meta:
-        model = Student
-        fields = ['name','departments','employer','date','package','ref_no']
+        model = StudentNew
+        fields = ['name','departments','employer','date','package','ref_no','year_admission','year_down']
         #adding bootstrap classes to form inputs
         widgets = {
             'name': forms.TextInput(attrs={'class':'form-control'}),
@@ -17,8 +17,8 @@ class AddStudent(forms.ModelForm):
             'date' : DateInput(attrs={'class':'form-control'}),
             'package': forms.NumberInput(attrs={'class':'form-control'}),
             'ref_no': forms.NumberInput(attrs={'class':'form-control'}),
-            'yearAdmission': forms.NumberInput(attrs={'class':'form-control'}),
-            'year Down': forms.NumberInput(attrs={'class':'form-control'}),
+            'year_admission': forms.NumberInput(attrs={'class':'form-control'}),
+            'year_down': forms.NumberInput(attrs={'class':'form-control'}),
         }
 
 class AddProEvent(forms.ModelForm):

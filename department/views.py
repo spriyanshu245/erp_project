@@ -1,33 +1,33 @@
 from django.shortcuts import render, HttpResponseRedirect
-from .forms import AddStudent, AddProEvent, AddStudPart ,AddFDOP_Dept , AddStartUP
-from .models import Student, ProEvent, DeptStudPart , FacultyDevProOrg_Dep ,StartUp
+from .forms import AddStudentNew, AddProEvent, AddStudPart ,AddFDOP_Dept , AddStartUP
+from .models import StudentNew, ProEvent, DeptStudPart , FacultyDevProOrg_Dep ,StartUp
 from django.contrib import messages
 
 # Create your views here.
 # for Adding and showing new entrys
 def add_show(request):
-    form = AddStudent(request.POST)
     if request.method == 'POST':
+        form = AddStudentNew(request.POST)
         if form.is_valid():
-            cd = form.cleaned_data
-            nm = cd['name']
-            dp = cd['departments']
-            em = cd['employer']
-            dt = cd['date']
-            pk = cd['package']
-            rf = cd['ref_no']
-            ya = cd['year_admission']
-            yd = cd['year_down']
-            #model class object created (reg)
-            reg = Student(name=nm, departments=dp, employer=em,date=dt, package=pk, ref_no=rf,year_admission=ya,year_down=yd)
-            reg.save(commit=True)
+            form.save(commit=True)
             messages.success(request, 'Added successfully')
             return HttpResponseRedirect('/')
-        form = AddStudent() 
-    else:
-        form = AddStudent()
+            
+            # cd = form.cleaned_data
+            # nm = cd['name']
+            # dp = cd['departments']
+            # em = cd['employer']
+            # dt = cd['date']
+            # pk = cd['package']
+            # rf = cd['ref_no']
+            # ya = cd['year_admission']
+            # yd = cd['year_down']
+            #model class object created (reg)
+            # reg = Student(name=nm, departments=dp, employer=em,date=dt, package=pk, ref_no=rf,year_admission=ya,year_down=yd)
+   
+    form = AddStudentNew()
 
-    stud = Student.objects.all()
+    stud = StudentNew.objects.all()
     context = {
         'header': 'Student Result',
         'form':form,
@@ -39,20 +39,20 @@ def add_show(request):
 # Update/Edit table item
 def update_data(request, id):
     if request.method == 'POST' :
-        pi = Student.objects.get(pk=id)
-        form = AddStudent(request.POST, instance=pi)
+        pi = StudentNew.objects.get(pk=id)
+        form = AddStudentNew(request.POST, instance=pi)
         if form.is_valid():
             form.save(commit=True)
             messages.success(request, 'Changes Saved !')
     else:
-        pi = Student.objects.get(pk=id)
-        form = AddStudent(instance=pi)
+        pi = StudentNew.objects.get(pk=id)
+        form = AddStudentNew(instance=pi)
     return render(request, 'department/update_row.html', {'form':form})
 
 # Delete function
 def delete_data(request, id):
     if request.method == 'POST' :
-        pi = Student.objects.get(pk=id)
+        pi = StudentNew.objects.get(pk=id)
         pi.delete()
         return HttpResponseRedirect('/')
 
