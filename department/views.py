@@ -1,23 +1,16 @@
 from django.shortcuts import render, HttpResponseRedirect
 from .forms import AddStudent, AddProEvent, AddStudPart
-from .models import Student, ProEvent, DeptStudPart
+from .models import StudentResult, DeptProEvent3, DeptStudPart5
 from django.contrib import messages
 
 # Create your views here.
+
+#-------------------------------------------------------------------------------------
 # for Adding and showing new entrys
 def add_show(request):
     form = AddStudent(request.POST)
     if request.method == 'POST':
         if form.is_valid():
-            # cd = form.cleaned_data
-            # nm = cd['name']
-            # dp = cd['departments']
-            # em = cd['employer']
-            # dt = cd['date']
-            # pk = cd['package']
-            # rf = cd['ref_no']
-            # #model class object created (reg)
-            # reg = Student(name=nm, departments=dp, employer=em,date=dt, package=pk, ref_no=rf)
             form.save()
             messages.success(request, 'Added successfully')
             return HttpResponseRedirect('/')
@@ -25,7 +18,7 @@ def add_show(request):
     else:
         form = AddStudent()
 
-    students = Student.objects.all()
+    students = StudentResult.objects.all()
     context = {
         'header': 'Student Result',
         'form':form,
@@ -37,24 +30,24 @@ def add_show(request):
 # Update/Edit table item
 def update_data(request, id):
     if request.method == 'POST' :
-        pi = Student.objects.get(pk=id)
+        pi = StudentResult.objects.get(pk=id)
         form = AddStudent(request.POST, instance=pi)
         if form.is_valid():
-            form.save(commit=True)
+            form.save()
             messages.success(request, 'Changes Saved !')
     else:
-        pi = Student.objects.get(pk=id)
+        pi = StudentResult.objects.get(pk=id)
         form = AddStudent(instance=pi)
     return render(request, 'department/update_row.html', {'form':form})
 
 # Delete function
 def delete_data(request, id):
     if request.method == 'POST' :
-        pi = Student.objects.get(pk=id)
+        pi = StudentResult.objects.get(pk=id)
         pi.delete()
         return HttpResponseRedirect('/')
 
-
+#------------------------------------------------------------------------------------
 def dept_act_3(request):
     form = AddProEvent()
     if request.method == 'POST':
@@ -65,7 +58,7 @@ def dept_act_3(request):
             return HttpResponseRedirect('/department/dept_act_3')
     else:
         form = AddProEvent()
-    event = ProEvent.objects.all
+    event = DeptProEvent3.objects.all
 
     context = {
         'header': 'Department Events With Professional Bodies',
@@ -82,7 +75,7 @@ def dept_act_5(request):
             form.save()
             messages.success(request, 'Added successfully')
             return HttpResponseRedirect('/department/dept_act_5')
-    event = DeptStudPart.objects.all()
+    event = DeptStudPart5.objects.all()
 
     context = {
         'header': "Students Inter-Institute Participation",

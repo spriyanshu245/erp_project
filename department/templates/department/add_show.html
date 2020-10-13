@@ -16,10 +16,10 @@
             <th scope="col">Class</th>
             <th scope="col">Examination Type</th>
             <th scope="col">Subject</th>
-            <th scope="col">Date</th>
+            <th scope="col">Exam Date</th>
             <th scope="col">Candidates Appeared</th>
             <th scope="col">Candidates Passed</th>
-            <th scope="col">Pass Percentage</th>
+            <th scope="col">Passing Percentage</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -47,6 +47,7 @@
         </tbody>
       </table>
      {% else %}
+     <h4 class="text-center alert alert-info"> {{header}} </h4>
      <h4 class="text-center alert alert-warning">No Records Found !</h4>
      {% endif %}
   </div>
