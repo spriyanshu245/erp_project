@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from department import views
 from django.conf import settings
 
 urlpatterns = [

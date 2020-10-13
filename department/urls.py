@@ -1,6 +1,6 @@
 from django.urls import path
 from django.conf.urls import url
-from . import views
+from department import views
 
 urlpatterns = [
     # url(r'^tab1/$', tab1, name="TAB 1"),

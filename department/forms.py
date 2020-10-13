@@ -1,6 +1,6 @@
 from django.core import validators
 from django import forms
-from .models import StudentResult, DeptEvent1, DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
+from .models import StudentResult,DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -21,29 +21,11 @@ class AddStudentResult(forms.ModelForm):
             'passed': forms.NumberInput(attrs={'class':'form-control'}),
             'percentage': forms.NumberInput(attrs={'class':'form-control'}),
         }
-
-#1 Information about events organized by department
-class AddDeptEvent1(forms.ModelForm):
-    class Meta:
-        model = DeptEvent1
-        fields = ['department','activity','resourse_person','resourse_person_contact','no_of_part','from_date','to_date']
-        #adding bootstrap classes to form inputs
-        widgets = {
-            'department': forms.Select(attrs={'class':'form-control'}),
-            'activity_name': forms.TextInput(attrs={'class':'form-control'}),
-            'resourse_person_name': forms.TextInput(attrs={'class':'form-control'}),
-            'resourse_person_contact': forms.TextInput(attrs={'class':'form-control'}),
-            'no_of_participants': forms.NumberInput(attrs={'class':'form-control'}),
-            'event_from_date': DateInput(attrs={'class':'form-control'}),
-            'event_to_date': DateInput(attrs={'class':'form-control'}), 
-        }
-
-#2 Information about events organized by department (For nearby schools only)
+# 
 class AddDeptEvent2(forms.ModelForm):
     class Meta:
         model = DeptEvent2
         fields = ['act_name','school','school_cont','fac_name','part_no','from_date','to_date']
-        #adding bootstrap classes to form inputs
         widgets = {
             'act_name': forms.TextInput(attrs={'class':'form-control'}),
             'school': forms.TextInput(attrs={'class':'form-control'}),
@@ -51,7 +33,7 @@ class AddDeptEvent2(forms.ModelForm):
             'fac_name': forms.TextInput(attrs={'class':'form-control'}),
             'part_no': forms.NumberInput(attrs={'class':'form-control'}),
             'from_date': DateInput(attrs={'class':'form-control'}),
-            'to_date': DateInput(attrs={'class':'form-control'}), 
+            'to_date': DateInput(attrs={'class':'form-control'}),
         }
 
 #3 Information about events organized by department in association with Professional bodies
