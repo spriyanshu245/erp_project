@@ -5,6 +5,7 @@ from django.contrib import messages
 
 # Create your views here.
 
+
 #-------------------------------------------------------------------------------------
 # for Adding and showing new entrys
 def add_show(request):
@@ -49,23 +50,23 @@ def delete_data(request, id):
 #------------------------------------------------------------------------------------
 
 def dept_act_2(request):
-    # form = AddDeptEvent2()
-    # if request.method == 'POST':
-    #     form = AddDeptEvent2(request.POST)
-    #     if form.is_valid():
-    #         form.save()
-    #         messages.success(request, "Added successfully")
-    #         return HttpResponseRedirect('/department/dept_act_3')
+    form = AddDeptEvent2()
+    if request.method == 'POST':
+        form = AddDeptEvent2(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Added successfully")
+            return HttpResponseRedirect('/department/dept_act_2')
 
-    # event = DeptEvent2.objects.all()
+    event = DeptEvent2.objects.all()
 
-    # context = {
-    #     'header': 'Events organized by department (For nearby schools only)',
-    #     'form' : form,
-    #     'event' : event,        
-    # }
+    context = {
+        'header': 'Events organized by department (For nearby schools only)',
+        'form' : form,
+        'event' : event,        
+    }
 
-    return render(request, '/department/dept_act_2.html')
+    return render(request, 'department/dept_act_2.html', context)
 
 #-------------------------------------------------------------------------------------
 def dept_act_3(request):
