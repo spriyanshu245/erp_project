@@ -59,11 +59,11 @@ class DeptStudPart5(models.Model):
     awards = models.CharField(("Recognition Awards"), max_length=264)
 
 #Information about Faculty Development Programs organized by department 
-class FacultyDevProOrg_Dep(models.Model):
+class DeptFacDevProg4(models.Model):
     program_name = models.CharField(max_length=150)
     department_name = models.CharField(max_length=150)
     sponsoring_agency = models.CharField(max_length=150)
-    amm_sponsored = models.IntegerField(default=0)
+    amt_sponsored = models.IntegerField(default=0)
     from_date = models.DateField(("From"), default=date.today,auto_now=False, auto_now_add=False)
     to_date = models.DateField(("To"), default=date.today,auto_now=False, auto_now_add=False)
     no_of_part = models.IntegerField(("No of Participants"))
