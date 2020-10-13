@@ -37,9 +37,9 @@
             <td style="text-align: center;">{{st.perct}}</td>
             <td>
                <a href="{% url 'update' st.id %}" class="btn btn-outline-secondary btn-sm">Update</a>
-               <form action="{% url 'delete' st.id %}" method="POST" class="inline">
+               <form action="{% url 'delete' st.id %}" method="POST">
                 {% csrf_token %}
-                   <input type="submit" class="btn btn-outline-danger btn-sm" value="Delete">
+                   <input type="submit" class="btn btn-outline-danger btn-sm inline" value="Delete">
                </form>
             </td>
           </tr>

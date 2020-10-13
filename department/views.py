@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from .forms import *
-from .models import StudentResult, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6, DeptEvent2
+from .models import StudentResult, DeptEvent1, DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
 from django.contrib import messages
 
 # Create your views here.
@@ -47,25 +47,44 @@ def delete_data(request, id):
         return HttpResponseRedirect('/')
 
 #------------------------------------------------------------------------------------
+def dept_act_1(request):
+    form = AddDeptEvent1()
+    if request.method == 'POST':
+        form = AddDeptEvent1(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Added successfully")
+            return HttpResponseRedirect('/department/dept_act_1')
 
+    event = DeptEvent1.objects.all()
+
+    context = {
+        'header': 'Events Organized by Department ',
+        'form' : form,
+        'event' : event,        
+    }
+
+    return render(request, 'department/dept_act_1.html', context)
+
+#------------------------------------------------------------------------------------
 def dept_act_2(request):
-    # form = AddDeptEvent2()
-    # if request.method == 'POST':
-    #     form = AddDeptEvent2(request.POST)
-    #     if form.is_valid():
-    #         form.save()
-    #         messages.success(request, "Added successfully")
-    #         return HttpResponseRedirect('/department/dept_act_3')
+    form = AddDeptEvent2()
+    if request.method == 'POST':
+        form = AddDeptEvent2(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Added successfully")
+            return HttpResponseRedirect('/department/dept_act_2')
 
-    # event = DeptEvent2.objects.all()
+    event = DeptEvent2.objects.all()
 
-    # context = {
-    #     'header': 'Events organized by department (For nearby schools only)',
-    #     'form' : form,
-    #     'event' : event,        
-    # }
+    context = {
+        'header': 'Events Organized by Department (For Nearby Schools)',
+        'form' : form,
+        'event' : event,        
+    }
 
-    return render(request, '/department/dept_act_2.html')
+    return render(request, 'department/dept_act_2.html', context)
 
 #-------------------------------------------------------------------------------------
 def dept_act_3(request):
@@ -98,7 +117,7 @@ def dept_act_4(request):
         if form.is_valid:
             form.save()
             messages.success(request, 'Added successfully')
-            return HttpResponseRedirect('/department/dept_act_5')
+            return HttpResponseRedirect('/department/dept_act_4')
 
     event = DeptFacultyDev4.objects.all()
 

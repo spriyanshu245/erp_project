@@ -77,10 +77,10 @@ class StudentResult(models.Model):
     #department = models.ForeignKey(Department, on_delete=models.CASCADE)
     exam_type = models.CharField(max_length = 150, choices=EXAM_TYPES, default='')
     subject = models.CharField(max_length = 150, choices=SUBJECTS, default='')
-    date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
+    date = models.DateField(("Exam Date"), default=date.today,auto_now=False, auto_now_add=False)
     appeared = models.IntegerField(null=False, blank=False)
     passed = models.IntegerField(null=False, blank=False)
-    perct = models.IntegerField(default=0,null=False, blank=False)
+    perct = models.IntegerField(("Percentage"),default=0,null=False, blank=False)
     objects = models.Manager()
 
 #1 Information about events organized by department
@@ -89,9 +89,8 @@ class DeptEvent1(models.Model):
     event_type = models.CharField(("Event Type"),max_length=150)
     event_name = models.CharField(("Event Name"),max_length=150)
     guest_name = models.CharField(("Guest Name"),max_length=150)
-    school_cont = models.CharField(("School Contact Details"),max_length=250)
-    fac_name = models.CharField(("Faculty Name"),max_length=250)
-    part_no = models.IntegerField(("No of Participants"))
+    guest_affl = models.CharField(("Affiliation of guest"),max_length=250)
+    no_of_part = models.IntegerField(("No of Participants"))
     from_date = models.DateField(("From"), default=date.today,auto_now=False, auto_now_add=False)
     to_date = models.DateField(("To"), default=date.today,auto_now=False, auto_now_add=False)
 
@@ -113,7 +112,7 @@ class DeptProEvent3(models.Model):
     #department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
     resourse_person = models.CharField(max_length=150)
     resourse_person_contact = models.IntegerField()
-    no_of_part = models.IntegerField()
+    no_of_part = models.IntegerField(("No of Participants"))
     from_date = models.DateField(("From"), default=date.today,auto_now=False, auto_now_add=False)
     to_date = models.DateField(("To"), default=date.today,auto_now=False, auto_now_add=False)
     objects = models.Manager()
@@ -149,12 +148,11 @@ class DeptStudPart5(models.Model):
 class DeptStartUp6(models.Model):
     startup_name = models.CharField(max_length=150)
     startup_nature = models.CharField(max_length=150)
-    start_date = models.CharField(max_length=150)
+    start_date = models.CharField(("Commencement Date"),max_length=150)
     founder = models.CharField(max_length=150)
-    LLP_no = models.IntegerField()
+    LLP_no = models.IntegerField(("LLP number"))
     website = models.CharField(max_length=150)
-    team_members = models.CharField( max_length=500)
-    #team_member isnt right
+    team_members = models.CharField(max_length=500)
 
 
 

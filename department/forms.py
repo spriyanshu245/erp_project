@@ -1,6 +1,6 @@
 from django.core import validators
 from django import forms
-from .models import StudentResult,DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
+from .models import StudentResult, DeptEvent1, DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -21,6 +21,23 @@ class AddStudentResult(forms.ModelForm):
             'passed': forms.NumberInput(attrs={'class':'form-control'}),
             'percentage': forms.NumberInput(attrs={'class':'form-control'}),
         }
+
+#1 Information about events organized by department
+class AddDeptEvent1(forms.ModelForm):
+    class Meta:
+        model = DeptEvent1
+        fields = ['department','event_type','event_name','guest_name','guest_affl','no_of_part','from_date','to_date']
+        widgets = {
+            'department' : forms.Select(attrs={'class':'form-control'}),
+            'event_type': forms.TextInput(attrs={'class':'form-control'}),
+            'event_name': forms.TextInput(attrs={'class':'form-control'}),
+            'guest_name': forms.TextInput(attrs={'class':'form-control'}),
+            'guest_affl': forms.TextInput(attrs={'class':'form-control'}),
+            'no_of_part': forms.NumberInput(attrs={'class':'form-control'}),
+            'from_date': DateInput(attrs={'class':'form-control'}),
+            'to_date': DateInput(attrs={'class':'form-control'}),
+        }
+
 # 
 class AddDeptEvent2(forms.ModelForm):
     class Meta:
@@ -44,12 +61,12 @@ class AddDeptProEvent3(forms.ModelForm):
         #adding bootstrap classes to form inputs
         widgets = {
             'department': forms.Select(attrs={'class':'form-control'}),
-            'activity_name': forms.TextInput(attrs={'class':'form-control'}),
-            'resourse_person_name': forms.TextInput(attrs={'class':'form-control'}),
+            'activity': forms.TextInput(attrs={'class':'form-control'}),
+            'resourse_person': forms.TextInput(attrs={'class':'form-control'}),
             'resourse_person_contact': forms.TextInput(attrs={'class':'form-control'}),
-            'no_of_participants': forms.NumberInput(attrs={'class':'form-control'}),
-            'event_from_date': DateInput(attrs={'class':'form-control'}),
-            'event_to_date': DateInput(attrs={'class':'form-control'}), 
+            'no_of_part': forms.NumberInput(attrs={'class':'form-control'}),
+            'from_date': DateInput(attrs={'class':'form-control'}),
+            'to_date': DateInput(attrs={'class':'form-control'}), 
         }
 
 
@@ -60,12 +77,12 @@ class AddDeptFacultyDev4(forms.ModelForm):
         fields = ['department','program','agency','amm_sponsored','from_date','to_date','no_of_part','level']
         widgets = {
             'department': forms.Select(attrs={'class':'form-control'}),
-            'program_name' : forms.TextInput(attrs={'class':'form-control'}),
-            'sponsor_agency': forms.TextInput(attrs={'class':'form-control'}),
-            'sponsored_amount': forms.NumberInput(attrs={'class':'form-control'}),
+            'program' : forms.TextInput(attrs={'class':'form-control'}),
+            'agency': forms.TextInput(attrs={'class':'form-control'}),
+            'amm_sponsored': forms.NumberInput(attrs={'class':'form-control'}),
             'from_date': DateInput(attrs={'class':'form-control'}),
             'to_date': DateInput(attrs={'class':'form-control'}),
-            'no_of_participants': forms.NumberInput(attrs={'class':'form-control'}),
+            'no_of_part': forms.NumberInput(attrs={'class':'form-control'}),
             'level': forms.TextInput(attrs={'class':'form-control'}),
         }
 
@@ -80,11 +97,12 @@ class AddDeptStudPart5(forms.ModelForm):
             'student_name': forms.TextInput(attrs={'class':'form-control'}),
             'event_type' : forms.TextInput(attrs={'class':'form-control'}),
             'event_name': forms.TextInput(attrs={'class':'form-control'}),
-            'organising_institute': forms.TextInput(attrs={'class':'form-control'}),
+            'org_inst': forms.TextInput(attrs={'class':'form-control'}),
             'from_date': DateInput(attrs={'class':'form-control'}),
             'to_date': DateInput(attrs={'class':'form-control'}),
-            'no_of_participants': forms.NumberInput(attrs={'class':'form-control'}),
+            'no_of_part': forms.NumberInput(attrs={'class':'form-control'}),
             'level': forms.TextInput(attrs={'class':'form-control'}),
+            'awards': forms.TextInput(attrs={'class':'form-control'}),
         }
 
 
@@ -96,9 +114,9 @@ class AddDeptStartUp6(forms.ModelForm):
         widgets = {
             'startup_name': forms.TextInput(attrs={'class':'form-control'}),
             'startup_nature' : forms.TextInput(attrs={'class':'form-control'}),
-            'commencement_date': DateInput(attrs={'class':'form-control'}),
-            'founder_name': forms.TextInput(attrs={'class':'form-control'}),
-            'LLP_number': forms.NumberInput(attrs={'class':'form-control'}),
+            'start_date': DateInput(attrs={'class':'form-control'}),
+            'founder': forms.TextInput(attrs={'class':'form-control'}),
+            'LLP_no': forms.NumberInput(attrs={'class':'form-control'}),
             'website': forms.TextInput(attrs={'class':'form-control'}),
             'team_members': forms.TextInput(attrs={'class':'form-control'}),
         }

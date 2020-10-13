@@ -8,19 +8,24 @@ from .models import *
 admin.site.register(Department)
 
 admin.site.register(StudentResult)
-list_display = ('department','Class','exam_type','subject','exam_date','appeared','passed','perct')
+list_display = ('department','Class','exam_type','subject','date','appeared','passed','perct')
+
+admin.site.register(DeptEvent1)
+list_display = ('department','event_type','event_name','guest_name','guest_affl','no_of_part','from_date','to_date')
+admin.site.register(DeptEvent2)
+list_display = ('act_name','school','school_cont','fac_name','part_no','from_date','to_date')
 
 admin.site.register(DeptProEvent3)
-list_display = ('department','activity_name','resourse_person_name','resourse_person_contact','no_of_participants','event_from_date','event_to_date')
+list_display = ('department','activity','resourse_person','resourse_person_contact','no_of_part','from_date','to_date')
 
 admin.site.register(DeptFacultyDev4)
-list_display = ('department','program_name','sponsor_agency','sponsored_amount','from_date','to_date','no_of_participants','level')
+list_display = ('department','program','agency','amm_sponsored','from_date','to_date','no_of_part','level')
 
 admin.site.register(DeptStudPart5)
-list_display = ('department','student_name','event_type','event_name','organising_institute','from_date','to_date','no_of_participants','level','awards')
+list_display = ('department','student_name','event_type','event_name','org_inst','from_date','to_date','no_of_part','level','awards')
 
 admin.site.register(DeptStartUp6)
-list_display = ('student_name','startup_nature','commencement_date','founder_name','LLP_number','website','team_members')
+list_display = ('startup_name','startup_nature','start_date','founder','LLP_no','website','team_members')
 
 
 

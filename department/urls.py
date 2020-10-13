@@ -8,6 +8,7 @@ urlpatterns = [
     # url(r'^tab3$', tab3, name="TAB 3"),
 
     path('', views.add_show, name="add_show"),
+    path(r'^dept_act_1/$', views.dept_act_1, name="dept_act_1"),
     path('dept_act_2/', views.dept_act_2, name="dept_act_2"),
     path('dept_act_3/', views.dept_act_3, name="dept_act_3"),
     path('dept_act_4/', views.dept_act_4, name="dept_act_4"),
