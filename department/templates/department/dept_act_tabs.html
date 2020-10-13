@@ -4,7 +4,7 @@
   </div>
   <div class="add_buttons">
     <div class="button-group">
-
+      <a href="{% url 'dept_act_2' %}" class="btn btn-primary btn-md btn-trim" role="button"> dept_act_2</a>
       <a href="{% url 'dept_act_3' %}" class="btn btn-primary btn-md btn-trim" role="button"> dept_act_3</a>
       <a href="{% url 'dept_act_4' %}" class="btn btn-primary btn-md btn-trim" role="button"> dept_act_4</a>
       <a href="{% url 'dept_act_5' %}" class="btn btn-primary btn-md btn-trim" role="button"> dept_act_5</a>
@@ -13,6 +13,6 @@
     </div>
   </div>
   <div>
-    <h4 class="text-center alert alert-info">Currently Viewing {{ header }} Table</h4>
+    <h4 class="text-center alert alert-info">{{ header }} Table</h4>
   </div>
 {% endblock %}

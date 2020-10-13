@@ -45,6 +45,14 @@ def delete_data(request, id):
         return HttpResponseRedirect('/')
 
 def dept_act_2(request):
+
+
+
+
+
+
+
+    
     return render(request, 'department/dept_act_2.html')
 
 
@@ -62,7 +70,7 @@ def dept_act_3(request):
     event = ProEvent.objects.all
 
     context = {
-        'header': 'Departmental Activities',
+        'header': 'Events Organized by Department in association with Professional Bodies',
         'form' : form,
         'event' : event,        
     }
