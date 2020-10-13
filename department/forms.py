@@ -1,6 +1,6 @@
 from django.core import validators
 from django import forms
-from .models import StudentNew, ProEvent, DeptStudPart, DeptStartUp6
+from .models import StudentNew, ProEvent, DeptStudPart5, DeptStartUp6
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -36,9 +36,9 @@ class AddProEvent(forms.ModelForm):
             'event_to_date': DateInput(attrs={'class':'form-control'}) 
         }
 
-class AddStudPart(forms.ModelForm):
+class AddStudPart5(forms.ModelForm):
     class Meta:
-        model = DeptStudPart
+        model = DeptStudPart5
         fields = ['student_name','event_type','event_name','org_inst','from_date','to_date','no_of_part','level','awards']
         widgets = {
             'student_name': forms.TextInput(attrs={'class':'form-control'}),
@@ -56,7 +56,7 @@ class AddStudPart(forms.ModelForm):
 #Information about Faculty Development Programs organized by department 
 class AddFDOP_Dept(forms.ModelForm):
     class Meta:
-        model = DeptStudPart
+        model = DeptStudPart5
         fields = ['student_name','event_type','event_name','org_inst','from_date','to_date','no_of_part','level','awards']
         widgets = {
             'student_name': forms.TextInput(attrs={'class':'form-control'}),

@@ -47,7 +47,7 @@ class ProEvent(models.Model):
         return self.activity_name
 
 #Participation in inter-institute events by students 
-class DeptStudPart(models.Model):
+class DeptStudPart5(models.Model):
     student_name = models.CharField(max_length=150)
     event_type = models.CharField(max_length=150)
     event_name = models.CharField(max_length=150)

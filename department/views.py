@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
-from .forms import AddStudentNew, AddProEvent, AddStudPart ,AddFDOP_Dept , AddStartUp6
-from .models import StudentNew, ProEvent, DeptStudPart , FacultyDevProOrg_Dep ,DeptStartUp6
+from .forms import AddStudentNew, AddProEvent, AddStudPart5, AddStartUp6
+from .models import StudentNew, ProEvent, DeptStudPart5, FacultyDevProOrg_Dep ,DeptStartUp6
 from django.contrib import messages
 
 # Create your views here.
@@ -89,14 +89,14 @@ def dept_act_4(request):
 
 def dept_act_5(request):
 
-    form = AddFDOP_Dept()
+    form = AddStudPart5()
     if request.method == 'POST':
-        form = AddFDOP_Dept(request.POST)
+        form = AddStudPart5(request.POST)
         if form.is_valid:
             form.save(commit=True)
             messages.success(request, 'Added successfully')
             return HttpResponseRedirect('/department/dept_act_5')
-    event = FacultyDevProOrg_Dep.objects.all()
+    event = DeptStudPart5.objects.all()
 
     context = {
         'header': "Students Inter-Institute Participation",
