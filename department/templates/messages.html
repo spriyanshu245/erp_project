@@ -4,17 +4,21 @@
 <ul class="messages">
   {% for msg in messages %}
   <li class="list-unstyled">
-    <div class="alert alert-{{msg.level_tag}}" role="alert">
+    <div id="message" class="alert alert-{{msg.level_tag}}" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
-        </button>{{msg.message}}
+        </button>{{msg.message}} 
     </div>
   </li>
-  <script>window.setTimeout(function() {
-    $(".alert").fadeTo(500, 0).slideUp(500, function(){
-        $(this).remove(); 
-    });
-}, 4000);</script>
+  <div>
+    <script>
+      window.setTimeout(function() {
+        $("#message").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove(); 
+            });
+          }, 4000);
+      </script>
+  </div>
   {% endfor %}
 </ul>
 {% endif %}

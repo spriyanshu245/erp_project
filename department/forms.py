@@ -19,7 +19,7 @@ class AddStudentResult(forms.ModelForm):
             'date' : DateInput(attrs={'class':'form-control'}),
             'appeared': forms.NumberInput(attrs={'class':'form-control'}),
             'passed': forms.NumberInput(attrs={'class':'form-control'}),
-            'percentage': forms.NumberInput(attrs={'class':'form-control'}),
+            'perct': forms.NumberInput(attrs={'class':'form-control'}),
         }
 
 #1 Information about events organized by department
@@ -38,7 +38,7 @@ class AddDeptEvent1(forms.ModelForm):
             'to_date': DateInput(attrs={'class':'form-control'}),
         }
 
-# 
+#2 Information about events organized by department (For nearby schools only) 
 class AddDeptEvent2(forms.ModelForm):
     class Meta:
         model = DeptEvent2

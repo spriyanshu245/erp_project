@@ -67,6 +67,15 @@ def dept_act_1(request):
 
     return render(request, 'department/dept_act_1.html', context)
 
+#  # Delete View 
+# class dept_act_1DeleteView(DeleteView):  
+#     model = DeptEvent1 
+      
+#     # specify success url 
+#     # to redirect after successfully 
+#     # deleting object 
+#     success_url ='/department/dept_act_1'
+
 #------------------------------------------------------------------------------------
 def dept_act_2(request):
     form = AddDeptEvent2()
