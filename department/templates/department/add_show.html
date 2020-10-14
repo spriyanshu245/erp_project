@@ -11,15 +11,15 @@
      <table class="table table-hover">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
+            <th scope="col">No</th>
             <th scope="col">Department</th>
-            <th scope="col">Employer</th>
-            <th scope="col">Date</th>
-            <th scope="col">Package</th>
-            <th scope="col">Reference</th>
-            <th scope="col">year_admission</th>
-            <th scope="col">year_down</th>
+            <th scope="col">Class</th>
+            <th scope="col">Examination Type</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Exam Date</th>
+            <th scope="col">Candidates Appeared</th>
+            <th scope="col">Candidates Passed</th>
+            <th scope="col">Passing Percentage</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -27,14 +27,14 @@
             {% for st in stu %}
           <tr>
             <th scope="row" style="text-align: center;">{{st.id}}</th>
-            <td style="text-align: center;">{{st.name}}</td>
-            <td style="text-align: center;">{{st.departments}}</td>
-            <td style="text-align: center;">{{st.employer}}</td>
+            <td style="text-align: center;">{{st.department}}</td>
+            <td style="text-align: center;">{{st.Class}}</td>
+            <td style="text-align: center;">{{st.exam_type}}</td>
+            <td style="text-align: center;">{{st.subject}}</td>
             <td style="text-align: center;">{{st.date}}</td>
-            <td style="text-align: center;">{{st.package}}</td>
-            <td style="text-align: center;">{{st.ref_no}}</td>
-            <td style="text-align: center;">{{st.year_admission}}</td>
-            <td style="text-align: center;">{{st.year_down}}</td>
+            <td style="text-align: center;">{{st.appeared}}</td>
+            <td style="text-align: center;">{{st.passed}}</td>
+            <td style="text-align: center;">{{st.perct}}</td>
             <td>
                <a href="{% url 'update' st.id %}" class="btn btn-outline-secondary btn-sm">Update</a>
                <form action="{% url 'delete' st.id %}" method="POST" class="inline">
@@ -47,6 +47,7 @@
         </tbody>
       </table>
      {% else %}
+     <h4 class="text-center alert alert-info"> {{header}} </h4>
      <h4 class="text-center alert alert-warning">No Records Found !</h4>
      {% endif %}
   </div>

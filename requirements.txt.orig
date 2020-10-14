@@ -2,6 +2,9 @@ Django==2.2.16
 mysqlclient==2.0.1
 pytz==2020.1
 sqlparse==0.4.1
+<<<<<<< HEAD
 selenium==3.141.0
 webdriver-manager==2.5.3
+=======
 django-filter==2.3.0
+>>>>>>> b0edc6a5722c2e24a118d2cbb1b538daa0970b0c

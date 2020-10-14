@@ -76,13 +76,8 @@ WSGI_APPLICATION = 'erp_project.wsgi.application'
 """
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'ii0s9b6z11qnbvvi',
-        'USER': 'hhzff4egikjucw2u',
-        'PASSWORD': 'wst68h0mw7rjonw5',
-        'HOST': 't89yihg12rw77y6f.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
-       
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 """
