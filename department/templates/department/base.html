@@ -23,14 +23,11 @@
 </div>
 
 
-
-
     <!--Navbar-->
-        
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
        
          <!--Side menu bar-->
-        <div id="mySidenav" class="sidenav">
+      <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="{% url 'add_show' %}">Students Academic Performance</a>
         <a href="{% url 'dept_act_1' %}">Departmental Activities</a>
@@ -58,18 +55,12 @@
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent ">
           <ul class="navbar-nav ml-auto">
-            
-            
             <li class="nav-item active ml-auto" >
               <a class="nav-link" href="#">Department <span class="sr-only">(current)</span></a>
             </li>
-            
-            
             <li class="nav-item ml-auto">
               <a class="nav-link" href="#">Placement</a>
             </li>
-            
-            
             <li class="nav-item ml-auto">
                 <a class="nav-link " href="#">Library</a>
             </li>    
@@ -88,7 +79,6 @@
             </li>
 
               -->
-            
           </ul>
           <!-- For search bar
           <form class="form-inline my-2 my-lg-0">
@@ -101,14 +91,13 @@
       
       
 
-    
-    
       <div class="container mt-5">
-        
         {% block content %} 
         {% endblock content %}
-        
       </div>
+
+
+
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

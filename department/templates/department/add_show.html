@@ -8,15 +8,15 @@
   <div class="col-sm-8">
     {% if stu %}
      <h4 class="text-center alert alert-info"> {{header}} </h4> 
-     <table class="table table-hover">
-        <thead class="thead-dark">
+     <table class="table table-bordered table-responsive table-hover">
+      <thead class="thead-dark">
           <tr>
-            <th scope="col">No</th>
+            <th scope="col" style="text-align: center;">No</th>
             <th scope="col">Department</th>
             <th scope="col">Class</th>
             <th scope="col">Examination Type</th>
             <th scope="col">Subject</th>
-            <th scope="col">Exam Date</th>
+            <th scope="col">Examination Date</th>
             <th scope="col">Candidates Appeared</th>
             <th scope="col">Candidates Passed</th>
             <th scope="col">Passing Percentage</th>
@@ -52,4 +52,5 @@
      {% endif %}
   </div>
 </div>
+
 {% endblock content %}
