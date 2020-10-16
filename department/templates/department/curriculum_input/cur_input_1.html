@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- {% include 'curr_input_tabs.html' %}  -->
+{% include 'cur_input_tabs.html' %}
 
 <div class="row">
  {% include 'add_record.html' %}
   <div class="col-sm-9">
-    {% if lecture %}
+    {% if items %}
      <h4 class="text-center alert alert-info"> {{header}} </h4> 
-     <table class="table table-bordered table-responsive table-hover">
+     <table class="table table-bordered table-hover">
       <thead class="thead-dark">
           <tr>
             <th scope="col">No</th>
@@ -23,19 +23,19 @@
           </tr>
         </thead>
         <tbody>
-            {% for lect in lecture %}
+            {% for item in items %}
           <tr>
-            <th scope="row" style="text-align: center;">{{st.id}}</th>
-            <td style="text-align: center;">{{lect.guest}}</td>
-            <td style="text-align: center;">{{lect.organization}}</td>
-            <td style="text-align: center;">{{lect.designation}}</td>
-            <td style="text-align: center;">{{lect.topic}}</td>
-            <td style="text-align: center;">{{lect.department}}</td>
-            <td style="text-align: center;">{{lect.date}}</td>
-            <td style="text-align: center;">{{lect.no_of_part}}</td>
+            <th scope="row" style="text-align: center;">{{item.id}}</th>
+            <td style="text-align: center;">{{item.guest}}</td>
+            <td style="text-align: center;">{{item.organization}}</td>
+            <td style="text-align: center;">{{item.designation}}</td>
+            <td style="text-align: center;">{{item.topic}}</td>
+            <td style="text-align: center;">{{item.department}}</td>
+            <td style="text-align: center;">{{item.date}}</td>
+            <td style="text-align: center;">{{item.no_of_part}}</td>
             <td>
-               <a href="{% url 'update' st.id %}" class="btn btn-outline-secondary btn-sm">Update</a>
-               <form action="{% url 'delete' st.id %}" method="POST">
+               <a href="#" class="btn btn-outline-secondary btn-sm">Update</a>
+               <form action="#" method="POST">
                 {% csrf_token %}
                    <input type="submit" class="btn btn-outline-danger btn-sm inline" value="Delete">
                </form>

@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- {% include 'fac_ach_tabs.html' %}  -->
+{% include 'fac_tabs.html' %} 
 
 <div class="row">
  {% include 'add_record.html' %}
   <div class="col-sm-9">
-    {% if fac %}
+    {% if items %}
      <h4 class="text-center alert alert-info"> {{header}} </h4> 
-     <table class="table table-bordered table-responsive table-hover">
+     <table class="table table-bordered table-hover">
       <thead class="thead-dark">
           <tr>
             <th scope="col">No</th>
@@ -20,16 +20,16 @@
           </tr>
         </thead>
         <tbody>
-            {% for fac in faculty %}
+            {% for item in items %}
           <tr>
-            <th scope="row" style="text-align: center;">{{fac.id}}</th>
-            <td style="text-align: center;">{{fac.title}}</td>
-            <td style="text-align: center;">{{fac.author_name}}</td>
-            <td style="text-align: center;">{{fac.publication}}</td>
-            <td style="text-align: center;">{{fac.ISBN}}</td>
+            <th scope="row" style="text-align: center;">{{item.id}}</th>
+            <td style="text-align: center;">{{item.title}}</td>
+            <td style="text-align: center;">{{item.author_name}}</td>
+            <td style="text-align: center;">{{item.publication}}</td>
+            <td style="text-align: center;">{{item.ISBN}}</td>
             <td>
-               <a href="{% url 'update' st.id %}" class="btn btn-outline-secondary btn-sm">Update</a>
-               <form action="{% url 'delete' st.id %}" method="POST">
+              <a href="#" class="btn btn-outline-secondary btn-sm">Update</a>
+               <form action="#" method="POST">
                 {% csrf_token %}
                    <input type="submit" class="btn btn-outline-danger btn-sm inline" value="Delete">
                </form>

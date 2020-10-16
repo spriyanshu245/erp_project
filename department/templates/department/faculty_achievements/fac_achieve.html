@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 {% extends 'base.html' %}
 
 {% block content %}
@@ -32,6 +31,13 @@
                <td style="text-align: center;">{{item.achievement}}</td>
                <td style="text-align: center;">{{item.level}}</td>
                <td style="text-align: center;">{{item.dates}}</td>
+               <td>
+                <a href="#" class="btn btn-outline-secondary btn-sm">Update</a>
+                <form action="#" method="POST">
+                 {% csrf_token %}
+                    <input type="submit" class="btn btn-outline-danger btn-sm inline" value="Delete">
+                </form>
+             </td>
              </tr>
                {% endfor %}
            </tbody>

@@ -164,8 +164,16 @@ class DeptStartUp6(models.Model):
                 # Model space for faculty contribution tables
 
 #-------------------------------------------------------------------------------------
+#1 Faculty achievements
+class FacAchieve(models.Model):
+    fac_name = models.CharField(("Faculty Name"), max_length=150)
+    department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
+    achievement = models.CharField(max_length=150)
+    level = models.CharField(max_length=150)
+    dates = models.DateField(("Dates"), default=date.today,auto_now=False, auto_now_add=False)
+
 #2 Names of books/Chapters/Manuals/ Monographs published
-class FacBook2(models.Model):
+class FacBook(models.Model):
     title = models.CharField(("Title"),max_length=500)
     author_name = models.CharField(("Name of author(s)"),max_length=150)
     publication = models.CharField(("Publication"),max_length=150)
@@ -174,53 +182,28 @@ class FacBook2(models.Model):
 #-------------------------------------------------------------------------------------
                           # CURRICULUM INPUT
 #1 Guest Lectures (General Topics)
-class GuestLect1(models.Model):
+class CurGuestLect1(models.Model):
     guest = models.CharField(("Name of Guest"),max_length = 150)
     organization = models.CharField(("Company/Organization Represented"),max_length=150)
     designation = models.CharField(max_length=150)
     topic = models.CharField(max_length=150)
-    department = models.CharField(("Name of Organizing Department").max_length = 150, choices=DEPARTMENTS)
+    department = models.CharField(("Name of Organizing Department"), max_length = 150, choices=DEPARTMENTS)
     date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
     no_of_part = models.IntegerField(("No of Participants"))
 
 #2 Expert Lectures (Subject-Specific Topics)
-class ExptLect2(models.Model):
+class CurExptLect2(models.Model):
     guest = models.CharField(("Name of Guest"),max_length = 150)
     organization = models.CharField(("Company/Organization Represented"),max_length=150)
     designation = models.CharField(max_length=150)
     topic = models.CharField(max_length=150)
-    department = models.CharField(("Name of Organizing Department").max_length = 150, choices=DEPARTMENTS)
+    department = models.CharField(("Name of Organizing Department"), max_length = 250, choices=DEPARTMENTS)
     date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
     no_of_part = models.IntegerField(("No of Participants"))
 
 # class ExptLect2(GuestLect1):
 #     pass
   
-#1 Faculty achievements
-
-class FacAchieve(models.Model):
-    fac_name = models.CharField(("Faculty Name"), max_length=150)
-    department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
-    achievement = models.CharField(max_length=150)
-    level = models.CharField(max_length=150)
-    dates = models.DateField(("Dates"), default=date.today,auto_now=False, auto_now_add=False)
-
-
-
-
-
-# class MY_CHOICES(models.Model)
-#     choice = models.CharField(max_length=154, unique=True)
-
-# class MODEL(models.Model):
-#     ...
-#     ...
-#     my_field = models.ManyToManyField(MY_CHOICES)
-
-#-------------------------------------------------------------------------------------
-                # Model space for Curriculum Input Tables
-#-------------------------------------------------------------------------------------
-
 #3 Student Internship/Industrial training
 class CurStudTrain3(models.Model):
     # No	Name of Department	Name of Student		Name of Company		Sector		Date/Duration
@@ -233,7 +216,6 @@ class CurStudTrain3(models.Model):
 
 #4 Student Industrial Visit
 class CurStudVisit4(models.Model):
-    # No	Name of Company		Sector	Name of Department	Name of Faculty Accompanied		No of students Visited	Duration (From-To)
     department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
     company = models.CharField(("Name of Company"), max_length=250)
     sector = models.CharField(max_length=250)
@@ -244,7 +226,6 @@ class CurStudVisit4(models.Model):
 
 # Student Sponsored Projects
 class CurStudSponsor5(models.Model):
-    # No	Title of  Project 		Name of Company Representative	Name of Sponsoring company		Duration	Grant Received	Status of Project
     title = models.CharField(("Title of Project"),max_length=250)
     comp_rep = models.CharField(("Name of Company Representative"), max_length=250)
     comp_sponsor = models.CharField(("Name of Sponsoring company"), max_length=250)
@@ -253,6 +234,13 @@ class CurStudSponsor5(models.Model):
     grant = models.CharField(("Grant Received"), max_length=150, choices=GRANT, default='No')
     status = models.CharField(max_length=150)
 
+# class MY_CHOICES(models.Model)
+#     choice = models.CharField(max_length=154, unique=True)
+
+# class MODEL(models.Model):
+#     ...
+#     ...
+#     my_field = models.ManyToManyField(MY_CHOICES)
     
 
 

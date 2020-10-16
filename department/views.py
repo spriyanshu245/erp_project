@@ -1,9 +1,10 @@
 from django.shortcuts import render, HttpResponseRedirect
 from .forms import *
-from .models import FacAchieve, StudentResult, DeptEvent1, DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
+from .models import *
+#FacAchieve, StudentResult, DeptEvent1, DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
 from django.contrib import messages
-# Create your views here.
 
+# Create your views here.
 
 #-------------------------------STUDENT RESULTS-----------------------------------------
 # for Adding and showing new entrys
@@ -182,78 +183,98 @@ def dept_act_6(request):
 
 #-------------------------------------------------------------------------------------
 #-------------------------------FACULTY ACHIEVEMENTS----------------------------------
-def fac_ach_2(request):
-    form = AddFacBook2()
-    if request.method == 'POST':
-        form = AddDeptEvent2(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Added successfully")
-            return HttpResponseRedirect('dept_act_2')
-
-    event = FacBook2.objects.all()
-
-    context = {
-        'header': 'BOOKS AND MONOGRAPHS PUBLISHED',
-        'form' : form,
-        'faculty' : faculty,        
-    }
-
-    return render(request, 'fac_ach_2.html', context)
-
-#-------------------------------------------------------------------------------------
-#-------------------------------CURRICULUM INPUT--------------------------------------
-def curr_input_1(request):
-    form = AddGuestLect1()
-    if request.method == 'POST':
-        form = AddGuestLect1(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Added successfully")
-            return HttpResponseRedirect('curr_input_1')
-
-    event = GuestLect1.objects.all()
-
-    context = {
-        'header': 'Events Organized by Department (For Nearby Schools)',
-        'form' : form,
-        'event' : event,        
-    }
-
-    return render(request, 'curr_input_1.html', context)
-
-#-------------------------------------------------------------------------------------
 
 def fac_achieve(request):
-
-    form = AddFacAchievements()
+    form = AddFacAchieve()
     if request.method == "POST":
-        form = AddFacAchievements(request.POST)
-        form.save()
-        messages.success(request, 'Added successfully')
-        return HttpResponseRedirect('fac_achieve')
-
+        form = AddFacAchieve(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Added successfully')
+            return HttpResponseRedirect('fac_achieve')
+             
     items = FacAchieve.objects.all()
 
     context = {
-        'header': "Achievement List",
+        'header': "ACHIEVEMENT LIST",
         'items': items,
         'form': form
     }
 
     return render(request, 'fac_achieve.html', context)
 
+#-------------------------------------------------------------------------------------
+def fac_book(request):
+    form = AddFacBook()
+    if request.method == 'POST':
+        form = AddFacBook(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Added successfully")
+            return HttpResponseRedirect('fac_book')
+
+    items = FacBook.objects.all()
+
+    context = {
+        'header': 'BOOKS AND MONOGRAPHS PUBLISHED',
+        'items': items,
+        'form': form       
+    }
+
+    return render(request, 'fac_book.html', context)
+
+#-------------------------------------------------------------------------------------
+#-------------------------------CURRICULUM INPUT--------------------------------------
+def cur_input_1(request):
+    form = AddCurGuestLect1()
+    if request.method == 'POST':
+        form = AddCurGuestLect1(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Added successfully")
+            return HttpResponseRedirect('curr_input_1')
+
+    items = CurGuestLect1.objects.all()
+
+    context = {
+        'header': 'Guest Lectures (General Topics)',
+        'form': form,
+        'items': items,
+        'nbar': 'cur_input_1',        
+    }
+
+    return render(request, 'cur_input_1.html', context)
+
 #-------------------------------------------------------------------------
-#Curriculum Input
+def cur_input_2(request):
+    form = AddCurExptLect2()
+    if request.method == 'POST':
+        form = AddCurExptLect2(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Added successfully")
+            return HttpResponseRedirect('cur_input_2')
 
+    items = CurExptLect2.objects.all()
+
+    context = {
+        'header': 'Expert Lectures',
+        'form': form,
+        'items': items,
+        'nbar': 'cur_input_2',        
+    }
+
+    return render(request, 'cur_input_2.html', context)
+
+#-------------------------------------------------------------------------
 def cur_input_3(request):
-
-    form = AddCurStudTrain3
+    form = AddCurStudTrain3()
     if request.method == "POST":
         form = AddCurStudTrain3(request.POST)
-        form.save()
-        messages.success(request, 'Added successfully')
-        return HttpResponseRedirect('cur_input_3')
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Added successfully')
+            return HttpResponseRedirect('cur_input_3')
 
     items = CurStudTrain3.objects.all()
 
@@ -303,7 +324,7 @@ def cur_input_5(request):
         'header': 'Students Sponsored Projects',
         'form': form,
         'items': items,
-        'nbar': 'cur_input_5'
+        'nbar': 'cur_input_5',
     }
 
     return render(request, 'cur_input_5.html', context)

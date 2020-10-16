@@ -33,6 +33,13 @@
                <td style="text-align: center;">{{item.to_date}}</td>
                <td style="text-align: center;">{{item.grant}}</td>
                <td style="text-align: center;">{{item.status}}</td>
+               <td>
+                <a href="#" class="btn btn-outline-secondary btn-sm">Update</a>
+                <form action="#" method="POST">
+                 {% csrf_token %}
+                    <input type="submit" class="btn btn-outline-danger btn-sm inline" value="Delete">
+                </form>
+             </td>
              </tr>
                {% endfor %}
            </tbody>

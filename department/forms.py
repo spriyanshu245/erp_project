@@ -1,12 +1,8 @@
 from django.core import validators
 from django import forms
-<<<<<<< HEAD
 from .models import *
-# StudentResult, DeptEvent1, DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6, FacBook, GuestLect1, ExptLect2
-=======
-# from .models import CurStudTrain3, FacAchieve, StudentResult, DeptEvent1, DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
-from .models import *
->>>>>>> 4e0485afc6bd31dbc0c2cace985e92bdec2a06dd
+#from .models import CurStudTrain3, FacAchieve, StudentResult, DeptEvent1, DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
+
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -132,11 +128,25 @@ class AddDeptStartUp6(forms.ModelForm):
 
 #-------------------------------------------------------------------------------------
 
+#1 Faculty Acheivements
+class AddFacAchieve(forms.ModelForm):
+    class Meta:
+        model = FacAchieve
+        fields = ['department','fac_name','achievement','level','dates',]
+        widgets = {
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'fac_name': forms.TextInput(attrs={'class':'form-control'}),
+            'achievement': forms.TextInput(attrs={'class':'form-control'}),
+            'level': forms.TextInput(attrs={'class':'form-control'}),
+            'dates': DateInput(attrs={'class':'form-control'}),
+        }
+
+
 #2 Names of books/Chapters/Manuals/ Monographs published
 class AddFacBook(forms.ModelForm):
         class Meta:
             model = FacBook
-            fields = ['title','author_name','start_date','founder','LLP_no','website','team_members']
+            fields = ['title','author_name','publication','ISBN']
             widgets = {
                 'title': forms.TextInput(attrs={'class':'form-control'}),
                 'author_name' : forms.TextInput(attrs={'class':'form-control'}),
@@ -144,12 +154,12 @@ class AddFacBook(forms.ModelForm):
                 'ISBN': forms.NumberInput(attrs={'class':'form-control'}),
             }
 
-#-------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------
 
 #1 Guest Lectures (General Topics)
-class AddGuestLect1(forms.ModelForm):
+class AddCurGuestLect1(forms.ModelForm):
     class Meta:
-        model = GuestLect1
+        model = CurGuestLect1
         fields = ['guest','organization','designation','topic','department','date','no_of_part']
         widgets = {
             'guest': forms.TextInput(attrs={'class':'form-control'}),
@@ -163,9 +173,9 @@ class AddGuestLect1(forms.ModelForm):
 
             
 #2 Expert Lectures (Subject-Specific Topics)
-class AddExptLect2(forms.ModelForm):
+class AddCurExptLect2(forms.ModelForm):
     class Meta:
-        model = ExptLect2
+        model = CurExptLect2
         fields = ['guest','organization','designation','topic','department','date','no_of_part']
         widgets = {
             'guest': forms.TextInput(attrs={'class':'form-control'}),
@@ -175,22 +185,9 @@ class AddExptLect2(forms.ModelForm):
             'department': forms.Select(attrs={'class':'form-control'}),
             'date': DateInput(attrs={'class':'form-control'}),
             'no_of_part': forms.NumberInput(attrs={'class':'form-control'}),
+        }
 
-## Faculty Acheivements ----------------------------------------------------
-#1 Faculty Acheivements
-class AddFacAchievements(forms.ModelForm):
-    class Meta:
-        model = FacAchieve
-        fields = ['department','fac_name','achievement','level','dates',]
-        widgets = {
-            'department': forms.Select(attrs={'class':'form-control'}),
-            'fac_name': forms.TextInput(attrs={'class':'form-control'}),
-            'achievement': forms.TextInput(attrs={'class':'form-control'}),
-            'level': forms.TextInput(attrs={'class':'form-control'}),
-            'dates': DateInput(attrs={'class':'form-control'}),
-}
 
-## Curriculum Input
 #3 Student Internship/Industrial Training 
 class AddCurStudTrain3(forms.ModelForm):
     class Meta:
@@ -204,6 +201,7 @@ class AddCurStudTrain3(forms.ModelForm):
             'from_date': DateInput(attrs={'class':'form-control'}),
             'to_date': DateInput(attrs={'class':'form-control'}),
         }
+
 
 #4 Student Industrial Visit 
 class AddCurStudVisit4(forms.ModelForm):

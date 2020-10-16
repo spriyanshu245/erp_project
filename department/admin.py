@@ -12,6 +12,7 @@ list_display = ('department','Class','exam_type','subject','date','appeared','pa
 
 admin.site.register(DeptEvent1)
 list_display = ('department','event_type','event_name','guest_name','guest_affl','no_of_part','from_date','to_date')
+
 admin.site.register(DeptEvent2)
 list_display = ('act_name','school','school_cont','fac_name','part_no','from_date','to_date')
 
@@ -26,6 +27,19 @@ list_display = ('department','student_name','event_type','event_name','org_inst'
 
 admin.site.register(DeptStartUp6)
 list_display = ('startup_name','startup_nature','start_date','founder','LLP_no','website','team_members')
+
+
+admin.site.register(FacAchieve)
+admin.site.register(FacBook)
+
+
+admin.site.register(CurGuestLect1)
+admin.site.register(CurExptLect2)
+admin.site.register(CurStudTrain3)
+admin.site.register(CurStudVisit4)
+admin.site.register(CurStudSponsor5)
+
+
 
 
 

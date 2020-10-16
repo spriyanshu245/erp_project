@@ -1,7 +1,6 @@
 {% block tabs %}
 {% load static %}
 
-<!-- <link rel="stylesheet" href="{% static 'department/css/bootstrap.css' %}"> -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 <style>
@@ -16,10 +15,12 @@
 
 <ul class="nav nav-tabs">
     <li  class="nav-item">
-        <a class="nav-link" href="" >Guest Lectures</a>
+        <a class="nav-link {% if nbar == 'cur_input_1' %}active{% endif %}"
+         href="{% url 'cur_input_1' %}" >Guest Lectures</a>
     </li>
     <li  class="nav-item">
-        <a class="nav-link" href="">Expert Lectures</a>
+        <a class="nav-link {% if nbar == 'cur_input_2' %}active{% endif %}"
+         href="{% url 'cur_input_2' %}">Expert Lectures</a>
     </li>
     <li  class="nav-item">
         <a class="nav-link {% if nbar == 'cur_input_3' %}active{% endif %}"
