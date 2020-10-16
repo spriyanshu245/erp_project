@@ -62,7 +62,8 @@ def dept_act_1(request):
     context = {
         'header': 'Events Organized by Department ',
         'form' : form,
-        'event' : event,        
+        'event' : event,  
+        'nbar': 'dept_act_1',     
     }
 
     return render(request, 'dept_act_1.html', context)
@@ -91,7 +92,8 @@ def dept_act_2(request):
     context = {
         'header': 'Events Organized by Department (For Nearby Schools)',
         'form' : form,
-        'event' : event,        
+        'event' : event,   
+        'nbar': 'dept_act_2',     
     }
 
     return render(request, 'dept_act_2.html', context)
@@ -113,7 +115,8 @@ def dept_act_3(request):
     context = {
         'header': 'Department Events With Professional Bodies',
         'form' : form,
-        'event' : event,        
+        'event' : event,  
+        'nbar': 'dept_act_3'      
     }
     return render(request, 'dept_act_3.html', context)
 
@@ -135,6 +138,7 @@ def dept_act_4(request):
         'header': "Departmental Faculty Development Programs",
         'form': form,
         'event': event,
+        'nbar': 'dept_act_4'
     }
 
     return render(request, 'dept_act_4.html', context)
@@ -154,6 +158,7 @@ def dept_act_5(request):
         'header': "Student's Inter-Institute Participation",
         'form': form,
         'event': event,
+        'nbar': 'dept_act_5'
     }
 
     return render(request, 'dept_act_5.html', context)
@@ -175,6 +180,7 @@ def dept_act_6(request):
         'header': "Start-Up",
         'form': form,
         'event': event,
+        'nbar': 'dept_act_6'
     }
 
     return render(request, 'dept_act_6.html', context)

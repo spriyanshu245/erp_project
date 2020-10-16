@@ -9,21 +9,36 @@
     </style>
 
   <div>
-    <h4 class="text-center alert alert-info">Departmental Activities</h4>
+    <!-- <h4 class="text-center alert alert-info">Departmental Activities</h4> -->
+    <h3 class="text-center alert alert-primary">Departmental Activities</h3>
   </div>
   
   <ul class="nav nav-tabs">
-    <li class="active"><a href="{% url 'dept_act_1' %}">ACTIVITY 1</a></li>
-    <li class="active"><a href="{% url 'dept_act_2' %}">ACTIVITY 2</a></li>
-    <li class="active"><a href="{% url 'dept_act_3' %}">ACTIVITY 3</a></li>
-    <li class="active"><a href="{% url 'dept_act_4' %}">ACTIVITY 4</a></li>
-    <li class="active"><a href="{% url 'dept_act_5' %}">ACTIVITY 5</a></li>
-    <li class="active"><a href="{% url 'dept_act_6' %}">ACTIVITY 6</a></li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'dept_act_1' %}active{% endif %}" 
+        href="{% url 'dept_act_1' %}">Events Organized</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'dept_act_2' %}active{% endif %}" 
+        href="{% url 'dept_act_2' %}">Events Organized(For nearby schools)</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'dept_act_3' %}active{% endif %}" 
+        href="{% url 'dept_act_3' %}">Events with Professional Bodies</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'dept_act_4' %}active{% endif %}" 
+        href="{% url 'dept_act_4' %}">Faculty Development</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'dept_act_5' %}active{% endif %}" 
+        href="{% url 'dept_act_5' %}">Student Inter-Institute Participation</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'dept_act_6' %}active{% endif %}" 
+        href="{% url 'dept_act_6' %}">Start-up</a>
+    </li>
   </ul>
-
-  <div>
-    <h4 class="text-center alert alert-info">{{ header }}</h4>
-  </div>
 
 {% endblock %}
 
