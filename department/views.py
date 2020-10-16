@@ -183,12 +183,19 @@ def dept_act_6(request):
 
 def fac_achieve(request):
 
-    # form = AddFacAchievements()
-    # if request.method == "POST":
-    #     form = AddFacAchievements(request.POST)
+    form = AddFacAchievements()
+    if request.method == "POST":
+        form = AddFacAchievements(request.POST)
+        form.save()
+        messages.success(request, 'Added successfully')
+        return HttpResponseRedirect('fac_achieve')
+
+    items = FacAchieve.objects.all()
 
     context = {
         'header': "Achievement List",
+        'items': items,
+        'form': form
     }
 
     return render(request, 'fac_achieve.html', context)

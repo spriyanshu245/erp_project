@@ -9,9 +9,10 @@
      <div class="col-sm-9">
        {% if items %}
         <h4 class="text-center alert alert-info"> {{header}} </h4> 
-        <table class="table table-bordered table-responsive table-hover">
-         <thead class="thead-dark">
-             <tr>'fac_name','department','achievement','level','dates'
+        <table class="table table-bordered  table-hover">
+
+            <thead class="thead-dark">
+             <tr>
                <th scope="col" style="text-align: center;">No</th>
                <th scope="col">Faculty</th>
                <th scope="col">Department</th>
@@ -20,20 +21,22 @@
                <th scope="col">Dates</th>
                <th scope="col">Action</th>
              </tr>
-           </thead>
+            </thead>
+
            <tbody>
-               {% for table in tables %}
+               {% for item in items %}
              <tr>
-               <th scope="row" style="text-align: center;">{{st.id}}</th>
-               <td style="text-align: center;">{{st.fac_name}}</td>
-               <td style="text-align: center;">{{st.department}}</td>
-               <td style="text-align: center;">{{st.achievement}}</td>
-               <td style="text-align: center;">{{st.level}}</td>
-               <td style="text-align: center;">{{st.dates}}</td>
+               <th scope="row" style="text-align: center;">{{item.id}}</th>
+               <td style="text-align: center;">{{item.fac_name}}</td>
+               <td style="text-align: center;">{{item.department}}</td>
+               <td style="text-align: center;">{{item.achievement}}</td>
+               <td style="text-align: center;">{{item.level}}</td>
+               <td style="text-align: center;">{{item.dates}}</td>
              </tr>
                {% endfor %}
            </tbody>
          </table>
+
         {% else %}
         <h4 class="text-center alert alert-info"> {{header}} </h4>
         <h4 class="text-center alert alert-warning">No Records Found !</h4>
@@ -43,30 +46,4 @@
    </div>
    
 
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <h2>hello</h2>
 {% endblock %}

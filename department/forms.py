@@ -126,10 +126,10 @@ class AddDeptStartUp6(forms.ModelForm):
 class AddFacAchievements(forms.ModelForm):
     class Meta:
         model = FacAchieve
-        fields = ['fac_name','department','achievement','level','dates',]
+        fields = ['department','fac_name','achievement','level','dates',]
         widgets = {
-            'fac_name': forms.TextInput(attrs={'class':'form-control'}),
             'department': forms.Select(attrs={'class':'form-control'}),
+            'fac_name': forms.TextInput(attrs={'class':'form-control'}),
             'achievement': forms.TextInput(attrs={'class':'form-control'}),
             'level': forms.TextInput(attrs={'class':'form-control'}),
             'dates': DateInput(attrs={'class':'form-control'}),
