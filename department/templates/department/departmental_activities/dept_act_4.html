@@ -1,26 +1,25 @@
 {% extends 'department/base.html' %}
 
 {% block content %}
-{% include 'department/dept_act_tabs.html' %}
+{% include 'dept_act_tabs.html' %}
 
 <div class="row">
     {% include 'add_record.html' %}
     <div class="col-sm-9">
         {% if event %}
-         <h4 class="text-center alert alert-info"> {{header}} </h4> 
+        <h4 class="text-center alert alert-info"> {{header}} </h4>
          <table class="table table-bordered table-responsive table-hover">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">No</th>
                 <th scope="col">Department</th>
-                <th scope="col">Type of Event</th>
-                <th scope="col">Name of Event</th>
-                <th scope="col">Name of Guest</th>
-                <th scope="col">Affiliation of guest</th>
+                <th scope="col">Name of Program</th>
+                <th scope="col">Sponsoring Agency</th>
+                <th scope="col">Amount if Sponsored</th>
+                <th scope="col">Duration (From)</th>
+                <th scope="col">Duration (To)</th>
                 <th scope="col">No of Participants</th>
-                <th scope="col">From</th>
-                <th scope="col">To</th>
-                <th scope="col">Action</th>
+                <th scope="col">Level</th>
               </tr>
             </thead>
             <tbody>
@@ -28,13 +27,13 @@
               <tr>
                 <th scope="row" style="text-align: center;">{{ev.id}}</th>
                 <td style="text-align: center;">{{ev.department}}</td>
-                <td style="text-align: center;">{{ev.event_type}}</td>
-                <td style="text-align: center;">{{ev.event_name}}</td>
-                <td style="text-align: center;">{{ev.guest_name}}</td>
-                <td style="text-align: center;">{{ev.guest_affl}}</td>
-                <td style="text-align: center;">{{ev.no_of_part}}</td>
+                <td style="text-align: center;">{{ev.program}}</td>
+                <td style="text-align: center;">{{ev.agency}}</td>
+                <td style="text-align: center;">{{ev.amm_sponsored}}</td>
                 <td style="text-align: center;">{{ev.from_date}}</td>
                 <td style="text-align: center;">{{ev.to_date}}</td>
+                <td style="text-align: center;">{{ev.no_of_part}}</td>
+                <td style="text-align: center;">{{ev.level}}</td>
               </tr>
                 {% endfor %}
             </tbody>
@@ -46,6 +45,4 @@
       </div>
 </div>
 
-
-
-{% endblock content %}
+{% endblock %}

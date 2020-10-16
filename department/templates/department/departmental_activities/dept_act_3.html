@@ -1,7 +1,7 @@
 {% extends 'department/base.html' %}
 
 {% block content %}
-{% include 'department/dept_act_tabs.html' %}
+{% include 'dept_act_tabs.html' %}
 
 <div class="row">
     {% include 'add_record.html' %}
@@ -12,25 +12,24 @@
             <thead class="thead-dark">
               <tr>
                 <th scope="col">No</th>
-                <th scope="col">Activity Name</th>
-                <th scope="col">School</th>
-                <th scope="col">School Contact</th>
-                <th scope="col">Faculty Name</th>
+                <th scope="col">Department</th>
+                <th scope="col">Activity</th>
+                <th scope="col">Resource Person</th>
+                <th scope="col">Contact Number</th>
                 <th scope="col">No of Participants</th>
-                <th scope="col">From</th>
-                <th scope="col">To</th>
-                <th scope="col">Action</th>
+                <th scope="col">Duration From</th>
+                <th scope="col">Duration To</th>
               </tr>
             </thead>
             <tbody>
                 {% for ev in event %}
               <tr>
                 <th scope="row" style="text-align: center;">{{ev.id}}</th>
-                <td style="text-align: center;">{{ev.act_name}}</td>
-                <td style="text-align: center;">{{ev.school}}</td>
-                <td style="text-align: center;">{{ev.school_cont}}</td>
-                <td style="text-align: center;">{{ev.fac_name}}</td>
-                <td style="text-align: center;">{{ev.part_no}}</td>
+                <td style="text-align: center;">{{ev.department}}</td>
+                <td style="text-align: center;">{{ev.activity}}</td>
+                <td style="text-align: center;">{{ev.resourse_person}}</td>
+                <td style="text-align: center;">{{ev.resourse_person_contact}}</td>
+                <td style="text-align: center;">{{ev.no_of_part}}</td>
                 <td style="text-align: center;">{{ev.from_date}}</td>
                 <td style="text-align: center;">{{ev.to_date}}</td>
               </tr>
@@ -43,7 +42,5 @@
          {% endif %}
       </div>
 </div>
-
-
-
 {% endblock content %}
+

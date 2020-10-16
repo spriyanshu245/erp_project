@@ -25,7 +25,7 @@ def add_show(request):
         'stu':students
     }
     
-    return render(request, 'department/add_show.html', context)
+    return render(request, 'add_show.html', context)
 
 # Update/Edit table item
 def update_data(request, id):
@@ -38,7 +38,7 @@ def update_data(request, id):
     else:
         pi = StudentResult.objects.get(pk=id)
         form = AddStudentResult(instance=pi)
-    return render(request, 'department/update_row.html', {'form':form})
+    return render(request, 'update_row.html', {'form':form})
 
 # Delete function
 def delete_data(request, id):
@@ -65,7 +65,7 @@ def dept_act_1(request):
         'event' : event,        
     }
 
-    return render(request, 'department/dept_act_1.html', context)
+    return render(request, 'dept_act_1.html', context)
 
 #  # Delete View 
 # class dept_act_1DeleteView(DeleteView):  
@@ -94,7 +94,7 @@ def dept_act_2(request):
         'event' : event,        
     }
 
-    return render(request, 'department/dept_act_2.html', context)
+    return render(request, 'dept_act_2.html', context)
 
 #-------------------------------------------------------------------------------------
 def dept_act_3(request):
@@ -115,7 +115,7 @@ def dept_act_3(request):
         'form' : form,
         'event' : event,        
     }
-    return render(request, 'department/dept_act_3.html', context)
+    return render(request, 'dept_act_3.html', context)
 
 
 
@@ -156,7 +156,7 @@ def dept_act_5(request):
         'event': event,
     }
 
-    return render(request, 'department/dept_act_5.html', context)
+    return render(request, 'dept_act_5.html', context)
 
 #-------------------------------------------------------------------------------------
 def dept_act_6(request):
@@ -177,7 +177,7 @@ def dept_act_6(request):
         'event': event,
     }
 
-    return render(request, 'department/dept_act_6.html', context)
+    return render(request, 'dept_act_6.html', context)
 
     #-------------------------------------------------------------------------------------
 
