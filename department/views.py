@@ -1,12 +1,12 @@
 from django.shortcuts import render, HttpResponseRedirect
 from .forms import *
-from .models import StudentResult, DeptEvent1, DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
+from .models import *
 from django.contrib import messages
-
+# StudentResult, DeptEvent1, DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
 # Create your views here.
 
 
-#-------------------------------------------------------------------------------------
+#-------------------------------STUDENT RESULTS-----------------------------------------
 # for Adding and showing new entrys
 def add_show(request):
     if request.method == 'POST':
@@ -48,6 +48,7 @@ def delete_data(request, id):
         return HttpResponseRedirect('/')
 
 #------------------------------------------------------------------------------------
+#------------------------DEPARTMENTAL ACTIVITIES-------------------------------------
 def dept_act_1(request):
     form = AddDeptEvent1()
     if request.method == 'POST':
@@ -108,7 +109,7 @@ def dept_act_3(request):
     else:
         form = AddDeptProEvent3()
 
-    event = DeptProEvent3.objects.all
+    event = DeptProEvent3.objects.all()
 
     context = {
         'header': 'Department Events With Professional Bodies',
@@ -148,6 +149,7 @@ def dept_act_5(request):
             form.save()
             messages.success(request, 'Added successfully')
             return HttpResponseRedirect('/department/dept_act_5')
+
     event = DeptStudPart5.objects.all()
 
     context = {
@@ -179,6 +181,48 @@ def dept_act_6(request):
 
     return render(request, 'dept_act_6.html', context)
 
-    #-------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------
+#-------------------------------FACULTY ACHIEVEMENTS----------------------------------
+def fac_ach_2(request):
+    form = AddFacBook2()
+    if request.method == 'POST':
+        form = AddDeptEvent2(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Added successfully")
+            return HttpResponseRedirect('dept_act_2')
+
+    event = FacBook2.objects.all()
+
+    context = {
+        'header': 'BOOKS AND MONOGRAPHS PUBLISHED',
+        'form' : form,
+        'faculty' : faculty,        
+    }
+
+    return render(request, 'fac_ach_2.html', context)
+
+#-------------------------------------------------------------------------------------
+#-------------------------------CURRICULUM INPUT--------------------------------------
+def curr_input_1(request):
+    form = AddGuestLect1()
+    if request.method == 'POST':
+        form = AddGuestLect1(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Added successfully")
+            return HttpResponseRedirect('curr_input_1')
+
+    event = GuestLect1.objects.all()
+
+    context = {
+        'header': 'Events Organized by Department (For Nearby Schools)',
+        'form' : form,
+        'event' : event,        
+    }
+
+    return render(request, 'curr_input_1.html', context)
+
+#-------------------------------------------------------------------------------------
 
     

@@ -159,9 +159,38 @@ class DeptStartUp6(models.Model):
                 # Model space for faculty contribution tables
 
 #-------------------------------------------------------------------------------------
-#1 Faculty achievements
-class FacAchieve(models.Model):
-    fdfff
+#2 Names of books/Chapters/Manuals/ Monographs published
+class FacBook2(models.Model):
+    title = models.CharField(("Title"),max_length=500)
+    author_name = models.CharField(("Name of author(s)"),max_length=150)
+    publication = models.CharField(("Publication"),max_length=150)
+    ISBN = models.IntegerField(("ISBN number"))
+
+#-------------------------------------------------------------------------------------
+                          # CURRICULUM INPUT
+#1 Guest Lectures (General Topics)
+class GuestLect1(models.Model):
+    guest = models.CharField(("Name of Guest"),max_length = 150)
+    organization = models.CharField(("Company/Organization Represented"),max_length=150)
+    designation = models.CharField(max_length=150)
+    topic = models.CharField(max_length=150)
+    department = models.CharField(("Name of Organizing Department").max_length = 150, choices=DEPARTMENTS)
+    date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
+    no_of_part = models.IntegerField(("No of Participants"))
+
+#2 Expert Lectures (Subject-Specific Topics)
+class ExptLect2(models.Model):
+    guest = models.CharField(("Name of Guest"),max_length = 150)
+    organization = models.CharField(("Company/Organization Represented"),max_length=150)
+    designation = models.CharField(max_length=150)
+    topic = models.CharField(max_length=150)
+    department = models.CharField(("Name of Organizing Department").max_length = 150, choices=DEPARTMENTS)
+    date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
+    no_of_part = models.IntegerField(("No of Participants"))
+
+# class ExptLect2(GuestLect1):
+#     pass
+  
 
 
 

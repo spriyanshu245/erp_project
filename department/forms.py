@@ -1,6 +1,7 @@
 from django.core import validators
 from django import forms
-from .models import StudentResult, DeptEvent1, DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
+from .models import *
+# StudentResult, DeptEvent1, DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6, FacBook, GuestLect1, ExptLect2
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -21,6 +22,7 @@ class AddStudentResult(forms.ModelForm):
             'passed': forms.NumberInput(attrs={'class':'form-control'}),
             'perct': forms.NumberInput(attrs={'class':'form-control'}),
         }
+#-------------------------------------------------------------------------------------
 
 #1 Information about events organized by department
 class AddDeptEvent1(forms.ModelForm):
@@ -119,4 +121,53 @@ class AddDeptStartUp6(forms.ModelForm):
             'LLP_no': forms.NumberInput(attrs={'class':'form-control'}),
             'website': forms.TextInput(attrs={'class':'form-control'}),
             'team_members': forms.TextInput(attrs={'class':'form-control'}),
+        }
+#-------------------------------------------------------------------------------------
+                # Form space for faculty contribution tables
+
+#-------------------------------------------------------------------------------------
+
+#2 Names of books/Chapters/Manuals/ Monographs published
+class AddFacBook(forms.ModelForm):
+        class Meta:
+            model = FacBook
+            fields = ['title','author_name','start_date','founder','LLP_no','website','team_members']
+            widgets = {
+                'title': forms.TextInput(attrs={'class':'form-control'}),
+                'author_name' : forms.TextInput(attrs={'class':'form-control'}),
+                'publication': forms.TextInput(attrs={'class':'form-control'}),
+                'ISBN': forms.NumberInput(attrs={'class':'form-control'}),
+            }
+
+#-------------------------------------------------------------------------------------
+
+#1 Guest Lectures (General Topics)
+class AddGuestLect1(forms.ModelForm):
+    class Meta:
+        model = GuestLect1
+        fields = ['guest','organization','designation','topic','department','date','no_of_part']
+        widgets = {
+            'guest': forms.TextInput(attrs={'class':'form-control'}),
+            'organization' : forms.TextInput(attrs={'class':'form-control'}),
+            'designation': forms.TextInput(attrs={'class':'form-control'}),
+            'topic': forms.TextInput(attrs={'class':'form-control'}),
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'date': DateInput(attrs={'class':'form-control'}),
+            'no_of_part': forms.NumberInput(attrs={'class':'form-control'}),
+        }
+
+            
+#2 Expert Lectures (Subject-Specific Topics)
+class AddExptLect2(forms.ModelForm):
+    class Meta:
+        model = ExptLect2
+        fields = ['guest','organization','designation','topic','department','date','no_of_part']
+        widgets = {
+            'guest': forms.TextInput(attrs={'class':'form-control'}),
+            'organization' : forms.TextInput(attrs={'class':'form-control'}),
+            'designation': forms.TextInput(attrs={'class':'form-control'}),
+            'topic': forms.TextInput(attrs={'class':'form-control'}),
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'date': DateInput(attrs={'class':'form-control'}),
+            'no_of_part': forms.NumberInput(attrs={'class':'form-control'}),
         }
