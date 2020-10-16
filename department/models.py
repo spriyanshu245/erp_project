@@ -83,6 +83,7 @@ class StudentResult(models.Model):
     perct = models.IntegerField(("Percentage"),default=0,null=False, blank=False)
     objects = models.Manager()
 
+#-------------------------------------------------------------------------------------
 #1 Information about events organized by department
 class DeptEvent1(models.Model):
     department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
@@ -154,7 +155,13 @@ class DeptStartUp6(models.Model):
     website = models.CharField(max_length=150)
     team_members = models.CharField(max_length=500)
 
+#-------------------------------------------------------------------------------------
+                # Model space for faculty contribution tables
 
+#-------------------------------------------------------------------------------------
+#1 Faculty achievements
+class FacAchieve(models.Model):
+    fdfff
 
 
 
