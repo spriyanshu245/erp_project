@@ -22,6 +22,8 @@ urlpatterns = [
 
     path('fac_achieve', views.fac_achieve, name="fac_achieve"),
 
-    path('cur_input_3', views.cur_input_3, name="cur_input_3")
+    path('cur_input_3', views.cur_input_3, name="cur_input_3"),
+    path('cur_input_4', views.cur_input_4, name="cur_input_4"),
+    path('cur_input_5', views.cur_input_5, name="cur_input_5"),
 
 ]

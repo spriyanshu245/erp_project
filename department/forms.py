@@ -1,6 +1,7 @@
 from django.core import validators
 from django import forms
-from .models import CurStudTrain3, FacAchieve, StudentResult, DeptEvent1, DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
+# from .models import CurStudTrain3, FacAchieve, StudentResult, DeptEvent1, DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
+from .models import *
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -121,7 +122,7 @@ class AddDeptStartUp6(forms.ModelForm):
             'team_members': forms.TextInput(attrs={'class':'form-control'}),
         }
 
-## Faculty Acheivements
+## Faculty Acheivements ----------------------------------------------------
 #1 Faculty Acheivements
 class AddFacAchievements(forms.ModelForm):
     class Meta:
@@ -135,6 +136,8 @@ class AddFacAchievements(forms.ModelForm):
             'dates': DateInput(attrs={'class':'form-control'}),
 }
 
+## Curriculum Input
+#3 Student Internship/Industrial Training 
 class AddCurStudTrain3(forms.ModelForm):
     class Meta:
         model = CurStudTrain3
@@ -146,4 +149,34 @@ class AddCurStudTrain3(forms.ModelForm):
             'sector': forms.TextInput(attrs={'class':'form-control'}),
             'from_date': DateInput(attrs={'class':'form-control'}),
             'to_date': DateInput(attrs={'class':'form-control'}),
+        }
+
+#4 Student Industrial Visit 
+class AddCurStudVisit4(forms.ModelForm):
+    class Meta:
+        model = CurStudVisit4
+        fields = ['department','company','sector','fac_name','no_of_stud','from_date','to_date']
+        widgets = {
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'company': forms.TextInput(attrs={'class':'form-control'}),
+            'sector': forms.TextInput(attrs={'class':'form-control'}),
+            'fac_name': forms.TextInput(attrs={'class':'form-control'}),
+            'no_of_stud': forms.NumberInput(attrs={'class':'form-control'}),
+            'from_date': DateInput(attrs={'class':'form-control'}),
+            'to_date': DateInput(attrs={'class':'form-control'}),
+        }
+
+#5 Students Sponsored Projects
+class AddCurStudSponsor5(forms.ModelForm):
+    class Meta:
+        model = CurStudSponsor5
+        fields = ['title','comp_rep','comp_sponsor','from_date','to_date','grant','status']
+        widgets = {
+            'title': forms.TextInput(attrs={'class':'form-control'}),
+            'comp_rep': forms.TextInput(attrs={'class':'form-control'}),
+            'comp_sponsor': forms.TextInput(attrs={'class':'form-control'}),
+            'from_date': DateInput(attrs={'class':'form-control'}),
+            'to_date': DateInput(attrs={'class':'form-control'}),
+            'grant': forms.Select(attrs={'class':'form-control'}),
+            'status': forms.TextInput(attrs={'class':'form-control'}),
         }

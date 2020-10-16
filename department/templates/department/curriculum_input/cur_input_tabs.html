@@ -16,19 +16,22 @@
 
 <ul class="nav nav-tabs">
     <li  class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="" data-toggle="tab">Guest Lectures</a>
+        <a class="nav-link" href="" >Guest Lectures</a>
     </li>
     <li  class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="">Expert Lectures</a>
+        <a class="nav-link" href="">Expert Lectures</a>
     </li>
     <li  class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="{% url 'cur_input_3' %}">Student Internship/Industrial Training</a>
+        <a class="nav-link {% if nbar == 'cur_input_3' %}active{% endif %}"
+            href="{% url 'cur_input_3' %}">Student Internship/Industrial Training</a>
     </li>
     <li  class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="">Student Industrial Visit</a>
+        <a class="nav-link {% if nbar == 'cur_input_4' %}active{% endif %}" 
+            href="{% url 'cur_input_4' %}">Student Industrial Visit</a>
     </li>
     <li  class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="">Students Sponsored Projects</a>
+        <a class="nav-link {% if nbar == 'cur_input_5' %}active{% endif %}" 
+            href="{% url 'cur_input_5' %}">Students Sponsored Projects</a>
     </li>
 </ul> 
 
