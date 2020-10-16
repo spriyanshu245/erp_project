@@ -1,0 +1,13 @@
+{% block tabs %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<div>
+  <h4 class="text-center alert alert-info">Academic Performance</h4>
+</div>
+<ul class="nav nav-tabs">
+    <li  class="active"><a href="{% url 'add_show' %}">STUDENT RESULT</a></li>
+</ul> 
+<div>
+  <h4 class="text-center alert alert-info">{{ header }} Table</h4>
+</div>
+{% endblock %}
