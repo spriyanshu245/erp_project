@@ -1,8 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 from .forms import *
-from .models import *
+from .models import FacAchieve, StudentResult, DeptEvent1, DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
 from django.contrib import messages
-# StudentResult, DeptEvent1, DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
 # Create your views here.
 
 
@@ -225,4 +224,87 @@ def curr_input_1(request):
 
 #-------------------------------------------------------------------------------------
 
+def fac_achieve(request):
+
+    form = AddFacAchievements()
+    if request.method == "POST":
+        form = AddFacAchievements(request.POST)
+        form.save()
+        messages.success(request, 'Added successfully')
+        return HttpResponseRedirect('fac_achieve')
+
+    items = FacAchieve.objects.all()
+
+    context = {
+        'header': "Achievement List",
+        'items': items,
+        'form': form
+    }
+
+    return render(request, 'fac_achieve.html', context)
+
+#-------------------------------------------------------------------------
+#Curriculum Input
+
+def cur_input_3(request):
+
+    form = AddCurStudTrain3
+    if request.method == "POST":
+        form = AddCurStudTrain3(request.POST)
+        form.save()
+        messages.success(request, 'Added successfully')
+        return HttpResponseRedirect('cur_input_3')
+
+    items = CurStudTrain3.objects.all()
+
+    context = {
+        'header': 'Student Internship/Industrial Training',
+        'form': form,
+        'items': items,
+        'nbar': 'cur_input_3',
+    }
+
+    return render(request, 'cur_input_3.html', context)
+
+#--------------------------------------------------------------------------
+def cur_input_4(request):
+
+    form = AddCurStudVisit4()
+    if request.method == "POST":
+        form = AddCurStudVisit4(request.POST)
+        form.save()
+        messages.success(request, 'Added successfully')
+        return HttpResponseRedirect('cur_input_4')
+
+    items = CurStudVisit4.objects.all()
+
+    context = {
+        'header': 'Student Industrial Visit',
+        'form': form,
+        'items': items,
+        'nbar': 'cur_input_4',
+    }
+
+    return render(request, 'cur_input_4.html', context)
+
+#--------------------------------------------------------------------------
+def cur_input_5(request):
+
+    form = AddCurStudSponsor5()
+    if request.method == "POST":
+        form = AddCurStudSponsor5(request.POST)
+        form.save()
+        messages.success(request, 'Added successfully')
+        return HttpResponseRedirect('cur_input_5')
+
+    items = CurStudSponsor5.objects.all()
+    
+    context = {
+        'header': 'Students Sponsored Projects',
+        'form': form,
+        'items': items,
+        'nbar': 'cur_input_5'
+    }
+
+    return render(request, 'cur_input_5.html', context)
     

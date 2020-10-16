@@ -1,0 +1,80 @@
+
+<div class="row">
+ {% include 'add_record.html' %}
+  <div class="col-sm-9">
+  {% if stu %}
+  <script>
+var StudObject=
+  {
+  "cols":[
+    "No",
+    "Department",
+    "Class",
+    "Examination_Type",
+    "Subject",
+    "Exam_Date",
+    "Candidates_Appeared",
+    "Candidates_Passed",
+    "Passing_Percentage",
+    "Action"
+
+  ],
+  "rows":[
+{% for st in stu %}
+[
+    "{{st.id}}",
+    "{{st.department}}",
+    "{{st.Class}}",
+    "{{st.exam_type}}",
+    "{{st.subject}}",
+    "{{st.date}}",
+    "{{st.appeared}}",
+    "{{st.passed}}",
+    "{{st.perct}}"
+
+]
+  {% if forloop.last is False %} ,{% endif %}
+{% endfor %}
+  ]
+}
+
+
+function  updateStud(){
+var mydiv = document.getElementById("mydiv");
+var search = document.getElementById("search").value;
+console.log(mydiv);
+var tableProc = "<table class=\"table table-hover\" ><tr>";
+for (i in StudObject.cols){
+ tableProc+="<th scope=\"row\" style=\"text-align: center;\">"+ StudObject.cols[i]+"</th>";
+} 
+tableProc+="</tr>";
+for ( j in StudObject.rows){
+  if (search=="class" || search==""){
+
+  }else if (!(StudObject.rows[j][2]==search))
+  {
+    continue;
+  }else{
+
+  }
+ tableProc+="<tr>";
+    for ( k in StudObject.rows[j] ){
+    tableProc+="<td style=\"text-align: center;\">"+ StudObject.rows[j][k]+"</td>";
+    }
+    tableProc+="</tr>";
+}
+
+tableProc+="</table>";
+mydiv.innerHTML = tableProc;
+}
+</script>
+<input type="text" id="search" VALUE="class">
+<input type="button" Name="update" value="update" onclick="updateStud()">
+     {% else %}
+     <h4 class="text-center alert alert-info"> {{header}} </h4>
+     <h4 class="text-center alert alert-warning">No Records Found !</h4>
+     {% endif %}
+     <div  id="mydiv" ></div>
+
+  </div>
+</div>

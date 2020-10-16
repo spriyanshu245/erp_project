@@ -62,6 +62,11 @@ SUBJECTS =(
     ('CIVIL SUBJECTS',CIVIL_SUB),
 )
 
+GRANT = (
+    ('Yes', 'Yes'),
+    ('No', 'No')
+)
+
 # Create your models here.
 
 class Department(models.Model):
@@ -191,6 +196,15 @@ class ExptLect2(models.Model):
 # class ExptLect2(GuestLect1):
 #     pass
   
+#1 Faculty achievements
+
+class FacAchieve(models.Model):
+    fac_name = models.CharField(("Faculty Name"), max_length=150)
+    department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
+    achievement = models.CharField(max_length=150)
+    level = models.CharField(max_length=150)
+    dates = models.DateField(("Dates"), default=date.today,auto_now=False, auto_now_add=False)
+
 
 
 
@@ -202,3 +216,43 @@ class ExptLect2(models.Model):
 #     ...
 #     ...
 #     my_field = models.ManyToManyField(MY_CHOICES)
+
+#-------------------------------------------------------------------------------------
+                # Model space for Curriculum Input Tables
+#-------------------------------------------------------------------------------------
+
+#3 Student Internship/Industrial training
+class CurStudTrain3(models.Model):
+    # No	Name of Department	Name of Student		Name of Company		Sector		Date/Duration
+    department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
+    student_name = models.CharField(("Name of Student"), max_length=150)
+    company = models.CharField(("Name of Company"), max_length=250)
+    sector = models.CharField(max_length=250)
+    from_date = models.DateField(("Duration (From)"), default=date.today, auto_now=False, auto_now_add=False)
+    to_date = models.DateField(("Duration (To)"), default=date.today,auto_now=False, auto_now_add=False)
+
+#4 Student Industrial Visit
+class CurStudVisit4(models.Model):
+    # No	Name of Company		Sector	Name of Department	Name of Faculty Accompanied		No of students Visited	Duration (From-To)
+    department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
+    company = models.CharField(("Name of Company"), max_length=250)
+    sector = models.CharField(max_length=250)
+    fac_name = models.CharField(("Faculty Name"),max_length=150)
+    no_of_stud = models.IntegerField(("No of Students"))
+    from_date = models.DateField(("Duration (From)"), default=date.today, auto_now=False, auto_now_add=False)
+    to_date = models.DateField(("Duration (To)"), default=date.today,auto_now=False, auto_now_add=False)
+
+# Student Sponsored Projects
+class CurStudSponsor5(models.Model):
+    # No	Title of  Project 		Name of Company Representative	Name of Sponsoring company		Duration	Grant Received	Status of Project
+    title = models.CharField(("Title of Project"),max_length=250)
+    comp_rep = models.CharField(("Name of Company Representative"), max_length=250)
+    comp_sponsor = models.CharField(("Name of Sponsoring company"), max_length=250)
+    from_date = models.DateField(("Duration (From)"), default=date.today, auto_now=False, auto_now_add=False)
+    to_date = models.DateField(("Duration (To)"), default=date.today,auto_now=False, auto_now_add=False)
+    grant = models.CharField(("Grant Received"), max_length=150, choices=GRANT, default='No')
+    status = models.CharField(max_length=150)
+
+    
+
+

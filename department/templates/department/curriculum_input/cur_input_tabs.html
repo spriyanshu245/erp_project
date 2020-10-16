@@ -1,0 +1,39 @@
+{% block tabs %}
+{% load static %}
+
+<!-- <link rel="stylesheet" href="{% static 'department/css/bootstrap.css' %}"> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<style>
+    .nav-tabs li a {
+      color: rgb(25, 124, 108);
+    }
+</style>
+
+<div>
+  <h3 class="text-center alert alert-info">Curriculum Input</h3>
+</div>
+
+<ul class="nav nav-tabs">
+    <li  class="nav-item">
+        <a class="nav-link" href="" >Guest Lectures</a>
+    </li>
+    <li  class="nav-item">
+        <a class="nav-link" href="">Expert Lectures</a>
+    </li>
+    <li  class="nav-item">
+        <a class="nav-link {% if nbar == 'cur_input_3' %}active{% endif %}"
+            href="{% url 'cur_input_3' %}">Student Internship/Industrial Training</a>
+    </li>
+    <li  class="nav-item">
+        <a class="nav-link {% if nbar == 'cur_input_4' %}active{% endif %}" 
+            href="{% url 'cur_input_4' %}">Student Industrial Visit</a>
+    </li>
+    <li  class="nav-item">
+        <a class="nav-link {% if nbar == 'cur_input_5' %}active{% endif %}" 
+            href="{% url 'cur_input_5' %}">Students Sponsored Projects</a>
+    </li>
+</ul> 
+
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% block tabs %}
+{% load static %}
+
+<!-- <link rel="stylesheet" href="{% static 'department/css/bootstrap.css' %}"> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<style>
+    .nav-tabs li a {
+      color: rgb(25, 124, 108);
+    }
+</style>
+
+<div>
+  <h4 class="text-center alert alert-info">Faculty Achievement</h4>
+</div>
+
+<ul class="nav nav-tabs">
+    <li  class="nav-item active">
+        <a class="nav-link" data-toggle="tab" href="{% url 'fac_achieve' %}" data-toggle="tab">Achievement List</a>
+    </li>
+    <li  class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="">Books and Monographs</a>
+    </li>
+</ul> 
+<div>
+  <h4 class="text-center alert alert-info">{{ header }} Table</h4>
+</div>
+
+{% endblock %}
