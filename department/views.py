@@ -137,7 +137,7 @@ def dept_act_4(request):
         'event': event,
     }
 
-    return render(request, 'department/dept_act_4.html', context)
+    return render(request, 'dept_act_4.html', context)
 
 #-------------------------------------------------------------------------------------
 def dept_act_5(request):
