@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'department/css/bootstrap.css'%}">
     <link rel="stylesheet" href="{% static 'department/css/w3.css'%}">
     <link rel="stylesheet" href="{% static 'department/css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'department/css/newstyle.css' %}">
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
 </head>
 <body>
@@ -89,19 +90,17 @@
         </div>
       </nav>
 
-     
-      
 
-<<<<<<< HEAD
-=======
     <div class="content">
-    
->>>>>>> d97a4333f68240a71baed6f738b95bc24e7d2d1f
-      <div class="container mt-5">
-        {% block content %} 
-        {% endblock content %}
-      </div>
 
+      <div class="wrapper">
+        <div class="container-fluid mt-5">
+        
+          {% block content %} 
+          {% endblock content %}
+          
+        </div>
+      </div>
 
 
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
