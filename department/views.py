@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from .forms import *
-from .models import StudentResult, DeptEvent1, DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
+from .models import FacAchieve, StudentResult, DeptEvent1, DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
 from django.contrib import messages
 
 # Create your views here.
@@ -181,4 +181,15 @@ def dept_act_6(request):
 
     #-------------------------------------------------------------------------------------
 
+def fac_achieve(request):
+
+    # form = AddFacAchievements()
+    # if request.method == "POST":
+    #     form = AddFacAchievements(request.POST)
+
+    context = {
+        'header': "Achievement List",
+    }
+
+    return render(request, 'fac_achieve.html', context)
     

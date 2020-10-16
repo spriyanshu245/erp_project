@@ -1,6 +1,6 @@
 from django.core import validators
 from django import forms
-from .models import StudentResult, DeptEvent1, DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
+from .models import FacAchieve, StudentResult, DeptEvent1, DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -120,3 +120,17 @@ class AddDeptStartUp6(forms.ModelForm):
             'website': forms.TextInput(attrs={'class':'form-control'}),
             'team_members': forms.TextInput(attrs={'class':'form-control'}),
         }
+
+## Faculty Acheivements
+#1 Faculty Acheivements
+class AddFacAchievements(forms.ModelForm):
+    class Meta:
+        model = FacAchieve
+        fields = ['fac_name','department','achievement','level','dates',]
+        widgets = {
+            'fac_name': forms.TextInput(attrs={'class':'form-control'}),
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'achievement': forms.TextInput(attrs={'class':'form-control'}),
+            'level': forms.TextInput(attrs={'class':'form-control'}),
+            'dates': DateInput(attrs={'class':'form-control'}),
+}

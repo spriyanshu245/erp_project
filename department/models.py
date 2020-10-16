@@ -160,8 +160,14 @@ class DeptStartUp6(models.Model):
 
 #-------------------------------------------------------------------------------------
 #1 Faculty achievements
+
 class FacAchieve(models.Model):
-    fdfff
+    fac_name = models.CharField(("Faculty Name"), max_length=150)
+    department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
+    achievement = models.CharField(max_length=150)
+    level = models.CharField(max_length=150)
+    dates = models.DateField(("Dates"), default=date.today,auto_now=False, auto_now_add=False)
+
 
 
 

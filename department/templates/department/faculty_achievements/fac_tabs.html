@@ -1,0 +1,18 @@
+{% block tabs %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'department/css/bootstrap.css' %}">
+
+<div>
+  <h4 class="text-center alert alert-info">Faculty Achievement</h4>
+</div>
+
+<ul class="nav nav-tabs">
+    <li  class="active"><a href="{% url 'fac_achieve' %}">Achievement List</a></li>
+    <li  class="active"><a href="">Books and Monographs</a></li>
+</ul> 
+<div>
+  <h4 class="text-center alert alert-info">{{ header }} Table</h4>
+</div>
+
+{% endblock %}
