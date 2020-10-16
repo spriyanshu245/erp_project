@@ -179,3 +179,18 @@ class FacAchieve(models.Model):
 #     ...
 #     ...
 #     my_field = models.ManyToManyField(MY_CHOICES)
+
+#-------------------------------------------------------------------------------------
+                # Model space for Curriculum Input Tables
+#-------------------------------------------------------------------------------------
+
+#3 Student Internship/Industrial training
+class CurStudTrain3(models.Model):
+    # No	Name of Department	Name of Student		Name of Company		Sector		Date/Duration
+    department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
+    student_name = models.CharField(("Name of Student"), max_length=150)
+    company = models.CharField(("Name of Company"), max_length=250)
+    sector = models.CharField(max_length=250)
+    from_date = models.DateField(("Date (From)"), default=date.today, auto_now=False, auto_now_add=False)
+    to_date = models.DateField(("Date (To)"), default=date.today,auto_now=False, auto_now_add=False)
+

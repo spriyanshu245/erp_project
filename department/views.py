@@ -199,4 +199,26 @@ def fac_achieve(request):
     }
 
     return render(request, 'fac_achieve.html', context)
+
+#-------------------------------------------------------------------------
+#Curriculum Input
+
+def cur_input_3(request):
+
+    form = AddCurStudTrain3
+    if request.method == "POST":
+        form = AddCurStudTrain3(request.POST)
+        form.save()
+        messages.success(request, 'Added successfully')
+        return HttpResponseRedirect('cur_input_3')
+
+    items = CurStudTrain3.objects.all()
+
+    context = {
+        'header': 'Student Internship/Industrial Training',
+        'form': form,
+        'items': items,
+    }
+
+    return render(request, 'cur_input_3.html', context)
     

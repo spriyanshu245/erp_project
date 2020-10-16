@@ -20,6 +20,8 @@ urlpatterns = [
     path('delete/<int:id>/', views.delete_data, name="delete"),
     path('update/<int:id>/', views.update_data, name="update"),
 
-    path('fac_achieve', views.fac_achieve, name="fac_achieve")
+    path('fac_achieve', views.fac_achieve, name="fac_achieve"),
+
+    path('cur_input_3', views.cur_input_3, name="cur_input_3")
 
 ]

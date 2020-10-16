@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Departments</title>
-    <link rel="stylesheet" href="{% static 'department/css/bootstrap.css'%}">
+    <!-- <link rel="stylesheet" href="{% static 'department/css/bootstrap.css'%}"> -->
     <link rel="stylesheet" href="{% static 'department/css/w3.css'%}">
     <link rel="stylesheet" href="{% static 'department/css/style.css'%}">
     <link rel="stylesheet" href="{% static 'department/css/newstyle.css' %}">
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 <body>
 
@@ -34,9 +34,9 @@
         <a href="{% url 'add_show' %}">Students Academic Performance</a>
         <a href="{% url 'dept_act_1' %}">Departmental Activities</a>
         <a href="#">Faculty Contribution</a>
-        <a href="#">Faculty Achievements</a>
+        <a href="{% url 'fac_achieve' %}">Faculty Achievements</a>
         <a href="#">Industry–Institute Interaction</a>
-        <a href="#">Curriculum Input</a>
+        <a href="{% url 'cur_input_3' %}">Curriculum Input</a>
         <a href="#">Student /Faculty Support System</a>
         <a href="#">Extra Curricular Activities</a>
         <a href="#">E-Cell</a>
