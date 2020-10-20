@@ -1,7 +1,6 @@
 from django.core import validators
 from django import forms
 from .models import *
-#from .models import CurStudTrain3, FacAchieve, StudentResult, DeptEvent1, DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
 
 
 class DateInput(forms.DateInput):

@@ -7,8 +7,8 @@
     {% include 'add_record.html' %}
     <div class="col-sm-9">
         {% if event %}
-         <h4 class="text-center alert alert-info"> {{header}} </h4> 
-         <table class="table table-bordered table-hover">
+         <h4 class="text-center alert alert-info"> {{header}} </h4>
+         <table id="table" class="table table-bordered table-hover">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">No</th>
@@ -23,7 +23,7 @@
                 <th scope="col">Action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="table_row">
                 {% for ev in event %}
               <tr>
                 <th scope="row" style="text-align: center;">{{ev.id}}</th>
@@ -35,6 +35,13 @@
                 <td style="text-align: center;">{{ev.no_of_part}}</td>
                 <td style="text-align: center;">{{ev.from_date}}</td>
                 <td style="text-align: center;">{{ev.to_date}}</td>
+                <td>
+                  <a href="#" class="btn btn-outline-secondary btn-sm">Update</a>
+                  <form action="#" method="POST">
+                   {% csrf_token %}
+                      <input type="submit" class="btn btn-outline-danger btn-sm inline" value="Delete">
+                  </form>
+               </td>
               </tr>
                 {% endfor %}
             </tbody>

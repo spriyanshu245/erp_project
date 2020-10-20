@@ -20,9 +20,10 @@
                 <th scope="col">Duration (To)</th>
                 <th scope="col">No of Participants</th>
                 <th scope="col">Level</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="table_row">
                 {% for ev in event %}
               <tr>
                 <th scope="row" style="text-align: center;">{{ev.id}}</th>
@@ -34,6 +35,13 @@
                 <td style="text-align: center;">{{ev.to_date}}</td>
                 <td style="text-align: center;">{{ev.no_of_part}}</td>
                 <td style="text-align: center;">{{ev.level}}</td>
+                <td>
+                  <a href="#" class="btn btn-outline-secondary btn-sm">Update</a>
+                  <form action="#" method="POST">
+                   {% csrf_token %}
+                      <input type="submit" class="btn btn-outline-danger btn-sm inline" value="Delete">
+                  </form>
+               </td>
               </tr>
                 {% endfor %}
             </tbody>

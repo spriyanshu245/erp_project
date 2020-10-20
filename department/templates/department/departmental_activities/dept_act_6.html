@@ -19,9 +19,10 @@
                 <th scope="col">LLP No.</th>
                 <th scope="col">Website</th>
                 <th scope="col">Team members</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="table_row">
                 {% for ev in event %}
               <tr>
                 <th scope="row" style="text-align: center;">{{ev.id}}</th>
@@ -32,6 +33,13 @@
                 <td style="text-align: center;">{{ev.LLP_no}}</td>
                 <td style="text-align: center;">{{ev.website}}</td>
                 <td style="text-align: center;">{{ev.team_members}}</td>
+                <td>
+                  <a href="#" class="btn btn-outline-secondary btn-sm">Update</a>
+                  <form action="#" method="POST">
+                   {% csrf_token %}
+                      <input type="submit" class="btn btn-outline-danger btn-sm inline" value="Delete">
+                  </form>
+               </td>
               </tr>
                 {% endfor %}
             </tbody>

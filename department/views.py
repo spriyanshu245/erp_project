@@ -1,7 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from .forms import *
 from .models import *
-#FacAchieve, StudentResult, DeptEvent1, DeptEvent2, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
 from django.contrib import messages
 
 # Create your views here.
@@ -197,7 +196,9 @@ def fac_achieve(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Added successfully')
-            return HttpResponseRedirect('fac_achieve')
+            return HttpResponseRedirect('/department/fac_achieve')
+    else:
+        form = AddFacAchieve()
              
     items = FacAchieve.objects.all()
 
@@ -217,7 +218,7 @@ def fac_book(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Added successfully")
-            return HttpResponseRedirect('fac_book')
+            return HttpResponseRedirect('/department/fac_book')
 
     items = FacBook.objects.all()
 

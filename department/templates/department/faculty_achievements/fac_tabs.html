@@ -11,19 +11,26 @@
 </style>
 
 <div>
-  <h4 class="text-center alert alert-info">Faculty Achievement</h4>
+  <h4 class="text-center alert alert-primary">Faculty Achievement</h4>
 </div>
 
 <ul class="nav nav-tabs">
-    <li  class="nav-item active">
-      <a class="nav-link" data-toggle="tab" href="{% url 'fac_achieve' %}" data-toggle="tab">Achievement List</a>
-    </li>
-    <li  class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="{% url 'fac_book' %}">Books and Monographs</a>
-    </li>
-</ul> 
+  <li class="nav-item">
+    <a class="nav-link {% if nbar == 'fac_achieve' %}active{% endif %}" 
+      href="{% url 'fac_achieve' %}">Achievement List</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if nbar == 'fac_book' %}active{% endif %}" 
+      href="{% url 'fac_book' %}">Books and Monographs</a>
+  </li>
+</ul>
+
+<br>
 <div>
-  <h4 class="text-center alert alert-info">{{ header }} Table</h4>
+  <form class="form-inline mr-auto mb-4 d-flex justify-content-end">
+    <input id="search" class="form-control mr-sm-2" type="text" placeholder="Search Table..">
+    <span class="glyphicon glyphicon-search"></span>
+  </form>
 </div>
 
 {% endblock %}

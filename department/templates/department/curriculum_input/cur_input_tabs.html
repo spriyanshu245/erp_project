@@ -10,7 +10,7 @@
 </style>
 
 <div>
-  <h3 class="text-center alert alert-info">Curriculum Input</h3>
+  <h3 class="text-center alert alert-primary">Curriculum Input</h3>
 </div>
 
 <ul class="nav nav-tabs">
@@ -35,6 +35,12 @@
             href="{% url 'cur_input_5' %}">Students Sponsored Projects</a>
     </li>
 </ul> 
-
+<br>
+<div>
+  <form class="form-inline mr-auto mb-4 d-flex justify-content-end">
+    <input id="search" class="form-control mr-sm-2" type="text" placeholder="Search Table..">
+    <span class="glyphicon glyphicon-search"></span>
+  </form>
+</div>
 
 {% endblock %}

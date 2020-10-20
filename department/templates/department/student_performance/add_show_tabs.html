@@ -2,12 +2,17 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 <div>
-  <h4 class="text-center alert alert-info">Academic Performance</h4>
+  <h4 class="text-center alert alert-primary">Academic Performance</h4>
 </div>
 <ul class="nav nav-tabs">
     <li  class="active"><a href="{% url 'add_show' %}">STUDENT RESULT</a></li>
-</ul> 
+</ul>
+<br>
 <div>
-  <h4 class="text-center alert alert-info">{{ header }} Table</h4>
+  <form class="form-inline mr-auto mb-4 d-flex justify-content-end">
+    <input id="search" class="form-control mr-sm-2" type="text" placeholder="Search Table..">
+    <span class="glyphicon glyphicon-search"></span>
+  </form>
 </div>
+
 {% endblock %}

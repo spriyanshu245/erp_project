@@ -23,7 +23,7 @@
             <th scope="col">Action</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="table_row">
             {% for st in stu %}
           <tr>
             <th scope="row" style="text-align: center;">{{st.id}}</th>
@@ -34,7 +34,7 @@
             <td style="text-align: center;">{{st.date}}</td>
             <td style="text-align: center;">{{st.appeared}}</td>
             <td style="text-align: center;">{{st.passed}}</td>
-            <td style="text-align: center;">{{st.perct}}</td>
+            <td style="text-align: center;">{{st.perct}} %</td>
             <td>
                <a href="{% url 'update' st.id %}" class="btn btn-outline-secondary btn-sm">Update</a>
                <form action="{% url 'delete' st.id %}" method="POST">

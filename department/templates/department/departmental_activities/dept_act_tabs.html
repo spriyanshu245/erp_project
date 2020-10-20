@@ -1,4 +1,5 @@
 {% block tabs %}
+{% load static %}
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
@@ -9,7 +10,6 @@
     </style>
 
   <div>
-    <!-- <h4 class="text-center alert alert-info">Departmental Activities</h4> -->
     <h3 class="text-center alert alert-primary">Departmental Activities</h3>
   </div>
   
@@ -39,21 +39,14 @@
         href="{% url 'dept_act_6' %}">Start-up</a>
     </li>
   </ul>
+  <br>
+  <div>
+    <form class="form-inline mr-auto mb-4 d-flex justify-content-end">
+      <input id="search" class="form-control mr-sm-2" type="text" placeholder="Search Table..">
+      <span class="glyphicon glyphicon-search"></span>
+    </form>
+  </div>
+
+  
 
 {% endblock %}
-
-
-
-
-<!-- <div class="nav nav-tabs">
-  <div class="button-group">
-
-    <a href="{% url 'dept_act_1' %}" class="btn btn-primary btn-md btn-trim" role="button"> dept_act_1</a>
-    <a href="{% url 'dept_act_2' %}" class="btn btn-primary btn-md btn-trim" role="button"> dept_act_2</a>
-    <a href="{% url 'dept_act_3' %}" class="btn btn-primary btn-md btn-trim" role="button"> dept_act_3</a>
-    <a href="{% url 'dept_act_4' %}" class="btn btn-primary btn-md btn-trim" role="button"> dept_act_4</a>
-    <a href="{% url 'dept_act_5' %}" class="btn btn-primary btn-md btn-trim" role="button"> dept_act_5</a>
-    <a href="{% url 'dept_act_6' %}" class="btn btn-primary btn-md btn-trim" role="button"> dept_act_6</a>
-    
-  </div>
-</div> -->
