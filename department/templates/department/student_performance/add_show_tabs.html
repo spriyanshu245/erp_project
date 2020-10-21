@@ -9,12 +9,12 @@
     <li  class="active"><a href="{% url 'add_show' %}">STUDENT RESULT</a></li>
 </ul>
 <br>
-<div class="mr-auto mb-4 d-flex justify-content-end">
-  <form class="form-inline ">
+<div>
+  <form class="form-inline mr-auto mb-4 d-flex justify-content-end" onkeydown="return event.key != 'Enter';">
     <input id="search" class="form-control mr-sm-2" type="text" placeholder="Search Table..">
     <span class="glyphicon glyphicon-search"></span>
-     </form>
-      <button class="btn" onclick="DownloadCsv('table_main')"><i class="fa fa-download"></i> Download</button>
+    <button class="btn" onclick="DownloadCsv('table_main')"><i class="fa fa-download"></i> Download</button>
+  </form>
 </div>
 
 {% endblock %}
