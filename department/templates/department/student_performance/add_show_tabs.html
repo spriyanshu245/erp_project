@@ -1,5 +1,6 @@
 {% block tabs %}
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <div>
   <h4 class="text-center alert alert-primary">Academic Performance</h4>
@@ -8,11 +9,12 @@
     <li  class="active"><a href="{% url 'add_show' %}">STUDENT RESULT</a></li>
 </ul>
 <br>
-<div>
-  <form class="form-inline mr-auto mb-4 d-flex justify-content-end">
+<div class="mr-auto mb-4 d-flex justify-content-end">
+  <form class="form-inline ">
     <input id="search" class="form-control mr-sm-2" type="text" placeholder="Search Table..">
     <span class="glyphicon glyphicon-search"></span>
-  </form>
+     </form>
+      <button class="btn" onclick="DownloadCsv('table_main')"><i class="fa fa-download"></i> Download</button>
 </div>
 
 {% endblock %}

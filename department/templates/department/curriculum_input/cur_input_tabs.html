@@ -36,11 +36,12 @@
     </li>
 </ul> 
 <br>
-<div>
-  <form class="form-inline mr-auto mb-4 d-flex justify-content-end">
+<div class="mr-auto mb-4 d-flex justify-content-end">
+  <form class="form-inline ">
     <input id="search" class="form-control mr-sm-2" type="text" placeholder="Search Table..">
     <span class="glyphicon glyphicon-search"></span>
-  </form>
+     </form>
+       <button class="btn" onclick="DownloadCsv('table_main')"><i class="fa fa-download"></i> Download</button>
 </div>
 
 {% endblock %}
