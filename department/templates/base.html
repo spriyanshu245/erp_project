@@ -26,10 +26,10 @@
 
     <!--Navbar-->
   
-    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark" style="position:sticky;">
        
          <!--Side menu bar-->
-      <div id="mySidenav" class="sidenav">
+    <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="{% url 'add_show' %}">Students Academic Performance</a>
         <a href="{% url 'dept_act_1' %}">Departmental Activities</a>
@@ -41,21 +41,22 @@
         <a href="#">Extra Curricular Activities</a>
         <a href="#">E-Cell</a>
         <a href="#" id="logout">Logout</a>
-      </div>
+    </div>
           
         <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
      
-        <div id="main">
+    <div id="main">
           <span style="font-size:30px;cursor:pointer;color:white;" onclick="openNav();">&#9776;</span>
-        </div>
+    </div>
 
 
         <a class="navbar-brand" href="{% url 'add_show' %}">Home</a>
+        
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
         </button>
       
-        <div class="collapse navbar-collapse" id="navbarSupportedContent ">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent ">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active ml-auto" >
               <a class="nav-link" href="#">Department <span class="sr-only">(current)</span></a>
@@ -87,13 +88,11 @@
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form> -->
-        </div>
-      </nav>
+    </div>
+</nav>
 
 
-    <div class="content">
-
-      <div class="wrapper">
+      <div class="wrapper background" style="position: sticky; background-repeat: no-repeat; background-size: 1150px; background-position: right; background-image: url({% static "department/images/image.png" %}); ">
         <div class="container-fluid mt-5">
           
           {% block content %} 
@@ -120,23 +119,113 @@ $(document).ready(function(){
   });
 
 </script>
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
     
-  </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
+    
   
   
 </body>
