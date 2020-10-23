@@ -107,6 +107,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     
+<<<<<<< HEAD
+=======
+
+    
+>>>>>>> 3b884c2d5297178856276bc52ff5d54049f94e24
     <br>
     <br>
     <br>
@@ -212,6 +217,7 @@
     <br>
     <br>
 
+<<<<<<< HEAD
     <script>
       function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
@@ -233,6 +239,16 @@
     var sticky = navbar.offsetTop;
     
     function myFunction() {
+=======
+    
+  <script>
+
+$(document).ready(function(){
+    $("#search").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#table_row tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+>>>>>>> 3b884c2d5297178856276bc52ff5d54049f94e24
         
       if (window.pageYOffset >= sticky) {
         navbar.classList.add("sticky")
@@ -287,5 +303,13 @@
     </script>
     
 
+<<<<<<< HEAD
 </body>
+=======
+</script>
+  
+</body>
+
+
+>>>>>>> 3b884c2d5297178856276bc52ff5d54049f94e24
 </html>
