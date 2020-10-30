@@ -69,8 +69,9 @@ GRANT = (
 
 # Create your models here.
 
+# Models with Primary Keys
 class Department(models.Model):
-    department = models.CharField(primary_key=True, max_length=128,unique=True)
+    department = models.CharField(("Department Name"),primary_key=True, max_length=128,unique=True)
 
     def __str__(self):
         return self.department
@@ -242,5 +243,23 @@ class CurStudSponsor5(models.Model):
 #     ...
 #     my_field = models.ManyToManyField(MY_CHOICES)
     
+#-----------------------------------------------------------------
+# INDUSTRY –INSTITUTE INTERACTION
 
+#1]Industrial Visit  of Faculty (Visits accompanied with students should be excluded)
+class IndFacvisit1(models.Model):
+    faculty = models.CharField(max_length=150)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    company = models.CharField("Name of Company", max_length=256)
+    sector = models.CharField(max_length=256)
+    purpose = models.TextField()
+    from_date = models.DateField(("Dates (From)"), default=date.today, auto_now=False, auto_now_add=False)
+    to_date = models.DateField(("Dates (To)"), default=date.today,auto_now=False, auto_now_add=False)
+    outcome = models.TextField()
 
+    def __str__(self):
+        return self.faculty
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('ind_inst_1',)

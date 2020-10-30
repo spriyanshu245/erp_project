@@ -60,3 +60,15 @@ Departmental Activities
         
     6] Start-up
         table(dept_act_6) :
+
+INDUSTRY –INSTITUTE INTERACTION
+1]Industrial Visit  of Faculty (Visits accompanied with students should be excluded)
+    No	Name of Faculty	Name of Department	Name of Company 		*Sector	Purpose of Visit	Dates	Outcome
+    faculty (char) - Name of Faculty
+    department (select) - Department Name
+    company (char) - Name of Company
+    sector (char) - *Sector
+    purpose (char) - Purpose of Visit
+    fromdate (date) - Dates (From)
+    todate (date) - Dates (To)
+    outcome (char) - Outcome

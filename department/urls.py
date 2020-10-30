@@ -29,4 +29,5 @@ urlpatterns = [
     path('cur_input_4', views.cur_input_4, name="cur_input_4"),
     path('cur_input_5', views.cur_input_5, name="cur_input_5"),
 
+    path('ind_inst_1', views.IndInst1Create.as_view(), name="ind_inst_1"),
 ]

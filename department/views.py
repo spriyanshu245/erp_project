@@ -2,6 +2,11 @@ from django.shortcuts import render, HttpResponseRedirect
 from .forms import *
 from .models import *
 from django.contrib import messages
+from django.views.generic import (CreateView, DetailView, UpdateView, DeleteView)
+from django.forms.models import model_to_dict
+from django.core import serializers
+
+# Custom templates
 
 # Create your views here.
 
@@ -336,3 +341,26 @@ def cur_input_5(request):
 
     return render(request, 'cur_input_5.html', context)
     
+#---------------Industry-Institute Interaction-----------------------------
+
+# Class Based View **note layout**
+# 1]Industrial Visit  of Faculty (Visits accompanied with students should be excluded)
+class IndInst1Create(CreateView):
+    model = IndFacvisit1
+    form_class = IndFacVisit1Form
+    template_name = 'ind_inst_1_form.html'
+    context_object_name = 'contextobj'
+
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['injectme'] = 'BASIC INJECTION!'
+        context['header'] = 'Industrial Visit  of Faculty (Visits accompanied with students should be excluded)'
+        context['events'] = self.model.objects.all()
+        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        return context
+
+class IndInst1Update(UpdateView):
+    model = IndFacvisit1
+    form_class = IndFacVisit1Form
+    template_name = "ind_inst_1_update.html"

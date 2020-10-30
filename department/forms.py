@@ -231,3 +231,22 @@ class AddCurStudSponsor5(forms.ModelForm):
             'grant': forms.Select(attrs={'class':'form-control'}),
             'status': forms.TextInput(attrs={'class':'form-control'}),
         }
+
+#--------------------------------------------------------------
+# INDUSTRY –INSTITUTE INTERACTION
+
+#1]Industrial Visit  of Faculty (Visits accompanied with students should be excluded)
+class IndFacVisit1Form(forms.ModelForm):
+    class Meta:
+        model = IndFacvisit1
+        fields = ('faculty','department','company','sector','purpose','from_date','to_date','outcome')
+        widgets = {
+            'faculty': forms.TextInput(attrs={'class':'form-control'}),
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'company': forms.TextInput(attrs={'class':'form-control'}),
+            'sector': forms.TextInput(attrs={'class':'form-control'}),
+            'purpose': forms.Textarea(attrs={'rows': 3,'class':'form-control'}),
+            'from_date': DateInput(attrs={'class':'form-control'}),
+            'to_date': DateInput(attrs={'class':'form-control'}),
+            'outcome': forms.Textarea(attrs={'rows': 3,'class':'form-control'}),
+        }

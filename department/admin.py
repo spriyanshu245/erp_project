@@ -39,6 +39,8 @@ admin.site.register(CurStudTrain3)
 admin.site.register(CurStudVisit4)
 admin.site.register(CurStudSponsor5)
 
+admin.site.register(IndFacvisit1)
+
 
 
 
