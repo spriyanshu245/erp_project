@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.views.generic import (CreateView, DetailView, UpdateView, DeleteView)
 from django.forms.models import model_to_dict
 from django.core import serializers
+from django.urls import reverse_lazy
 
 # Custom templates
 
@@ -349,7 +350,7 @@ class IndInst1Create(CreateView):
     model = IndFacvisit1
     form_class = IndFacVisit1Form
     template_name = 'ind_inst_1_form.html'
-    context_object_name = 'contextobj'
+    context_object_name = 'ind_inst_1_instance'
 
     
     def get_context_data(self, **kwargs):
@@ -358,9 +359,21 @@ class IndInst1Create(CreateView):
         context['header'] = 'Industrial Visit  of Faculty (Visits accompanied with students should be excluded)'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        context['nbar'] = "ind_inst_1_tab"
         return context
 
 class IndInst1Update(UpdateView):
     model = IndFacvisit1
     form_class = IndFacVisit1Form
     template_name = "ind_inst_1_update.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Industrial Visit  of Faculty (Visits accompanied with students should be excluded)'
+        return context
+
+class IndInst1Delete(DeleteView):
+    model = IndFacvisit1
+    success_url = reverse_lazy("ind_inst_1")
+    template_name = "ind_inst_1_delete.html"
+    context_object_name = "model_instance"

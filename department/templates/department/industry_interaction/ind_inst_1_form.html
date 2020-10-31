@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load custom_filters %}
 {% block content %}
-
+{% include 'ind_inst_tabs.html' %}
 <div class="row">
     {% include 'add_record.html' %}
      <div class="col-sm-9">
@@ -35,8 +35,8 @@
                     <td>{{ value }}</td>
                     {% endfor %}
                     <td>
-                        <a href="#" class="btn btn-outline-success btn-sm">Update</a>
-                        <a href="#" class="btn btn-outline-danger btn-sm inline">Delete</a>
+                        <a href="{% url 'ind_inst_1_update' pk=instance.pk %}" class="btn btn-outline-success btn-sm">Update</a>
+                        <a href="{% url 'ind_inst_1_delete' pk=instance.pk %}" class="btn btn-outline-danger btn-sm inline">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}
