@@ -30,7 +30,7 @@
             <tbody id="table_row">
                 {% for instance in data %}
                 <tr>
-                    <td></td>
+                    <td>{{forloop.counter}}</td>
                     {% for field, value in instance.fields.items %}
                     <td>{{ value }}</td>
                     {% endfor %}
