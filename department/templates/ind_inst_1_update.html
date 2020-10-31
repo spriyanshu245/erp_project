@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<h1>Update: {{header}}</h1>
+<div class="jumbotron">
+    <h1>Update: {{header}}</h1>
+</div>
 
 <form action="" method="post">
     {% csrf_token %}
