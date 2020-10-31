@@ -9,6 +9,12 @@ body {
   transition: background-color .5s;
 }
 
+.wrapper{
+  width: 90%;
+  margin: auto;
+}
+
+
 .sidenav {
   height: 100%;
   width: 0;

@@ -1,4 +1,3 @@
-
 DEPARTMENTS = (
     ('Computer Science','Computer Science'),
     ('Electronics and Telecommunication','Electronics and Telecommunication'),
@@ -17,6 +16,14 @@ EXAM_TYPES=(
     ('MID SEM','MID SEM'),
     ('PRELIMS','PRELIMS'),
     ('END SEM','END SEM'),
+)
+
+COMP_SUB = (
+    ('DBMS','DBMS'),
+    ('TOC','TOC'),
+    ('CN','CN'),
+    ('SEMP','SEMP'),
+    ('ISEE','ISEE'),
 )
 
 ENTC_SUB = (
@@ -43,18 +50,26 @@ CIVIL_SUB = (
     ('C5','C5'),
 )
 
-COMP_SUB = (
-    ('DBMS','DBMS'),
-    ('TOC','TOC'),
-    ('CN','CN'),
-    ('SEMP','SEMP'),
-    ('ISEE','ISEE'),
+ENG_SUB = (
+    ('PHYSICS','PHYSICS'),
+    ('MATHS','MATHS'),
+    ('CHEMISTRY','CHEMISTRY'),
+    ('ELECTRONICS','ELECTRONICS'),
+    ('ELECTRICAL','ELECTRICAL'),
+    ('GRAPHICS','GRAPHICS'),
+    ('MECHANICS','MECHANICS'),
 )
 
 SUBJECTS =(
     ('', 'Choose...'),
-    (COMP_SUB,COMP_SUB),
-    (ENTC_SUB,ENTC_SUB),
-    (MECH_SUB,MECH_SUB),
-    (CIVIL_SUB,CIVIL_SUB),
+    ('COMPUTER SUBJECTS',COMP_SUB),
+    ('ENTC SUBJECTS',ENTC_SUB),
+    ('MECHANICAL SUBJECTS',MECH_SUB),
+    ('CIVIL SUBJECTS',CIVIL_SUB),
+    ('ENGINEERING SCIENCE SUBJECTS',ENG_SUB),
+)
+
+GRANT = (
+    ('Yes', 'Yes'),
+    ('No', 'No')
 )
