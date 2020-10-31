@@ -1,0 +1,50 @@
+{% block tabs %}
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+    .nav-tabs li a {
+      color: rgb(25, 124, 108);
+    }
+</style>
+
+<div>
+  <h4 class="text-center alert alert-primary">Industry/Institute Interaction</h4>
+</div>
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'ind_inst_1_tab' %}active{% endif %}" 
+        href="{% url 'ind_inst_1' %}">Events Organized</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'dept_act_2' %}active{% endif %}" 
+        href="#">Tab2</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'dept_act_3' %}active{% endif %}" 
+        href="#">Tab 3</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'dept_act_4' %}active{% endif %}" 
+        href="#">Tab 4</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'dept_act_5' %}active{% endif %}" 
+        href="#">Tab 5</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'dept_act_6' %}active{% endif %}" 
+        href="#">Tab 6</a>
+    </li>
+  </ul>
+<br>
+
+<div>
+  <form class="form-inline mr-auto mb-4 d-flex justify-content-end" onkeydown="return event.key != 'Enter';">
+    <input id="search" class="form-control mr-sm-2" type="text" placeholder="Search Table../Doesnt Work">
+    <span class="glyphicon glyphicon-search"></span>
+    <button class="btn" onclick="DownloadCsv('table_main')"><i class="fa fa-download"></i> Download</button>
+  </form>
+</div>
+
+{% endblock %}
