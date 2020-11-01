@@ -3,15 +3,16 @@
 
 <div class="row">
     <div class="col-sm-8">
-        <h4 class="alert alert-info" style="text-align: center;">UPDATE</h4>
+        <div class=" col-sm-8 jumbotron shadow">
+            <h1>Update: {{header}}</h1>
         <form action="" method="POST">
             {% csrf_token %}
             {{form.as_p}}
             <input type="submit" class="btn btn-success" value="save changes">
-            <a href="{% url 'add_show' %}" class="btn btn-info">Back to Home</a>
+            <a href="{% url 'add_show' %}" class="btn btn-info">Back</a>
             {% include 'messages.html' %}
         </form>
     </div>
 </div>
 
-{% endblock content %}
+{% endblock %}
