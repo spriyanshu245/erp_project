@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.views.generic import (CreateView, DetailView, UpdateView, DeleteView)
 from django.forms.models import model_to_dict
 from django.core import serializers
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 # Custom templates
 
@@ -349,7 +349,7 @@ def cur_input_5(request):
 class IndInst1Create(CreateView):
     model = IndFacvisit1
     form_class = IndFacVisit1Form
-    template_name = 'ind_inst_1_form.html'
+    template_name = 'create_form.html'
     context_object_name = 'ind_inst_1_instance'
 
     
@@ -360,12 +360,13 @@ class IndInst1Create(CreateView):
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
         context['nbar'] = "ind_inst_1_tab"
+
         return context
 
 class IndInst1Update(UpdateView):
     model = IndFacvisit1
     form_class = IndFacVisit1Form
-    template_name = "ind_inst_1_update.html"
+    template_name = "form_update.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -375,5 +376,11 @@ class IndInst1Update(UpdateView):
 class IndInst1Delete(DeleteView):
     model = IndFacvisit1
     success_url = reverse_lazy("ind_inst_1")
-    template_name = "ind_inst_1_delete.html"
+    template_name = "form_delete.html"
     context_object_name = "model_instance"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cancel_link'] = "ind_inst_1"
+        return context
+
