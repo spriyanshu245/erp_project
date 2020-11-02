@@ -355,11 +355,12 @@ class IndInst1Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['injectme'] = 'BASIC INJECTION!'
         context['header'] = 'Industrial Visit  of Faculty (Visits accompanied with students should be excluded)'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
         context['nbar'] = "ind_inst_1_tab"
+        context['update_link'] = "ind_inst_1_update"
+        context['delete_link'] = "ind_inst_1_delete"
 
         return context
 

@@ -35,8 +35,8 @@
                     <td>{{ value }}</td>
                     {% endfor %}
                     <td>
-                        <a href="{% url 'ind_inst_1_update' pk=instance.pk %}" class="btn btn-outline-success btn-sm">Update</a>
-                        <a href="{% url 'ind_inst_1_delete' pk=instance.pk %}" class="btn btn-outline-danger btn-sm inline">Delete</a>
+                        <a href="{% url 'update_link' pk=instance.pk %}" class="btn btn-outline-success btn-sm">Update</a>
+                        <a href="{% url 'delete_link' pk=instance.pk %}" class="btn btn-outline-danger btn-sm inline">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}

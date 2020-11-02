@@ -21,7 +21,7 @@ DEPT_ACT_DIR = Path.joinpath(TEMPLATE_DIR, "departmental_activities")
 STUD_PERF_DIR = Path.joinpath(TEMPLATE_DIR, "student_performance")
 FAC_ACH_DIR = Path.joinpath(TEMPLATE_DIR, "faculty_achievements")
 CUR_INPUT_DIR = Path.joinpath(TEMPLATE_DIR, "curriculum_input")
-IND_INST_DIR = Path.joinpath(TEMPLATE_DIR, "industry_interaction")
+# IND_INST_DIR = Path.joinpath(TEMPLATE_DIR, "industry_interaction")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -62,7 +62,7 @@ ROOT_URLCONF = 'erp_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR, DEPT_ACT_DIR, STUD_PERF_DIR, FAC_ACH_DIR, CUR_INPUT_DIR, IND_INST_DIR],
+        'DIRS': [TEMPLATE_DIR, DEPT_ACT_DIR, STUD_PERF_DIR, FAC_ACH_DIR, CUR_INPUT_DIR,],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
