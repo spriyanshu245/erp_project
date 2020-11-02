@@ -35,13 +35,8 @@
                     <td>{{ value }}</td>
                     {% endfor %}
                     <td>
-<<<<<<< HEAD
-                        <a href="{% url 'update_link' pk=instance.pk %}" class="btn btn-outline-success btn-sm">Update</a>
-                        <a href="{% url 'delete_link' pk=instance.pk %}" class="btn btn-outline-danger btn-sm inline">Delete</a>
-=======
-                        <a href="{% url 'ind_inst_1_update' pk=instance.pk %}" class="btn btn-outline-secondary btn-sm">Update</a>
-                        <a href="{% url 'ind_inst_1_delete' pk=instance.pk %}" class="btn btn-outline-danger btn-sm inline">Delete</a>
->>>>>>> f7299b4a8ba5b6cf97cae5ea45b4c74338aca123
+                        <a href="{% url update_link pk=instance.pk %}" class="btn btn-outline-success btn-sm">Update</a>
+                        <a href="{% url delete_link pk=instance.pk %}" class="btn btn-outline-danger btn-sm inline">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}

@@ -1,9 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <h2 class=" alert alert-info">Update:</h2>
 <div class="jumbotron">
     <h2>{{header}}</h2>
 </div>
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-primary" value="Submit">
+</form>
 
 {% endblock %}

@@ -361,7 +361,6 @@ class IndInst1Create(CreateView):
         context['nbar'] = "ind_inst_1_tab"
         context['update_link'] = "ind_inst_1_update"
         context['delete_link'] = "ind_inst_1_delete"
-
         return context
 
 class IndInst1Update(UpdateView):
@@ -385,3 +384,82 @@ class IndInst1Delete(DeleteView):
         context['cancel_link'] = "ind_inst_1"
         return context
 
+#2] Training of Faculty by Industry
+class IndInst2Create(CreateView):
+    model = IndInst2
+    form_class = IndInst2Form
+    template_name = 'create_form.html'
+    # context_object_name = 'ind_inst_2_instance'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Training of Faculty by Industry'
+        context['events'] = self.model.objects.all()
+        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        context['nbar'] = "ind_inst_2_tab"
+        context['update_link'] = "ind_inst_2_update"
+        context['delete_link'] = "ind_inst_2_delete"
+        return context
+
+class IndInst2Update(UpdateView):
+    model = IndInst2
+    form_class = IndInst2Form
+    template_name = "form_update.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Training of Faculty by Industry'
+
+        return context
+
+class IndInst2Delete(DeleteView):
+    model = IndInst2
+    success_url = reverse_lazy("ind_inst_2")
+    template_name = "form_delete.html"
+    context_object_name = "model_instance"
+    
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cancel_link'] = "ind_inst_2"
+        context['instance_name'] = self.model.name_of_faculty
+        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        return context
+
+#3] Faculty Providing training to industry
+class IndInst3Create(CreateView):
+    model = IndInst3
+    form_class = IndInst3Form
+    template_name = 'create_form.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Faculty Providing training to Industry'
+        context['events'] = self.model.objects.all()
+        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        context['nbar'] = "ind_inst_3_tab"
+        context['update_link'] = "ind_inst_3_update"
+        context['delete_link'] = "ind_inst_3_delete"
+        return context
+
+class IndInst3Update(UpdateView):
+    model = IndInst3
+    form_class = IndInst3Form
+    template_name = "form_update.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Faculty Providing training to Industry'
+        return context
+
+class IndInst3Delete(DeleteView):
+    model = IndInst3
+    success_url = reverse_lazy("ind_inst_3")
+    template_name = "form_delete.html"
+    context_object_name = "model_instance"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cancel_link'] = "ind_inst_3"
+        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        return context

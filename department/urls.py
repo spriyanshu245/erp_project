@@ -29,8 +29,16 @@ urlpatterns = [
     path('cur_input_4/', views.cur_input_4, name="cur_input_4"),
     path('cur_input_5/', views.cur_input_5, name="cur_input_5"),
 
+    # Industry Institute Interaction
     path('ind_inst_1/', views.IndInst1Create.as_view(), name="ind_inst_1"),
     path('ind_inst_1/update/<int:pk>/', views.IndInst1Update.as_view(), name="ind_inst_1_update"),
     path('ind_inst_1/delete/<int:pk>/', views.IndInst1Delete.as_view(), name="ind_inst_1_delete"),
     
+    path('ind_inst_2/', views.IndInst2Create.as_view(), name="ind_inst_2"),
+    path('ind_inst_2/update/<int:pk>/', views.IndInst2Update.as_view(), name="ind_inst_2_update"),
+    path('ind_inst_2/delete/<int:pk>/', views.IndInst2Delete.as_view(), name="ind_inst_2_delete"),
+
+    path('ind_inst_3/', views.IndInst3Create.as_view(), name="ind_inst_3"),
+    path('ind_inst_3/update/<int:pk>/', views.IndInst3Update.as_view(), name="ind_inst_3_update"),
+    path('ind_inst_3/delete/<int:pk>/', views.IndInst3Delete.as_view(), name="ind_inst_3_delete"),
 ]

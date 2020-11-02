@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import date
 from .choices import DEPARTMENTS, CLASS, EXAM_TYPES, SUBJECTS, GRANT
+from django.urls import reverse
 
 
 # Create your models here.
@@ -197,5 +198,38 @@ class IndFacvisit1(models.Model):
         return self.faculty
 
     def get_absolute_url(self):
-        from django.urls import reverse
         return reverse('ind_inst_1',)
+
+#2] Training  of Faculty by Industry
+class IndInst2(models.Model):
+    # No	Name of Faculty	Name of Department	Name of Company 		*Sector	Title of Training	Dates	Outcome
+    name_of_faculty = models.CharField(max_length=150)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, default=2)
+    name_of_company = models.CharField(max_length=256)
+    sector = models.CharField(max_length=256)
+    title_of_training = models.CharField(max_length=256)
+    # dates remaining
+    outcome = models.TextField()
+
+    def __str__(self):
+        return self.name_of_faculty
+
+    def get_absolute_url(self):
+        return reverse('ind_inst_2',)
+
+#3] Faculty Providing training to industry
+# No	Name of Faculty	Name of Department	Name of Company 		*Sector	Title of Training	Dates	Outcome
+class IndInst3(models.Model):
+    name_of_faculty = models.CharField(max_length=150)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, default=2)
+    name_of_company = models.CharField(max_length=256)
+    sector = models.CharField(max_length=256)
+    title_of_training = models.CharField(max_length=256)
+    # dates remaining
+    outcome = models.TextField()
+
+    def __str__(self):
+        return self.name_of_faculty
+
+    def get_absolute_url(self):
+        return reverse('ind_inst_3',)

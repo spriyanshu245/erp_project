@@ -250,3 +250,29 @@ class IndFacVisit1Form(forms.ModelForm):
             'to_date': DateInput(attrs={'class':'form-control'}),
             'outcome': forms.Textarea(attrs={'rows': 3,'class':'form-control'}),
         }
+
+class IndInst2Form(forms.ModelForm):
+    class Meta:
+        model = IndInst2
+        fields = ('name_of_faculty','department','name_of_company','sector','title_of_training','outcome')
+        widgets = {
+            'name_of_faculty': forms.TextInput(attrs={'class':'form-control'}),
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'name_of_company': forms.TextInput(attrs={'class':'form-control'}),
+            'sector': forms.TextInput(attrs={'class':'form-control'}),
+            'title_of_training': forms.TextInput(attrs={'class':'form-control'}),
+            'outcome': forms.Textarea(attrs={'rows': 3,'class':'form-control'}),
+        }
+
+class IndInst3Form(forms.ModelForm):
+    class Meta:
+        model = IndInst3
+        fields = ('name_of_faculty','department','name_of_company','sector','title_of_training','outcome')
+        widgets = {
+            'name_of_faculty': forms.TextInput(attrs={'class':'form-control'}),
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'name_of_company': forms.TextInput(attrs={'class':'form-control'}),
+            'sector': forms.TextInput(attrs={'class':'form-control'}),
+            'title_of_training': forms.TextInput(attrs={'class':'form-control'}),
+            'outcome': forms.Textarea(attrs={'rows': 3,'class':'form-control'}),
+        }
