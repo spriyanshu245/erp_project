@@ -32,8 +32,8 @@ SECRET_KEY = '_z90!&@q%-1)uqlb$g6^%lyri8)0@5r#6vbk)rqnqn=v3a0twb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
+#actual website when it deploy
 
 # Application definition
 
@@ -132,3 +132,8 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+LOGIN_REDIRECT_URL='/'
+LOGOUT_REDIRECT_URL='/'
+AUTH_PROFILE_MODULE='department.models.Profile'

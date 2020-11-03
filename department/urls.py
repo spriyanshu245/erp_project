@@ -1,11 +1,13 @@
 from django.urls import path
 from django.conf.urls import url
 from department import views
+from django.contrib.auth import views as auth_views
 # from .views import dept_act_1DeleteView
 
 urlpatterns = [
-
-       path('', views.add_show, name="add_show"),
+    path('login/', auth_views.LoginView.as_view(),name="login"),
+    path('logout/', auth_views.LogoutView.as_view(),name="logout"),
+    path('', views.add_show, name="add_show"),
     path('delete/<int:id>/', views.delete_data, name="delete"),
     path('update/<int:id>/', views.update_data, name="update"),
     
@@ -42,3 +44,5 @@ urlpatterns = [
     path('ind_inst_3/update/<int:pk>/', views.IndInst3Update.as_view(), name="ind_inst_3_update"),
     path('ind_inst_3/delete/<int:pk>/', views.IndInst3Delete.as_view(), name="ind_inst_3_delete"),
 ]
+
+#handler404 = ''

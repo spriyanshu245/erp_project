@@ -73,3 +73,23 @@ GRANT = (
     ('Yes', 'Yes'),
     ('No', 'No')
 )
+
+
+
+ROLE=(
+    ('admin','admin'),
+    ('HOD','HOD'),
+    ('sadmin','sadmin'),
+    ('teacher','teacher'),
+    ('non-teach','non-teach')
+    )
+DEPT_PEM=(
+    ('ALLD','ALLD'),
+    ('COMP','COMP'),
+    ('ENTC','ENTC'),
+    ('MECH','MECH'),
+    ('CIVI','CIVI'),
+    ('VIEW','VIEW')
+    )
+
+# Create your models here.

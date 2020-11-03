@@ -1,7 +1,7 @@
 from django.core import validators
 from django import forms
 from .models import *
-
+from django.contrib.auth.models import User
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -276,3 +276,15 @@ class IndInst3Form(forms.ModelForm):
             'title_of_training': forms.TextInput(attrs={'class':'form-control'}),
             'outcome': forms.Textarea(attrs={'rows': 3,'class':'form-control'}),
         }
+
+
+#--------------------user
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('role', 'dept')

@@ -1,7 +1,10 @@
 from django.db import models
 from datetime import date
-from .choices import DEPARTMENTS, CLASS, EXAM_TYPES, SUBJECTS, GRANT
+from .choices import DEPARTMENTS, CLASS, EXAM_TYPES, SUBJECTS, GRANT, ROLE, DEPT_PEM 
 from django.urls import reverse
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -233,3 +236,24 @@ class IndInst3(models.Model):
 
     def get_absolute_url(self):
         return reverse('ind_inst_3',)
+
+##__________________________
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    role = models.TextField(max_length=10, choices=ROLE,default="non-teach",blank=True)
+    dept = models.CharField(max_length=4, choices=DEPT_PEM,default="VIEW",blank=True)
+
+    def __str__(self):  # __unicode__ for Python 2
+        return self.user.username
+
+@receiver(post_save, sender=User)
+def create_or_update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+    instance.profile.save()
+
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
