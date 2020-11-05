@@ -10,8 +10,13 @@ urlpatterns = [
     path('update/<int:id>/', views.update_data, name="update"),
     
 
-    url(r'^dept_act_1/$', views.dept_act_1, name="dept_act_1"),
-    # path('<pk>/delete/', dept_act_1DeleteView.as_view()),
+    # url(r'^dept_act_1/$', views.dept_act_1, name="dept_act_1"),
+    # # path('<pk>/delete/', dept_act_1DeleteView.as_view()),
+    path('dept_act_1/', views.DeptEvent1Create.as_view(), name="dept_act_1"),
+    path('dept_act_1/update/<int:pk>/', views.DeptEvent1Update.as_view(), name="dept_act_1_update"),
+    path('dept_act_1/delete/<int:pk>/', views.DeptEvent1Delete.as_view(), name="dept_act_1_delete"),
+
+
     path('dept_act_2/', views.dept_act_2, name="dept_act_2"),
     path('dept_act_3/', views.dept_act_3, name="dept_act_3"),
     path('dept_act_4/', views.dept_act_4, name="dept_act_4"),

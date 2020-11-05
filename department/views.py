@@ -54,34 +54,64 @@ def delete_data(request, id):
 
 #------------------------------------------------------------------------------------
 #------------------------DEPARTMENTAL ACTIVITIES-------------------------------------
-def dept_act_1(request):
-    form = AddDeptEvent1()
-    if request.method == 'POST':
-        form = AddDeptEvent1(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Added successfully")
-            return HttpResponseRedirect('/department/dept_act_1')
+# def dept_act_1(request):
+#     form = AddDeptEvent1()
+#     if request.method == 'POST':
+#         form = AddDeptEvent1(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, "Added successfully")
+#             return HttpResponseRedirect('/department/dept_act_1')
 
-    event = DeptEvent1.objects.all()
+#     event = DeptEvent1.objects.all()
 
-    context = {
-        'header': 'Events Organized by Department ',
-        'form' : form,
-        'event' : event,  
-        'nbar': 'dept_act_1',     
-    }
+#     context = {
+#         'header': 'Events Organized by Department ',
+#         'form' : form,
+#         'event' : event,  
+#         'nbar': 'dept_act_1',     
+#     }
 
-    return render(request, 'dept_act_1.html', context)
+#     return render(request, 'dept_act_1.html', context)
 
-#  # Delete View 
-# class dept_act_1DeleteView(DeleteView):  
-#     model = DeptEvent1 
-      
-#     # specify success url 
-#     # to redirect after successfully 
-#     # deleting object 
-#     success_url ='/department/dept_act_1'
+#3] Faculty Providing training to industry
+class DeptEvent1Create(CreateView):
+    model = DeptEvent1
+    form_class = AddDeptEvent1
+    template_name = 'create_form.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Events Organized by Department'
+        context['events'] = self.model.objects.all()
+        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        context['nbar'] = "dept_act_1"
+        context['update_link'] = "dept_act_1_update"
+        context['delete_link'] = "dept_act_1_delete"
+        context['tabs_link'] = "dept_act_tabs"
+        return context
+
+class DeptEvent1Update(UpdateView):
+    model = DeptEvent1
+    form_class = AddDeptEvent1
+    template_name = "form_update.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Events Organized by Department'
+        return context
+
+class DeptEvent1Delete(DeleteView):
+    model = DeptEvent1
+    success_url = reverse_lazy("dept_act_1")
+    template_name = "form_delete.html"
+    context_object_name = "model_instance"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cancel_link'] = "dept_act_1"
+        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        return context
 
 #------------------------------------------------------------------------------------
 def dept_act_2(request):
@@ -440,6 +470,7 @@ class IndInst3Create(CreateView):
         context['nbar'] = "ind_inst_3_tab"
         context['update_link'] = "ind_inst_3_update"
         context['delete_link'] = "ind_inst_3_delete"
+        context['tabs_link'] = "ind_inst_tabs"
         return context
 
 class IndInst3Update(UpdateView):
