@@ -1,7 +1,10 @@
 from django.db import models
 from datetime import date
-from .choices import DEPARTMENTS, CLASS, EXAM_TYPES, SUBJECTS, GRANT, SECTOR
+from .choices import DEPARTMENTS, CLASS, EXAM_TYPES, SUBJECTS, GRANT, ROLE, DEPT_PEM, SECTOR
 from django.urls import reverse
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -326,7 +329,7 @@ class IndInst8(models.Model):
     status_of_project = models.CharField(max_length=150)
 
     def __str__(self):
-        return self.name_of_facultyr
+        return self.name_of_faculty
 
     def get_absolute_url(self):
         return reverse('ind_inst_8',)
@@ -346,3 +349,23 @@ class IndInst9(models.Model):
 
     def get_absolute_url(self):
         return reverse('ind_inst_9',)
+##__________________________
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    role = models.TextField(max_length=10, choices=ROLE,default="non-teach",blank=True)
+    dept = models.CharField(max_length=4, choices=DEPT_PEM,default="VIEW",blank=True)
+
+    def __str__(self):  # __unicode__ for Python 2
+        return self.user.username
+
+@receiver(post_save, sender=User)
+def create_or_update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+    instance.profile.save()
+
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()

@@ -6,6 +6,7 @@ from django.views.generic import (CreateView, DetailView, UpdateView, DeleteView
 from django.forms.models import model_to_dict
 from django.core import serializers
 from django.urls import reverse_lazy, reverse
+from django.contrib.auth.decorators import login_required
 
 # Custom templates
 
@@ -33,6 +34,7 @@ def add_show(request):
     return render(request, 'add_show.html', context)
 
 # Update/Edit table item
+@login_required
 def update_data(request, id):
     if request.method == 'POST' :
         pi = StudentResult.objects.get(pk=id)
@@ -46,6 +48,7 @@ def update_data(request, id):
     return render(request, 'update_row.html', {'form':form})
 
 # Delete function
+@login_required
 def delete_data(request, id):
     if request.method == 'POST' :
         pi = StudentResult.objects.get(pk=id)
