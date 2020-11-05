@@ -1,7 +1,7 @@
 from django.core import validators
 from django import forms
 from .models import *
-
+from django.contrib.auth.models import User
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -254,25 +254,122 @@ class IndFacVisit1Form(forms.ModelForm):
 class IndInst2Form(forms.ModelForm):
     class Meta:
         model = IndInst2
-        fields = ('name_of_faculty','department','name_of_company','sector','title_of_training','outcome')
+        fields = ('name_of_faculty','department','name_of_company','sector','title_of_training','from_date','to_date','outcome')
         widgets = {
             'name_of_faculty': forms.TextInput(attrs={'class':'form-control'}),
             'department': forms.Select(attrs={'class':'form-control'}),
             'name_of_company': forms.TextInput(attrs={'class':'form-control'}),
             'sector': forms.TextInput(attrs={'class':'form-control'}),
             'title_of_training': forms.TextInput(attrs={'class':'form-control'}),
+            'from_date': DateInput(attrs={'class':'form-control'}),
+            'to_date': DateInput(attrs={'class':'form-control'}),
             'outcome': forms.Textarea(attrs={'rows': 3,'class':'form-control'}),
         }
 
 class IndInst3Form(forms.ModelForm):
     class Meta:
         model = IndInst3
-        fields = ('name_of_faculty','department','name_of_company','sector','title_of_training','outcome')
+        fields = ('name_of_faculty','department','name_of_company','sector','title_of_training','from_date','to_date','outcome')
         widgets = {
             'name_of_faculty': forms.TextInput(attrs={'class':'form-control'}),
             'department': forms.Select(attrs={'class':'form-control'}),
             'name_of_company': forms.TextInput(attrs={'class':'form-control'}),
             'sector': forms.TextInput(attrs={'class':'form-control'}),
             'title_of_training': forms.TextInput(attrs={'class':'form-control'}),
+            'from_date': DateInput(attrs={'class':'form-control'}),
+            'to_date': DateInput(attrs={'class':'form-control'}),
             'outcome': forms.Textarea(attrs={'rows': 3,'class':'form-control'}),
         }
+
+class IndInst4FormNew(forms.ModelForm):
+    class Meta:
+        model = IndInst4Model
+        fields = ('name_of_faculty','department','name_of_company','date_of_appointment','type_of_board','designation_of_faculty','meeting_date')
+        widgets = {
+            'name_of_faculty': forms.TextInput(attrs={'class':'form-control'}),
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'name_of_company': forms.TextInput(attrs={'class':'form-control'}),
+            'date_of_appointment': DateInput(attrs={'class':'form-control'}),
+            'type_of_board': forms.TextInput(attrs={'class':'form-control'}),
+            'designation_of_faculty': forms.TextInput(attrs={'class':'form-control'}),
+            'meeting_date': forms.DateInput(attrs={'class':'form-control'})
+        }
+
+class IndInst5Form(forms.ModelForm):
+    class Meta:
+        model = IndInst5
+        fields = ('type_of_board','name_of_industry_member','designation','name_of_company','sector','tenure')
+        widgets = {
+            'type_of_board': forms.TextInput(attrs={'class':'form-control'}),
+            'name_of_industry_member': forms.TextInput(attrs={'class':'form-control'}),
+            'designation': forms.TextInput(attrs={'class':'form-control'}),
+            'name_of_company': forms.TextInput(attrs={'class':'form-control'}),
+            'sector': forms.TextInput(attrs={'class':'form-control'}),
+            'tenure': forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+class IndInst6Form(forms.ModelForm):
+    class Meta:
+        model = IndInst6
+        fields = ('name_of_faculty','title_of_invention','patent_no','date_of_grant','name_of_company','sector','date_of_adoption')
+        widgets = {
+            'name_of_faculty': forms.TextInput(attrs={'class':'form-control'}),
+            'title_of_invention': forms.TextInput(attrs={'class':'form-control'}),
+            'patent_no': forms.TextInput(attrs={'class':'form-control'}),
+            'date_of_grant': DateInput(attrs={'class':'form-control'}),
+            'name_of_company': forms.TextInput(attrs={'class':'form-control'}),
+            'sector': forms.Select(attrs={'class':'form-control'}),
+            'date_of_adoption': DateInput(attrs={'class':'form-control'}),
+            }
+
+class IndInst7Form(forms.ModelForm):
+    class Meta:
+        model = IndInst7
+        fields = ('title_of_project','name_of_coordinator','name_of_sponsoring_company','duration_from','duration_to','grant_received','status_of_project')
+        widgets = {
+            'title_of_project': forms.TextInput(attrs={'class':'form-control'}),
+            'name_of_coordinator': forms.TextInput(attrs={'class':'form-control'}),
+            'name_of_sponsoring_company': forms.TextInput(attrs={'class':'form-control'}),
+            'duration_from': DateInput(attrs={'class':'form-control'}),
+            'duration_to': DateInput(attrs={'class':'form-control'}),
+            'grant_received': forms.Select(attrs={'class':'form-control'}),
+            'status_of_project': forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+class IndInst8Form(forms.ModelForm):
+    class Meta:
+        model = IndInst8
+        fields = ('name_of_faculty','name_of_company','title_of_project','revenue_generated','dates_from','dates_to','status_of_project')
+        widgets = {
+            'name_of_faculty': forms.TextInput(attrs={'class':'form-control'}),
+            'name_of_company': forms.TextInput(attrs={'class':'form-control'}),
+            'title_of_project': forms.TextInput(attrs={'class':'form-control'}),
+            'revenue_generated': forms.NumberInput(attrs={'class': 'form-control'}),
+            'dates_from': DateInput(attrs={'class':'form-control'}),
+            'dates_to': DateInput(attrs={'class':'form-control'}),
+            'status_of_project': forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+class IndInst9Form(forms.ModelForm):
+    class Meta:
+        model = IndInst9
+        fields = ('department','name_of_faculty_coordinator','name_of_company','sector','date_of_MOU','purpose_of_MOU')
+        widgets = {
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'name_of_faculty_coordinator': forms.TextInput(attrs={'class':'form-control'}),
+            'name_of_company': forms.TextInput(attrs={'class':'form-control'}),
+            'sector': forms.Select(attrs={'class':'form-control'}),
+            'date_of_MOU': DateInput(attrs={'class':'form-control'}),
+            'purpose_of_MOU': forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+#--------------------user
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('role', 'dept')

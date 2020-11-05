@@ -1,17 +1,30 @@
 from django.db import models
 from datetime import date
-from .choices import DEPARTMENTS, CLASS, EXAM_TYPES, SUBJECTS, GRANT
+from .choices import DEPARTMENTS, CLASS, EXAM_TYPES, SUBJECTS, GRANT, ROLE, DEPT_PEM, SECTOR
 from django.urls import reverse
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.contrib.auth.models import User
 
 
 # Create your models here.
 
+# Choices
+
 # Models with Primary Keys
+## remaining --designation,
 class Department(models.Model):
     department = models.CharField(("Department Name"),primary_key=True, max_length=128,unique=True)
 
     def __str__(self):
         return self.department
+
+class Sector(models.Model):
+    sector = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.sector
+
 
 # Students Result in various examinations during specified period 
 class StudentResult(models.Model):
@@ -188,7 +201,7 @@ class IndFacvisit1(models.Model):
     faculty = models.CharField(max_length=150)
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
     company = models.CharField("Name of Company", max_length=256)
-    sector = models.CharField(max_length=256)
+    sector = models.ForeignKey(Sector, on_delete=models.CASCADE)
     purpose = models.TextField()
     from_date = models.DateField(("Dates (From)"), default=date.today, auto_now=False, auto_now_add=False)
     to_date = models.DateField(("Dates (To)"), default=date.today,auto_now=False, auto_now_add=False)
@@ -206,9 +219,10 @@ class IndInst2(models.Model):
     name_of_faculty = models.CharField(max_length=150)
     department = models.ForeignKey(Department, on_delete=models.CASCADE, default=2)
     name_of_company = models.CharField(max_length=256)
-    sector = models.CharField(max_length=256)
+    sector = models.ForeignKey(Sector, on_delete=models.CASCADE)
     title_of_training = models.CharField(max_length=256)
-    # dates remaining
+    from_date = models.DateField(("Dates (From)"), default=date.today, auto_now=False, auto_now_add=False)
+    to_date = models.DateField(("Dates (To)"), default=date.today,auto_now=False, auto_now_add=False)
     outcome = models.TextField()
 
     def __str__(self):
@@ -223,9 +237,10 @@ class IndInst3(models.Model):
     name_of_faculty = models.CharField(max_length=150)
     department = models.ForeignKey(Department, on_delete=models.CASCADE, default=2)
     name_of_company = models.CharField(max_length=256)
-    sector = models.CharField(max_length=256)
+    sector = models.ForeignKey(Sector, on_delete=models.CASCADE)
     title_of_training = models.CharField(max_length=256)
-    # dates remaining
+    from_date = models.DateField(("Dates (From)"), default=date.today, auto_now=False, auto_now_add=False)
+    to_date = models.DateField(("Dates (To)"), default=date.today,auto_now=False, auto_now_add=False)
     outcome = models.TextField()
 
     def __str__(self):
@@ -233,3 +248,124 @@ class IndInst3(models.Model):
 
     def get_absolute_url(self):
         return reverse('ind_inst_3',)
+
+#4] Faculty on board of Industry
+# Name of Faculty	Name of Department	Name of Company	Date of Appointment	Type of Board/council	Designation of Faculty		Meeting Date(if any)
+#some error so new model name here only
+class IndInst4Model(models.Model):
+    name_of_faculty = models.CharField(max_length=150)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, default=2)
+    name_of_company = models.CharField(max_length=256)
+    date_of_appointment = models.DateField(default=date.today, auto_now=False, auto_now_add=False)
+    type_of_board = models.CharField(("Type of Board/Council"), max_length=150) # whether foreign key or not and values
+    designation_of_faculty = models.CharField(max_length=150) # whether foreign key or not
+    meeting_date = models.DateField(("Meeting Date(if any)"),blank=True)
+
+    def __str__(self):
+        return self.name_of_faculty
+
+    def get_absolute_url(self):
+        return reverse('ind_inst_4',)
+
+#5] Industrial people on various Boards/Committee of Institute or Department                                        
+# Type of Board/council	Name of Industry Member		Designation  	Name of Company		Sector	Tenure
+class IndInst5(models.Model):
+    type_of_board = models.CharField(("Type of Board/Council"), max_length=150) # whether foreign key or not and values
+    name_of_industry_member = models.CharField(max_length=150)
+    designation = models.CharField(max_length=150) # Foreign Key?
+    name_of_company = models.CharField(max_length=250)
+    sector = models.ForeignKey(Sector, on_delete=models.CASCADE)
+    tenure = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name_of_industry_member
+
+    def get_absolute_url(self):
+        return reverse('ind_inst_5',)
+
+#6] Faculty patents leading to industry products
+# Name of Faculty	Title of Invention	Patent Number	Date of Grant/File	Name of Company		Sector	Date of Adoption
+class IndInst6(models.Model):
+    name_of_faculty = models.CharField(max_length=150)
+    title_of_invention = models.CharField(max_length=150)
+    patent_no = models.CharField(max_length=150)
+    date_of_grant = models.DateField(("Date of Grant/File"),default=date.today, auto_now=False, auto_now_add=False)
+    name_of_company = models.CharField(max_length=256)
+    sector = models.ForeignKey(Sector, on_delete=models.CASCADE)
+    date_of_adoption = models.DateField(default=date.today, auto_now=False, auto_now_add=False)
+
+    def __str__(self):
+        return self.name_of_faculty
+
+    def get_absolute_url(self):
+        return reverse('ind_inst_6',)
+
+#7] Sponsored Projects (Faculty only)
+#Title of  Project 	Name(s) of coordinator		Name of Sponsoring company		Duration	Grant Received	Status of Project
+class IndInst7(models.Model):
+    title_of_project = models.CharField(max_length=150)
+    name_of_coordinator = models.CharField(max_length=150)
+    name_of_sponsoring_company = models.CharField(max_length=150)
+    duration_from = models.DateField(("Duration(From)"), default=date.today, auto_now=False, auto_now_add=False)
+    duration_to = models.DateField(("Duration(To)"), default=date.today, auto_now=False, auto_now_add=False)
+    grant_received = models.CharField(max_length=150, choices=GRANT, default='No')
+    status_of_project = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.title_of_project
+
+    def get_absolute_url(self):
+        return reverse('ind_inst_7',)
+
+#8] Consultancy Projects/Advisory Services
+# Name of Faculty	Name of Company/ organization		Title of Project		Revenue Generated 	Dates	Status of Project
+class IndInst8(models.Model):
+    name_of_faculty = models.CharField(max_length=150)
+    name_of_company = models.CharField(("Name of Company/ organization"),max_length=256)
+    title_of_project = models.CharField(max_length=150)
+    revenue_generated = models.IntegerField()
+    dates_from = models.DateField(("Dates (From)"), default=date.today, auto_now=False, auto_now_add=False)
+    dates_to = models.DateField(("Dates (To)"), default=date.today, auto_now=False, auto_now_add=False)
+    status_of_project = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.name_of_faculty
+
+    def get_absolute_url(self):
+        return reverse('ind_inst_8',)
+
+# 9] MOU Information
+# Name of Department	Name of Faculty Coordinator		Name of Company		Sector	Date of MOU	Purpose of MOU
+class IndInst9(models.Model):
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, default=1)
+    name_of_faculty_coordinator = models.CharField(max_length=150)
+    name_of_company = models.CharField(("Name of Company/ organization"),max_length=256)
+    sector = models.CharField(max_length=150, choices=SECTOR)
+    date_of_MOU = models.DateField(default=date.today, auto_now=False, auto_now_add=False)
+    purpose_of_MOU = models.TextField()
+
+    def __str__(self):
+        return (self.name_of_company)
+
+    def get_absolute_url(self):
+        return reverse('ind_inst_9',)
+##__________________________
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    role = models.TextField(max_length=10, choices=ROLE,default="non-teach",blank=True)
+    dept = models.CharField(max_length=4, choices=DEPT_PEM,default="VIEW",blank=True)
+
+    def __str__(self):  # __unicode__ for Python 2
+        return self.user.username
+
+@receiver(post_save, sender=User)
+def create_or_update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+    instance.profile.save()
+
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()

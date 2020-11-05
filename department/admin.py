@@ -1,10 +1,35 @@
 from django.contrib import admin
 from .models import * 
-
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
 #Department, StudentResult, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
 # Register your models here.
 #class UserAdmin(admin.ModelAdmin):
 
+class ProfileInline(admin.StackedInline):
+    model = Profile
+    can_delete = False
+    verbose_name_plural = 'Profile'
+    fk_name = 'user'
+
+class CustomUserAdmin(UserAdmin):
+    inlines = (ProfileInline, )
+
+    def get_inline_instances(self, request, obj=None):
+        if not obj:
+            return list()
+        return super(CustomUserAdmin, self).get_inline_instances(request, obj)
+
+
+admin.site.unregister(User)
+admin.site.register(User, CustomUserAdmin)
+
+#--------internet
+
+
+
+admin.site.register(Profile)
 admin.site.register(Department)
 
 admin.site.register(StudentResult)
@@ -40,6 +65,9 @@ admin.site.register(CurStudVisit4)
 admin.site.register(CurStudSponsor5)
 
 admin.site.register(IndFacvisit1)
+admin.site.register(IndInst2)
+admin.site.register(IndInst3)
+admin.site.register(IndInst4Model)
 
 
 

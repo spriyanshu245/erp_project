@@ -73,3 +73,40 @@ GRANT = (
     ('Yes', 'Yes'),
     ('No', 'No')
 )
+
+SECTOR = [
+    ('Agriculture','Agriculture'),
+    ('Banking','Banking'),
+    ('Construction','Construction'),
+    ('Consumer durables','Consumer durables'),
+    ('Engineering','Engineering'),
+    ('Health care','Health care'),
+    ('IT','IT'),
+    ('Metal and mining','Metal and mining'),
+    ('Oil and Gas','Oil and Gas'),
+    ('Power','Power'),
+    ('Retail','Retail'),
+    ('Service','Service'),
+    ('Transport','Transport'),
+    ('others','others')
+]
+
+
+ROLE=(
+    ('admin','admin'),
+    ('HOD','HOD'),
+    ('sadmin','sadmin'),
+    ('teacher','teacher'),
+    ('non-teach','non-teach')
+    )
+    
+DEPT_PEM=(
+    ('ALLD','ALLD'),
+    ('COMP','COMP'),
+    ('ENTC','ENTC'),
+    ('MECH','MECH'),
+    ('CIVI','CIVI'),
+    ('VIEW','VIEW')
+    )
+
+# Create your models here.

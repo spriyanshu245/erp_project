@@ -48,7 +48,7 @@
         <a href="#">Student /Faculty Support System</a>
         <a href="#">Extra Curricular Activities</a>
         <a href="#">E-Cell</a>
-        <a href="#" id="logout">Logout</a>
+        <a href="{% url 'logout' %}" id="logout">Logout</a>
     </div>
           
         <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
@@ -90,13 +90,25 @@
             </li>
 
               -->
+          
           </ul>
           <!-- For search bar
           <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form> -->
+           
+          
     </div>
+         <li class="row nav-item ml-auto align-items-end navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+        <a class="nav-link "> {{ user.username }} </a>
+         {% else %}
+                <a class="nav-link " href="/login">Login</a>
+
+          {% endif %}
+
+           </li>
 </nav>
 
 
@@ -107,6 +119,7 @@
           {% endblock content %}
           
         </div>
+        
       </div>
 
     

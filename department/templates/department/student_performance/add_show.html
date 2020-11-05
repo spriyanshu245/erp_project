@@ -20,7 +20,9 @@
             <th scope="col">Candidates Appeared</th>
             <th scope="col">Candidates Passed</th>
             <th scope="col">Passing Percentage</th>
+            {% if user.profile.role == "admin" %}
             <th scope="col">Action</th>
+            {% endif %}
           </tr>
         </thead>
         <tbody id="table_row">
@@ -35,6 +37,7 @@
             <td style="text-align: center;">{{st.appeared}}</td>
             <td style="text-align: center;">{{st.passed}}</td>
             <td style="text-align: center;">{{st.perct}} %</td>
+            {% if user.profile.role == "admin" %}
             <td>
                <a href="{% url 'update' st.id %}" class="btn btn-outline-secondary btn-sm">Update</a>
                <form action="{% url 'delete' st.id %}" method="POST">
@@ -42,6 +45,7 @@
                    <input type="submit" class="btn btn-outline-danger btn-sm inline" value="Delete">
                </form>
             </td>
+            {% endif %}
           </tr>
             {% endfor %}
         </tbody>
