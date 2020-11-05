@@ -1,5 +1,5 @@
 {% block tabs %}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
@@ -27,15 +27,27 @@
     </li>
     <li class="nav-item">
       <a class="nav-link {% if nbar == 'ind_inst_4_tab' %}active{% endif %}" 
-        href="{% url 'ind_inst_3' %}">Tab 4</a>
+        href="{% url 'ind_inst_4' %}">Faculty on board of Industry</a>
     </li>
     <li class="nav-item">
       <a class="nav-link {% if nbar == 'ind_inst_5_tab' %}active{% endif %}" 
-        href="{% url 'ind_inst_3' %}">Tab 5</a>
+        href="{% url 'ind_inst_5' %}">Industrial people on Boards/Committee </a>
     </li>
     <li class="nav-item">
       <a class="nav-link {% if nbar == 'ind_inst_6_tab' %}active{% endif %}" 
-        href="{% url 'ind_inst_3' %}">Tab 6</a>
+        href="{% url 'ind_inst_6' %}">Faculty patents</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'ind_inst_7_tab' %}active{% endif %}" 
+        href="{% url 'ind_inst_7' %}">Sponsored Projects(Faculty)</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'ind_inst_8_tab' %}active{% endif %}" 
+        href="{% url 'ind_inst_8' %}">Consultancy Projects/Advisory Services</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'ind_inst_9_tab' %}active{% endif %}" 
+        href="{% url 'ind_inst_9' %}">MOU Information</a>
     </li>
   </ul>
 <br>

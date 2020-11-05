@@ -73,3 +73,20 @@ GRANT = (
     ('Yes', 'Yes'),
     ('No', 'No')
 )
+
+SECTOR = [
+    ('Agriculture','Agriculture'),
+    ('Banking','Banking'),
+    ('Construction','Construction'),
+    ('Consumer durables','Consumer durables'),
+    ('Engineering','Engineering'),
+    ('Health care','Health care'),
+    ('IT','IT'),
+    ('Metal and mining','Metal and mining'),
+    ('Oil and Gas','Oil and Gas'),
+    ('Power','Power'),
+    ('Retail','Retail'),
+    ('Service','Service'),
+    ('Transport','Transport'),
+    ('others','others')
+]

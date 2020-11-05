@@ -5,15 +5,7 @@
 
 <h1 class="alert">Are you sure you want to delete this record?</h1>
 <div class="jumbotron">
-    {% for instance in data %}
-        {% if forloop.first %}
-        {% for field, value in instance.fields.items %}
-            {% if forloop.first %}
-            <h1>{{value}}</h1>
-            {% endif%}
-        {% endfor %}
-        {% endif %}
-    {% endfor %}
+    <h1>{{model_instance}}</h1>
 </div>
 <form action="" method="post">
     {% csrf_token %}

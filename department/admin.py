@@ -40,6 +40,9 @@ admin.site.register(CurStudVisit4)
 admin.site.register(CurStudSponsor5)
 
 admin.site.register(IndFacvisit1)
+admin.site.register(IndInst2)
+admin.site.register(IndInst3)
+admin.site.register(IndInst4Model)
 
 
 

@@ -41,4 +41,29 @@ urlpatterns = [
     path('ind_inst_3/', views.IndInst3Create.as_view(), name="ind_inst_3"),
     path('ind_inst_3/update/<int:pk>/', views.IndInst3Update.as_view(), name="ind_inst_3_update"),
     path('ind_inst_3/delete/<int:pk>/', views.IndInst3Delete.as_view(), name="ind_inst_3_delete"),
+
+    path('ind_inst_4/', views.IndInst4Create.as_view(), name="ind_inst_4"),
+    path('ind_inst_4/update/<int:pk>/', views.IndInst4Update.as_view(), name="ind_inst_4_update"),
+    path('ind_inst_4/delete/<int:pk>/', views.IndInst4Delete.as_view(), name="ind_inst_4_delete"),
+    
+    path('ind_inst_5/', views.IndInst5Create.as_view(), name="ind_inst_5"),
+    path('ind_inst_5/update/<int:pk>/', views.IndInst5Update.as_view(), name="ind_inst_5_update"),
+    path('ind_inst_5/delete/<int:pk>/', views.IndInst5Delete.as_view(), name="ind_inst_5_delete"),
+
+    path('ind_inst_6/', views.IndInst6Create.as_view(), name="ind_inst_6"),
+    path('ind_inst_6/update/<int:pk>/', views.IndInst6Update.as_view(), name="ind_inst_6_update"),
+    path('ind_inst_6/delete/<int:pk>/', views.IndInst6Delete.as_view(), name="ind_inst_6_delete"),
+
+    path('ind_inst_7/', views.IndInst7Create.as_view(), name="ind_inst_7"),
+    path('ind_inst_7/update/<int:pk>/', views.IndInst7Update.as_view(), name="ind_inst_7_update"),
+    path('ind_inst_7/delete/<int:pk>/', views.IndInst7Delete.as_view(), name="ind_inst_7_delete"),
+
+    path('ind_inst_8/', views.IndInst8Create.as_view(), name="ind_inst_8"),
+    path('ind_inst_8/update/<int:pk>/', views.IndInst8Update.as_view(), name="ind_inst_8_update"),
+    path('ind_inst_8/delete/<int:pk>/', views.IndInst8Delete.as_view(), name="ind_inst_8_delete"),
+
+    path('ind_inst_9/', views.IndInst9Create.as_view(), name="ind_inst_9"),
+    path('ind_inst_9/update/<int:pk>/', views.IndInst9Update.as_view(), name="ind_inst_9_update"),
+    path('ind_inst_9/delete/<int:pk>/', views.IndInst9Delete.as_view(), name="ind_inst_9_delete"),
+
 ]
