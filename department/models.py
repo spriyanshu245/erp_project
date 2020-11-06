@@ -9,8 +9,6 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-# Choices
-
 # Models with Primary Keys
 ## remaining --designation,
 class Department(models.Model):
@@ -25,7 +23,7 @@ class Sector(models.Model):
     def __str__(self):
         return self.sector
 
-
+#-------------------------------------------------------------------------------------
 # Students Result in various examinations during specified period 
 class StudentResult(models.Model):
     department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
@@ -349,7 +347,10 @@ class IndInst9(models.Model):
 
     def get_absolute_url(self):
         return reverse('ind_inst_9',)
-##__________________________
+
+
+
+##________________________________________________________________________________________________________
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     role = models.TextField(max_length=10, choices=ROLE,default="non-teach",blank=True)

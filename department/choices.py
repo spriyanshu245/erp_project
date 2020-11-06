@@ -108,5 +108,3 @@ DEPT_PEM=(
     ('CIVI','CIVI'),
     ('VIEW','VIEW')
     )
-
-# Create your models here.
