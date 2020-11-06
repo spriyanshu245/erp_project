@@ -4,7 +4,7 @@ register = template.Library()
 
 @register.filter
 def replace_to_space(value):
-    value = value.replace("_or_","/")
+    value = value.replace("_or","/")
     value = value.replace("open_","(")
     value = value.replace("_close",")")
     value = value.replace("_"," ")

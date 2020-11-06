@@ -1,6 +1,6 @@
 from django.db import models
 from datetime import date
-from .choices import DEPARTMENTS, CLASS, EXAM_TYPES, SUBJECTS, GRANT, ROLE, DEPT_PEM, SECTOR
+from .choices import *
 from django.urls import reverse
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -367,21 +367,65 @@ class StudFac1(models.Model):
 
 #2]Self Learning facilities for students
 # Class / Division	Type of Self Learning Facility		Name of Subject		No of students participated	Dates 	Certificate/Award Received by students if any
+class StudFac2(models.Model):
+    class_or_division = models.CharField(max_length=150)
+    type_of_self_learning_facility = models.CharField(max_length=150, choices=SELF_LEARNING, default=1)
+    name_of_subject = models.CharField(max_length=150)
+    no_of_student_participated = models.PositiveIntegerField()
+    dates = models.CharField(max_length=150)
+    certificate_or_award_received_by_students = models.CharField(("Certificate/Award Received by students (if any)"),max_length=150, blank=True)
 
+    def __str__(self):
+        return self.class_or_division
+
+    def get_absolute_url(self):
+        return reverse('stud_fac_2',)
 
 #3]Achievement of Students in Competitive Exam 
 # Name of Student		Name of Department		*Name of Competitive exam appeared/qualified 		Competitive Exam Seat No.	Score
+class StudFac3(models.Model):
+    name_of_student = models.CharField(max_length=150)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, default=1)
+    name_of_competitive_exam_appeard_or_qualified = models.CharField(max_length=150, choices=COMPETITIVE_EXAM, default=1)
+    competitive_exam_seat_no = models.CharField(max_length=150)
+    score = models.FloatField()
 
+    def __str__(self):
+        return self.name_of_student
+
+    def get_absolute_url(self):
+        return reverse('stud_fac_3',)
 
 #4]Capability Enhancement and Development Activities
 # Name of Activity*			Date of implementation		Number of Students Enrolled		Agencies involved
+class StudFac4(models.Model):
+    name_of_activity = models.CharField(max_length=150, choices=ACTIVITY, default=1)
+    date_of_implementation = models.DateField(default=date.today, auto_now=False, auto_now_add=False)
+    no_of_students_enrolled = models.PositiveIntegerField()
+    agencies_involved = models.CharField(max_length=250)
 
+    def __str__(self):
+        return self.name_of_activity
+
+    def get_absolute_url(self):
+        return reverse('stud_fac_4',)
 
 #5]Number of professional development / administrative training  programmes organized
 # Title of the professional development program* 		Organized for Faculty / Staff	Organizing Department 		Duration (from-to)	No. of participants	Agencies involved
+class StudFac5(models.Model):
+    title_of_the_professional_development_program = models.CharField(max_length=150)
+    organized_for_faculty_or_staff = models.CharField(("Organized for Faculty/Staff"), max_length=150)
+    organizing_department = models.ForeignKey(Department, on_delete=models.CASCADE, default=1)
+    duration_open_from_close = models.DateField(("Duration (From)"),default=date.today, auto_now=False, auto_now_add=False)
+    duration_open_to_close = models.DateField(("Duration (To)"),default=date.today, auto_now=False, auto_now_add=False)
+    no_of_participants = models.PositiveIntegerField()
+    agencies_involved = models.CharField(max_length=250)
 
+    def __str__(self):
+        return self.title_of_the_professional_development_program
 
-
+    def get_absolute_url(self):
+        return reverse('stud_fac_5',)
 
 
 ##__________________________
