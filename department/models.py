@@ -9,8 +9,6 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-# Choices
-
 # Models with Primary Keys
 ## remaining --designation,
 class Department(models.Model):
@@ -25,7 +23,7 @@ class Sector(models.Model):
     def __str__(self):
         return self.sector
 
-
+#-------------------------------------------------------------------------------------
 # Students Result in various examinations during specified period 
 class StudentResult(models.Model):
     department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')

@@ -254,7 +254,7 @@ class Migration(migrations.Migration):
                 ('sector', models.CharField(choices=[('Agriculture', 'Agriculture'), ('Banking', 'Banking'), ('Construction', 'Construction'), ('Consumer durables', 'Consumer durables'), ('Engineering', 'Engineering'), ('Health care', 'Health care'), ('IT', 'IT'), ('Metal and mining', 'Metal and mining'), ('Oil and Gas', 'Oil and Gas'), ('Power', 'Power'), ('Retail', 'Retail'), ('Service', 'Service'), ('Transport', 'Transport'), ('others', 'others')], max_length=150)),
                 ('date_of_MOU', models.DateField(default=datetime.date.today)),
                 ('purpose_of_MOU', models.TextField()),
-                ('department', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='department.department')),
+                ('department', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='department.Department')),
             ],
         ),
         migrations.CreateModel(
@@ -267,7 +267,7 @@ class Migration(migrations.Migration):
                 ('date_of_grant', models.DateField(default=datetime.date.today, verbose_name='Date of Grant/File')),
                 ('name_of_company', models.CharField(max_length=256)),
                 ('date_of_adoption', models.DateField(default=datetime.date.today)),
-                ('sector', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='department.sector')),
+                ('sector', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='department.Sector')),
             ],
         ),
         migrations.CreateModel(
@@ -279,7 +279,7 @@ class Migration(migrations.Migration):
                 ('designation', models.CharField(max_length=150)),
                 ('name_of_company', models.CharField(max_length=250)),
                 ('tenure', models.CharField(max_length=100)),
-                ('sector', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='department.sector')),
+                ('sector', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='department.Sector')),
             ],
         ),
         migrations.CreateModel(
@@ -292,7 +292,7 @@ class Migration(migrations.Migration):
                 ('type_of_board', models.CharField(max_length=150, verbose_name='Type of Board/Council')),
                 ('designation_of_faculty', models.CharField(max_length=150)),
                 ('meeting_date', models.DateField(blank=True, verbose_name='Meeting Date(if any)')),
-                ('department', models.ForeignKey(default=2, on_delete=django.db.models.deletion.CASCADE, to='department.department')),
+                ('department', models.ForeignKey(default=2, on_delete=django.db.models.deletion.CASCADE, to='department.Department')),
             ],
         ),
         migrations.CreateModel(
@@ -305,8 +305,8 @@ class Migration(migrations.Migration):
                 ('from_date', models.DateField(default=datetime.date.today, verbose_name='Dates (From)')),
                 ('to_date', models.DateField(default=datetime.date.today, verbose_name='Dates (To)')),
                 ('outcome', models.TextField()),
-                ('department', models.ForeignKey(default=2, on_delete=django.db.models.deletion.CASCADE, to='department.department')),
-                ('sector', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='department.sector')),
+                ('department', models.ForeignKey(default=2, on_delete=django.db.models.deletion.CASCADE, to='department.Department')),
+                ('sector', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='department.Sector')),
             ],
         ),
         migrations.CreateModel(
@@ -319,8 +319,8 @@ class Migration(migrations.Migration):
                 ('from_date', models.DateField(default=datetime.date.today, verbose_name='Dates (From)')),
                 ('to_date', models.DateField(default=datetime.date.today, verbose_name='Dates (To)')),
                 ('outcome', models.TextField()),
-                ('department', models.ForeignKey(default=2, on_delete=django.db.models.deletion.CASCADE, to='department.department')),
-                ('sector', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='department.sector')),
+                ('department', models.ForeignKey(default=2, on_delete=django.db.models.deletion.CASCADE, to='department.Department')),
+                ('sector', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='department.Sector')),
             ],
         ),
         migrations.CreateModel(
@@ -333,8 +333,8 @@ class Migration(migrations.Migration):
                 ('from_date', models.DateField(default=datetime.date.today, verbose_name='Dates (From)')),
                 ('to_date', models.DateField(default=datetime.date.today, verbose_name='Dates (To)')),
                 ('outcome', models.TextField()),
-                ('department', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='department.department')),
-                ('sector', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='department.sector')),
+                ('department', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='department.Department')),
+                ('sector', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='department.Sector')),
             ],
         ),
     ]

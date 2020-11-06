@@ -3,7 +3,7 @@ from .models import *
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
-#Department, StudentResult, DeptProEvent3, DeptFacultyDev4, DeptStudPart5, DeptStartUp6
+
 # Register your models here.
 #class UserAdmin(admin.ModelAdmin):
 
@@ -28,9 +28,9 @@ admin.site.register(User, CustomUserAdmin)
 #--------internet
 
 
-
 admin.site.register(Profile)
 admin.site.register(Department)
+
 
 admin.site.register(StudentResult)
 list_display = ('department','Class','exam_type','subject','date','appeared','passed','perct')
@@ -63,6 +63,7 @@ admin.site.register(CurExptLect2)
 admin.site.register(CurStudTrain3)
 admin.site.register(CurStudVisit4)
 admin.site.register(CurStudSponsor5)
+
 
 admin.site.register(IndFacvisit1)
 admin.site.register(IndInst2)
