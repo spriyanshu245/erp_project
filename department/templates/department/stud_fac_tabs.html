@@ -1,0 +1,48 @@
+{% block tabs %}
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<style>
+    .nav-tabs li a {
+      color: rgb(25, 124, 108);
+    }
+</style>
+
+<div>
+  <h4 class="text-center alert alert-primary">Industry/Institute Interaction</h4>
+</div>
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'tab_1' %}active{% endif %}" 
+        href="{% url 'stud_fac_1' %}">Industrial Visit of Faculty</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'tab_2' %}active{% endif %}" 
+        href="{% url 'stud_fac_1' %}">Tab 2</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'tab_3' %}active{% endif %}" 
+        href="{% url 'stud_fac_1' %}">Tab 3</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'tab_4' %}active{% endif %}" 
+        href="{% url 'stud_fac_1' %}">Tab 4</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'tab_5' %}active{% endif %}" 
+        href="{% url 'stud_fac_1' %}">Tab 5</a>
+    </li>
+    
+  </ul>
+<br>
+
+<div>
+  <form class="form-inline mr-auto mb-4 d-flex justify-content-end" onkeydown="return event.key != 'Enter';">
+    <input id="search" class="form-control mr-sm-2" type="text" placeholder="Search Table..">
+    <span class="glyphicon glyphicon-search"></span>
+    <button class="btn" onclick="DownloadCsv('table_main')"><i class="fa fa-download"></i> Download</button>
+  </form>
+</div>
+
+{% endblock %}

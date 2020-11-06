@@ -349,6 +349,43 @@ class IndInst9(models.Model):
 
     def get_absolute_url(self):
         return reverse('ind_inst_9',)
+
+#--------------STUDENT /FACULTY SUPPORT SYSTEM----------------------
+#1]Mentoring System to help students at individual level
+#Name of Department	Class/ Division	Type of Meeting (GFM/HOD)	Name of Faculty 		*Type of Mentoring		Dates of mentoring activity
+class StudFac1(models.Model):
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, default=1)
+    class_or_division = models.CharField(max_length=150)
+    type_of_meeting_open_GFM_or_HOD_close = models.CharField(("Type of meeting (GFM/HOD)"), max_length=150)
+    name_of_faculty = models.CharField(max_length=150)
+    type_of_mentoring = models.CharField(max_length=150)
+    dates_of_mentoring_activity = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.class_or_division
+
+    def get_absolute_url(self):
+        return reverse('stud_fac_1',)
+
+#2]Self Learning facilities for students
+# Class / Division	Type of Self Learning Facility		Name of Subject		No of students participated	Dates 	Certificate/Award Received by students if any
+
+
+#3]Achievement of Students in Competitive Exam 
+# Name of Student		Name of Department		*Name of Competitive exam appeared/qualified 		Competitive Exam Seat No.	Score
+
+
+#4]Capability Enhancement and Development Activities
+# Name of Activity*			Date of implementation		Number of Students Enrolled		Agencies involved
+
+
+#5]Number of professional development / administrative training  programmes organized
+# Title of the professional development program* 		Organized for Faculty / Staff	Organizing Department 		Duration (from-to)	No. of participants	Agencies involved
+
+
+
+
+
 ##__________________________
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

@@ -693,3 +693,42 @@ class IndInst9Delete(DeleteView):
         context = super().get_context_data(**kwargs)
         context['cancel_link'] = "ind_inst_9"
         return context
+
+#--------
+#1]
+class StudFac1Create(CreateView):
+    model = StudFac1
+    form_class = StudFac1Form
+    template_name = 'create_form.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Mentoring System to help students at individual level'
+        context['events'] = self.model.objects.all()
+        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        context['nbar'] = "tab_1"
+        context['update_link'] = "stud_fac_1_update"
+        context['delete_link'] = "stud_fac_1_delete"
+        context['tab_link'] = "stud_fac_tabs.html"
+        return context
+
+class StudFac1Update(UpdateView):
+    model = StudFac1
+    form_class = StudFac1Form
+    template_name = "form_update.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Mentoring System to help students at individual level'
+        return context
+
+class StudFac1Delete(DeleteView):
+    model = StudFac1
+    success_url = reverse_lazy("stud_fac_1")
+    template_name = "form_delete.html"
+    context_object_name = "model_instance"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cancel_link'] = "stud_fac_1"
+        return context

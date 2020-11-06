@@ -68,6 +68,10 @@ urlpatterns = [
     path('ind_inst_9/update/<int:pk>/', views.IndInst9Update.as_view(), name="ind_inst_9_update"),
     path('ind_inst_9/delete/<int:pk>/', views.IndInst9Delete.as_view(), name="ind_inst_9_delete"),
 
+    path('stud_fac_1/', views.StudFac1Create.as_view(), name="stud_fac_1"),
+    path('stud_fac_1/update/<int:pk>/', views.StudFac1Update.as_view(), name="stud_fac_1_update"),
+    path('stud_fac_1/delete/<int:pk>/', views.StudFac1Delete.as_view(), name="stud_fac_1_delete"),
+
 ]
 
 #handler404 = ''

@@ -363,6 +363,20 @@ class IndInst9Form(forms.ModelForm):
             'purpose_of_MOU': forms.TextInput(attrs={'class':'form-control'}),
         }
 
+#--------------STUDENT /FACULTY SUPPORT SYSTEM----------------------
+class StudFac1Form(forms.ModelForm):
+    class Meta:
+        model = StudFac1
+        fields = ('department','class_or_division','type_of_meeting_open_GFM_or_HOD_close','name_of_faculty','type_of_mentoring','dates_of_mentoring_activity')
+        widgets = {
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'class_or_division': forms.TextInput(attrs={'class':'form-control'}),
+            'type_of_meeting_open_GFM_or_HOD_close': forms.TextInput(attrs={'class':'form-control'}),
+            'name_of_faculty': forms.TextInput(attrs={'class':'form-control'}),
+            'type_of_mentoring': forms.TextInput(attrs={'class':'form-control'}), 
+            'dates_of_mentoring_activity': forms.TextInput(attrs={'class':'form-control'}),
+        }
+
 #--------------------user
 class UserForm(forms.ModelForm):
     class Meta:
