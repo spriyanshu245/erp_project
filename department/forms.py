@@ -428,6 +428,31 @@ class StudFac5Form(forms.ModelForm):
             "agencies_involved": forms.TextInput(attrs={'class':'form-control'}),
         }
 
+#------------EXTRA CURRICULAR ACTIVITIES-------------------
+class ExtraCurr1Form(forms.ModelForm):
+    class Meta:
+        model = ExtraCurr1
+        fields = ("activity","organized_by","level","date","number_of_students_participated")
+        widgets = {
+            "activity": forms.TextInput(attrs={'class': 'form-control'}),
+            "organized_by": forms.TextInput(attrs={'class': 'form-control'}),
+            "level": forms.TextInput(attrs={'class': 'form-control'}),
+            "date": DateInput(attrs={'class':'form-control'}),
+            "number_of_students_participated": forms.NumberInput(attrs={'class':'form-control'}),
+        }
+
+class ExtraCurr2Form(forms.ModelForm):
+    class Meta:
+        model = ExtraCurr2
+        fields = ("name_of_the_sport_or_team","student_ID_number","name_of_department","level","rank")
+        widgets = {
+            "name_of_the_sport_or_team": forms.TextInput(attrs={'class': 'form-control'}),
+            "student_ID_number": forms.TextInput(attrs={'class': 'form-control'}),
+            "name_of_department": forms.Select(attrs={'class':'form-control'}),
+            "level": forms.TextInput(attrs={'class': 'form-control'}),
+            "rank": forms.NumberInput(attrs={'class':'form-control'}),
+        }
+
 
 #--------------------user
 class UserForm(forms.ModelForm):

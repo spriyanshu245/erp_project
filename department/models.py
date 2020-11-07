@@ -6,6 +6,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
 
+# Questionable fields
+# level, student_ID_number
 
 # Create your models here.
 
@@ -16,12 +18,6 @@ class Department(models.Model):
 
     def __str__(self):
         return self.department
-
-class Sector(models.Model):
-    sector = models.CharField(max_length=150)
-
-    def __str__(self):
-        return self.sector
 
 #-------------------------------------------------------------------------------------
 # Students Result in various examinations during specified period 
@@ -199,7 +195,7 @@ class IndFacvisit1(models.Model):
     faculty = models.CharField(max_length=150)
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
     company = models.CharField("Name of Company", max_length=256)
-    sector = models.ForeignKey(Sector, on_delete=models.CASCADE)
+    sector = models.CharField(choices=SECTOR, max_length=150)
     purpose = models.TextField()
     from_date = models.DateField(("Dates (From)"), default=date.today, auto_now=False, auto_now_add=False)
     to_date = models.DateField(("Dates (To)"), default=date.today,auto_now=False, auto_now_add=False)
@@ -217,7 +213,7 @@ class IndInst2(models.Model):
     name_of_faculty = models.CharField(max_length=150)
     department = models.ForeignKey(Department, on_delete=models.CASCADE, default=2)
     name_of_company = models.CharField(max_length=256)
-    sector = models.ForeignKey(Sector, on_delete=models.CASCADE)
+    sector = models.CharField(choices=SECTOR, max_length=150)
     title_of_training = models.CharField(max_length=256)
     from_date = models.DateField(("Dates (From)"), default=date.today, auto_now=False, auto_now_add=False)
     to_date = models.DateField(("Dates (To)"), default=date.today,auto_now=False, auto_now_add=False)
@@ -235,7 +231,7 @@ class IndInst3(models.Model):
     name_of_faculty = models.CharField(max_length=150)
     department = models.ForeignKey(Department, on_delete=models.CASCADE, default=2)
     name_of_company = models.CharField(max_length=256)
-    sector = models.ForeignKey(Sector, on_delete=models.CASCADE)
+    sector = models.CharField(choices=SECTOR, max_length=150)
     title_of_training = models.CharField(max_length=256)
     from_date = models.DateField(("Dates (From)"), default=date.today, auto_now=False, auto_now_add=False)
     to_date = models.DateField(("Dates (To)"), default=date.today,auto_now=False, auto_now_add=False)
@@ -272,7 +268,7 @@ class IndInst5(models.Model):
     name_of_industry_member = models.CharField(max_length=150)
     designation = models.CharField(max_length=150) # Foreign Key?
     name_of_company = models.CharField(max_length=250)
-    sector = models.ForeignKey(Sector, on_delete=models.CASCADE)
+    sector = models.CharField(choices=SECTOR, max_length=150)
     tenure = models.CharField(max_length=100)
 
     def __str__(self):
@@ -289,7 +285,7 @@ class IndInst6(models.Model):
     patent_no = models.CharField(max_length=150)
     date_of_grant = models.DateField(("Date of Grant/File"),default=date.today, auto_now=False, auto_now_add=False)
     name_of_company = models.CharField(max_length=256)
-    sector = models.ForeignKey(Sector, on_delete=models.CASCADE)
+    sector = models.CharField(choices=SECTOR, max_length=150)
     date_of_adoption = models.DateField(default=date.today, auto_now=False, auto_now_add=False)
 
     def __str__(self):
@@ -427,6 +423,38 @@ class StudFac5(models.Model):
     def get_absolute_url(self):
         return reverse('stud_fac_5',)
 
+
+#------------EXTRA CURRICULAR ACTIVITIES-------------------
+#1] Sports (This information to be provided by Physical/Sports Director)
+# Activity	Organized by			Level		Date	Number of Students Participated
+class ExtraCurr1(models.Model):
+    activity = models.CharField(max_length=150)
+    organized_by = models.CharField(max_length=150)
+    level = models.CharField(max_length=150)
+    date = models.DateField(default=date.today, auto_now=False, auto_now_add=False)
+    number_of_students_participated = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.activity
+
+    def get_absolute_url(self):
+        return reverse('extra_curr_1',)
+
+#2] Names of winners at various levels of  sports tournaments
+# Name of the Sport / Team	Name of the student		Student ID Number	Name of Department		Level	Rank
+# *A detailed descriptive report with photographs by Sports Director
+class ExtraCurr2(models.Model):
+    name_of_the_sport_or_team = models.CharField(("Name of the Sport / Team"), max_length=250)
+    student_ID_number = models.CharField(max_length=100)
+    name_of_department = models.ForeignKey(Department, default=1, on_delete=models.CASCADE)
+    level = models.CharField(max_length=100)
+    rank = models.IntegerField()
+
+    def __str__(self):
+        return self.name_of_the_sport_or_team, self.student_ID_number
+
+    def get_absolute_url(self):
+        return reverse('extra_curr_2',)
 
 ##__________________________
 class Profile(models.Model):

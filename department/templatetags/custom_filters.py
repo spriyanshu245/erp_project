@@ -11,4 +11,5 @@ def replace_to_space(value):
     value = value.capitalize()
     value = value.replace("gfm","GFM")
     value = value.replace("hod","HOD")
+    value = value.replace("id", "ID")
     return value

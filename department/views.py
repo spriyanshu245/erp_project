@@ -1133,3 +1133,80 @@ class StudFac5Delete(DeleteView):
         context = super().get_context_data(**kwargs)
         context['cancel_link'] = "stud_fac_5"
         return context
+
+#------------EXTRA CURRICULAR ACTIVITIES-------------------
+#1] Sports (This information to be provided by Physical/Sports Director)
+class ExtraCurr1Create(CreateView):
+    model = ExtraCurr1
+    form_class = ExtraCurr1Form
+    template_name = 'create_form.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Sports (This information to be provided by Physical/Sports Director)'
+        context['events'] = self.model.objects.all()
+        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        context['nbar'] = "tab_1"
+        context['update_link'] = "extra_curr_1_update"
+        context['delete_link'] = "extra_curr_1_delete"
+        context['tab_link'] = "extra_curr_tabs.html"
+        return context
+
+class ExtraCurr1Update(UpdateView):
+    model = ExtraCurr1
+    form_class = ExtraCurr1Form
+    template_name = "form_update.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Sports (This information to be provided by Physical/Sports Director)'
+        return context
+
+class ExtraCurr1Delete(DeleteView):
+    model = ExtraCurr1
+    success_url = reverse_lazy("extra_curr_1")
+    template_name = "form_delete.html"
+    context_object_name = "model_instance"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cancel_link'] = "extra_curr_1"
+        return context
+
+#2]Names of winners at various levels of  sports tournaments
+class ExtraCurr2Create(CreateView):
+    model = ExtraCurr2
+    form_class = ExtraCurr2Form
+    template_name = 'create_form.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Names of winners at various levels of  sports tournaments'
+        context['events'] = self.model.objects.all()
+        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        context['nbar'] = "tab_2"
+        context['update_link'] = "extra_curr_2_update"
+        context['delete_link'] = "extra_curr_2_delete"
+        context['tab_link'] = "extra_curr_tabs.html"
+        return context
+
+class ExtraCurr2Update(UpdateView):
+    model = ExtraCurr2
+    form_class = ExtraCurr2Form
+    template_name = "form_update.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Names of winners at various levels of  sports tournaments'
+        return context
+
+class ExtraCurr2Delete(DeleteView):
+    model = ExtraCurr2
+    success_url = reverse_lazy("extra_curr_2")
+    template_name = "form_delete.html"
+    context_object_name = "model_instance"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cancel_link'] = "extra_curr_2"
+        return context

@@ -131,6 +131,13 @@ urlpatterns = [
     path('stud_fac_5/update/<int:pk>/', views.StudFac5Update.as_view(), name="stud_fac_5_update"),
     path('stud_fac_5/delete/<int:pk>/', views.StudFac5Delete.as_view(), name="stud_fac_5_delete"),
 
+    path('extra_curr_1/', views.ExtraCurr1Create.as_view(), name="extra_curr_1"),
+    path('extra_curr_1/update/<int:pk>/', views.ExtraCurr1Update.as_view(), name="extra_curr_1_update"),
+    path('extra_curr_1/delete/<int:pk>/', views.ExtraCurr1Delete.as_view(), name="extra_curr_1_delete"),
+
+    path('extra_curr_2/', views.ExtraCurr2Create.as_view(), name="extra_curr_2"),
+    path('extra_curr_2/update/<int:pk>/', views.ExtraCurr2Update.as_view(), name="extra_curr_2_update"),
+    path('extra_curr_2/delete/<int:pk>/', views.ExtraCurr2Delete.as_view(), name="extra_curr_2_delete"),
 ]
 
 #handler404 = ''
