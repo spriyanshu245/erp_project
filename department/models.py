@@ -451,7 +451,7 @@ class ExtraCurr2(models.Model):
     rank = models.IntegerField()
 
     def __str__(self):
-        return self.name_of_the_sport_or_team, self.student_ID_number
+        return self.student_ID_number
 
     def get_absolute_url(self):
         return reverse('extra_curr_2',)
