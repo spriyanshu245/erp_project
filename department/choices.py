@@ -91,6 +91,37 @@ SECTOR = [
     ('others','others')
 ]
 
+COMPETITIVE_EXAM = (
+    ("MPSC","MPSC"),
+    ("UPSC","UPSC"),
+    ("GATE","GATE"),
+    ("GRE","GRE"),
+    ("IELTS","IELTS"),
+    ("TOEFL","TOEFL"),
+    ("CAT","CAT"),
+    ("Others","Others"),
+)
+
+SELF_LEARNING = (
+    ("Webinars", "Webinars"),
+    ("Podcast", "Podcast"),
+    ("MOOC’s", "MOOC’s"),
+    ("NPTEL courses", "NPTEL courses"),
+    ("Myexamo", "Myexamo"),
+    ("Others", "Others"),
+)
+
+ACTIVITY = (
+    ("Soft Skill Development", "Soft Skill Development"), 
+    ("Remedial Coaching", "Remedial Coaching"), 
+    ("Language Lab", "Language Lab"),
+    ("Yoga", "Yoga"), 
+    ("Meditation", "Meditation"), 
+    ("Personal Counseling", "Personal Counseling"), 
+    ("Bridge Courses", "Bridge Courses"), 
+    ("Competitive Examination", "Competitive Examination"), 
+    ("Higher", "Higher"),
+)
 
 ROLE=(
     ('admin','admin'),

@@ -377,6 +377,83 @@ class StudFac1Form(forms.ModelForm):
             'dates_of_mentoring_activity': forms.TextInput(attrs={'class':'form-control'}),
         }
 
+class StudFac2Form(forms.ModelForm):
+    class Meta:
+        model = StudFac2
+        fields = ("class_or_division","type_of_self_learning_facility","name_of_subject","no_of_student_participated","dates","certificate_or_award_received_by_students")
+        widgets = {
+            "class_or_division": forms.TextInput(attrs={'class':'form-control'}),
+            "type_of_self_learning_facility": forms.Select(attrs={'class':'form-control'}),
+            "name_of_subject": forms.TextInput(attrs={'class':'form-control'}),
+            "no_of_student_participated": forms.NumberInput(attrs={'class': 'form-control'}),
+            "dates": forms.TextInput(attrs={'class':'form-control'}),
+            "certificate_or_award_received_by_students": forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+class StudFac3Form(forms.ModelForm):
+    class Meta:
+        model = StudFac3
+        fields = ("name_of_student","department","name_of_competitive_exam_appeard_or_qualified","competitive_exam_seat_no","score")
+        widgets = {
+            "name_of_student": forms.TextInput(attrs={'class':'form-control'}),
+            "department": forms.Select(attrs={'class':'form-control'}),
+            "name_of_competitive_exam_appeard_or_qualified": forms.Select(attrs={'class':'form-control'}),
+            "competitive_exam_seat_no": forms.TextInput(attrs={'class':'form-control'}),
+            "score": forms.NumberInput(attrs={'class': 'form-control'}),
+            
+        }
+
+class StudFac4Form(forms.ModelForm):
+    class Meta:
+        model = StudFac4
+        fields = ("name_of_activity","date_of_implementation","no_of_students_enrolled","agencies_involved")
+        widgets = {
+            "name_of_activity": forms.Select(attrs={'class':'form-control'}),
+            "date_of_implementation": DateInput(attrs={'class':'form-control'}),
+            "no_of_students_enrolled": forms.NumberInput(attrs={'class':'form-control'}),
+            "agencies_involved": forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+class StudFac5Form(forms.ModelForm):
+    class Meta:
+        model = StudFac5
+        fields = ("title_of_the_professional_development_program","organized_for_faculty_or_staff","organizing_department","duration_open_from_close","duration_open_to_close","no_of_participants","agencies_involved")
+        widgets = {
+            "title_of_the_professional_development_program": forms.TextInput(attrs={'class':'form-control'}),
+            "organized_for_faculty_or_staff": forms.TextInput(attrs={'class':'form-control'}),
+            "organizing_department": forms.Select(attrs={'class':'form-control'}),
+            "duration_open_from_close": DateInput(attrs={'class':'form-control'}),
+            "duration_open_to_close": DateInput(attrs={'class':'form-control'}),
+            "no_of_participants": forms.NumberInput(attrs={'class':'form-control'}),
+            "agencies_involved": forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+#------------EXTRA CURRICULAR ACTIVITIES-------------------
+class ExtraCurr1Form(forms.ModelForm):
+    class Meta:
+        model = ExtraCurr1
+        fields = ("activity","organized_by","level","date","number_of_students_participated")
+        widgets = {
+            "activity": forms.TextInput(attrs={'class': 'form-control'}),
+            "organized_by": forms.TextInput(attrs={'class': 'form-control'}),
+            "level": forms.TextInput(attrs={'class': 'form-control'}),
+            "date": DateInput(attrs={'class':'form-control'}),
+            "number_of_students_participated": forms.NumberInput(attrs={'class':'form-control'}),
+        }
+
+class ExtraCurr2Form(forms.ModelForm):
+    class Meta:
+        model = ExtraCurr2
+        fields = ("name_of_the_sport_or_team","student_ID_number","name_of_department","level","rank")
+        widgets = {
+            "name_of_the_sport_or_team": forms.TextInput(attrs={'class': 'form-control'}),
+            "student_ID_number": forms.TextInput(attrs={'class': 'form-control'}),
+            "name_of_department": forms.Select(attrs={'class':'form-control'}),
+            "level": forms.TextInput(attrs={'class': 'form-control'}),
+            "rank": forms.NumberInput(attrs={'class':'form-control'}),
+        }
+
+
 #--------------------user
 class UserForm(forms.ModelForm):
     class Meta:

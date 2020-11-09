@@ -110,10 +110,34 @@ urlpatterns = [
     path('ind_inst_9/update/<int:pk>/', views.IndInst9Update.as_view(), name="ind_inst_9_update"),
     path('ind_inst_9/delete/<int:pk>/', views.IndInst9Delete.as_view(), name="ind_inst_9_delete"),
 
+   #STUDENT /FACULTY SUPPORT SYSTEM
     path('stud_fac_1/', views.StudFac1Create.as_view(), name="stud_fac_1"),
     path('stud_fac_1/update/<int:pk>/', views.StudFac1Update.as_view(), name="stud_fac_1_update"),
     path('stud_fac_1/delete/<int:pk>/', views.StudFac1Delete.as_view(), name="stud_fac_1_delete"),
 
+    path('stud_fac_2/', views.StudFac2Create.as_view(), name="stud_fac_2"),
+    path('stud_fac_2/update/<int:pk>/', views.StudFac2Update.as_view(), name="stud_fac_2_update"),
+    path('stud_fac_2/delete/<int:pk>/', views.StudFac2Delete.as_view(), name="stud_fac_2_delete"),
+
+    path('stud_fac_3/', views.StudFac3Create.as_view(), name="stud_fac_3"),
+    path('stud_fac_3/update/<int:pk>/', views.StudFac3Update.as_view(), name="stud_fac_3_update"),
+    path('stud_fac_3/delete/<int:pk>/', views.StudFac1Delete.as_view(), name="stud_fac_3_delete"),
+
+    path('stud_fac_4/', views.StudFac4Create.as_view(), name="stud_fac_4"),
+    path('stud_fac_4/update/<int:pk>/', views.StudFac4Update.as_view(), name="stud_fac_4_update"),
+    path('stud_fac_4/delete/<int:pk>/', views.StudFac4Delete.as_view(), name="stud_fac_4_delete"),
+
+    path('stud_fac_5/', views.StudFac5Create.as_view(), name="stud_fac_5"),
+    path('stud_fac_5/update/<int:pk>/', views.StudFac5Update.as_view(), name="stud_fac_5_update"),
+    path('stud_fac_5/delete/<int:pk>/', views.StudFac5Delete.as_view(), name="stud_fac_5_delete"),
+
+    path('extra_curr_1/', views.ExtraCurr1Create.as_view(), name="extra_curr_1"),
+    path('extra_curr_1/update/<int:pk>/', views.ExtraCurr1Update.as_view(), name="extra_curr_1_update"),
+    path('extra_curr_1/delete/<int:pk>/', views.ExtraCurr1Delete.as_view(), name="extra_curr_1_delete"),
+
+    path('extra_curr_2/', views.ExtraCurr2Create.as_view(), name="extra_curr_2"),
+    path('extra_curr_2/update/<int:pk>/', views.ExtraCurr2Update.as_view(), name="extra_curr_2_update"),
+    path('extra_curr_2/delete/<int:pk>/', views.ExtraCurr2Delete.as_view(), name="extra_curr_2_delete"),
 ]
 
 #handler404 = ''
