@@ -1134,7 +1134,9 @@ class StudFac5Delete(DeleteView):
         context['cancel_link'] = "stud_fac_5"
         return context
 
+#---------------------------------------------------------
 #------------EXTRA CURRICULAR ACTIVITIES-------------------
+
 #1] Sports (This information to be provided by Physical/Sports Director)
 class ExtraCurr1Create(CreateView):
     model = ExtraCurr1

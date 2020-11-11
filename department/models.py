@@ -423,8 +423,9 @@ class StudFac5(models.Model):
     def get_absolute_url(self):
         return reverse('stud_fac_5',)
 
+#----------------------------------------------------------
+#------------ EXTRA CURRICULAR ACTIVITIES -----------------
 
-#------------EXTRA CURRICULAR ACTIVITIES-------------------
 #1] Sports (This information to be provided by Physical/Sports Director)
 # Activity	Organized by			Level		Date	Number of Students Participated
 class ExtraCurr1(models.Model):
