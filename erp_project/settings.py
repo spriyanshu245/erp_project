@@ -17,11 +17,6 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = Path.joinpath(BASE_DIR,"department", "templates", "department")
-DEPT_ACT_DIR = Path.joinpath(TEMPLATE_DIR, "departmental_activities")
-STUD_PERF_DIR = Path.joinpath(TEMPLATE_DIR, "student_performance")
-FAC_ACH_DIR = Path.joinpath(TEMPLATE_DIR, "faculty_achievements")
-CUR_INPUT_DIR = Path.joinpath(TEMPLATE_DIR, "curriculum_input")
-IND_INST_DIR = Path.joinpath(TEMPLATE_DIR, "industry_interaction")
 TABS_DIR = Path.joinpath(TEMPLATE_DIR, "tabs")
 
 # Quick-start development settings - unsuitable for production
@@ -63,7 +58,7 @@ ROOT_URLCONF = 'erp_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR, DEPT_ACT_DIR, STUD_PERF_DIR, FAC_ACH_DIR, CUR_INPUT_DIR, IND_INST_DIR, TABS_DIR],
+        'DIRS': [TEMPLATE_DIR, TABS_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

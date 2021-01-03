@@ -20,6 +20,8 @@ class Department(models.Model):
         return self.department
 
 #-------------------------------------------------------------------------------------
+                        # STUDENTS ACADEMIC PERFORMANCE
+                        
 # Students Result in various examinations during specified period 
 class StudentResult(models.Model):
     department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
@@ -27,14 +29,22 @@ class StudentResult(models.Model):
     #department = models.ForeignKey(Department, on_delete=models.CASCADE)
     exam_type = models.CharField(max_length = 150, choices=EXAM_TYPES, default='')
     subject = models.CharField(max_length = 150, choices=SUBJECTS, default='')
-    date = models.DateField(("Exam Date"), default=date.today,auto_now=False, auto_now_add=False)
     appeared = models.IntegerField(null=False, blank=False)
     passed = models.IntegerField(null=False, blank=False)
-    perct = models.IntegerField(("Percentage"),default=0,null=False, blank=False)
+    percentage = models.IntegerField(("Percentage"),default=0,null=False, blank=False)
+    date = models.DateField(("Exam Date"), default=date.today,auto_now=False, auto_now_add=False)
     objects = models.Manager()
 
+    def __str__(self):
+        return self.ssubject
+
+    def get_absolute_url(self):
+        return reverse('stud_result',)
+
 #-------------------------------------------------------------------------------------
-#1 Information about events organized by department
+                          # DEPARTMENTAL ACTIVITIES
+
+#1] Information about events organized by department
 class DeptEvent1(models.Model):
     department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
     event_type = models.CharField(("Event Type"),max_length=150)
@@ -45,7 +55,13 @@ class DeptEvent1(models.Model):
     from_date = models.DateField(("From"), default=date.today,auto_now=False, auto_now_add=False)
     to_date = models.DateField(("To"), default=date.today,auto_now=False, auto_now_add=False)
 
-#2 Information about events organized by department (For nearby schools only)
+    def __str__(self):
+        return self.event_name
+
+    def get_absolute_url(self):
+        return reverse('dept_act_1',)
+
+#2] Information about events organized by department (For nearby schools only)
 class DeptEvent2(models.Model):
     act_name = models.CharField(("Activity Name"),max_length=150)
     school = models.CharField(max_length=150)
@@ -55,11 +71,16 @@ class DeptEvent2(models.Model):
     from_date = models.DateField(("From"), default=date.today,auto_now=False, auto_now_add=False)
     to_date = models.DateField(("To"), default=date.today,auto_now=False, auto_now_add=False)
 
-#3 Information about events organized by department in association with Professional bodies
+    def __str__(self):
+        return self.act_name
+
+    def get_absolute_url(self):
+        return reverse('dept_act_2',)
+
+#3] Information about events organized by department in association with Professional bodies
 class DeptProEvent3(models.Model):
     department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
     activity = models.CharField(max_length=150)
-    #department_name = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
     #department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
     resourse_person = models.CharField(max_length=150)
     resourse_person_contact = models.IntegerField()
@@ -70,8 +91,11 @@ class DeptProEvent3(models.Model):
 
     def __str__(self):
         return self.activity
+ 
+    def get_absolute_url(self):
+        return reverse('dept_act_3',)
 
-#4 Information about Faculty Development Programs organized by department 
+#4] Information about Faculty Development Programs organized by department 
 class DeptFacultyDev4(models.Model):
     department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
     program = models.CharField(max_length=150)
@@ -82,7 +106,13 @@ class DeptFacultyDev4(models.Model):
     no_of_part = models.IntegerField(("No of Participants"))
     level = models.CharField(max_length=150)
 
-#5 Participation in inter-institute events by students 
+    def __str__(self):
+        return self.program
+
+    def get_absolute_url(self):
+        return reverse('dept_act_4',)
+
+#5] Participation in inter-institute events by students 
 class DeptStudPart5(models.Model):
     department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
     student_name = models.CharField(max_length=150)
@@ -95,7 +125,13 @@ class DeptStudPart5(models.Model):
     level = models.CharField(max_length=150)
     awards = models.CharField(("Recognition Awards"), max_length=264)
 
-#6 Start-Up
+    def __str__(self):
+        return self.student_name
+
+    def get_absolute_url(self):
+        return reverse('dept_act_5',)
+
+#6] Start-Up
 class DeptStartUp6(models.Model):
     startup_name = models.CharField(max_length=150)
     startup_nature = models.CharField(max_length=150)
@@ -105,11 +141,18 @@ class DeptStartUp6(models.Model):
     website = models.CharField(max_length=150)
     team_members = models.CharField(max_length=500)
 
+    def __str__(self):
+        return self.startup_name
+
+    def get_absolute_url(self):
+        return reverse('dept_act_6',)
+
+
 #-------------------------------------------------------------------------------------
                 # Model space for faculty contribution tables
 
 #-------------------------------------------------------------------------------------
-#1 Faculty achievements
+#1] Faculty achievements
 class FacAchieve(models.Model):
     fac_name = models.CharField(("Faculty Name"), max_length=150)
     department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
@@ -117,16 +160,30 @@ class FacAchieve(models.Model):
     level = models.CharField(max_length=150)
     dates = models.DateField(("Dates"), default=date.today,auto_now=False, auto_now_add=False)
 
-#2 Names of books/Chapters/Manuals/ Monographs published
+    def __str__(self):
+        return self.fac_name
+
+    def get_absolute_url(self):
+        return reverse('fac_achieve',)
+
+
+#2] Names of books/Chapters/Manuals/ Monographs published
 class FacBook(models.Model):
     title = models.CharField(("Title"),max_length=500)
     author_name = models.CharField(("Name of author(s)"),max_length=150)
     publication = models.CharField(("Publication"),max_length=150)
     ISBN = models.IntegerField(("ISBN number"))
 
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('fac_book',)
+
+
 #-------------------------------------------------------------------------------------
                           # CURRICULUM INPUT
-#1 Guest Lectures (General Topics)
+#1] Guest Lectures (General Topics)
 class CurGuestLect1(models.Model):
     guest = models.CharField(("Name of Guest"),max_length = 150)
     organization = models.CharField(("Company/Organization Represented"),max_length=150)
@@ -136,7 +193,14 @@ class CurGuestLect1(models.Model):
     date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
     no_of_part = models.IntegerField(("No of Participants"))
 
-#2 Expert Lectures (Subject-Specific Topics)
+    def __str__(self):
+        return self.guest
+
+    def get_absolute_url(self):
+        return reverse('cur_input_1',)
+
+
+#2] Expert Lectures (Subject-Specific Topics)
 class CurExptLect2(models.Model):
     guest = models.CharField(("Name of Guest"),max_length = 150)
     organization = models.CharField(("Company/Organization Represented"),max_length=150)
@@ -146,12 +210,18 @@ class CurExptLect2(models.Model):
     date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
     no_of_part = models.IntegerField(("No of Participants"))
 
+    def __str__(self):
+        return self.guest
+
+    def get_absolute_url(self):
+        return reverse('cur_input_2',)
+
 # class ExptLect2(GuestLect1):
 #     pass
   
-#3 Student Internship/Industrial training
-class CurStudTrain3(models.Model):
+#3] Student Internship/Industrial training
     # No	Name of Department	Name of Student		Name of Company		Sector		Date/Duration
+class CurStudTrain3(models.Model):
     department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
     student_name = models.CharField(("Name of Student"), max_length=150)
     company = models.CharField(("Name of Company"), max_length=250)
@@ -159,7 +229,13 @@ class CurStudTrain3(models.Model):
     from_date = models.DateField(("Duration (From)"), default=date.today, auto_now=False, auto_now_add=False)
     to_date = models.DateField(("Duration (To)"), default=date.today,auto_now=False, auto_now_add=False)
 
-#4 Student Industrial Visit
+    def __str__(self):
+        return self.student_name
+
+    def get_absolute_url(self):
+        return reverse('cur_input_3',)
+
+#4] Student Industrial Visit
 class CurStudVisit4(models.Model):
     department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
     company = models.CharField(("Name of Company"), max_length=250)
@@ -169,7 +245,13 @@ class CurStudVisit4(models.Model):
     from_date = models.DateField(("Duration (From)"), default=date.today, auto_now=False, auto_now_add=False)
     to_date = models.DateField(("Duration (To)"), default=date.today,auto_now=False, auto_now_add=False)
 
-# Student Sponsored Projects
+    def __str__(self):
+        return self.company
+
+    def get_absolute_url(self):
+        return reverse('cur_input_4',)
+
+#5] Student Sponsored Projects
 class CurStudSponsor5(models.Model):
     title = models.CharField(("Title of Project"),max_length=250)
     comp_rep = models.CharField(("Name of Company Representative"), max_length=250)
@@ -178,6 +260,12 @@ class CurStudSponsor5(models.Model):
     to_date = models.DateField(("Duration (To)"), default=date.today,auto_now=False, auto_now_add=False)
     grant = models.CharField(("Grant Received"), max_length=150, choices=GRANT, default='No')
     status = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('cur_input_5',)
 
 # class MY_CHOICES(models.Model)
 #     choice = models.CharField(max_length=154, unique=True)
@@ -457,7 +545,7 @@ class ExtraCurr2(models.Model):
     def get_absolute_url(self):
         return reverse('extra_curr_2',)
 
-##__________________________
+##__________________________________________________________________________________________________
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     role = models.TextField(max_length=10, choices=ROLE,default="non-teach",blank=True)

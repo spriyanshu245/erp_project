@@ -8,13 +8,13 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(),name="logout"),
 
 #-------------------------------------------------------------------------------------------------------------------
-
-    path('', views.add_show, name="add_show"),
-    path('delete/<int:id>/', views.delete_data, name="delete"),
-    path('update/<int:id>/', views.update_data, name="update"),
+    # STUDENT RESULT
+    path('', views.StudentResultCreate.as_view(), name="stud_result"),
+    path('stud_result/update/<int:pk>/', views.StudentResultUpdate.as_view(), name="stud_result_update"),
+    path('stud_result/delete/<int:pk>/', views.StudentResultDelete.as_view(), name="stud_result_delete"),
     
 #-------------------------------------------------------------------------------------------------------------------
-    
+    # DEPARTMENTAL ACTIVITIES
     path('dept_act_1/', views.DeptEvent1Create.as_view(), name="dept_act_1"),
     path('dept_act_1/update/<int:pk>/', views.DeptEvent1Update.as_view(), name="dept_act_1_update"),
     path('dept_act_1/delete/<int:pk>/', views.DeptEvent1Delete.as_view(), name="dept_act_1_delete"),
@@ -40,7 +40,7 @@ urlpatterns = [
     path('dept_act_6/delete/<int:pk>/', views.DeptStartUp6Delete.as_view(), name="dept_act_6_delete"),
 
 #-------------------------------------------------------------------------------------------------------------------
-
+    # FACULTY ACHIEVEMENT
     path('fac_achieve/', views.FacAchieveCreate.as_view(), name="fac_achieve"),
     path('fac_achieve/update/<int:pk>/', views.FacAchieveUpdate.as_view(), name="fac_achieve_update"),
     path('fac_achieve/delete/<int:pk>/', views.FacAchieveDelete.as_view(), name="fac_achieve_delete"),
@@ -49,31 +49,9 @@ urlpatterns = [
     path('fac_book/update/<int:pk>/', views.FacBookUpdate.as_view(), name="fac_book_update"),
     path('fac_book/delete/<int:pk>/', views.FacBookDelete.as_view(), name="fac_book_delete"),
 
-#------------------------------------------------------------------------------------------------------------------- 
-
-    path('cur_input_1/', views.CurGuestLect1Create.as_view(), name="cur_input_1"),
-    path('cur_input_1/update/<int:pk>/', views.CurGuestLect1Update.as_view(), name="cur_input_1_update"),
-    path('cur_input_1/delete/<int:pk>/', views.CurGuestLect1Delete.as_view(), name="cur_input_1_delete"),
-
-    path('cur_input_2/', views.CurExptLect2Create.as_view(), name="cur_input_2"),
-    path('cur_input_2/update/<int:pk>/', views.CurExptLect2Update.as_view(), name="cur_input_2_update"),
-    path('cur_input_2/delete/<int:pk>/', views.CurExptLect2Delete.as_view(), name="cur_input_2_delete"),
-
-    path('cur_input_3/', views.CurStudTrain3Create.as_view(), name="cur_input_3"),
-    path('cur_input_3/update/<int:pk>/', views.CurStudTrain3Update.as_view(), name="cur_input_3_update"),
-    path('cur_input_3/delete/<int:pk>/', views.CurStudTrain3Delete.as_view(), name="cur_input_3_delete"),
-
-    path('cur_input_4/', views.CurStudVisit4Create.as_view(), name="cur_input_4"),
-    path('cur_input_4/update/<int:pk>/', views.CurStudVisit4Update.as_view(), name="cur_input_4_update"),
-    path('cur_input_4/delete/<int:pk>/', views.CurStudVisit4Delete.as_view(), name="cur_input_4_delete"),
-
-    path('cur_input_5/', views.CurStudSponsor5Create.as_view(), name="cur_input_5"),
-    path('cur_input_5/update/<int:pk>/', views.CurStudSponsor5Update.as_view(), name="cur_input_5_update"),
-    path('cur_input_5/delete/<int:pk>/', views.CurStudSponsor5Delete.as_view(), name="cur_input_5_delete"),
 
 #-------------------------------------------------------------------------------------------------------------------
-
-    # Industry Institute Interaction
+    # INDUSTRY INSTITUTE INTERACTION
     path('ind_inst_1/', views.IndInst1Create.as_view(), name="ind_inst_1"),
     path('ind_inst_1/update/<int:pk>/', views.IndInst1Update.as_view(), name="ind_inst_1_update"),
     path('ind_inst_1/delete/<int:pk>/', views.IndInst1Delete.as_view(), name="ind_inst_1_delete"),
@@ -110,7 +88,30 @@ urlpatterns = [
     path('ind_inst_9/update/<int:pk>/', views.IndInst9Update.as_view(), name="ind_inst_9_update"),
     path('ind_inst_9/delete/<int:pk>/', views.IndInst9Delete.as_view(), name="ind_inst_9_delete"),
 
-   #STUDENT /FACULTY SUPPORT SYSTEM
+#------------------------------------------------------------------------------------------------------------------- 
+    # CURRICULUM INPUT
+    path('cur_input_1/', views.CurGuestLect1Create.as_view(), name="cur_input_1"),
+    path('cur_input_1/update/<int:pk>/', views.CurGuestLect1Update.as_view(), name="cur_input_1_update"),
+    path('cur_input_1/delete/<int:pk>/', views.CurGuestLect1Delete.as_view(), name="cur_input_1_delete"),
+
+    path('cur_input_2/', views.CurExptLect2Create.as_view(), name="cur_input_2"),
+    path('cur_input_2/update/<int:pk>/', views.CurExptLect2Update.as_view(), name="cur_input_2_update"),
+    path('cur_input_2/delete/<int:pk>/', views.CurExptLect2Delete.as_view(), name="cur_input_2_delete"),
+
+    path('cur_input_3/', views.CurStudTrain3Create.as_view(), name="cur_input_3"),
+    path('cur_input_3/update/<int:pk>/', views.CurStudTrain3Update.as_view(), name="cur_input_3_update"),
+    path('cur_input_3/delete/<int:pk>/', views.CurStudTrain3Delete.as_view(), name="cur_input_3_delete"),
+
+    path('cur_input_4/', views.CurStudVisit4Create.as_view(), name="cur_input_4"),
+    path('cur_input_4/update/<int:pk>/', views.CurStudVisit4Update.as_view(), name="cur_input_4_update"),
+    path('cur_input_4/delete/<int:pk>/', views.CurStudVisit4Delete.as_view(), name="cur_input_4_delete"),
+
+    path('cur_input_5/', views.CurStudSponsor5Create.as_view(), name="cur_input_5"),
+    path('cur_input_5/update/<int:pk>/', views.CurStudSponsor5Update.as_view(), name="cur_input_5_update"),
+    path('cur_input_5/delete/<int:pk>/', views.CurStudSponsor5Delete.as_view(), name="cur_input_5_delete"),
+
+#-------------------------------------------------------------------------------------------------------------------
+   # STUDENT /FACULTY SUPPORT SYSTEM
     path('stud_fac_1/', views.StudFac1Create.as_view(), name="stud_fac_1"),
     path('stud_fac_1/update/<int:pk>/', views.StudFac1Update.as_view(), name="stud_fac_1_update"),
     path('stud_fac_1/delete/<int:pk>/', views.StudFac1Delete.as_view(), name="stud_fac_1_delete"),
@@ -131,6 +132,8 @@ urlpatterns = [
     path('stud_fac_5/update/<int:pk>/', views.StudFac5Update.as_view(), name="stud_fac_5_update"),
     path('stud_fac_5/delete/<int:pk>/', views.StudFac5Delete.as_view(), name="stud_fac_5_delete"),
 
+#-------------------------------------------------------------------------------------------------------------------
+    # EXTRA CURRICULAR ACTIVITIES
     path('extra_curr_1/', views.ExtraCurr1Create.as_view(), name="extra_curr_1"),
     path('extra_curr_1/update/<int:pk>/', views.ExtraCurr1Update.as_view(), name="extra_curr_1_update"),
     path('extra_curr_1/delete/<int:pk>/', views.ExtraCurr1Delete.as_view(), name="extra_curr_1_delete"),

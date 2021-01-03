@@ -10,7 +10,7 @@ class DateInput(forms.DateInput):
 class AddStudentResult(forms.ModelForm):
     class Meta:
         model = StudentResult
-        fields = ['department','Class','exam_type','subject','date','appeared','passed','perct']
+        fields = ['department','Class','exam_type','subject','date','appeared','passed','percentage']
         #adding bootstrap classes to form inputs
         widgets = {
             'department' : forms.Select(attrs={'class':'form-control'}),
@@ -20,7 +20,7 @@ class AddStudentResult(forms.ModelForm):
             'date' : DateInput(attrs={'class':'form-control'}),
             'appeared': forms.NumberInput(attrs={'class':'form-control'}),
             'passed': forms.NumberInput(attrs={'class':'form-control'}),
-            'perct': forms.NumberInput(attrs={'class':'form-control'}),
+            'percentage': forms.NumberInput(attrs={'class':'form-control'}),
         }
 #-------------------------------------------------------------------------------------
 
