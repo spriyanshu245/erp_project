@@ -36,7 +36,7 @@ class StudentResult(models.Model):
     objects = models.Manager()
 
     def __str__(self):
-        return self.ssubject
+        return self.subject
 
     def get_absolute_url(self):
         return reverse('stud_result',)
@@ -138,7 +138,7 @@ class DeptStartUp6(models.Model):
     start_date = models.CharField(("Commencement Date"),max_length=150)
     founder = models.CharField(max_length=150)
     LLP_no = models.IntegerField(("LLP number"))
-    website = models.CharField(max_length=150)
+    website = models.URLField(max_length=150)
     team_members = models.CharField(max_length=500)
 
     def __str__(self):
@@ -149,10 +149,80 @@ class DeptStartUp6(models.Model):
 
 
 #-------------------------------------------------------------------------------------
-                # Model space for faculty contribution tables
+                            # FACULTY CONTRIBUTION
+
+#1] Research projects in the specified period
+class ResProject1(models.Model):
+    title = models.CharField(max_length=150)
+    department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
+    name = models.CharField(max_length=150)
+    date = models.DateField(default=date.today,auto_now=False, auto_now_add=False)
+    agency = models.CharField(max_length=150)
+    other = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('fac_contri_1',)
+
+
+#2] Funds received for research for projects mentioned above
+class ResFunds2(models.Model):
+    funding_agency = models.CharField(max_length=150)
+    grants_recieved = models.IntegerField()
+    grants_utilized = models.IntegerField()
+    remaining_grant = models.IntegerField()
+
+    def __str__(self):
+        return self.funding_agency
+
+    # def get_absolute_url(self):
+    #     return reverse('fac_achieve',)
+
+
+#3] Research papers published in International journals in the specified period
+class ResInternational3(models.Model):
+    title = models.CharField(max_length=150)
+    department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
+    authors_name = models.CharField(max_length=150)
+    journal_name = models.CharField(max_length=150)
+    date_of_publication = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
+    amount = models.CharField(("Amount (if paid by institute)"), max_length=150)
+    volume = models.CharField(("Volume, Issue, Page Number and Impact Factor/ICV"), max_length=150)
+    approval = models.CharField(max_length=150, choices=APPROVAL, default='')
+    url = models.URLField(max_length=150)
+
+    def __str__(self):
+        return self.title
+
+    # def get_absolute_url(self):
+    #     return reverse('fac_achieve',)
+
+
+#4] Research papers published in national journals in the specified period
+class ResNational4(models.Model):
+    title = models.CharField(max_length=150)
+    department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
+    authors_name = models.CharField(max_length=150)
+    journal_name = models.CharField(max_length=150)
+    date_of_publication = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
+    amount = models.CharField(("Amount (if paid by institute)"), max_length=150)
+    volume = models.CharField(("Volume, Issue, Page Number and Impact Factor/ICV"), max_length=150)
+    approval = models.CharField(max_length=150, choices=APPROVAL, default='')
+    url = models.URLField(max_length=150)
+
+    def __str__(self):
+        return self.title
+
+    # def get_absolute_url(self):
+    #     return reverse('fac_achieve',)
+
 
 #-------------------------------------------------------------------------------------
-#1] Faculty achievements
+                            # FACULTY ACHIEVEMENTS
+
+#1] Achievement List
 class FacAchieve(models.Model):
     fac_name = models.CharField(("Faculty Name"), max_length=150)
     department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
@@ -275,10 +345,10 @@ class CurStudSponsor5(models.Model):
 #     ...
 #     my_field = models.ManyToManyField(MY_CHOICES)
     
-#-----------------------------------------------------------------
-# INDUSTRY –INSTITUTE INTERACTION
+#-------------------------------------------------------------------------------------
+                            #INDUSTRY – INSTITUTE INTERACTION
 
-#1]Industrial Visit  of Faculty (Visits accompanied with students should be excluded)
+#1] Industrial Visit  of Faculty (Visits accompanied with students should be excluded)
 class IndFacvisit1(models.Model):
     faculty = models.CharField(max_length=150)
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
@@ -313,6 +383,7 @@ class IndInst2(models.Model):
     def get_absolute_url(self):
         return reverse('ind_inst_2',)
 
+
 #3] Faculty Providing training to industry
 # No	Name of Faculty	Name of Department	Name of Company 		*Sector	Title of Training	Dates	Outcome
 class IndInst3(models.Model):
@@ -331,10 +402,11 @@ class IndInst3(models.Model):
     def get_absolute_url(self):
         return reverse('ind_inst_3',)
 
+
 #4] Faculty on board of Industry
 # Name of Faculty	Name of Department	Name of Company	Date of Appointment	Type of Board/council	Designation of Faculty		Meeting Date(if any)
 #some error so new model name here only
-class IndInst4Model(models.Model):
+class IndInst4(models.Model):
     name_of_faculty = models.CharField(max_length=150)
     department = models.ForeignKey(Department, on_delete=models.CASCADE, default=2)
     name_of_company = models.CharField(max_length=256)
@@ -348,6 +420,7 @@ class IndInst4Model(models.Model):
 
     def get_absolute_url(self):
         return reverse('ind_inst_4',)
+
 
 #5] Industrial people on various Boards/Committee of Institute or Department                                        
 # Type of Board/council	Name of Industry Member		Designation  	Name of Company		Sector	Tenure
@@ -364,6 +437,7 @@ class IndInst5(models.Model):
 
     def get_absolute_url(self):
         return reverse('ind_inst_5',)
+
 
 #6] Faculty patents leading to industry products
 # Name of Faculty	Title of Invention	Patent Number	Date of Grant/File	Name of Company		Sector	Date of Adoption
@@ -382,6 +456,7 @@ class IndInst6(models.Model):
     def get_absolute_url(self):
         return reverse('ind_inst_6',)
 
+
 #7] Sponsored Projects (Faculty only)
 #Title of  Project 	Name(s) of coordinator		Name of Sponsoring company		Duration	Grant Received	Status of Project
 class IndInst7(models.Model):
@@ -398,6 +473,7 @@ class IndInst7(models.Model):
 
     def get_absolute_url(self):
         return reverse('ind_inst_7',)
+
 
 #8] Consultancy Projects/Advisory Services
 # Name of Faculty	Name of Company/ organization		Title of Project		Revenue Generated 	Dates	Status of Project
@@ -416,6 +492,7 @@ class IndInst8(models.Model):
     def get_absolute_url(self):
         return reverse('ind_inst_8',)
 
+
 # 9] MOU Information
 # Name of Department	Name of Faculty Coordinator		Name of Company		Sector	Date of MOU	Purpose of MOU
 class IndInst9(models.Model):
@@ -432,8 +509,10 @@ class IndInst9(models.Model):
     def get_absolute_url(self):
         return reverse('ind_inst_9',)
 
-#--------------STUDENT /FACULTY SUPPORT SYSTEM----------------------
-#1]Mentoring System to help students at individual level
+#-------------------------------------------------------------------------------------
+                            #STUDENT /FACULTY SUPPORT SYSTEM
+
+#1] Mentoring System to help students at individual level
 #Name of Department	Class/ Division	Type of Meeting (GFM/HOD)	Name of Faculty 		*Type of Mentoring		Dates of mentoring activity
 class StudFac1(models.Model):
     department = models.ForeignKey(Department, on_delete=models.CASCADE, default=1)
@@ -511,8 +590,8 @@ class StudFac5(models.Model):
     def get_absolute_url(self):
         return reverse('stud_fac_5',)
 
-#----------------------------------------------------------
-#------------ EXTRA CURRICULAR ACTIVITIES -----------------
+#-------------------------------------------------------------------------------------
+                                #EXTRA CURRICULAR ACTIVITIES
 
 #1] Sports (This information to be provided by Physical/Sports Director)
 # Activity	Organized by			Level		Date	Number of Students Participated
@@ -544,6 +623,8 @@ class ExtraCurr2(models.Model):
 
     def get_absolute_url(self):
         return reverse('extra_curr_2',)
+
+
 
 ##__________________________________________________________________________________________________
 class Profile(models.Model):

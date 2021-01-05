@@ -1,0 +1,52 @@
+{% block tabs %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style>
+    .nav-tabs li a {
+      color: rgb(25, 124, 108);
+    }
+    </style>
+
+  <div>
+    <h3 class="text-center alert alert-primary">Faculty Contributions</h3>
+  </div>
+  
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'fac_contri_1' %}active{% endif %}" 
+        href="{% url 'fac_contri_1' %}">Research Projects</a>
+    </li>
+    <!-- <li class="nav-item">
+      <a class="nav-link {% if nbar == 'dept_act_2' %}active{% endif %}" 
+        href="{% url 'dept_act_2' %}">Events Organized(For nearby schools)</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'dept_act_3' %}active{% endif %}" 
+        href="{% url 'dept_act_3' %}">Events with Professional Bodies</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'dept_act_4' %}active{% endif %}" 
+        href="{% url 'dept_act_4' %}">Faculty Development</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'dept_act_5' %}active{% endif %}" 
+        href="{% url 'dept_act_5' %}">Student Inter-Institute Participation</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'dept_act_6' %}active{% endif %}" 
+        href="{% url 'dept_act_6' %}">Start-up</a>
+    </li> -->
+  </ul>
+  <br>
+  <div>
+    <form class="form-inline mr-auto mb-4 d-flex justify-content-end" onkeydown="return event.key != 'Enter';">
+      <input id="search" class="form-control mr-sm-2" type="text" placeholder="Search Table..">
+      <span class="glyphicon glyphicon-search"></span>
+       <button class="btn btn-outline-success btn-m" onclick="DownloadCsv('table_main')"><i class="fa fa-download"></i> Download</button>
+    </form>
+  </div>
+
+  
+
+{% endblock %}

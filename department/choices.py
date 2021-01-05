@@ -92,6 +92,7 @@ SECTOR = [
 ]
 
 COMPETITIVE_EXAM = (
+    ('', 'Choose...'),
     ("MPSC","MPSC"),
     ("UPSC","UPSC"),
     ("GATE","GATE"),
@@ -103,6 +104,7 @@ COMPETITIVE_EXAM = (
 )
 
 SELF_LEARNING = (
+    ('', 'Choose...'),
     ("Webinars", "Webinars"),
     ("Podcast", "Podcast"),
     ("MOOC’s", "MOOC’s"),
@@ -112,6 +114,7 @@ SELF_LEARNING = (
 )
 
 ACTIVITY = (
+    ('', 'Choose...'),
     ("Soft Skill Development", "Soft Skill Development"), 
     ("Remedial Coaching", "Remedial Coaching"), 
     ("Language Lab", "Language Lab"),
@@ -121,6 +124,14 @@ ACTIVITY = (
     ("Bridge Courses", "Bridge Courses"), 
     ("Competitive Examination", "Competitive Examination"), 
     ("Higher", "Higher"),
+)
+
+APPROVAL=(
+    ('', 'Choose...'),
+    ('UGC','UGC'),
+    ('SCOPUS','SCOPUS'),
+    ('Web of Science','Web of Science'),
+    ('Other','Other'),
 )
 
 ROLE=(

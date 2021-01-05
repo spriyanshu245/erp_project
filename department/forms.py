@@ -22,9 +22,11 @@ class AddStudentResult(forms.ModelForm):
             'passed': forms.NumberInput(attrs={'class':'form-control'}),
             'percentage': forms.NumberInput(attrs={'class':'form-control'}),
         }
-#-------------------------------------------------------------------------------------
 
-#1 Information about events organized by department
+#-------------------------------------------------------------------------------------
+                                # DEPARTMENTAL ACTIVITIES
+
+#1] Information about events organized by department
 class AddDeptEvent1(forms.ModelForm):
     class Meta:
         model = DeptEvent1
@@ -40,7 +42,7 @@ class AddDeptEvent1(forms.ModelForm):
             'to_date': DateInput(attrs={'class':'form-control'}),
         }
 
-#2 Information about events organized by department (For nearby schools only) 
+#2] Information about events organized by department (For nearby schools only) 
 class AddDeptEvent2(forms.ModelForm):
     class Meta:
         model = DeptEvent2
@@ -55,7 +57,7 @@ class AddDeptEvent2(forms.ModelForm):
             'to_date': DateInput(attrs={'class':'form-control'}),
         }
 
-#3 Information about events organized by department in association with Professional bodies
+#3] Information about events organized by department in association with Professional bodies
 class AddDeptProEvent3(forms.ModelForm):
     class Meta:
         model = DeptProEvent3
@@ -72,7 +74,7 @@ class AddDeptProEvent3(forms.ModelForm):
         }
 
 
-#4 Information about Faculty Development Programs organized by department 
+#4] Information about Faculty Development Programs organized by department 
 class AddDeptFacultyDev4(forms.ModelForm):
     class Meta:
         model = DeptFacultyDev4
@@ -89,7 +91,7 @@ class AddDeptFacultyDev4(forms.ModelForm):
         }
 
 
-#5 Participation in inter-institute events by students 
+#5] Participation in inter-institute events by students 
 class AddDeptStudPart5(forms.ModelForm):
     class Meta:
         model = DeptStudPart5
@@ -108,7 +110,7 @@ class AddDeptStudPart5(forms.ModelForm):
         }
 
 
-#6 Start-Up
+#6] Start-Up
 class AddDeptStartUp6(forms.ModelForm):
     class Meta:
         model = DeptStartUp6
@@ -119,15 +121,29 @@ class AddDeptStartUp6(forms.ModelForm):
             'start_date': DateInput(attrs={'class':'form-control'}),
             'founder': forms.TextInput(attrs={'class':'form-control'}),
             'LLP_no': forms.NumberInput(attrs={'class':'form-control'}),
-            'website': forms.TextInput(attrs={'class':'form-control'}),
+            'website': forms.URLInput(attrs={'class':'form-control'}),
             'team_members': forms.TextInput(attrs={'class':'form-control'}),
         }
 #-------------------------------------------------------------------------------------
-                # Form space for faculty contribution tables
+                            # FACULTY CONTRIBUTION
+
+#1] Research projects in the specified period
+class AddResProject1(forms.ModelForm):
+    class Meta:
+        model = ResProject1
+        fields = ['title','department','name','date','agency','other']
+        widgets = {
+            'title': forms.TextInput(attrs={'class':'form-control'}),
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'name': forms.TextInput(attrs={'class':'form-control'}),
+            'date': DateInput(attrs={'class':'form-control'}),
+            'agency': forms.TextInput(attrs={'class':'form-control'}),
+            'other': forms.TextInput(attrs={'class':'form-control'}),
+        }
 
 #-------------------------------------------------------------------------------------
 
-#1 Faculty Acheivements
+#1] Faculty Acheivements
 class AddFacAchieve(forms.ModelForm):
     class Meta:
         model = FacAchieve
@@ -141,7 +157,7 @@ class AddFacAchieve(forms.ModelForm):
         }
 
 
-#2 Names of books/Chapters/Manuals/ Monographs published
+#2] Names of books/Chapters/Manuals/ Monographs published
 class AddFacBook(forms.ModelForm):
         class Meta:
             model = FacBook
@@ -155,7 +171,7 @@ class AddFacBook(forms.ModelForm):
 
 #-----------------------------------------------------------------------------------------
 
-#1 Guest Lectures (General Topics)
+#1] Guest Lectures (General Topics)
 class AddCurGuestLect1(forms.ModelForm):
     class Meta:
         model = CurGuestLect1
@@ -171,7 +187,7 @@ class AddCurGuestLect1(forms.ModelForm):
         }
 
             
-#2 Expert Lectures (Subject-Specific Topics)
+#2] Expert Lectures (Subject-Specific Topics)
 class AddCurExptLect2(forms.ModelForm):
     class Meta:
         model = CurExptLect2
@@ -187,7 +203,7 @@ class AddCurExptLect2(forms.ModelForm):
         }
 
 
-#3 Student Internship/Industrial Training 
+#3] Student Internship/Industrial Training 
 class AddCurStudTrain3(forms.ModelForm):
     class Meta:
         model = CurStudTrain3
@@ -202,7 +218,7 @@ class AddCurStudTrain3(forms.ModelForm):
         }
 
 
-#4 Student Industrial Visit 
+#4] Student Industrial Visit 
 class AddCurStudVisit4(forms.ModelForm):
     class Meta:
         model = CurStudVisit4
@@ -217,7 +233,7 @@ class AddCurStudVisit4(forms.ModelForm):
             'to_date': DateInput(attrs={'class':'form-control'}),
         }
 
-#5 Students Sponsored Projects
+#5] Students Sponsored Projects
 class AddCurStudSponsor5(forms.ModelForm):
     class Meta:
         model = CurStudSponsor5
@@ -232,7 +248,7 @@ class AddCurStudSponsor5(forms.ModelForm):
             'status': forms.TextInput(attrs={'class':'form-control'}),
         }
 
-#--------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------
 # INDUSTRY –INSTITUTE INTERACTION
 
 #1]Industrial Visit  of Faculty (Visits accompanied with students should be excluded)
@@ -281,9 +297,9 @@ class IndInst3Form(forms.ModelForm):
             'outcome': forms.Textarea(attrs={'rows': 3,'class':'form-control'}),
         }
 
-class IndInst4FormNew(forms.ModelForm):
+class IndInst4Form(forms.ModelForm):
     class Meta:
-        model = IndInst4Model
+        model = IndInst4
         fields = ('name_of_faculty','department','name_of_company','date_of_appointment','type_of_board','designation_of_faculty','meeting_date')
         widgets = {
             'name_of_faculty': forms.TextInput(attrs={'class':'form-control'}),
@@ -363,7 +379,8 @@ class IndInst9Form(forms.ModelForm):
             'purpose_of_MOU': forms.TextInput(attrs={'class':'form-control'}),
         }
 
-#--------------STUDENT /FACULTY SUPPORT SYSTEM----------------------
+#--------------------------------------------------------------------------------------------------
+# STUDENT /FACULTY SUPPORT SYSTEM
 class StudFac1Form(forms.ModelForm):
     class Meta:
         model = StudFac1
@@ -428,7 +445,8 @@ class StudFac5Form(forms.ModelForm):
             "agencies_involved": forms.TextInput(attrs={'class':'form-control'}),
         }
 
-#------------EXTRA CURRICULAR ACTIVITIES-------------------
+#--------------------------------------------------------------------------------------------------
+# EXTRA CURRICULAR ACTIVITIES
 class ExtraCurr1Form(forms.ModelForm):
     class Meta:
         model = ExtraCurr1
@@ -454,7 +472,8 @@ class ExtraCurr2Form(forms.ModelForm):
         }
 
 
-#--------------------user
+
+#------------------------------user----------------------------------------------------------------
 class UserForm(forms.ModelForm):
     class Meta:
         model = User

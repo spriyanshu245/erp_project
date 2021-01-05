@@ -40,6 +40,13 @@ urlpatterns = [
     path('dept_act_6/delete/<int:pk>/', views.DeptStartUp6Delete.as_view(), name="dept_act_6_delete"),
 
 #-------------------------------------------------------------------------------------------------------------------
+    # FACULTY CONTRIBUTIONS
+    url('fac_contri_1/', views.ResProject1Create.as_view(), name="fac_contri_1"),
+    path('fac_contri_1/update/<int:pk>/', views.ResProject1Update.as_view(), name="fac_contri_1_update"),
+    path('fac_contri_1/delete/<int:pk>/', views.ResProject1Delete.as_view(), name="fac_contri_1_delete"),
+
+
+#-------------------------------------------------------------------------------------------------------------------
     # FACULTY ACHIEVEMENT
     path('fac_achieve/', views.FacAchieveCreate.as_view(), name="fac_achieve"),
     path('fac_achieve/update/<int:pk>/', views.FacAchieveUpdate.as_view(), name="fac_achieve_update"),
