@@ -27,12 +27,12 @@ class StudentResult(models.Model):
     department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
     Class = models.CharField(max_length = 150, choices=CLASS, default='')
     #department = models.ForeignKey(Department, on_delete=models.CASCADE)
-    exam_type = models.CharField(max_length = 150, choices=EXAM_TYPES, default='')
+    exam_Type = models.CharField(max_length = 150, choices=EXAM_TYPES, default='')
     subject = models.CharField(max_length = 150, choices=SUBJECTS, default='')
+    exam_Date = models.DateField(("Exam Date"), default=date.today,auto_now=False, auto_now_add=False)
     appeared = models.IntegerField(null=False, blank=False)
     passed = models.IntegerField(null=False, blank=False)
     percentage = models.IntegerField(("Percentage"),default=0,null=False, blank=False)
-    date = models.DateField(("Exam Date"), default=date.today,auto_now=False, auto_now_add=False)
     objects = models.Manager()
 
     def __str__(self):
@@ -177,8 +177,8 @@ class ResFunds2(models.Model):
     def __str__(self):
         return self.funding_agency
 
-    # def get_absolute_url(self):
-    #     return reverse('fac_achieve',)
+    def get_absolute_url(self):
+        return reverse('fac_contri_2',)
 
 
 #3] Research papers published in International journals in the specified period
@@ -188,16 +188,16 @@ class ResInternational3(models.Model):
     authors_name = models.CharField(max_length=150)
     journal_name = models.CharField(max_length=150)
     date_of_publication = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
-    amount = models.CharField(("Amount (if paid by institute)"), max_length=150)
-    volume = models.CharField(("Volume, Issue, Page Number and Impact Factor/ICV"), max_length=150)
+    volume_Issue_ICV = models.CharField(("Volume, Issue, Page Number and Impact Factor/ICV"), max_length=150)
+    amount = models.IntegerField(("Amount (if paid by institute)"))
     approval = models.CharField(max_length=150, choices=APPROVAL, default='')
     url = models.URLField(max_length=150)
 
     def __str__(self):
         return self.title
 
-    # def get_absolute_url(self):
-    #     return reverse('fac_achieve',)
+    def get_absolute_url(self):
+        return reverse('fac_contri_3',)
 
 
 #4] Research papers published in national journals in the specified period
@@ -207,16 +207,16 @@ class ResNational4(models.Model):
     authors_name = models.CharField(max_length=150)
     journal_name = models.CharField(max_length=150)
     date_of_publication = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
+    volume_Issue_ICV = models.CharField(("Volume, Issue, Page Number and Impact Factor/ICV"), max_length=150)
     amount = models.CharField(("Amount (if paid by institute)"), max_length=150)
-    volume = models.CharField(("Volume, Issue, Page Number and Impact Factor/ICV"), max_length=150)
     approval = models.CharField(max_length=150, choices=APPROVAL, default='')
     url = models.URLField(max_length=150)
 
     def __str__(self):
         return self.title
 
-    # def get_absolute_url(self):
-    #     return reverse('fac_achieve',)
+    def get_absolute_url(self):
+        return reverse('fac_contri_4',)
 
 
 #-------------------------------------------------------------------------------------

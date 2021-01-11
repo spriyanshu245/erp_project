@@ -13,7 +13,7 @@ from django.contrib import messages
 
 # Create your views here.
 
-#--------------------------------------STUDENT ACADEMIC PERFORMANCE--------------------------------
+#----------------------------------STUDENT ACADEMIC PERFORMANCE--------------------------------====
 
 class StudentResultCreate(CreateView):
     model = StudentResult
@@ -29,6 +29,7 @@ class StudentResultCreate(CreateView):
         context['update_link'] = "stud_result_update"
         context['delete_link'] = "stud_result_delete"
         context['tab_link'] = "stud_result_tabs.html"
+        context['count'] = self.model.objects.all().count()
         return context
         
 @method_decorator(login_required, name='dispatch')
@@ -57,11 +58,12 @@ class StudentResultDelete(DeleteView):
 
 #--------------------------------------------------------------------------------------------------
 #------------------------------------DEPARTMENTAL ACTIVITIES---------------------------------------
+
 class DeptEvent1Create(CreateView):
     model = DeptEvent1
     form_class = AddDeptEvent1
     template_name = 'create_form.html'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Events Organized by Department'
@@ -113,6 +115,8 @@ class DeptEvent2Create(CreateView):
         context['delete_link'] = "dept_act_2_delete"
         context['tab_link'] = "dept_act_tabs.html"
         return context
+
+
 
 class DeptEvent2Update(UpdateView):
     model = DeptEvent2
@@ -292,17 +296,17 @@ class DeptStartUp6Delete(DeleteView):
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
         return context
 
-
-
+        
 #--------------------------------------------------------------------------------------------------
-#------------------------------------FACULTY CONTRIBUTIONS---------------------------------------
+#--------------------------------------FACULTY CONTRIBUTIONS---------------------------------------
+# count class of all faculty contribution tables
 
 #1] Research projects in the specified period
 class ResProject1Create(CreateView):
     model = ResProject1
     form_class = AddResProject1
     template_name = 'create_form.html'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Research projects in the specified period'
@@ -312,7 +316,19 @@ class ResProject1Create(CreateView):
         context['update_link'] = "fac_contri_1_update"
         context['delete_link'] = "fac_contri_1_delete"
         context['tab_link'] = "fac_contri_tabs.html"
+
+        titles = ['Research projects in the specified period',
+        'Funds received for research for projects',
+        'Research papers published in International journals',
+        'Research papers published in National journals']
+        counts = [self.model.objects.all().count(),
+        ResFunds2Create.model.objects.all().count(),
+        ResInternational3Create.model.objects.all().count(),
+        ResNational4Create.model.objects.all().count()]
+        context['title'] = titles
+        context['count'] = counts
         return context
+
 
 class ResProject1Update(UpdateView):
     model = ResProject1
@@ -333,6 +349,128 @@ class ResProject1Delete(DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cancel_link'] = "fac_contri_1"
+        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        return context
+
+#--------------------------------------------------------------------------------------------------
+#2] Funds received for research for projects
+class ResFunds2Create(CreateView):
+    model = ResFunds2
+    form_class = AddResFunds2
+    template_name = 'create_form.html'
+
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Funds received for research for projects'
+        context['events'] = self.model.objects.all()
+        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        context['nbar'] = "fac_contri_2"
+        context['update_link'] = "fac_contri_2_update"
+        context['delete_link'] = "fac_contri_2_delete"
+        context['tab_link'] = "fac_contri_tabs.html"
+        # context['count'] = self.model.objects.all().count()
+        return context
+
+class ResFunds2Update(UpdateView):
+    model = ResFunds2
+    form_class = AddResFunds2
+    template_name = "form_update.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Funds received for research for projects'
+        return context
+
+class ResFunds2Delete(DeleteView):
+    model = ResFunds2
+    success_url = reverse_lazy("fac_contri_2")
+    template_name = "form_delete.html"
+    context_object_name = "model_instance"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cancel_link'] = "fac_contri_2"
+        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        return context
+
+#--------------------------------------------------------------------------------------------------
+#3] Research papers published in International journals in the specified period
+class ResInternational3Create(CreateView):
+    model = ResInternational3
+    form_class = AddResInternational3
+    template_name = 'create_form.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Research papers published in International journals in the specified period'
+        context['events'] = self.model.objects.all()
+        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        context['nbar'] = "fac_contri_3"
+        context['update_link'] = "fac_contri_3_update"
+        context['delete_link'] = "fac_contri_3_delete"
+        context['tab_link'] = "fac_contri_tabs.html"
+        return context
+
+class ResInternational3Update(UpdateView):
+    model = ResInternational3
+    form_class = AddResInternational3
+    template_name = "form_update.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Research papers published in International journals'
+        return context
+
+class ResInternational3Delete(DeleteView):
+    model = ResInternational3
+    success_url = reverse_lazy("fac_contri_3")
+    template_name = "form_delete.html"
+    context_object_name = "model_instance"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cancel_link'] = "fac_contri_3"
+        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        return context
+
+#--------------------------------------------------------------------------------------------------
+#4] Research papers published in national journals in the specified period
+class ResNational4Create(CreateView):
+    model = ResNational4
+    form_class = AddResNational4
+    template_name = 'create_form.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Research papers published in National journals in the specified period'
+        context['events'] = self.model.objects.all()
+        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        context['nbar'] = "fac_contri_4"
+        context['update_link'] = "fac_contri_4_update"
+        context['delete_link'] = "fac_contri_4_delete"
+        context['tab_link'] = "fac_contri_tabs.html"
+        return context
+
+class ResNational4Update(UpdateView):
+    model = ResNational4
+    form_class = AddResNational4
+    template_name = "form_update.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Research papers published in National journals'
+        return context
+
+class ResNational4Delete(DeleteView):
+    model = ResNational4
+    success_url = reverse_lazy("fac_contri_4")
+    template_name = "form_delete.html"
+    context_object_name = "model_instance"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cancel_link'] = "fac_contri_4"
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
         return context
 

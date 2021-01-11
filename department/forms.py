@@ -1,5 +1,7 @@
 from django.core import validators
 from django import forms
+from django.db.models.fields import DecimalField
+from django.forms.models import ALL_FIELDS
 from .models import *
 from django.contrib.auth.models import User
 
@@ -10,14 +12,14 @@ class DateInput(forms.DateInput):
 class AddStudentResult(forms.ModelForm):
     class Meta:
         model = StudentResult
-        fields = ['department','Class','exam_type','subject','date','appeared','passed','percentage']
+        fields = ['department','Class','exam_Type','subject','exam_Date','appeared','passed','percentage']
         #adding bootstrap classes to form inputs
         widgets = {
             'department' : forms.Select(attrs={'class':'form-control'}),
             'Class' : forms.Select(attrs={'class':'form-control'}),
-            'exam_type': forms.Select(attrs={'class':'form-control'}),
+            'exam_Type': forms.Select(attrs={'class':'form-control'}),
             'subject': forms.Select (attrs={'class':'form-control'}),   
-            'date' : DateInput(attrs={'class':'form-control'}),
+            'exam_Date' : DateInput(attrs={'class':'form-control'}),
             'appeared': forms.NumberInput(attrs={'class':'form-control'}),
             'passed': forms.NumberInput(attrs={'class':'form-control'}),
             'percentage': forms.NumberInput(attrs={'class':'form-control'}),
@@ -141,6 +143,51 @@ class AddResProject1(forms.ModelForm):
             'other': forms.TextInput(attrs={'class':'form-control'}),
         }
 
+#2] Funds received for research for projects
+class AddResFunds2(forms.ModelForm):
+    class Meta:
+        model = ResFunds2
+        fields = ['funding_agency','grants_recieved','grants_utilized','remaining_grant']
+        widgets = {
+             'funding_agency': forms.TextInput(attrs={'class':'form-control'}),
+             'grants_recieved': forms.NumberInput(attrs={'class':'form-control'}),
+             'grants_utilized': forms.NumberInput(attrs={'class':'form-control'}),
+             'remaining_grant': forms.NumberInput(attrs={'class':'form-control'}),
+        }
+
+#3] Research papers published in International journals in the specified period
+class AddResInternational3(forms.ModelForm):
+    class Meta:
+        model = ResInternational3
+        fields = ['title','department','authors_name','journal_name','date_of_publication','volume_Issue_ICV','amount','approval','url']
+        widgets = {
+            'title': forms.TextInput(attrs={'class':'form-control'}),
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'authors_name': forms.TextInput(attrs={'class':'form-control'}),
+            'journal_name': forms.TextInput(attrs={'class':'form-control'}),
+            'date_of_publication': DateInput(attrs={'class':'form-control'}),
+            'volume_Issue_ICV': forms.TextInput(attrs={'class':'form-control'}),
+            'amount': forms.NumberInput(attrs={'class':'form-control'}),
+            'approval': forms.Select(attrs={'class':'form-control'}),
+            'url': forms.URLInput(attrs={'class':'form-control'}),
+        }
+
+#4] Research papers published in national journals in the specified period
+class AddResNational4(forms.ModelForm):
+    class Meta:
+        model = ResNational4
+        fields = ['title','department','authors_name','journal_name','date_of_publication','volume_Issue_ICV','amount','approval','url']
+        widgets = {
+            'title': forms.TextInput(attrs={'class':'form-control'}),
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'authors_name': forms.TextInput(attrs={'class':'form-control'}),
+            'journal_name': forms.TextInput(attrs={'class':'form-control'}),
+            'date_of_publication': DateInput(attrs={'class':'form-control'}),
+            'volume_Issue_ICV': forms.TextInput(attrs={'class':'form-control'}),
+            'amount': forms.NumberInput(attrs={'class':'form-control'}),
+            'approval': forms.Select(attrs={'class':'form-control'}),
+            'url': forms.URLInput(attrs={'class':'form-control'}),
+        }
 #-------------------------------------------------------------------------------------
 
 #1] Faculty Acheivements

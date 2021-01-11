@@ -13,3 +13,7 @@ def replace_to_space(value):
     value = value.replace("hod","HOD")
     value = value.replace("id", "ID")
     return value
+
+@register.filter(name='zip')
+def zip_lists(a, b):
+  return zip(a, b)

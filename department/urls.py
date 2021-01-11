@@ -41,10 +41,21 @@ urlpatterns = [
 
 #-------------------------------------------------------------------------------------------------------------------
     # FACULTY CONTRIBUTIONS
-    url('fac_contri_1/', views.ResProject1Create.as_view(), name="fac_contri_1"),
+    path('fac_contri_1/', views.ResProject1Create.as_view(), name="fac_contri_1"),
     path('fac_contri_1/update/<int:pk>/', views.ResProject1Update.as_view(), name="fac_contri_1_update"),
     path('fac_contri_1/delete/<int:pk>/', views.ResProject1Delete.as_view(), name="fac_contri_1_delete"),
 
+    path('fac_contri_2/', views.ResFunds2Create.as_view(), name="fac_contri_2"),
+    path('fac_contri_2/update/<int:pk>/', views.ResFunds2Update.as_view(), name="fac_contri_2_update"),
+    path('fac_contri_2/delete/<int:pk>/', views.ResFunds2Delete.as_view(), name="fac_contri_2_delete"),
+
+    path('fac_contri_3/', views.ResInternational3Create.as_view(), name="fac_contri_3"),
+    path('fac_contri_3/update/<int:pk>/', views.ResInternational3Update.as_view(), name="fac_contri_3_update"),
+    path('fac_contri_3/delete/<int:pk>/', views.ResInternational3Delete.as_view(), name="fac_contri_3_delete"),
+
+    path('fac_contri_4/', views.ResNational4Create.as_view(), name="fac_contri_4"),
+    path('fac_contri_4/update/<int:pk>/', views.ResNational4Update.as_view(), name="fac_contri_4_update"),
+    path('fac_contri_4/delete/<int:pk>/', views.ResNational4Delete.as_view(), name="fac_contri_4_delete"),
 
 #-------------------------------------------------------------------------------------------------------------------
     # FACULTY ACHIEVEMENT

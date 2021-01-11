@@ -33,7 +33,7 @@ admin.site.register(Department)
 
 
 admin.site.register(StudentResult)
-list_display = ('department','Class','exam_type','subject','date','appeared','passed','percentage')
+list_display = ('department','Class','exam_Type','subject','exam_Date','appeared','passed','percentage')
 
 admin.site.register(DeptEvent1)
 list_display = ('department','event_type','event_name','guest_name','guest_affl','no_of_part','from_date','to_date')
