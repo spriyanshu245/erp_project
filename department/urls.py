@@ -57,6 +57,30 @@ urlpatterns = [
     path('fac_contri_4/update/<int:pk>/', views.ResNational4Update.as_view(), name="fac_contri_4_update"),
     path('fac_contri_4/delete/<int:pk>/', views.ResNational4Delete.as_view(), name="fac_contri_4_delete"),
 
+    path('fac_contri_5/', views.ConfInternational5Create.as_view(), name="fac_contri_5"),
+    path('fac_contri_5/update/<int:pk>/', views.ConfInternational5Update.as_view(), name="fac_contri_5_update"),
+    path('fac_contri_5/delete/<int:pk>/', views.ConfInternational5Delete.as_view(), name="fac_contri_5_delete"),
+
+    path('fac_contri_6/', views.ConfNational6Create.as_view(), name="fac_contri_6"),
+    path('fac_contri_6/update/<int:pk>/', views.ConfNational6Update.as_view(), name="fac_contri_6_update"),
+    path('fac_contri_6/delete/<int:pk>/', views.ConfNational6Delete.as_view(), name="fac_contri_6_delete"),
+
+    path('fac_contri_7/', views.ResIndustrial7Create.as_view(), name="fac_contri_7"),
+    path('fac_contri_7/update/<int:pk>/', views.ResIndustrial7Update.as_view(), name="fac_contri_7_update"),
+    path('fac_contri_7/delete/<int:pk>/', views.ResIndustrial7Delete.as_view(), name="fac_contri_7_delete"),
+
+    path('fac_contri_8/', views.FacEvents8Create.as_view(), name="fac_contri_8"),
+    path('fac_contri_8/update/<int:pk>/', views.FacEvents8Update.as_view(), name="fac_contri_8_update"),
+    path('fac_contri_8/delete/<int:pk>/', views.FacEvents8Delete.as_view(), name="fac_contri_8_delete"),
+
+    path('fac_contri_9/', views.ProfessionalPrac9Create.as_view(), name="fac_contri_9"),
+    path('fac_contri_9/update/<int:pk>/', views.ProfessionalPrac9Update.as_view(), name="fac_contri_9_update"),
+    path('fac_contri_9/delete/<int:pk>/', views.ProfessionalPrac9Delete.as_view(), name="fac_contri_9_delete"),
+
+    path('fac_contri_10/', views.FacPatents10Create.as_view(), name="fac_contri_10"),
+    path('fac_contri_10/update/<int:pk>/', views.FacPatents10Update.as_view(), name="fac_contri_10_update"),
+    path('fac_contri_10/delete/<int:pk>/', views.FacPatents10Delete.as_view(), name="fac_contri_10_delete"),
+
 #-------------------------------------------------------------------------------------------------------------------
     # FACULTY ACHIEVEMENT
     path('fac_achieve/', views.FacAchieveCreate.as_view(), name="fac_achieve"),

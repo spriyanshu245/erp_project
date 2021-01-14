@@ -170,9 +170,9 @@ class ResProject1(models.Model):
 #2] Funds received for research for projects mentioned above
 class ResFunds2(models.Model):
     funding_agency = models.CharField(max_length=150)
-    grants_recieved = models.IntegerField()
-    grants_utilized = models.IntegerField()
-    remaining_grant = models.IntegerField()
+    grants_recieved = models.IntegerField(default=0)
+    grants_utilized = models.IntegerField(default=0)
+    remaining_grant = models.IntegerField(default=0)
 
     def __str__(self):
         return self.funding_agency
@@ -189,7 +189,7 @@ class ResInternational3(models.Model):
     journal_name = models.CharField(max_length=150)
     date_of_publication = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
     volume_Issue_ICV = models.CharField(("Volume, Issue, Page Number and Impact Factor/ICV"), max_length=150)
-    amount = models.IntegerField(("Amount (if paid by institute)"))
+    amount = models.IntegerField(("Amount (if paid by institute)"), default=0)
     approval = models.CharField(max_length=150, choices=APPROVAL, default='')
     url = models.URLField(max_length=150)
 
@@ -202,13 +202,13 @@ class ResInternational3(models.Model):
 
 #4] Research papers published in national journals in the specified period
 class ResNational4(models.Model):
-    title = models.CharField(max_length=150)
+    title = models.CharField(("Title of the paper"), max_length=150)
     department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
     authors_name = models.CharField(max_length=150)
     journal_name = models.CharField(max_length=150)
-    date_of_publication = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
+    date_of_Publication = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
     volume_Issue_ICV = models.CharField(("Volume, Issue, Page Number and Impact Factor/ICV"), max_length=150)
-    amount = models.CharField(("Amount (if paid by institute)"), max_length=150)
+    amount = models.IntegerField(("Amount (if paid by institute)"), default=0)
     approval = models.CharField(max_length=150, choices=APPROVAL, default='')
     url = models.URLField(max_length=150)
 
@@ -217,6 +217,110 @@ class ResNational4(models.Model):
 
     def get_absolute_url(self):
         return reverse('fac_contri_4',)
+
+#5] Paper presented in International Conferences in the specified period
+class ConfInternational5(models.Model):
+    title = models.CharField(("Title of the paper"), max_length=150)
+    department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
+    authors_Name = models.CharField(max_length=150, null=True)
+    conference_Name = models.CharField(max_length=150, null=True)
+    oraganised_by = models.CharField(max_length=150, null=True)
+    date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
+    amount = models.IntegerField(("Amount (if paid by institute)"), default=0)
+    location = models.CharField(max_length=150, null=True)
+    url = models.URLField(max_length=150, null=True)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('fac_contri_5',)
+
+
+#6] Paper presented in National Conferences in the specified period
+class ConfNational6(models.Model):
+    title = models.CharField(("Title of the paper"), max_length=150)
+    department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
+    authors_Name = models.CharField(max_length=150)
+    conference_Name = models.CharField(max_length=150)
+    oraganised_by = models.CharField(max_length=150)
+    date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
+    amount = models.IntegerField(("Amount (if paid by institute)"), default=0)
+    location = models.CharField(max_length=150)
+    url = models.URLField(max_length=150, null=True)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('fac_contri_6',)
+
+
+#7] Research papers authored with industrial persons
+class ResIndustrial7(models.Model):
+    title = models.CharField(("Title of the paper"), max_length=150)
+    authors_Name = models.CharField(max_length=150)
+    co_Author_Name = models.CharField(max_length=150)
+    name_of_Company = models.CharField(max_length=150)
+    date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
+    name_of_Conference_orjournal = models.CharField(('Name of Conference/Details of Journal'),max_length=150)
+    location = models.CharField(max_length=150)
+    url = models.URLField(max_length=150, null=True)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('fac_contri_7',)
+
+#8] Events for faculty members (FDP/Webinar/Seminar/STTP/Workshops/Others)
+class FacEvents8(models.Model):
+    event_Type = models.CharField(max_length=150)
+    event_Name = models.CharField(max_length=150)
+    name_of_Faculty = models.CharField(max_length=150)
+    department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
+    date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
+    level = models.IntegerField()
+    amount = models.IntegerField(default=0)
+    organising_Institute = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.event_Type
+
+    def get_absolute_url(self):
+        return reverse('fac_contri_8',)
+
+
+#9] Participation in Professional Practices (Curriculum Revision/Syllabus Development/Others)
+class ProfessionalPrac9(models.Model):
+    faculty_Name = models.CharField(max_length=150)
+    department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
+    professional_Practice_Type = models.CharField(('Type of professional practices'),max_length=150)
+    designation = models.CharField(('Designation in Professional Practices'),max_length=150)
+    organising_Institute = models.CharField(max_length=150)
+    date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
+
+    def __str__(self):
+        return self.faculty_Name
+
+    def get_absolute_url(self):
+        return reverse('fac_contri_9',)
+
+
+#10] List of Faculty Patents/IPR
+class FacPatents10(models.Model):
+    faculty_Name = models.CharField(max_length=150)
+    department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
+    invention_Title = models.CharField(('Title of Invention'),max_length=150)
+    patent_Number = models.CharField(('Patent/Application Number'),max_length=150)
+    date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
+    patent_Status = models.CharField(("Current Status of Patent"), max_length=150)
+
+    def __str__(self):
+        return self.faculty_Name
+
+    def get_absolute_url(self):
+        return reverse('fac_contri_10',)
 
 
 #-------------------------------------------------------------------------------------
@@ -252,109 +356,15 @@ class FacBook(models.Model):
 
 
 #-------------------------------------------------------------------------------------
-                          # CURRICULUM INPUT
-#1] Guest Lectures (General Topics)
-class CurGuestLect1(models.Model):
-    guest = models.CharField(("Name of Guest"),max_length = 150)
-    organization = models.CharField(("Company/Organization Represented"),max_length=150)
-    designation = models.CharField(max_length=150)
-    topic = models.CharField(max_length=150)
-    department = models.CharField(("Name of Organizing Department"), max_length = 150, choices=DEPARTMENTS)
-    date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
-    no_of_part = models.IntegerField(("No of Participants"))
-
-    def __str__(self):
-        return self.guest
-
-    def get_absolute_url(self):
-        return reverse('cur_input_1',)
-
-
-#2] Expert Lectures (Subject-Specific Topics)
-class CurExptLect2(models.Model):
-    guest = models.CharField(("Name of Guest"),max_length = 150)
-    organization = models.CharField(("Company/Organization Represented"),max_length=150)
-    designation = models.CharField(max_length=150)
-    topic = models.CharField(max_length=150)
-    department = models.CharField(("Name of Organizing Department"), max_length = 250, choices=DEPARTMENTS)
-    date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
-    no_of_part = models.IntegerField(("No of Participants"))
-
-    def __str__(self):
-        return self.guest
-
-    def get_absolute_url(self):
-        return reverse('cur_input_2',)
-
-# class ExptLect2(GuestLect1):
-#     pass
-  
-#3] Student Internship/Industrial training
-    # No	Name of Department	Name of Student		Name of Company		Sector		Date/Duration
-class CurStudTrain3(models.Model):
-    department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
-    student_name = models.CharField(("Name of Student"), max_length=150)
-    company = models.CharField(("Name of Company"), max_length=250)
-    sector = models.CharField(max_length=250)
-    from_date = models.DateField(("Duration (From)"), default=date.today, auto_now=False, auto_now_add=False)
-    to_date = models.DateField(("Duration (To)"), default=date.today,auto_now=False, auto_now_add=False)
-
-    def __str__(self):
-        return self.student_name
-
-    def get_absolute_url(self):
-        return reverse('cur_input_3',)
-
-#4] Student Industrial Visit
-class CurStudVisit4(models.Model):
-    department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
-    company = models.CharField(("Name of Company"), max_length=250)
-    sector = models.CharField(max_length=250)
-    fac_name = models.CharField(("Faculty Name"),max_length=150)
-    no_of_stud = models.IntegerField(("No of Students"))
-    from_date = models.DateField(("Duration (From)"), default=date.today, auto_now=False, auto_now_add=False)
-    to_date = models.DateField(("Duration (To)"), default=date.today,auto_now=False, auto_now_add=False)
-
-    def __str__(self):
-        return self.company
-
-    def get_absolute_url(self):
-        return reverse('cur_input_4',)
-
-#5] Student Sponsored Projects
-class CurStudSponsor5(models.Model):
-    title = models.CharField(("Title of Project"),max_length=250)
-    comp_rep = models.CharField(("Name of Company Representative"), max_length=250)
-    comp_sponsor = models.CharField(("Name of Sponsoring company"), max_length=250)
-    from_date = models.DateField(("Duration (From)"), default=date.today, auto_now=False, auto_now_add=False)
-    to_date = models.DateField(("Duration (To)"), default=date.today,auto_now=False, auto_now_add=False)
-    grant = models.CharField(("Grant Received"), max_length=150, choices=GRANT, default='No')
-    status = models.CharField(max_length=150)
-
-    def __str__(self):
-        return self.title
-
-    def get_absolute_url(self):
-        return reverse('cur_input_5',)
-
-# class MY_CHOICES(models.Model)
-#     choice = models.CharField(max_length=154, unique=True)
-
-# class MODEL(models.Model):
-#     ...
-#     ...
-#     my_field = models.ManyToManyField(MY_CHOICES)
-    
-#-------------------------------------------------------------------------------------
                             #INDUSTRY – INSTITUTE INTERACTION
 
 #1] Industrial Visit  of Faculty (Visits accompanied with students should be excluded)
 class IndFacvisit1(models.Model):
     faculty = models.CharField(max_length=150)
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
-    company = models.CharField("Name of Company", max_length=256)
+    company = models.CharField(("Name of Company"), max_length=256)
     sector = models.CharField(choices=SECTOR, max_length=150)
-    purpose = models.TextField()
+    purpose = models.TextField(("Purpose of Visit"), max_length=256)
     from_date = models.DateField(("Dates (From)"), default=date.today, auto_now=False, auto_now_add=False)
     to_date = models.DateField(("Dates (To)"), default=date.today,auto_now=False, auto_now_add=False)
     outcome = models.TextField()
@@ -508,6 +518,103 @@ class IndInst9(models.Model):
 
     def get_absolute_url(self):
         return reverse('ind_inst_9',)
+
+
+#-------------------------------------------------------------------------------------
+                          # CURRICULUM INPUT
+                          
+#1] Guest Lectures (General Topics)
+class CurGuestLect1(models.Model):
+    guest = models.CharField(("Name of Guest"),max_length = 150)
+    organization = models.CharField(("Company/Organization Represented"),max_length=150)
+    designation = models.CharField(max_length=150)
+    topic = models.CharField(max_length=150)
+    department = models.CharField(("Name of Organizing Department"), max_length = 150, choices=DEPARTMENTS)
+    date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
+    no_of_part = models.IntegerField(("No of Participants"))
+
+    def __str__(self):
+        return self.guest
+
+    def get_absolute_url(self):
+        return reverse('cur_input_1',)
+
+
+#2] Expert Lectures (Subject-Specific Topics)
+class CurExptLect2(models.Model):
+    guest = models.CharField(("Name of Guest"),max_length = 150)
+    organization = models.CharField(("Company/Organization Represented"),max_length=150)
+    designation = models.CharField(max_length=150)
+    topic = models.CharField(max_length=150)
+    department = models.CharField(("Name of Organizing Department"), max_length = 250, choices=DEPARTMENTS)
+    date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
+    no_of_part = models.IntegerField(("No of Participants"))
+
+    def __str__(self):
+        return self.guest
+
+    def get_absolute_url(self):
+        return reverse('cur_input_2',)
+
+# class ExptLect2(GuestLect1):
+#     pass
+  
+#3] Student Internship/Industrial training
+    # No	Name of Department	Name of Student		Name of Company		Sector		Date/Duration
+class CurStudTrain3(models.Model):
+    department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
+    student_name = models.CharField(("Name of Student"), max_length=150)
+    company = models.CharField(("Name of Company"), max_length=250)
+    sector = models.CharField(max_length=250)
+    from_date = models.DateField(("Duration (From)"), default=date.today, auto_now=False, auto_now_add=False)
+    to_date = models.DateField(("Duration (To)"), default=date.today,auto_now=False, auto_now_add=False)
+
+    def __str__(self):
+        return self.student_name
+
+    def get_absolute_url(self):
+        return reverse('cur_input_3',)
+
+#4] Student Industrial Visit
+class CurStudVisit4(models.Model):
+    department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
+    company = models.CharField(("Name of Company"), max_length=250)
+    sector = models.CharField(max_length=250)
+    fac_name = models.CharField(("Faculty Name"),max_length=150)
+    no_of_stud = models.IntegerField(("No of Students"))
+    from_date = models.DateField(("Duration (From)"), default=date.today, auto_now=False, auto_now_add=False)
+    to_date = models.DateField(("Duration (To)"), default=date.today,auto_now=False, auto_now_add=False)
+
+    def __str__(self):
+        return self.company
+
+    def get_absolute_url(self):
+        return reverse('cur_input_4',)
+
+#5] Student Sponsored Projects
+class CurStudSponsor5(models.Model):
+    title = models.CharField(("Title of Project"),max_length=250)
+    comp_rep = models.CharField(("Name of Company Representative"), max_length=250)
+    comp_sponsor = models.CharField(("Name of Sponsoring company"), max_length=250)
+    from_date = models.DateField(("Duration (From)"), default=date.today, auto_now=False, auto_now_add=False)
+    to_date = models.DateField(("Duration (To)"), default=date.today,auto_now=False, auto_now_add=False)
+    grant = models.CharField(("Grant Received"), max_length=150, choices=GRANT, default='No')
+    status = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('cur_input_5',)
+
+# class MY_CHOICES(models.Model)
+#     choice = models.CharField(max_length=154, unique=True)
+
+# class MODEL(models.Model):
+#     ...
+#     ...
+#     my_field = models.ManyToManyField(MY_CHOICES)
+    
 
 #-------------------------------------------------------------------------------------
                             #STUDENT /FACULTY SUPPORT SYSTEM

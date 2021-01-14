@@ -1,4 +1,4 @@
-DEPARTMENTS = (
+DEPARTMENTS = (('', 'Choose...'),
     ('Computer Science','Computer Science'),
     ('Electronics and Telecommunication','Electronics and Telecommunication'),
     ('Mechanical','Mechanical'),

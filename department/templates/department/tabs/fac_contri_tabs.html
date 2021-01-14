@@ -1,6 +1,4 @@
 {% block tabs %}
-{% load custom_filters %}
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -25,20 +23,44 @@
     </li>
     <li class="nav-item">
       <a class="nav-link {% if nbar == 'fac_contri_3' %}active{% endif %}" 
-        href="{% url 'fac_contri_3' %}">International Research publications</a>
+        href="{% url 'fac_contri_3' %}">International Research Publications</a>
     </li>
     <li class="nav-item">
       <a class="nav-link {% if nbar == 'fac_contri_4' %}active{% endif %}" 
-        href="{% url 'fac_contri_4' %}">National Research publications</a>
+        href="{% url 'fac_contri_4' %}">National Research Publications</a>
     </li>
-     <!-- <li class="nav-item">
-      <a class="nav-link {% if nbar == 'dept_act_5' %}active{% endif %}" 
-        href="{% url 'dept_act_5' %}">Student Inter-Institute Participation</a>
+     <li class="nav-item">
+      <a class="nav-link {% if nbar == 'fac_contri_5' %}active{% endif %}" 
+        href="{% url 'fac_contri_5' %}">(Paper presentation) International Conferences </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {% if nbar == 'dept_act_6' %}active{% endif %}" 
-        href="{% url 'dept_act_6' %}">Start-up</a>
-    </li> -->
+      <a class="nav-link {% if nbar == 'fac_contri_6' %}active{% endif %}" 
+        href="{% url 'fac_contri_6' %}">(Paper presentation) National Conferences</a>
+    </li>
+     <li class="nav-item">
+      <a class="nav-link {% if nbar == 'fac_contri_7' %}active{% endif %}" 
+        href="{% url 'fac_contri_7' %}"> Research Papers Authored with Industrial Persons</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'fac_contri_8' %}active{% endif %}" 
+        href="{% url 'fac_contri_8' %}">Events for Faculty Members</a>
+    </li>
+     <li class="nav-item">
+      <a class="nav-link {% if nbar == 'fac_contri_9' %}active{% endif %}" 
+        href="{% url 'fac_contri_9' %}">Professional Practices</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'fac_contri_10' %}active{% endif %}" 
+        href="{% url 'fac_contri_10' %}">Faculty Patents/IPR</a>
+    </li>
+     <li class="nav-item">
+      <a class="nav-link {% if nbar == 'fac_contri_11' %}active{% endif %}" 
+        href="#">National Conference attended</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'fac_contri_12' %}active{% endif %}" 
+        href="#">International Conference attended</a>
+    </li>
   </ul>
   <br>
   <div>
@@ -49,29 +71,5 @@
     </form>
   </div>
 
-  {% block counts %}
-{% if count %}
-<table class="table table-bordered  table-hover" id="table_count">
-
-    <thead class="thead-dark">
-     <tr>
-      <th scope="col" style="text-align: center;">No</th>
-        <th scope="col" style="text-align: center;"></th>
-        <th scope="col" style="text-align: center;">Number</th>
-    </tr>
-    </thead>
-  
-    <tbody>
-      {% for item1, item2 in title|zip:count %}
-        <tr>
-          <td style="text-align: center;">{{forloop.counter}}</td>
-          <td style="text-align: center;">Number of {{item1}}</td>
-          <td style="text-align: center;">{{item2}}</td>
-        </tr>
-        {% endfor %}
-        
-    </tbody>
-  </table>
-{% endif %}
-{% endblock %}
+{% include 'counts_block.html' %}
 {% endblock %}

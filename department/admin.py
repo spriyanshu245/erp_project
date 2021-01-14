@@ -35,6 +35,7 @@ admin.site.register(Department)
 admin.site.register(StudentResult)
 list_display = ('department','Class','exam_Type','subject','exam_Date','appeared','passed','percentage')
 
+
 admin.site.register(DeptEvent1)
 list_display = ('department','event_type','event_name','guest_name','guest_affl','no_of_part','from_date','to_date')
 admin.site.register(DeptEvent2)
@@ -53,17 +54,16 @@ admin.site.register(ResProject1)
 admin.site.register(ResFunds2)
 admin.site.register(ResInternational3)
 admin.site.register(ResNational4)
+admin.site.register(ConfInternational5)
+admin.site.register(ConfNational6)
+admin.site.register(ResIndustrial7)
+admin.site.register(FacEvents8)
+admin.site.register(ProfessionalPrac9)
+admin.site.register(FacPatents10)
 
 
 admin.site.register(FacAchieve)
 admin.site.register(FacBook)
-
-
-admin.site.register(CurGuestLect1)
-admin.site.register(CurExptLect2)
-admin.site.register(CurStudTrain3)
-admin.site.register(CurStudVisit4)
-admin.site.register(CurStudSponsor5)
 
 
 admin.site.register(IndFacvisit1)
@@ -75,6 +75,13 @@ admin.site.register(IndInst6)
 admin.site.register(IndInst7)
 admin.site.register(IndInst8)
 admin.site.register(IndInst9)
+
+
+admin.site.register(CurGuestLect1)
+admin.site.register(CurExptLect2)
+admin.site.register(CurStudTrain3)
+admin.site.register(CurStudVisit4)
+admin.site.register(CurStudSponsor5)
 
 
 admin.site.register(StudFac1)

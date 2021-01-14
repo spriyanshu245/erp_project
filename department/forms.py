@@ -25,6 +25,7 @@ class AddStudentResult(forms.ModelForm):
             'percentage': forms.NumberInput(attrs={'class':'form-control'}),
         }
 
+
 #-------------------------------------------------------------------------------------
                                 # DEPARTMENTAL ACTIVITIES
 
@@ -75,7 +76,6 @@ class AddDeptProEvent3(forms.ModelForm):
             'to_date': DateInput(attrs={'class':'form-control'}), 
         }
 
-
 #4] Information about Faculty Development Programs organized by department 
 class AddDeptFacultyDev4(forms.ModelForm):
     class Meta:
@@ -91,7 +91,6 @@ class AddDeptFacultyDev4(forms.ModelForm):
             'no_of_part': forms.NumberInput(attrs={'class':'form-control'}),
             'level': forms.TextInput(attrs={'class':'form-control'}),
         }
-
 
 #5] Participation in inter-institute events by students 
 class AddDeptStudPart5(forms.ModelForm):
@@ -111,7 +110,6 @@ class AddDeptStudPart5(forms.ModelForm):
             'awards': forms.TextInput(attrs={'class':'form-control'}),
         }
 
-
 #6] Start-Up
 class AddDeptStartUp6(forms.ModelForm):
     class Meta:
@@ -126,6 +124,8 @@ class AddDeptStartUp6(forms.ModelForm):
             'website': forms.URLInput(attrs={'class':'form-control'}),
             'team_members': forms.TextInput(attrs={'class':'form-control'}),
         }
+
+
 #-------------------------------------------------------------------------------------
                             # FACULTY CONTRIBUTION
 
@@ -176,19 +176,117 @@ class AddResInternational3(forms.ModelForm):
 class AddResNational4(forms.ModelForm):
     class Meta:
         model = ResNational4
-        fields = ['title','department','authors_name','journal_name','date_of_publication','volume_Issue_ICV','amount','approval','url']
+        fields = ['title','department','authors_name','journal_name','date_of_Publication','volume_Issue_ICV','amount','approval','url']
         widgets = {
             'title': forms.TextInput(attrs={'class':'form-control'}),
             'department': forms.Select(attrs={'class':'form-control'}),
             'authors_name': forms.TextInput(attrs={'class':'form-control'}),
             'journal_name': forms.TextInput(attrs={'class':'form-control'}),
-            'date_of_publication': DateInput(attrs={'class':'form-control'}),
+            'date_of_Publication': DateInput(attrs={'class':'form-control'}),
             'volume_Issue_ICV': forms.TextInput(attrs={'class':'form-control'}),
             'amount': forms.NumberInput(attrs={'class':'form-control'}),
             'approval': forms.Select(attrs={'class':'form-control'}),
             'url': forms.URLInput(attrs={'class':'form-control'}),
         }
+
+#5] Paper presented in International Conferences in the specified periodclass ResNational4(models.Model):
+class AddConfInternational5(forms.ModelForm):
+    class Meta:
+        model = ConfInternational5
+        fields = ['title','department','authors_Name','conference_Name','oraganised_by','date','amount','location','url']
+        widgets = {
+            'title': forms.TextInput(attrs={'class':'form-control'}),
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'authors_Name': forms.TextInput(attrs={'class':'form-control'}),
+            'conference_Name': forms.TextInput(attrs={'class':'form-control'}),
+            'oraganised_by': forms.TextInput(attrs={'class':'form-control'}),
+            'date': DateInput(attrs={'class':'form-control'}),
+            'amount': forms.NumberInput(attrs={'class':'form-control'}),
+            'location': forms.TextInput(attrs={'class':'form-control'}),
+            'url': forms.URLInput(attrs={'class':'form-control'}),
+        }
+
+#6] Paper presented in National Conferences in the specified period
+class AddConfNational6(forms.ModelForm):
+    class Meta:
+        model = ConfNational6
+        fields = ['title','department','authors_Name','conference_Name','oraganised_by','date','amount','location','url']
+        widgets = {
+            'title': forms.TextInput(attrs={'class':'form-control'}),
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'authors_Name': forms.TextInput(attrs={'class':'form-control'}),
+            'conference_Name': forms.TextInput(attrs={'class':'form-control'}),
+            'oraganised_by': forms.TextInput(attrs={'class':'form-control'}),
+            'date': DateInput(attrs={'class':'form-control'}),
+            'amount': forms.NumberInput(attrs={'class':'form-control'}),
+            'location': forms.TextInput(attrs={'class':'form-control'}),
+            'url': forms.URLInput(attrs={'class':'form-control'}),
+        }
+
+
+#7] Research papers authored with industrial persons
+class AddResIndustrial7(forms.ModelForm):
+    class Meta:
+        model = ResIndustrial7
+        fields = ['title','authors_Name','co_Author_Name','name_of_Company','date','name_of_Conference_orjournal','location','url']
+        widgets = {
+            'title': forms.TextInput(attrs={'class':'form-control'}),
+            'authors_Name': forms.TextInput(attrs={'class':'form-control'}),
+            'co_Author_Name': forms.TextInput(attrs={'class':'form-control'}),
+            'name_of_Company': forms.TextInput(attrs={'class':'form-control'}),
+            'date': DateInput(attrs={'class':'form-control'}),
+            'name_of_Conference_orjournal': forms.TextInput(attrs={'class':'form-control'}),
+            'location': forms.TextInput(attrs={'class':'form-control'}),
+            'url': forms.URLInput(attrs={'class':'form-control'}),
+        }
+
+#8] Events for faculty members (FDP/Webinar/Seminar/STTP/Workshops/Others)
+class AddFacEvents8(forms.ModelForm):
+    class Meta:
+        model = FacEvents8
+        fields = ['event_Type','event_Name','name_of_Faculty','department','date','level','amount','organising_Institute']
+        widgets = {
+            'event_Type': forms.TextInput(attrs={'class':'form-control'}),
+            'event_Name': forms.TextInput(attrs={'class':'form-control'}),
+            'name_of_Faculty': forms.TextInput(attrs={'class':'form-control'}),
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'date': DateInput(attrs={'class':'form-control'}),
+            'level': forms.NumberInput(attrs={'class':'form-control'}),
+            'amount': forms.NumberInput(attrs={'class':'form-control'}),
+            'organising_Institute': forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+#9] Participation in Professional Practices (Curriculum Revision/Syllabus Development/Others)
+class AddProfessionalPrac9(forms.ModelForm):
+    class Meta:
+        model = ProfessionalPrac9
+        fields = ['faculty_Name','department','professional_Practice_Type','designation','organising_Institute','date']
+        widgets = {
+            'faculty_Name': forms.TextInput(attrs={'class':'form-control'}),
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'professional_Practice_Type': forms.TextInput(attrs={'class':'form-control'}),
+            'designation': forms.TextInput(attrs={'class':'form-control'}),
+            'organising_Institute': forms.TextInput(attrs={'class':'form-control'}),
+            'date': DateInput(attrs={'class':'form-control'}),
+        }
+
+#10] List of Faculty Patents/IPR
+class AddFacPatents10(forms.ModelForm):
+    class Meta:
+        model = FacPatents10
+        fields = ['faculty_Name','department','invention_Title','patent_Number','date','patent_Status']
+        widgets = {
+            'faculty_Name': forms.TextInput(attrs={'class':'form-control'}),
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'invention_Title': forms.TextInput(attrs={'class':'form-control'}),
+            'patent_Number': forms.NumberInput(attrs={'class':'form-control'}),
+            'date': DateInput(attrs={'class':'form-control'}),
+            'patent_Status': forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+
 #-------------------------------------------------------------------------------------
+                                    # FACULTY ACHIEVEMENTS
 
 #1] Faculty Acheivements
 class AddFacAchieve(forms.ModelForm):
@@ -216,87 +314,9 @@ class AddFacBook(forms.ModelForm):
                 'ISBN': forms.NumberInput(attrs={'class':'form-control'}),
             }
 
-#-----------------------------------------------------------------------------------------
-
-#1] Guest Lectures (General Topics)
-class AddCurGuestLect1(forms.ModelForm):
-    class Meta:
-        model = CurGuestLect1
-        fields = ['guest','organization','designation','topic','department','date','no_of_part']
-        widgets = {
-            'guest': forms.TextInput(attrs={'class':'form-control'}),
-            'organization' : forms.TextInput(attrs={'class':'form-control'}),
-            'designation': forms.TextInput(attrs={'class':'form-control'}),
-            'topic': forms.TextInput(attrs={'class':'form-control'}),
-            'department': forms.Select(attrs={'class':'form-control'}),
-            'date': DateInput(attrs={'class':'form-control'}),
-            'no_of_part': forms.NumberInput(attrs={'class':'form-control'}),
-        }
-
-            
-#2] Expert Lectures (Subject-Specific Topics)
-class AddCurExptLect2(forms.ModelForm):
-    class Meta:
-        model = CurExptLect2
-        fields = ['guest','organization','designation','topic','department','date','no_of_part']
-        widgets = {
-            'guest': forms.TextInput(attrs={'class':'form-control'}),
-            'organization' : forms.TextInput(attrs={'class':'form-control'}),
-            'designation': forms.TextInput(attrs={'class':'form-control'}),
-            'topic': forms.TextInput(attrs={'class':'form-control'}),
-            'department': forms.Select(attrs={'class':'form-control'}),
-            'date': DateInput(attrs={'class':'form-control'}),
-            'no_of_part': forms.NumberInput(attrs={'class':'form-control'}),
-        }
-
-
-#3] Student Internship/Industrial Training 
-class AddCurStudTrain3(forms.ModelForm):
-    class Meta:
-        model = CurStudTrain3
-        fields = ['department','student_name','company','sector','from_date','to_date']
-        widgets = {
-            'department': forms.Select(attrs={'class':'form-control'}),
-            'student_name': forms.TextInput(attrs={'class':'form-control'}),
-            'company': forms.TextInput(attrs={'class':'form-control'}),
-            'sector': forms.TextInput(attrs={'class':'form-control'}),
-            'from_date': DateInput(attrs={'class':'form-control'}),
-            'to_date': DateInput(attrs={'class':'form-control'}),
-        }
-
-
-#4] Student Industrial Visit 
-class AddCurStudVisit4(forms.ModelForm):
-    class Meta:
-        model = CurStudVisit4
-        fields = ['department','company','sector','fac_name','no_of_stud','from_date','to_date']
-        widgets = {
-            'department': forms.Select(attrs={'class':'form-control'}),
-            'company': forms.TextInput(attrs={'class':'form-control'}),
-            'sector': forms.TextInput(attrs={'class':'form-control'}),
-            'fac_name': forms.TextInput(attrs={'class':'form-control'}),
-            'no_of_stud': forms.NumberInput(attrs={'class':'form-control'}),
-            'from_date': DateInput(attrs={'class':'form-control'}),
-            'to_date': DateInput(attrs={'class':'form-control'}),
-        }
-
-#5] Students Sponsored Projects
-class AddCurStudSponsor5(forms.ModelForm):
-    class Meta:
-        model = CurStudSponsor5
-        fields = ['title','comp_rep','comp_sponsor','from_date','to_date','grant','status']
-        widgets = {
-            'title': forms.TextInput(attrs={'class':'form-control'}),
-            'comp_rep': forms.TextInput(attrs={'class':'form-control'}),
-            'comp_sponsor': forms.TextInput(attrs={'class':'form-control'}),
-            'from_date': DateInput(attrs={'class':'form-control'}),
-            'to_date': DateInput(attrs={'class':'form-control'}),
-            'grant': forms.Select(attrs={'class':'form-control'}),
-            'status': forms.TextInput(attrs={'class':'form-control'}),
-        }
 
 #--------------------------------------------------------------------------------------------------
-# INDUSTRY –INSTITUTE INTERACTION
+                             # INDUSTRY –INSTITUTE INTERACTION
 
 #1]Industrial Visit  of Faculty (Visits accompanied with students should be excluded)
 class IndFacVisit1Form(forms.ModelForm):
@@ -425,6 +445,88 @@ class IndInst9Form(forms.ModelForm):
             'date_of_MOU': DateInput(attrs={'class':'form-control'}),
             'purpose_of_MOU': forms.TextInput(attrs={'class':'form-control'}),
         }
+
+
+#-----------------------------------------------------------------------------------------
+                               # CURRICULUM INPUT
+
+#1] Guest Lectures (General Topics)
+class AddCurGuestLect1(forms.ModelForm):
+    class Meta:
+        model = CurGuestLect1
+        fields = ['guest','organization','designation','topic','department','date','no_of_part']
+        widgets = {
+            'guest': forms.TextInput(attrs={'class':'form-control'}),
+            'organization' : forms.TextInput(attrs={'class':'form-control'}),
+            'designation': forms.TextInput(attrs={'class':'form-control'}),
+            'topic': forms.TextInput(attrs={'class':'form-control'}),
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'date': DateInput(attrs={'class':'form-control'}),
+            'no_of_part': forms.NumberInput(attrs={'class':'form-control'}),
+        }
+
+            
+#2] Expert Lectures (Subject-Specific Topics)
+class AddCurExptLect2(forms.ModelForm):
+    class Meta:
+        model = CurExptLect2
+        fields = ['guest','organization','designation','topic','department','date','no_of_part']
+        widgets = {
+            'guest': forms.TextInput(attrs={'class':'form-control'}),
+            'organization' : forms.TextInput(attrs={'class':'form-control'}),
+            'designation': forms.TextInput(attrs={'class':'form-control'}),
+            'topic': forms.TextInput(attrs={'class':'form-control'}),
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'date': DateInput(attrs={'class':'form-control'}),
+            'no_of_part': forms.NumberInput(attrs={'class':'form-control'}),
+        }
+
+
+#3] Student Internship/Industrial Training 
+class AddCurStudTrain3(forms.ModelForm):
+    class Meta:
+        model = CurStudTrain3
+        fields = ['department','student_name','company','sector','from_date','to_date']
+        widgets = {
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'student_name': forms.TextInput(attrs={'class':'form-control'}),
+            'company': forms.TextInput(attrs={'class':'form-control'}),
+            'sector': forms.TextInput(attrs={'class':'form-control'}),
+            'from_date': DateInput(attrs={'class':'form-control'}),
+            'to_date': DateInput(attrs={'class':'form-control'}),
+        }
+
+
+#4] Student Industrial Visit 
+class AddCurStudVisit4(forms.ModelForm):
+    class Meta:
+        model = CurStudVisit4
+        fields = ['department','company','sector','fac_name','no_of_stud','from_date','to_date']
+        widgets = {
+            'department': forms.Select(attrs={'class':'form-control'}),
+            'company': forms.TextInput(attrs={'class':'form-control'}),
+            'sector': forms.TextInput(attrs={'class':'form-control'}),
+            'fac_name': forms.TextInput(attrs={'class':'form-control'}),
+            'no_of_stud': forms.NumberInput(attrs={'class':'form-control'}),
+            'from_date': DateInput(attrs={'class':'form-control'}),
+            'to_date': DateInput(attrs={'class':'form-control'}),
+        }
+
+#5] Students Sponsored Projects
+class AddCurStudSponsor5(forms.ModelForm):
+    class Meta:
+        model = CurStudSponsor5
+        fields = ['title','comp_rep','comp_sponsor','from_date','to_date','grant','status']
+        widgets = {
+            'title': forms.TextInput(attrs={'class':'form-control'}),
+            'comp_rep': forms.TextInput(attrs={'class':'form-control'}),
+            'comp_sponsor': forms.TextInput(attrs={'class':'form-control'}),
+            'from_date': DateInput(attrs={'class':'form-control'}),
+            'to_date': DateInput(attrs={'class':'form-control'}),
+            'grant': forms.Select(attrs={'class':'form-control'}),
+            'status': forms.TextInput(attrs={'class':'form-control'}),
+        }
+
 
 #--------------------------------------------------------------------------------------------------
 # STUDENT /FACULTY SUPPORT SYSTEM
