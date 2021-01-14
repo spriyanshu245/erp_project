@@ -1,0 +1,6 @@
+## PLEASE ENTER ENCOUNTERED PROBLEMS HERE ##
+
+1. Bootstrap gets loaded twice once in base and again in every "tabs" template.
+    This is causing shifting of nav links to left and rounding of corners. 
+        Removing tabs bootstrap cdn fixes the issue.
+ 
