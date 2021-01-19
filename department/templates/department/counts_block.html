@@ -1,0 +1,28 @@
+{% block counts %}
+{% load custom_filters %}
+{% if count %}
+<div class="collapse" id="contentId">
+<table class="table table-bordered  table-hover" id="table_count">
+
+    <thead class="thead-dark">
+     <tr>
+        <th scope="col" style="text-align: center;">No</th>
+        <th scope="col"></th>
+        <th scope="col" style="text-align: center;">Number</th>
+    </tr>
+    </thead>
+  
+    <tbody>
+      {% for title, count in title|zip:count %}
+        <tr>
+          <td style="text-align: center;">{{forloop.counter}}</td>
+          <td style="color:rgb(45, 161, 16)">Number of {{title}}</td>
+          <td style="text-align: center;">{{count}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    
+  </table>
+</div>
+{% endif %}
+{% endblock %}

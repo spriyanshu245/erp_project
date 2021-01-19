@@ -29,7 +29,10 @@ class StudentResultCreate(CreateView):
         context['update_link'] = "stud_result_update"
         context['delete_link'] = "stud_result_delete"
         context['tab_link'] = "stud_result_tabs.html"
-        context['count'] = self.model.objects.all().count()
+        titles = ['Number of books/chapters/Manuals/Monographs spublished',]
+        counts = [self.model.objects.all().count(),]
+        context['title'] = titles
+        context['count'] = counts
         return context
         
 @method_decorator(login_required, name='dispatch')
