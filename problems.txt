@@ -12,8 +12,7 @@
 
 
 2. update/ delete messages.
-3.excel sheet unformatted.
+3.downloaded excel sheet unformatted.
 4.table vertical and horizonal scrollable.
-
-5.one click download all department app tables.
- 
+5.one click download - 'department app' tables.
+6.context['note'] - (yellow cell ) fetch from views and display in add_records.html below

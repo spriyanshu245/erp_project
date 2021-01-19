@@ -60,6 +60,8 @@ admin.site.register(ResIndustrial7)
 admin.site.register(FacEvents8)
 admin.site.register(ProfessionalPrac9)
 admin.site.register(FacPatents10)
+admin.site.register(NationalAttend11)
+admin.site.register(InternationalAttend12)
 
 
 admin.site.register(FacAchieve)

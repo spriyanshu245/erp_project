@@ -11,11 +11,13 @@
 <br>
 <div>
   <form class="form-inline mr-auto mb-4 d-flex justify-content-end" onkeydown="return event.key != 'Enter';">
-    <input id="search" class="form-control mr-sm-2" type="text" placeholder="Search Table..">
-    <span class="glyphicon glyphicon-search"></span>
+    <i class="fa fa-search"></i>
+    <input id="search" class="form-control mr-sm-2" style="margin-left: 0.7em" type="text" placeholder="Search Table..">
     <button class="btn btn-outline-success btn-m" onclick="DownloadCsv('table_main')"><i class="fa fa-download"></i> Download</button>
+    {% if count %}
     <button class="btn btn-outline-secondary btn-m" type="button" data-toggle="collapse" data-target="#contentId" aria-expanded="false"
-          aria-controls="contentId">Show Counts</button>
+        aria-controls="contentId"><i class="fa fa-list"></i> Show Counts</button>
+    {% endif %}
   </form>
 </div>
 

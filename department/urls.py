@@ -81,6 +81,14 @@ urlpatterns = [
     path('fac_contri_10/update/<int:pk>/', views.FacPatents10Update.as_view(), name="fac_contri_10_update"),
     path('fac_contri_10/delete/<int:pk>/', views.FacPatents10Delete.as_view(), name="fac_contri_10_delete"),
 
+    path('fac_contri_11/', views.NationalAttend11Create.as_view(), name="fac_contri_11"),
+    path('fac_contri_11/update/<int:pk>/', views.NationalAttend11Update.as_view(), name="fac_contri_11_update"),
+    path('fac_contri_11/delete/<int:pk>/', views.NationalAttend11Delete.as_view(), name="fac_contri_11_delete"),
+
+    path('fac_contri_12/', views.InternationalAttend12Create.as_view(), name="fac_contri_12"),
+    path('fac_contri_12/update/<int:pk>/', views.InternationalAttend12Update.as_view(), name="fac_contri_12_update"),
+    path('fac_contri_12/delete/<int:pk>/', views.InternationalAttend12Delete.as_view(), name="fac_contri_12_delete"),
+
 #-------------------------------------------------------------------------------------------------------------------
     # FACULTY ACHIEVEMENT
     path('fac_achieve/', views.FacAchieveCreate.as_view(), name="fac_achieve"),
