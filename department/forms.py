@@ -12,7 +12,7 @@ class DateInput(forms.DateInput):
 class AddStudentResult(forms.ModelForm):
     class Meta:
         model = StudentResult
-        fields = ['department','Class','exam_Type','subject','exam_Date','appeared','passed','percentage']
+        fields = ['department','Class','exam_Type','subject','exam_Date','appeared','passed']
         #adding bootstrap classes to form inputs
         widgets = {
             'department' : forms.Select(attrs={'class':'form-control'}),
@@ -22,7 +22,6 @@ class AddStudentResult(forms.ModelForm):
             'exam_Date' : DateInput(attrs={'class':'form-control'}),
             'appeared': forms.NumberInput(attrs={'class':'form-control'}),
             'passed': forms.NumberInput(attrs={'class':'form-control'}),
-            'percentage': forms.NumberInput(attrs={'class':'form-control'}),
         }
 
 
@@ -648,7 +647,61 @@ class ExtraCurr2Form(forms.ModelForm):
             "rank": forms.NumberInput(attrs={'class':'form-control'}),
         }
 
-class Ecelllform(forms.ModelForm):
+class  CulturalAct3Form(forms.ModelForm):
+    class Meta:
+        model =  CulturalAct3
+        fields = ("event_Name","organized_By","level","date","Prize_Won_or_Medal","no_of_Students_Participated")
+        widgets = {
+            "event_Name": forms.TextInput(attrs={'class': 'form-control'}),
+            "organized_By": forms.TextInput(attrs={'class': 'form-control'}),
+            "level": forms.TextInput(attrs={'class': 'form-control'}),
+            "date": DateInput(attrs={'class':'form-control'}),
+            "Prize_Won_or_Medal": forms.TextInput(attrs={'class': 'form-control'}),
+            "no_of_Students_Participated": forms.NumberInput(attrs={'class':'form-control'}),
+        }
+
+class  SocialAct4Form(forms.ModelForm):
+    class Meta:
+        model =  SocialAct4
+        fields = '__all__'
+        widgets = {
+            "activity_Name": forms.TextInput(attrs={'class': 'form-control'}),
+            "location": forms.TextInput(attrs={'class': 'form-control'}),
+            "no_of_Faculties_Participated": forms.TextInput(attrs={'class': 'form-control'}),
+            "no_of_Students_Participated": forms.TextInput(attrs={'class': 'form-control'}),
+            "no_of_People_Benefited": forms.TextInput(attrs={'class': 'form-control'}),
+            "date": DateInput(attrs={'class':'form-control'}),
+            "Awards_or_Recognition_open_if_any_close": forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+class  CentersAct5Form(forms.ModelForm):
+    class Meta:
+        model =  CentersAct5
+        fields = '__all__'
+        widgets = {
+            "Center_or_Cell": forms.TextInput(attrs={'class': 'form-control'}),
+            "Program_or_Activity": forms.TextInput(attrs={'class': 'form-control'}),
+            "sponsoring_Agency": forms.TextInput(attrs={'class': 'form-control'}),
+            "date": DateInput(attrs={'class':'form-control'}),
+            "level": forms.TextInput(attrs={'class': 'form-control'}),
+            "no_of_Participants": forms.NumberInput(attrs={'class':'form-control'}),
+        }
+
+class  ExtraAct6Form(forms.ModelForm):
+    class Meta:
+        model =  ExtraAct6
+        fields = '__all__'
+        widgets = {
+            "department": forms.Select(attrs={'class':'form-control'}),
+            "faculty": forms.TextInput(attrs={'class': 'form-control'}),
+            "activity": forms.TextInput(attrs={'class': 'form-control'}),
+            "date": DateInput(attrs={'class':'form-control'}),
+            "achievement": forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+#--------------------------------------------------------------------------------------------------
+                                    # E - CELL
+class EcellForm(forms.ModelForm):
     class Meta:
         model = ExtraCurr1
         fields = ("activity","organized_by","level","date","no_of_Students_Participated")
@@ -661,7 +714,7 @@ class Ecelllform(forms.ModelForm):
         }
 
 
-#------------------------------user----------------------------------------------------------------
+#-------------------------------------------USERS-----------------------------------------------------
 class UserForm(forms.ModelForm):
     class Meta:
         model = User

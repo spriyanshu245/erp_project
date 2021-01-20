@@ -17,11 +17,11 @@
                 {% for instance in data %}
                     {% if forloop.first %}
                         {% for field, value in instance.fields.items %}
-                            <th scope="col">{{ field|replace_to_space }}</th>
+                            <th scope="col" style="text-align: center;">{{ field|replace_to_space }}</th>
                         {% endfor %}
                     {% endif %}
                 {% endfor %}
-                <th scope="col">Action</th>
+                <th scope="col" style="text-align: center;">Action</th>
                 
             </tr>
             </thead>

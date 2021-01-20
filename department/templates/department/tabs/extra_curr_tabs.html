@@ -14,12 +14,28 @@
 </div>
 <ul class="nav nav-tabs">
     <li class="nav-item">
-      <a class="nav-link {% if nbar == 'tab_1' %}active{% endif %}" 
+      <a class="nav-link {% if nbar == 'extra_curr_1' %}active{% endif %}" 
         href="{% url 'extra_curr_1' %}">Sports</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {% if nbar == 'tab_2' %}active{% endif %}" 
-        href="{% url 'extra_curr_2' %}">winners</a>
+      <a class="nav-link {% if nbar == 'extra_curr_2' %}active{% endif %}" 
+        href="{% url 'extra_curr_2' %}">Winners</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'extra_curr_3' %}active{% endif %}" 
+        href="{% url 'extra_curr_3' %}">Cultural/Club Awards</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'extra_curr_4' %}active{% endif %}" 
+        href="{% url 'extra_curr_4' %}">Social Activities</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'extra_curr_5' %}active{% endif %}" 
+        href="{% url 'extra_curr_5' %}">Centers/Cells Activities</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'extra_curr_6' %}active{% endif %}" 
+        href="{% url 'extra_curr_6' %}">Extra Activities/Acheivement</a>
     </li>
     
   </ul>
@@ -37,4 +53,5 @@
   </form>
 </div>
 
+{% include 'counts_block.html' %}
 {% endblock %}

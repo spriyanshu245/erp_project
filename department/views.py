@@ -77,6 +77,7 @@ class DeptEvent1Create(CreateView):
         context['update_link'] = "dept_act_1_update"
         context['delete_link'] = "dept_act_1_delete"
         context['tab_link'] = "dept_act_tabs.html"
+        context['note'] = "Type of Event- Seminar/Webinar/Workshop/Conference/ Industry-Academia Innovation/Success Stories/Skill development"
         return context
 
 @method_decorator(login_required, name='dispatch')
@@ -118,6 +119,8 @@ class DeptEvent2Create(CreateView):
         context['update_link'] = "dept_act_2_update"
         context['delete_link'] = "dept_act_2_delete"
         context['tab_link'] = "dept_act_tabs.html"
+        context['note'] = "Activities like SanganakSadhana, Swachha-Bharat Mission can be included. Don’t include NSS activities here."
+
         return context
 
 
@@ -159,6 +162,8 @@ class DeptProEvent3Create(CreateView):
         context['update_link'] = "dept_act_3_update"
         context['delete_link'] = "dept_act_3_delete"
         context['tab_link'] = "dept_act_tabs.html"
+        context['note'] = "Include activities conducted in association with professional bodies only."
+
         return context
 
 class DeptProEvent3Update(UpdateView):
@@ -198,6 +203,7 @@ class DeptFacultyDev4Create(CreateView):
         context['update_link'] = "dept_act_4_update"
         context['delete_link'] = "dept_act_4_delete"
         context['tab_link'] = "dept_act_tabs.html"
+        context['note'] = "Details provided by department shall be acknowledged"
         return context
 
 class DeptFacultyDev4Update(UpdateView):
@@ -237,6 +243,7 @@ class DeptStudPart5Create(CreateView):
         context['update_link'] = "dept_act_5_update"
         context['delete_link'] = "dept_act_5_delete"
         context['tab_link'] = "dept_act_tabs.html"
+        context['note'] = "Include only technical activities here"
         return context
 
 class DeptStudPart5Update(UpdateView):
@@ -276,6 +283,7 @@ class DeptStartUp6Create(CreateView):
         context['update_link'] = "dept_act_6_update"
         context['delete_link'] = "dept_act_6_delete"
         context['tab_link'] = "dept_act_tabs.html"
+        context['note'] = "Only provide information here if new Start-up has been started. Don't include startup activities here."
         return context
 
 class DeptStartUp6Update(UpdateView):
@@ -320,7 +328,7 @@ class ResProject1Create(CreateView):
         context['update_link'] = "fac_contri_1_update"
         context['delete_link'] = "fac_contri_1_delete"
         context['tab_link'] = "fac_contri_tabs.html"
-        context['header2'] = "Numerical information about research activities in the specified period"
+        context['count_header'] = "Numerical information about research activities in the specified period"
 
         titles = ['Research projects in the specified period',
         'Funds received for research for projects',
@@ -1476,7 +1484,7 @@ class StudFac1Create(CreateView):
         context['header'] = 'Mentoring System to help students at individual level'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
-        context['nbar'] = "tab_1"
+        context['nbar'] = "stud_fac_1"
         context['update_link'] = "stud_fac_1_update"
         context['delete_link'] = "stud_fac_1_delete"
         context['tab_link'] = "stud_fac_tabs.html"
@@ -1515,7 +1523,7 @@ class StudFac2Create(CreateView):
         context['header'] = 'Self Learning facilities for students'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
-        context['nbar'] = "tab_2"
+        context['nbar'] = "stud_fac_2"
         context['update_link'] = "stud_fac_2_update"
         context['delete_link'] = "stud_fac_2_delete"
         context['tab_link'] = "stud_fac_tabs.html"
@@ -1554,7 +1562,7 @@ class StudFac3Create(CreateView):
         context['header'] = 'Achievement of Students in Competitive Exam '
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
-        context['nbar'] = "tab_3"
+        context['nbar'] = "stud_fac_3"
         context['update_link'] = "stud_fac_3_update"
         context['delete_link'] = "stud_fac_3_delete"
         context['tab_link'] = "stud_fac_tabs.html"
@@ -1593,7 +1601,7 @@ class StudFac4Create(CreateView):
         context['header'] = 'Capability Enhancement and Development Activities'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
-        context['nbar'] = "tab_4"
+        context['nbar'] = "stud_fac_4"
         context['update_link'] = "stud_fac_4_update"
         context['delete_link'] = "stud_fac_4_delete"
         context['tab_link'] = "stud_fac_tabs.html"
@@ -1629,10 +1637,10 @@ class StudFac5Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['header'] = 'Number of professional development / administrative training  programmes organized'
+        context['header'] = 'Professional development / administrative training  programmes organized'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
-        context['nbar'] = "tab_5"
+        context['nbar'] = "stud_fac_5"
         context['update_link'] = "stud_fac_5_update"
         context['delete_link'] = "stud_fac_5_delete"
         context['tab_link'] = "stud_fac_tabs.html"
@@ -1645,7 +1653,7 @@ class StudFac5Update(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['header'] = 'Number of professional development / administrative training  programmes organized'
+        context['header'] = 'Professional development / administrative training  programmes organized'
         return context
 
 class StudFac5Delete(DeleteView):
@@ -1673,7 +1681,7 @@ class ExtraCurr1Create(CreateView):
         context['header'] = 'Sports (This information to be provided by Physical/Sports Director)'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
-        context['nbar'] = "tab_1"
+        context['nbar'] = "extra_curr_1"
         context['update_link'] = "extra_curr_1_update"
         context['delete_link'] = "extra_curr_1_delete"
         context['tab_link'] = "extra_curr_tabs.html"
@@ -1712,7 +1720,7 @@ class ExtraCurr2Create(CreateView):
         context['header'] = 'Names of winners at various levels of  sports tournaments'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
-        context['nbar'] = "tab_2"
+        context['nbar'] = "extra_curr_2"
         context['update_link'] = "extra_curr_2_update"
         context['delete_link'] = "extra_curr_2_delete"
         context['tab_link'] = "extra_curr_tabs.html"
@@ -1738,3 +1746,237 @@ class ExtraCurr2Delete(DeleteView):
         context = super().get_context_data(**kwargs)
         context['cancel_link'] = "extra_curr_2"
         return context
+
+#-------------------------------------------------------------------------------------------------
+#3] Awards won in cultural competitions/Club activities
+class CulturalAct3Create(CreateView):
+    model = CulturalAct3
+    form_class = CulturalAct3Form
+    template_name = 'create_form.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Awards won in cultural competitions/Club activities'
+        context['events'] = self.model.objects.all()
+        context['nbar'] = "extra_curr_3"
+        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        context['update_link'] = "extra_curr_3_update"
+        context['delete_link'] = "extra_curr_3_delete"
+        context['tab_link'] = "extra_curr_tabs.html"
+        context['count_header'] = "Number of students participated in cultural competitions other than institute level"
+        context['note'] = "A detailed descriptive report by Cultural Coordinator"
+
+        titles = ["cultural events",
+        "solo_Performances",
+        "team_Performances"]
+        counts = [ self.model.objects.all().count(),
+        self.model.objects.all().count()]
+        context['title'] = titles
+        context['count'] = counts
+        return context
+
+class CulturalAct3Update(UpdateView):
+    model = CulturalAct3
+    form_class = CulturalAct3Form
+    template_name = "form_update.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Awards won in cultural competitions/Club activities'
+        return context
+
+class CulturalAct3Delete(DeleteView):
+    model = CulturalAct3
+    success_url = reverse_lazy("extra_curr_3")
+    template_name = "form_delete.html"
+    context_object_name = "model_instance"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cancel_link'] = "extra_curr_3"
+        return context
+
+#-------------------------------------------------------------------------------------------------
+#4] Information about social activities held in the specified period
+class SocialAct4Create(CreateView):
+    model = SocialAct4
+    form_class = ExtraCurr2Form
+    template_name = 'create_form.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Information about social activities held'
+        context['events'] = self.model.objects.all()
+        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        context['nbar'] = "extra_curr_4"
+        context['update_link'] = "extra_curr_4_update"
+        context['delete_link'] = "extra_curr_4_delete"
+        context['tab_link'] = "extra_curr_tabs.html"
+        return context
+
+class SocialAct4Update(UpdateView):
+    model = SocialAct4
+    form_class = SocialAct4Form
+    template_name = "form_update.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Information about social activities held'
+        return context
+
+class SocialAct4Delete(DeleteView):
+    model = SocialAct4
+    success_url = reverse_lazy("extra_curr_4")
+    template_name = "form_delete.html"
+    context_object_name = "model_instance"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cancel_link'] = "extra_curr_4"
+        return context
+
+#-------------------------------------------------------------------------------------------------
+#5] Activities of Various Centers/Cells (ISTE/Research/Skill Development Center etc)
+class CentersAct5Create(CreateView):
+    model = CentersAct5
+    form_class = CentersAct5Form
+    template_name = 'create_form.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Activities of Various Centers/Cells (ISTE/Research/Skill Development Center etc)'
+        context['events'] = self.model.objects.all()
+        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        context['nbar'] = "extra_curr_5"
+        context['update_link'] = "extra_curr_5_update"
+        context['delete_link'] = "extra_curr_5_delete"
+        context['tab_link'] = "extra_curr_tabs.html"
+        return context
+
+class CentersAct5Update(UpdateView):
+    model = CentersAct5
+    form_class = CentersAct5Form
+    template_name = "form_update.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Activities of Various Centers/Cells (ISTE/Research/Skill Development Center etc)'
+        return context
+
+class CentersAct5Delete(DeleteView):
+    model = CentersAct5
+    success_url = reverse_lazy("extra_curr_5")
+    template_name = "form_delete.html"
+    context_object_name = "model_instance"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cancel_link'] = "extra_curr_5"
+        return context
+
+#-------------------------------------------------------------------------------------------------
+#6] Extra Activities/Acheivement(if any)
+class ExtraAct6Create(CreateView):
+    model = ExtraAct6
+    form_class = ExtraAct6Form
+    template_name = 'create_form.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Extra Activities/Acheivement(if any)'
+        context['events'] = self.model.objects.all()
+        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        context['nbar'] = "extra_curr_6"
+        context['update_link'] = "extra_curr_6_update"
+        context['delete_link'] = "extra_curr_6_delete"
+        context['tab_link'] = "extra_curr_tabs.html"
+        return context
+
+class ExtraAct6Update(UpdateView):
+    model = ExtraAct6
+    form_class = ExtraAct6Form
+    template_name = "form_update.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Extra Activities/Acheivement(if any)'
+        return context
+
+class ExtraAct6Delete(DeleteView):
+    model = ExtraAct6
+    success_url = reverse_lazy("extra_curr_6")
+    template_name = "form_delete.html"
+    context_object_name = "model_instance"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cancel_link'] = "extra_curr_6"
+        return context
+
+#-------------------------------------------------------------------------------------------------
+#2] Activities Conducted By E- Cell
+class EcellCreate(CreateView):
+    model = Ecell
+    form_class = EcellForm
+    template_name = 'create_form.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Activities Conducted By E- Cell'
+        context['events'] = self.model.objects.all()
+        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        context['nbar'] = "e_cell"
+        context['update_link'] = "e_cell_update"
+        context['delete_link'] = "e_cell_delete"
+        context['tab_link'] = "e_cell_tabs.html"
+        return context
+
+class EcellUpdate(UpdateView):
+    model = Ecell
+    form_class = EcellForm
+    template_name = "form_update.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Activities Conducted By E- Cell'
+        return context
+
+class EcellDelete(DeleteView):
+    model = Ecell
+    success_url = reverse_lazy("e_cell")
+    template_name = "form_delete.html"
+    context_object_name = "model_instance"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cancel_link'] = "e_cell"
+        return context
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

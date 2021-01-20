@@ -95,6 +95,15 @@ admin.site.register(StudFac5)
 
 admin.site.register(ExtraCurr1)
 admin.site.register(ExtraCurr2)
+admin.site.register(CulturalCount3)
+admin.site.register(CulturalAct3)
+admin.site.register(SocialAct4)
+admin.site.register(CentersAct5)
+admin.site.register(ExtraAct6)
+
+
+admin.site.register(Ecell)
+
 
 
 
