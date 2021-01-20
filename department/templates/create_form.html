@@ -8,13 +8,12 @@
      <div class="col-sm-9">
 
         {% if events %}
-        <h4 class="text-center alert alert-info"> {{header}} </h4> 
-        <table class="table table-bordered  table-hover" id="table_main">
+        <h4 class="text-center alert alert-primary"> {{header}} </h4> 
+        <table class="table table-bordered  table-hover" id="table_main" style="text-align: center;">
 
             <thead class="thead-dark">
              <tr>
-                <th scope="col" style="text-align: center;">No</th>
-
+                <th scope="col">No</th>
                 {% for instance in data %}
                     {% if forloop.first %}
                         {% for field, value in instance.fields.items %}
@@ -27,9 +26,9 @@
             </tr>
             </thead>
 
-            <tbody id="table_row">
+            <tbody id="table_row" style="font-weight: bold; color: #687a6d; padding: 10px; border: 1px solid #F1F1F1;">
                 {% for instance in data %}
-                <tr>
+                <tr >
                     <td>{{forloop.counter}}</td>
                     {% for field, value in instance.fields.items %}
                     <td>{{ value }}</td>

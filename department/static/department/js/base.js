@@ -1,3 +1,5 @@
+
+
 //<!-- JS to open and close sidebar with overlay effect -->
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";

@@ -50,10 +50,53 @@ urlpatterns = [
 
 #-------------------------------------------------------------------------------------------------------------------
     # FACULTY CONTRIBUTIONS
-    url('fac_contri_1/', views.ResProject1Create.as_view(), name="fac_contri_1"),
+    path('fac_contri_1/', views.ResProject1Create.as_view(), name="fac_contri_1"),
     path('fac_contri_1/update/<int:pk>/', views.ResProject1Update.as_view(), name="fac_contri_1_update"),
     path('fac_contri_1/delete/<int:pk>/', views.ResProject1Delete.as_view(), name="fac_contri_1_delete"),
 
+    path('fac_contri_2/', views.ResFunds2Create.as_view(), name="fac_contri_2"),
+    path('fac_contri_2/update/<int:pk>/', views.ResFunds2Update.as_view(), name="fac_contri_2_update"),
+    path('fac_contri_2/delete/<int:pk>/', views.ResFunds2Delete.as_view(), name="fac_contri_2_delete"),
+
+    path('fac_contri_3/', views.ResInternational3Create.as_view(), name="fac_contri_3"),
+    path('fac_contri_3/update/<int:pk>/', views.ResInternational3Update.as_view(), name="fac_contri_3_update"),
+    path('fac_contri_3/delete/<int:pk>/', views.ResInternational3Delete.as_view(), name="fac_contri_3_delete"),
+
+    path('fac_contri_4/', views.ResNational4Create.as_view(), name="fac_contri_4"),
+    path('fac_contri_4/update/<int:pk>/', views.ResNational4Update.as_view(), name="fac_contri_4_update"),
+    path('fac_contri_4/delete/<int:pk>/', views.ResNational4Delete.as_view(), name="fac_contri_4_delete"),
+
+    path('fac_contri_5/', views.ConfInternational5Create.as_view(), name="fac_contri_5"),
+    path('fac_contri_5/update/<int:pk>/', views.ConfInternational5Update.as_view(), name="fac_contri_5_update"),
+    path('fac_contri_5/delete/<int:pk>/', views.ConfInternational5Delete.as_view(), name="fac_contri_5_delete"),
+
+    path('fac_contri_6/', views.ConfNational6Create.as_view(), name="fac_contri_6"),
+    path('fac_contri_6/update/<int:pk>/', views.ConfNational6Update.as_view(), name="fac_contri_6_update"),
+    path('fac_contri_6/delete/<int:pk>/', views.ConfNational6Delete.as_view(), name="fac_contri_6_delete"),
+
+    path('fac_contri_7/', views.ResIndustrial7Create.as_view(), name="fac_contri_7"),
+    path('fac_contri_7/update/<int:pk>/', views.ResIndustrial7Update.as_view(), name="fac_contri_7_update"),
+    path('fac_contri_7/delete/<int:pk>/', views.ResIndustrial7Delete.as_view(), name="fac_contri_7_delete"),
+
+    path('fac_contri_8/', views.FacEvents8Create.as_view(), name="fac_contri_8"),
+    path('fac_contri_8/update/<int:pk>/', views.FacEvents8Update.as_view(), name="fac_contri_8_update"),
+    path('fac_contri_8/delete/<int:pk>/', views.FacEvents8Delete.as_view(), name="fac_contri_8_delete"),
+
+    path('fac_contri_9/', views.ProfessionalPrac9Create.as_view(), name="fac_contri_9"),
+    path('fac_contri_9/update/<int:pk>/', views.ProfessionalPrac9Update.as_view(), name="fac_contri_9_update"),
+    path('fac_contri_9/delete/<int:pk>/', views.ProfessionalPrac9Delete.as_view(), name="fac_contri_9_delete"),
+
+    path('fac_contri_10/', views.FacPatents10Create.as_view(), name="fac_contri_10"),
+    path('fac_contri_10/update/<int:pk>/', views.FacPatents10Update.as_view(), name="fac_contri_10_update"),
+    path('fac_contri_10/delete/<int:pk>/', views.FacPatents10Delete.as_view(), name="fac_contri_10_delete"),
+
+    path('fac_contri_11/', views.NationalAttend11Create.as_view(), name="fac_contri_11"),
+    path('fac_contri_11/update/<int:pk>/', views.NationalAttend11Update.as_view(), name="fac_contri_11_update"),
+    path('fac_contri_11/delete/<int:pk>/', views.NationalAttend11Delete.as_view(), name="fac_contri_11_delete"),
+
+    path('fac_contri_12/', views.InternationalAttend12Create.as_view(), name="fac_contri_12"),
+    path('fac_contri_12/update/<int:pk>/', views.InternationalAttend12Update.as_view(), name="fac_contri_12_update"),
+    path('fac_contri_12/delete/<int:pk>/', views.InternationalAttend12Delete.as_view(), name="fac_contri_12_delete"),
 
 #-------------------------------------------------------------------------------------------------------------------
     # FACULTY ACHIEVEMENT

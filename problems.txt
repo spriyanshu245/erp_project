@@ -3,4 +3,16 @@
 1. Bootstrap gets loaded twice once in base and again in every "tabs" template.
     This is causing shifting of nav links to left and rounding of corners. 
         Removing tabs bootstrap cdn fixes the issue.
- 
+
+        1.1 bootstrap cdn is not loading in child html pages from base.html
+            causing all tables to basic styling.
+                we have to figure out other way use bootstrap in base as we
+                do need to include bootstrap in tabs html.
+
+
+
+2. update/ delete messages.
+3.downloaded excel sheet unformatted.
+4.table vertical and horizonal scrollable.
+5.one click download - 'department app' tables.
+6.context['note'] - (yellow cell ) fetch from views and display in add_records.html below

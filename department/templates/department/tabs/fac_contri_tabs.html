@@ -1,5 +1,5 @@
 {% block tabs %}
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <style>
@@ -17,36 +17,63 @@
       <a class="nav-link {% if nbar == 'fac_contri_1' %}active{% endif %}" 
         href="{% url 'fac_contri_1' %}">Research Projects</a>
     </li>
-    <!-- <li class="nav-item">
-      <a class="nav-link {% if nbar == 'dept_act_2' %}active{% endif %}" 
-        href="{% url 'dept_act_2' %}">Events Organized(For nearby schools)</a>
+   <li class="nav-item">
+      <a class="nav-link {% if nbar == 'fac_contri_2' %}active{% endif %}" 
+        href="{% url 'fac_contri_2' %}">Research project Funds</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {% if nbar == 'dept_act_3' %}active{% endif %}" 
-        href="{% url 'dept_act_3' %}">Events with Professional Bodies</a>
+      <a class="nav-link {% if nbar == 'fac_contri_3' %}active{% endif %}" 
+        href="{% url 'fac_contri_3' %}">International Research Publications</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {% if nbar == 'dept_act_4' %}active{% endif %}" 
-        href="{% url 'dept_act_4' %}">Faculty Development</a>
+      <a class="nav-link {% if nbar == 'fac_contri_4' %}active{% endif %}" 
+        href="{% url 'fac_contri_4' %}">National Research Publications</a>
+    </li>
+     <li class="nav-item">
+      <a class="nav-link {% if nbar == 'fac_contri_5' %}active{% endif %}" 
+        href="{% url 'fac_contri_5' %}">(Paper presentation) International Conferences </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {% if nbar == 'dept_act_5' %}active{% endif %}" 
-        href="{% url 'dept_act_5' %}">Student Inter-Institute Participation</a>
+      <a class="nav-link {% if nbar == 'fac_contri_6' %}active{% endif %}" 
+        href="{% url 'fac_contri_6' %}">(Paper presentation) National Conferences</a>
+    </li>
+     <li class="nav-item">
+      <a class="nav-link {% if nbar == 'fac_contri_7' %}active{% endif %}" 
+        href="{% url 'fac_contri_7' %}"> Research Papers Authored with Industrial Persons</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {% if nbar == 'dept_act_6' %}active{% endif %}" 
-        href="{% url 'dept_act_6' %}">Start-up</a>
-    </li> -->
+      <a class="nav-link {% if nbar == 'fac_contri_8' %}active{% endif %}" 
+        href="{% url 'fac_contri_8' %}">Events for Faculty Members</a>
+    </li>
+     <li class="nav-item">
+      <a class="nav-link {% if nbar == 'fac_contri_9' %}active{% endif %}" 
+        href="{% url 'fac_contri_9' %}">Professional Practices</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'fac_contri_10' %}active{% endif %}" 
+        href="{% url 'fac_contri_10' %}">Faculty Patents/IPR</a>
+    </li>
+     <li class="nav-item">
+      <a class="nav-link {% if nbar == 'fac_contri_11' %}active{% endif %}" 
+        href="{% url 'fac_contri_11' %}">National Conference attended</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'fac_contri_12' %}active{% endif %}" 
+        href="{% url 'fac_contri_12' %}">International Conference attended</a>
+    </li>
   </ul>
   <br>
   <div>
     <form class="form-inline mr-auto mb-4 d-flex justify-content-end" onkeydown="return event.key != 'Enter';">
-      <input id="search" class="form-control mr-sm-2" type="text" placeholder="Search Table..">
-      <span class="glyphicon glyphicon-search"></span>
-       <button class="btn btn-outline-success btn-m" onclick="DownloadCsv('table_main')"><i class="fa fa-download"></i> Download</button>
+      <i class="fa fa-search"></i>
+      <input id="search" class="form-control mr-sm-2" style="margin-left: 0.7em" type="text" placeholder="Search Table..">
+      <button class="btn btn-outline-success btn-m" onclick="DownloadCsv('table_main')"><i class="fa fa-download"></i> Download</button>
+      {% if count %}
+      <button class="btn btn-outline-secondary btn-m" type="button" data-toggle="collapse" data-target="#contentId" aria-expanded="false"
+          aria-controls="contentId"><i class="fa fa-list"></i> Show Counts</button>
+      {% endif %}
     </form>
   </div>
 
-  
-
+{% include 'counts_block.html' %}
 {% endblock %}
