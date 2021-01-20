@@ -8,10 +8,32 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import redirect
 
 # Custom templates
 
 # Create your views here.
+
+#------------------------------LOGIN VIEWS-------------------------------------------------------
+
+def registerPage(request):
+    form = CreateUserForm()
+
+    if request.method == "POST":
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("/")
+
+    context = {'form':form}
+    return render(request, 'test.html', context)
+
+#------------------------------TEST PAGE----------------------------------
+def testPage(request):
+    context = {}
+    return render(request, 'test.html', context)
+
 
 #--------------------------------------STUDENT ACADEMIC PERFORMANCE--------------------------------
 

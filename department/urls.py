@@ -4,8 +4,17 @@ from department import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    # Test Pages
+   path('testPage/', views.testPage, name="test"),
+
+#---------------------------------------------------------------
+    # Registration Page and Logins
     path('login/', auth_views.LoginView.as_view(),name="login"),
     path('logout/', auth_views.LogoutView.as_view(),name="logout"),
+    
+    # Shubham Login Pages
+    path('register/', views.registerPage, name="register"),
+    # path('loginPage/', views.loginPage, name="loginPage"),
 
 #-------------------------------------------------------------------------------------------------------------------
     # STUDENT RESULT

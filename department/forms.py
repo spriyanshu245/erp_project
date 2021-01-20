@@ -2,9 +2,19 @@ from django.core import validators
 from django import forms
 from .models import *
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 class DateInput(forms.DateInput):
     input_type = 'date'
+
+# Registration and login
+class CreateUserForm(UserCreationForm):
+    class Meta:
+        model = User
+        # fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username','first_name','last_name', 'email', 'password1', 'password2']
+
+
 
 # Students Result in various examinations during specified period 
 class AddStudentResult(forms.ModelForm):
