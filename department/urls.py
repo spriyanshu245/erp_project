@@ -201,6 +201,31 @@ urlpatterns = [
     path('extra_curr_2/', views.ExtraCurr2Create.as_view(), name="extra_curr_2"),
     path('extra_curr_2/update/<int:pk>/', views.ExtraCurr2Update.as_view(), name="extra_curr_2_update"),
     path('extra_curr_2/delete/<int:pk>/', views.ExtraCurr2Delete.as_view(), name="extra_curr_2_delete"),
+
+    path('extra_curr_3/', views.CulturalAct3Create.as_view(), name="extra_curr_3"),
+    path('extra_curr_3/update/<int:pk>/', views.CulturalAct3Update.as_view(), name="extra_curr_3_update"),
+    path('extra_curr_3/delete/<int:pk>/', views.CulturalAct3Delete.as_view(), name="extra_curr_3_delete"),
+
+    path('extra_curr_4/', views.SocialAct4Create.as_view(), name="extra_curr_4"),
+    path('extra_curr_4/update/<int:pk>/', views.SocialAct4Update.as_view(), name="extra_curr_4_update"),
+    path('extra_curr_4/delete/<int:pk>/', views.SocialAct4Delete.as_view(), name="extra_curr_4_delete"),
+
+    path('extra_curr_5/', views.CentersAct5Create.as_view(), name="extra_curr_5"),
+    path('extra_curr_5/update/<int:pk>/', views.CentersAct5Update.as_view(), name="extra_curr_5_update"),
+    path('extra_curr_5/delete/<int:pk>/', views.CentersAct5Delete.as_view(), name="extra_curr_5_delete"),
+
+    path('extra_curr_6/', views.ExtraAct6Create.as_view(), name="extra_curr_6"),
+    path('extra_curr_6/update/<int:pk>/', views.ExtraAct6Update.as_view(), name="extra_curr_6_update"),
+    path('extra_curr_6/delete/<int:pk>/', views.ExtraAct6Delete.as_view(), name="extra_curr_6_delete"),
+
+    
+
+#-------------------------------------------------------------------------------------------------------------------
+    # E - CELL
+    path('e_cell/', views.EcellCreate.as_view(), name="e_cell"),
+    path('extra_curr_1/update/<int:pk>/', views.EcellUpdate.as_view(), name="e_cell_update"),
+    path('extra_curr_1/delete/<int:pk>/', views.EcellDelete.as_view(), name="e_cell_delete"),
+
 ]
 
 #handler404 = ''

@@ -32,14 +32,21 @@ class StudentResult(models.Model):
     exam_Date = models.DateField(("Exam Date"), default=date.today,auto_now=False, auto_now_add=False)
     appeared = models.IntegerField(null=False, blank=False)
     passed = models.IntegerField(null=False, blank=False)
-    percentage = models.FloatField(("Percentage"),default=0,null=False, blank=False)
+    percentage = models.DecimalField(("Percentage"), default=0 ,decimal_places=2 , max_digits=10)
     objects = models.Manager()
+
+    def save(self, *args, **kwargs):
+        self.percentage = (self.passed / self.appeared)* 100
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.subject
 
     def get_absolute_url(self):
         return reverse('stud_result',)
+    
+
+
 
 #-------------------------------------------------------------------------------------
                           # DEPARTMENTAL ACTIVITIES
@@ -755,7 +762,7 @@ class ExtraCurr2(models.Model):
     student_ID_number = models.CharField(max_length=100)
     name_of_department = models.ForeignKey(Department, default=1, on_delete=models.CASCADE)
     level = models.CharField(max_length=100)
-    rank = models.IntegerField()
+    rank = models.PositiveIntegerField(default=1)
 
     def __str__(self):
         return self.student_ID_number
@@ -766,19 +773,18 @@ class ExtraCurr2(models.Model):
 # CULTURAL ACTIVITIES
 #3] Number of students participated in cultural competitions other than institute level
 class CulturalCount3(models.Model):
-    no_of_events = models.PositiveIntegerField()
-    solo_Performances = models.PositiveIntegerField()
-    team_Performances = models.PositiveIntegerField()
+    no_of_events = models.PositiveIntegerField(default=12)
+    solo_Performances = models.PositiveIntegerField(default=10)
+    team_Performances = models.PositiveIntegerField(default=10)
 
     def __str__(self):
         return self.no_of_events
 
     def get_absolute_url(self):
         return reverse('extra_curr_3',)
-        
+     
 #3] Awards won in cultural competitions/Club activities
-
-class CulturalAct3(models.Model):
+class CulturalAct3(models.Model,):
     event_Name = models.CharField(max_length=150)
     organized_By = models.CharField(max_length=150)
     level = models.CharField(max_length=150)
@@ -842,13 +848,19 @@ class ExtraAct6(models.Model):
 #-------------------------------------------------------------------------------------
                                     #E - CELL
 
-#1] Activity Conducted By E- Cell
+#1] Activities Conducted By E- Cell
 class Ecell(models.Model):
     activity = models.CharField(max_length=250)
     organised_By = models.CharField(max_length=150)
     level = models.CharField(max_length=100)
     date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
     no_of_Students_Participated = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.faculty
+
+    def get_absolute_url(self):
+        return reverse('e_cell',)
 
 
 
