@@ -1796,20 +1796,16 @@ class CulturalAct3Create(CreateView):
         context['header'] = 'Awards won in cultural competitions/Club activities'
         context['events'] = self.model.objects.all()
         context['nbar'] = "extra_curr_3"
+        print(serializers.serialize( "python", CulturalCount3.objects.all() ))
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
         context['update_link'] = "extra_curr_3_update"
         context['delete_link'] = "extra_curr_3_delete"
         context['tab_link'] = "extra_curr_tabs.html"
-        context['count_header'] = "Number of students participated in cultural competitions other than institute level"
         context['note'] = "A detailed descriptive report by Cultural Coordinator"
 
-        titles = ["cultural events",
-        "solo_Performances",
-        "team_Performances"]
-        counts = [ self.model.objects.all().count(),
-        self.model.objects.all().count()]
-        context['title'] = titles
-        context['count'] = counts
+        context['count_data'] = serializers.serialize( "python", CulturalCount3.objects.all() )
+        context['count_header'] = "Number of students participated in cultural competitions other than institute level"
+        context['update_link'] = "extra_currcount_3_update"
         return context
 
 class CulturalAct3Update(UpdateView):
@@ -1819,8 +1815,19 @@ class CulturalAct3Update(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['header'] = 'Number of students participated in cultural competitions other than institute level'
+        return context
+
+class CulturalCount3Update(UpdateView):
+    model = CulturalCount3
+    form_class = CulturalCount3Form
+    template_name = "form_update.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         context['header'] = 'Awards won in cultural competitions/Club activities'
         return context
+
 
 class CulturalAct3Delete(DeleteView):
     model = CulturalAct3

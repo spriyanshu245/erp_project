@@ -205,6 +205,7 @@ urlpatterns = [
     path('extra_curr_3/', views.CulturalAct3Create.as_view(), name="extra_curr_3"),
     path('extra_curr_3/update/<int:pk>/', views.CulturalAct3Update.as_view(), name="extra_curr_3_update"),
     path('extra_curr_3/delete/<int:pk>/', views.CulturalAct3Delete.as_view(), name="extra_curr_3_delete"),
+    path('extra_currcount_3/update/<int:pk>/', views.CulturalCount3Update.as_view(), name="extra_currcount_3_update"),
 
     path('extra_curr_4/', views.SocialAct4Create.as_view(), name="extra_curr_4"),
     path('extra_curr_4/update/<int:pk>/', views.SocialAct4Update.as_view(), name="extra_curr_4_update"),

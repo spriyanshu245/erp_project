@@ -777,11 +777,16 @@ class CulturalCount3(models.Model):
     solo_Performances = models.PositiveIntegerField(default=10)
     team_Performances = models.PositiveIntegerField(default=10)
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.no_of_events
 
     def get_absolute_url(self):
         return reverse('extra_curr_3',)
+
+
      
 #3] Awards won in cultural competitions/Club activities
 class CulturalAct3(models.Model,):

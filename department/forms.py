@@ -657,6 +657,16 @@ class ExtraCurr2Form(forms.ModelForm):
             "rank": forms.NumberInput(attrs={'class':'form-control'}),
         }
 
+class  CulturalCount3Form(forms.ModelForm):
+    class Meta:
+        model =  CulturalCount3
+        fields = '__all__'
+        widgets = {
+            "no_of_events": forms.NumberInput(attrs={'class':'form-control'}),
+            "solo_Performances": forms.NumberInput(attrs={'class':'form-control'}),
+            "team_Performances": forms.NumberInput(attrs={'class':'form-control'}),
+        }
+         
 class  CulturalAct3Form(forms.ModelForm):
     class Meta:
         model =  CulturalAct3
