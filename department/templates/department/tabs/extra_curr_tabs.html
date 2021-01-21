@@ -69,17 +69,19 @@
   
     <tbody>
       
-      <tr >
+      
         {% for instance in count_data %}
           {% for field, value in instance.fields.items %}
+          <tr >
           <td>{{forloop.counter}}</td>
           <td>{{ field }}</td>
           <td>{{ value }}</td>
           <td>
               <a href="{% url update_link pk=instance.pk %}" class="btn btn-outline-success btn-sm">Update</a>
           </td>
+        </tr>
            {% endfor %}
-      </tr>
+      
         {% endfor %}
     </tbody>
   </table>
