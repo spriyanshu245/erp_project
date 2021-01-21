@@ -5,11 +5,12 @@ from django.views.generic import (CreateView, DetailView, UpdateView, DeleteView
 from django.forms.models import model_to_dict
 from django.core import serializers
 from django.urls import reverse_lazy, reverse
-from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, logout, authenticate
 
 # Custom templates
 
@@ -28,6 +29,20 @@ def registerPage(request):
 
     context = {'form':form}
     return render(request, 'test.html', context)
+
+def loginPage(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            login(request, user)
+            return redirect('/')
+     
+    context = {}
+    return render(request, 'registration/loginPage.html', context)
 
 #------------------------------TEST PAGE----------------------------------
 def testPage(request):
