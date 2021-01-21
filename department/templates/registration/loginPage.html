@@ -1,0 +1,36 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BVCOEL Login</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{% static 'department/css/loginPage.css'%}">
+
+    </head>
+    <body>
+        <div class="container">
+            <h1 id="main-title">BVCOEL</h1>
+            <p id="subtitle">Login</p>
+            <form action="" method="POST">
+                {% csrf_token %}
+
+                <div id="username" class="placeholders">
+                    <label id="pl_username" for="text" class="">Username (up to 8 characters)</label>
+                    <input required id="pl_username" type="text" name="username" maxlength="8" placeholder="Enter your username...">
+                </div>
+
+                <div id="password" class="placeholders">
+                    <label id="pl_password" for="text" class="">Enter Password</label>
+                    <input required id="pl_password" type="password" name="password" maxlength="8" placeholder="Enter your password...">
+                </div>
+                
+            
+                <button id="a-submit" type="submit">Login</button>
+
+              </form> 
+
+        </div>
+    </body>
+</html>
+
