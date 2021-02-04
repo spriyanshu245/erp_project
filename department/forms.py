@@ -723,14 +723,27 @@ class  ExtraAct6Form(forms.ModelForm):
                                     # E - CELL
 class EcellForm(forms.ModelForm):
     class Meta:
-        model = ExtraCurr1
-        fields = ("activity","organized_by","level","date","no_of_Students_Participated")
+        model = Ecell
+        fields = '__all__'
         widgets = {
             "activity": forms.TextInput(attrs={'class': 'form-control'}),
-            "organized_by": forms.TextInput(attrs={'class': 'form-control'}),
+            "organised_By": forms.TextInput(attrs={'class': 'form-control'}),
             "level": forms.TextInput(attrs={'class': 'form-control'}),
             "date": DateInput(attrs={'class':'form-control'}),
             "no_of_Students_Participated": forms.NumberInput(attrs={'class':'form-control'}),
+        }
+
+class  EcellCountForm(forms.ModelForm):
+    class Meta:
+        model =  EcellCount
+        fields = '__all__'
+        widgets = {
+            "activity_Name": forms.TextInput(attrs={'class':'form-control'}),
+            "civil": forms.NumberInput(attrs={'class':'form-control'}),
+            "computer": forms.NumberInput(attrs={'class':'form-control'}),
+            "E_andTC": forms.NumberInput(attrs={'class':'form-control'}),
+            "mechanical": forms.NumberInput(attrs={'class':'form-control'}),
+            "first_Year": forms.NumberInput(attrs={'class':'form-control'}),
         }
 
 

@@ -11,9 +11,9 @@
 
 
 
-2. update/ delete / recor added messages post operation.
+2.update/ delete / record added messages post operation.
 3.downloaded excel sheet is unformatted.
-4.table vertical and horizonal scrollable.
+4.table vertical and horizonal scrollable. ---------------------------------------------------done
 5.one click download - 'department app' tables.
-6.context['note'] - (yellow cell ) fetch from views and display in add_records.html below  #done
+6.context['note'] - (yellow cell ) fetch from views and display in add_records.html below ----done
 7.import / export student data from excel sheet in django database table.

@@ -862,10 +862,41 @@ class Ecell(models.Model):
     no_of_Students_Participated = models.PositiveIntegerField()
 
     def __str__(self):
-        return self.faculty
+        return self.activity
 
     def get_absolute_url(self):
         return reverse('e_cell',)
+
+#1] Numerical information about various activities in the specified period
+class EcellCount(models.Model):
+    activity_Name =  models.CharField(max_length=250)
+    civil = models.PositiveIntegerField(default=1)
+    computer = models.PositiveIntegerField(default=10)
+    E_andTC = models.PositiveIntegerField(default=10)
+    mechanical = models.PositiveIntegerField(default=10)
+    first_Year = models.PositiveIntegerField(default=10)
+
+    def __str__(self):
+        return self.activity_Name
+
+    def get_absolute_url(self):
+        return reverse('e_cell',)
+
+def save(self, *args, **kwargs):
+ if EcellCount.objects.count() != 6:    
+    EcellCount.objects.create(activity_Name="Number of Research paper in UGC Approved Journal",civil=1, computer=1, E_andTC=1, mechanical=1, first_Year=1)
+    EcellCount.objects.create(activity_Name="Number of Patent Filed/Published",civil=1, computer=1, E_andTC=1, mechanical=1, first_Year=1)
+    EcellCount.objects.create(activity_Name="NUmber of Activities Conducted By E- Cell",civil=1, computer=1, E_andTC=1, mechanical=1, first_Year=1)
+    EcellCount.objects.create(activity_Name="Number of International Conference attended",civil=1, computer=1, E_andTC=1, mechanical=1, first_Year=1)
+    EcellCount.objects.create(activity_Name="Number of NationalConference attended",civil=1, computer=1, E_andTC=1, mechanical=1, first_Year=1)
+    EcellCount.objects.create(activity_Name="Number of Start-Ups",civil=1, computer=1, E_andTC=1, mechanical=1, first_Year=1)
+    super(EcellCount, self).save(*args, **kwargs)
+ else : pass
+
+
+# one_entry = Entry.objects.get(pk=1)
+
+
 
 
 

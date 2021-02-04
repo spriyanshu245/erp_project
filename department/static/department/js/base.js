@@ -1,5 +1,3 @@
-
-
 //<!-- JS to open and close sidebar with overlay effect -->
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
@@ -57,4 +55,5 @@ function DownloadCsv(table_id) {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+  
 }

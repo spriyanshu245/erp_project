@@ -224,8 +224,10 @@ urlpatterns = [
 #-------------------------------------------------------------------------------------------------------------------
     # E - CELL
     path('e_cell/', views.EcellCreate.as_view(), name="e_cell"),
-    path('extra_curr_1/update/<int:pk>/', views.EcellUpdate.as_view(), name="e_cell_update"),
-    path('extra_curr_1/delete/<int:pk>/', views.EcellDelete.as_view(), name="e_cell_delete"),
+    path('e_cell/update/<int:pk>/', views.EcellUpdate.as_view(), name="e_cell_update"),
+    path('e_cell/delete/<int:pk>/', views.EcellDelete.as_view(), name="e_cell_delete"),
+    path('e_cell_count/update/<int:pk>/', views.EcellCountUpdate.as_view(), name="e_cell_count_update"),
+
 
 ]
 
