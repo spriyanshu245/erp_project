@@ -1,12 +1,14 @@
-from django.shortcuts import render, HttpResponseRedirect
+
 from .forms import *
 from .models import *
+from .decorators import unauthenticated_user
+
 from django.views.generic import (CreateView, DetailView, UpdateView, DeleteView)
 from django.forms.models import model_to_dict
 from django.core import serializers
 from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -30,7 +32,10 @@ def registerPage(request):
     context = {'form':form}
     return render(request, 'test.html', context)
 
+@unauthenticated_user
 def loginPage(request):
+    context = {}
+
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -40,9 +45,16 @@ def loginPage(request):
         if user is not None:
             login(request, user)
             return redirect('/')
+        else :
+            messages.info(request, 'Username or password is incorrect')
+            return render(request, 'registration/loginPage.html', context)
      
-    context = {}
     return render(request, 'registration/loginPage.html', context)
+
+def logoutPage(request):
+    context = {}
+    logout(request)
+    return redirect('/loginPage')
 
 #------------------------------TEST PAGE----------------------------------
 def testPage(request):
@@ -51,6 +63,7 @@ def testPage(request):
 
 
 #--------------------------------------STUDENT ACADEMIC PERFORMANCE--------------------------------
+
 
 class StudentResultCreate(CreateView):
     model = StudentResult

@@ -15,6 +15,7 @@ urlpatterns = [
     # Shubham Login Pages
     path('register/', views.registerPage, name="register"),
     path('loginPage/', views.loginPage, name = "loginPage"),
+    path('logoutPage/', views.logoutPage, name = "logoutPage"),
     # path('loginPage/', views.loginPage, name="loginPage"),
 
 #-------------------------------------------------------------------------------------------------------------------
