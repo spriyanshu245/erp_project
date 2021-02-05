@@ -103,6 +103,7 @@ admin.site.register(ExtraAct6)
 
 
 admin.site.register(Ecell)
+admin.site.register(EcellCount)
 
 
 

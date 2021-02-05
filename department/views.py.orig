@@ -94,9 +94,6 @@ def dept_act_5(request):
         'event': event,
     }
 
-<<<<<<< HEAD
-    return render(request, 'department/dept_act_5.html', context)
-=======
     return render(request, 'department/dept_act_4.html', context)
 
 def dept_act_5(request):
@@ -136,4 +133,3 @@ def dept_act_6(request):
     }
 
     return render(request, 'department/dept_act_6.html', context)
->>>>>>> sd_mess

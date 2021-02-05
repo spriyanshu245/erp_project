@@ -46,9 +46,10 @@
     <i class="fa fa-search"></i>
     <input id="search" class="form-control mr-sm-2" style="margin-left: 0.7em" type="text" placeholder="Search Table..">
     <button class="btn btn-outline-success btn-m" onclick="DownloadCsv('table_main')"><i class="fa fa-download"></i> Download</button>
-
+    {% if count_data %}
     <button class="btn btn-outline-secondary btn-m" type="button" data-toggle="collapse" data-target="#contentId" aria-expanded="false"
         aria-controls="contentId"><i class="fa fa-list"></i> Show Counts</button>
+    {% endif %}
   </form>
 </div>
 
@@ -56,7 +57,7 @@
 {% load custom_filters %}
 {% if events %}
 <div class="collapse" id="contentId">
-<table class="table table-bordered  table-hover" id="table_count">
+<table class="table table-bordered  table-hover" id="table_count" style="text-align: center;">
 
     <thead class="thead-dark">
      <tr>
@@ -68,16 +69,14 @@
     </thead>
   
     <tbody>
-      
-      
         {% for instance in count_data %}
           {% for field, value in instance.fields.items %}
           <tr >
           <td>{{forloop.counter}}</td>
-          <td>{{ field }}</td>
+          <td style="text-align: left; color:rgb(45, 161, 16)">{{ field }}</td>
           <td>{{ value }}</td>
           <td>
-              <a href="{% url update_link pk=instance.pk %}" class="btn btn-outline-success btn-sm">Update</a>
+              <a href="{% url count_update pk=instance.pk %}" class="btn btn-outline-success btn-sm">Update</a>
           </td>
         </tr>
            {% endfor %}

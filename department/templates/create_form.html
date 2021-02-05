@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load custom_filters %}
+{% load static %}
 {% block content %}
 {% include tab_link %}
 
@@ -8,25 +9,29 @@
      <div class="col-sm-9">
 
         {% if events %}
-        <h4 class="text-center alert alert-primary"> {{header}} </h4> 
-        <table class="table table-bordered  table-hover" id="table_main" style="text-align: center;">
+        <h4 class="text-center alert alert-primary"> {{header}} </h4>
+        <div style="height: 600px; overflow-x:auto; overflow-y:auto;">
+        <table class="table table-bordered table-hover shadow sortable" id="table_main" style="text-align: center;">
 
             <thead class="thead-dark">
              <tr>
-                <th scope="col">No</th>
+                <th scope="col" style="text-align: center; position: sticky; top: 0;">No</th>
                 {% for instance in data %}
                     {% if forloop.first %}
                         {% for field, value in instance.fields.items %}
-                            <th scope="col" style="text-align: center;">{{ field|replace_to_space }}</th>
+                            <th scope="col" style="text-align: center; position: sticky; top: 0;">{{ field|replace_to_space }}</th>
                         {% endfor %}
                     {% endif %}
                 {% endfor %}
-                <th scope="col" style="text-align: center;">Action</th>
+                <th scope="col" style="text-align: center; position: sticky; top: 0;">Action</th>
                 
             </tr>
             </thead>
 
-            <tbody id="table_row" style="font-weight: bold; color: #687a6d; padding: 10px; border: 1px solid #F1F1F1;">
+            <tbody id="table_row" style="font-weight: bold; 
+            color: #687a6d; 
+            padding: 10px; 
+            border: 1px solid #F1F1F1;">
                 {% for instance in data %}
                 <tr >
                     <td>{{forloop.counter}}</td>
@@ -42,13 +47,12 @@
            </tbody>
 
          </table>
+        </div>
 
         {% else %}
         <h4 class="text-center alert alert-info"> {{header}} </h4>
         <h4 class="text-center alert alert-warning">No Records Found !</h4>
         {% endif %}
      </div>
-
    </div>
-
 {% endblock %}

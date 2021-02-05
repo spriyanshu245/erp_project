@@ -1809,7 +1809,6 @@ class CulturalAct3Create(CreateView):
         context['header'] = 'Awards won in cultural competitions/Club activities'
         context['events'] = self.model.objects.all()
         context['nbar'] = "extra_curr_3"
-        print(serializers.serialize( "python", CulturalCount3.objects.all() ))
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
         context['update_link'] = "extra_curr_3_update"
         context['delete_link'] = "extra_curr_3_delete"
@@ -1818,7 +1817,7 @@ class CulturalAct3Create(CreateView):
 
         context['count_data'] = serializers.serialize( "python", CulturalCount3.objects.all() )
         context['count_header'] = "Number of students participated in cultural competitions other than institute level"
-        context['update_link'] = "extra_currcount_3_update"
+        context['count_update'] = "extra_currcount_3_update"
         return context
 
 class CulturalAct3Update(UpdateView):
@@ -1828,7 +1827,7 @@ class CulturalAct3Update(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['header'] = 'Number of students participated in cultural competitions other than institute level'
+        context['header'] = 'Awards won in cultural competitions/Club activities'
         return context
 
 class CulturalCount3Update(UpdateView):
@@ -1838,7 +1837,7 @@ class CulturalCount3Update(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['header'] = 'Awards won in cultural competitions/Club activities'
+        context['header'] = 'Number of students participated in cultural competitions other than institute level'
         return context
 
 
@@ -1986,6 +1985,9 @@ class EcellCreate(CreateView):
         context['update_link'] = "e_cell_update"
         context['delete_link'] = "e_cell_delete"
         context['tab_link'] = "e_cell_tabs.html"
+
+        context['count_data'] = serializers.serialize( "python", EcellCount.objects.all() )
+        context['count_update'] = "e_cell_count_update"
         return context
 
 class EcellUpdate(UpdateView):
@@ -1995,7 +1997,17 @@ class EcellUpdate(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['header'] = 'Activities Conducted By E- Cell'
+        context['header'] = 'Activities Conducted By E - Cell'
+        return context
+
+class EcellCountUpdate(UpdateView):
+    model = EcellCount
+    form_class = EcellCountForm
+    template_name = "form_update.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Numerical information about various activities in the specified period'
         return context
 
 class EcellDelete(DeleteView):
