@@ -220,7 +220,6 @@ urlpatterns = [
     path('extra_curr_6/update/<int:pk>/', views.ExtraAct6Update.as_view(), name="extra_curr_6_update"),
     path('extra_curr_6/delete/<int:pk>/', views.ExtraAct6Delete.as_view(), name="extra_curr_6_delete"),
 
-    
 
 #-------------------------------------------------------------------------------------------------------------------
     # E - CELL
@@ -229,6 +228,25 @@ urlpatterns = [
     path('e_cell/delete/<int:pk>/', views.EcellDelete.as_view(), name="e_cell_delete"),
     path('e_cell_count/update/<int:pk>/', views.EcellCountUpdate.as_view(), name="e_cell_count_update"),
 
+####################################################################################################################
+#-------------------------------------------------------------------------------------------------------------------
+# PLACEMENT TABLES
+						
+    path('placement2/', views.Placement2Create.as_view(), name="place2"),
+    path('placement2/update/<int:pk>/', views.Placement2Update.as_view(), name="place2_update"),
+    path('placement2/delete/<int:pk>/', views.Placement2Delete.as_view(), name="place2_delete"),
+
+    path('placement3/', views.Placement3Create.as_view(), name="place3"),
+    path('placement3/update/<int:pk>/', views.Placement3Update.as_view(), name="place3_update"),
+    path('placemen32/delete/<int:pk>/', views.Placement3Delete.as_view(), name="place3_delete"),
+
+    path('placement4/', views.Placement4Create.as_view(), name="place4"),
+    path('placement4/update/<int:pk>/', views.Placement4Update.as_view(), name="place4_update"),
+    path('placement4/delete/<int:pk>/', views.Placement4Delete.as_view(), name="place4_delete"),
+
+    path('placement5/', views.Placement5Create.as_view(), name="place5"),
+    path('placement5/update/<int:pk>/', views.Placement5Update.as_view(), name="place5_update"),
+    path('placement5/delete/<int:pk>/', views.Placement5Delete.as_view(), name="place5_delete"),
 
 ]
 

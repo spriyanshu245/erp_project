@@ -897,9 +897,75 @@ def save(self, *args, **kwargs):
 # one_entry = Entry.objects.get(pk=1)
 
 
+#-------------------------------------------------------------------------------------------------------------------
+# PLACEMENT TABLES
+#-------------------------------------------------------------------------------------------------------------------
 
+#-------------------------------------------------------------------------------------------------------------------
+# List of companies visited  for campus placement in specified period								
+# No.	Name of company		Sector	Discipline	Dates of Drive	No of eligible students 	No of  students offered jobs	Package
+class Placement2(models.Model):
+    name_of_company = models.CharField(max_length=150)
+    sector = models.CharField(max_length=150)
+    discipline = models.CharField(max_length=150)
+    dates_of_drive = models.CharField(max_length=150)
+    no_of_eligible_students = models.PositiveIntegerField()
+    no_of_students_offered_jobs = models.PositiveIntegerField()
+    package = models.PositiveIntegerField()
 
+    def __str__(self):
+        return self.name_of_company
 
+    def get_absolute_url(self):
+        return reverse('place2',)
+
+#List of companies for which students appeared at other campus in specified period								
+#No.	Name of company		Sector	Location (College/Industry)	Date of Walk-in	No. of students appeared	No. of students offered job	Package
+class Placement3(models.Model):
+    name_of_company = models.CharField(max_length=150)
+    sector = models.CharField(max_length=150)
+    location_open_College_or_Industry_close = models.CharField(max_length=200)
+    date_of_walk_in = models.DateField(("Date of Walk-In"), default=date.today,auto_now=False, auto_now_add=False)
+    no_of_students_appeared = models.PositiveIntegerField()
+    no_of_students_offered_jobs = models.PositiveIntegerField()
+    package = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.name_of_company
+
+    def get_absolute_url(self):
+        return reverse('place3',)
+
+#Student Placement Data								
+#No	Name of Student placed		Department	Name of Employer		Date of Selection	Package	Appointment reference No
+class Placement4(models.Model):
+    name_of_student = models.CharField(max_length=150)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    name_of_employer = models.CharField(max_length=150)
+    date_of_selection = models.DateField(("Date of Selection"), default=date.today,auto_now=False, auto_now_add=False)
+    package = models.PositiveIntegerField()
+    appointment_reference_no = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.name_of_student
+
+    def get_absolute_url(self):
+        return reverse('place4',)
+
+#List of Students Opted for Entrepreneurship/Self Employment   (During specified period)								
+#No	Name of Student		Discipline	Type of Self Employment (Start up /NGO)		Name of Firm/Company		Products /Services offered
+class Placement5(models.Model):
+    name_of_student = models.CharField(max_length=150)
+    discipline = models.CharField(max_length=150)
+    type_of_self_employment = models.CharField(choices=(("Start up", "Start up"), ("NGO", "NGO")), max_length=150)
+    name_of_firm_or_company = models.CharField("Name of Firm/ Company", max_length=150)
+    products_or_services_offered = models.CharField("Products/ Services offered", max_length=150)
+
+    def __str__(self):
+        return self.name_of_student
+
+    def get_absolute_url(self):
+        return reverse('place5',)
 
 ##__________________________________________________________________________________________________
 class Profile(models.Model):

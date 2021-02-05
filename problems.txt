@@ -17,3 +17,9 @@
 5.one click download - 'department app' tables.
 6.context['note'] - (yellow cell ) fetch from views and display in add_records.html below ----done
 7.import / export student data from excel sheet in django database table.
+
+
+Model Related---------------
+1. department is foreign key based. "ondelete=models.CASCADE" will delete entire database on deletion of respective department.
+2. sector field = choices or text
+3. location field = if map can be added or not.
