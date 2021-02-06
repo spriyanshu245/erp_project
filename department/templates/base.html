@@ -88,7 +88,7 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   {% if user.is_authenticated %}
-                    <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
+                    <a class="dropdown-item" href="{% url 'logoutPage' %}">Log out</a>
                   {% else %}
                     <a class="dropdown-item" href="/loginPage">Login</a>
                   {% endif %}

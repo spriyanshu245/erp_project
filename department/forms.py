@@ -744,6 +744,60 @@ class  EcellCountForm(forms.ModelForm):
             "first_Year": forms.NumberInput(attrs={'class':'form-control'}),
         }
 
+#--------------------------------PLACEMENT SHEET-----------------------------------------------------
+class  Placement2Form(forms.ModelForm):
+    class Meta:
+        model =  Placement2
+        fields = "__all__"
+        widgets = {
+            "name_of_company": forms.TextInput(attrs={'class': 'form-control'}),
+            "sector": forms.TextInput(attrs={'class': 'form-control'}),
+            "discipline": forms.TextInput(attrs={'class': 'form-control'}),
+            "dates_of_drive": DateInput(attrs={'class':'form-control'}),
+            "no_of_eligible_students": forms.NumberInput(attrs={'class':'form-control'}),
+            "no_of_students_offered_jobs": forms.NumberInput(attrs={'class':'form-control'}),
+            "package": forms.NumberInput(attrs={'class':'form-control'})
+        }
+
+class  Placement3Form(forms.ModelForm):
+    class Meta:
+        model =  Placement3
+        fields = "__all__"
+        widgets = {
+            "name_of_company": forms.TextInput(attrs={'class': 'form-control'}),
+            "sector": forms.TextInput(attrs={'class': 'form-control'}),
+            "location_open_College_or_Industry_close": forms.TextInput(attrs={'class': 'form-control'}),
+            "date_of_walk_in": DateInput(attrs={'class':'form-control'}),
+            "no_of_students_appeared": forms.NumberInput(attrs={'class':'form-control'}),
+            "no_of_students_offered_jobs": forms.NumberInput(attrs={'class':'form-control'}),
+            "package": forms.NumberInput(attrs={'class':'form-control'})
+        }
+
+class  Placement4Form(forms.ModelForm):
+    class Meta:
+        model =  Placement4
+        fields = "__all__"
+        widgets = {
+            "name_of_student": forms.TextInput(attrs={'class': 'form-control'}),
+            "department": forms.Select(attrs={'class':'form-control'}),
+            "name_of_employer": forms.TextInput(attrs={'class': 'form-control'}),
+            "date_of_selection": DateInput(attrs={'class':'form-control'}),
+            "package": forms.NumberInput(attrs={'class':'form-control'}),
+            "appointment_reference_no": forms.TextInput(attrs={'class': 'form-control'})
+        }
+
+class  Placement5Form(forms.ModelForm):
+    class Meta:
+        model =  Placement5
+        fields = "__all__"
+        widgets = {
+            "name_of_student": forms.TextInput(attrs={'class': 'form-control'}),
+            "discipline": forms.TextInput(attrs={'class': 'form-control'}),
+            "type_of_self_employment": forms.Select(attrs={'class':'form-control'}),
+            "name_of_firm_or_company": forms.TextInput(attrs={'class': 'form-control'}),
+            "products_or_services_offered": forms.TextInput(attrs={'class': 'form-control'})
+        }
+
 
 #-------------------------------------------USERS-----------------------------------------------------
 class UserForm(forms.ModelForm):

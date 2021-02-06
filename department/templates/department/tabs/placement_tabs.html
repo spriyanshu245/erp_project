@@ -1,0 +1,52 @@
+{% block tabs %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<style>
+    .nav-tabs li a {
+      color: rgb(25, 124, 108);
+    }
+</style>
+
+<div>
+  <h3 class="text-center alert alert-primary">Placement and Entrepreneurship</h3>
+</div>
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'place1_tab' %}active{% endif %}" 
+        href="{% url 'place2' %}">Numerical information about placement</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'place2_tab' %}active{% endif %}" 
+        href="{% url 'place2' %}">Companies visited for campus placement</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'place3_tab' %}active{% endif %}" 
+        href="{% url 'place3' %}">Companies for which students appeared at other campus</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'place4_tab' %}active{% endif %}" 
+        href="{% url 'place4' %}">Student Placement Data</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'place5_tab' %}active{% endif %}" 
+        href="{% url 'place5' %}">Students Opted for Entrepreneurship/Self Employment</a>
+    </li>
+  </ul>
+<br>
+
+<div>
+  <form class="form-inline mr-auto mb-4 d-flex justify-content-end" onkeydown="return event.key != 'Enter';">
+    <i class="fa fa-search"></i>
+    <input id="search" class="form-control mr-sm-2" style="margin-left: 0.7em" type="text" placeholder="Search Table..">
+    <button class="btn btn-outline-success btn-m" onclick="DownloadCsv('table_main')"><i class="fa fa-download"></i> Download</button>
+    {% if count %}
+    <button class="btn btn-outline-secondary btn-m" type="button" data-toggle="collapse" data-target="#contentId" aria-expanded="false"
+        aria-controls="contentId"><i class="fa fa-list"></i> Show Counts</button>
+    {% endif %}
+  </form>
+</div>
+
+{% endblock %}
