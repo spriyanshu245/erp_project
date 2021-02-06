@@ -1,6 +1,4 @@
 from django.shortcuts import render, HttpResponseRedirect
-from .forms import *
-from .models import *
 from django.views.generic import (CreateView, DetailView, UpdateView, DeleteView)
 from django.forms.models import model_to_dict
 from django.core import serializers
@@ -11,6 +9,8 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
+from .forms import *
+from .models import *
 
 # Custom templates
 
@@ -25,10 +25,12 @@ def registerPage(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("/")
+            user = form.cleaned_data.get('username')
+            messages.success(request, 'Account successfully created for ' + user)
+            return redirect("loginPage")
 
     context = {'form':form}
-    return render(request, 'test.html', context)
+    return render(request, 'registration/register.html', context)
 
 def loginPage(request):
     if request.method == "POST":
@@ -47,7 +49,7 @@ def loginPage(request):
 #------------------------------TEST PAGE----------------------------------
 def testPage(request):
     context = {}
-    return render(request, 'test.html', context)
+    return render(request, 'registration/register.html', context)
 
 
 #--------------------------------------STUDENT ACADEMIC PERFORMANCE--------------------------------

@@ -16,8 +16,8 @@
                 {% csrf_token %}
 
                 <div id="username" class="placeholders">
-                    <label id="pl_username" for="text" class="">Username (up to 8 characters)</label>
-                    <input required id="pl_username" type="text" name="username" maxlength="8" placeholder="Enter your username...">
+                    <label id="pl_username" for="text" class="">Username (up to 10 characters)</label>
+                    <input required id="pl_username" type="text" name="username" maxlength="10" placeholder="Enter your username...">
                 </div>
 
                 <div id="password" class="placeholders">
@@ -27,6 +27,15 @@
                 
                     <button id="a-submit" type="submit">Login</button>
                     <a class="button" href="{% url 'register' %}" id="a-submit">Register</a>
+
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="fade" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        {% for message in messages%}
+                        <p>{{message}}</p> 
+                        {% endfor %}
+                        
                 
             </form>
         </div>

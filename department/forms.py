@@ -1,7 +1,5 @@
 from django.core import validators
 from django import forms
-from django.db.models.fields import DecimalField
-from django.forms.models import ALL_FIELDS
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm

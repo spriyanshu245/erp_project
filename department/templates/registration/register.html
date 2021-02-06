@@ -1,24 +1,97 @@
-{% extends 'base.html' %}
-
-
+{% load static %}
 {% block content %}
 
-  <h2>Register</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.username.label }}
-    {{ form.username }}
+<!-- 
+    
+    Green Registration Form, by Xavier Mod 
 
-    {{ form.email.label }}
-    {{ form.email }}
+    v1.0 1/02/19
 
-    {{ form.password1.label }}
-    {{ form.password1 }}
+    Created by Xavier Mod | hi.xavier.mod@gmail.com | 2019
 
-    {{ form.password2.label }}
-    {{ form.password2 }}
+-->
 
-    <button type="submit">Create User</button>
-  </form>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Registration</title>
+        <meta charset="UTF-8">
+        <!-- <link rel="stylesheet" href="css.css"> -->
+        <link rel="stylesheet" href="{% static 'department/css/test.css'%}">
 
+    </head>
+    <body>
+        <div class="container">
+            <h1 id="main-title">BVCOEL</h1>
+            <p id="subtitle">User Registration</p>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div id="first-name" class="placeholders">
+                    <label id="pl_first_name" for="text" class="">First name</label>
+                    <!-- <input required id="pl_first_name" type="text" name="firstname" placeholder="Enter your first name..."> -->
+                    {{form.first_name}}
+                </div>
+
+                <div id="first-name" class="placeholders">
+                    <label id="pl_first_name" for="text" class="">Last name</label>
+                    <!-- <input required id="pl_first_name" type="text" name="firstname" placeholder="Enter your first name..."> -->
+                    {{form.last_name}}
+                </div>
+
+                <div id="username" class="placeholders">
+                    <label id="pl_username" for="text" class="">Username (up to 10 characters)</label>
+                    <!-- <input required id="pl_username" type="text" name="username" maxlength="8" placeholder="Enter your username..."> -->
+                    {{form.username}}
+                </div>
+
+                <div id="email" class="placeholders">
+                    <label id="pl_email" for="text" class="">Email</label>
+                    <!-- <input required id="pl_email" type="email" name="email" placeholder="Enter your email..."> -->
+                    {{form.email}}
+                </div>
+
+                <div id="password" class="placeholders">
+                    <label id="pl_password" for="text" class="">Enter Password</label>
+                    <!-- <input required id="pl_password" type="password" name="password" maxlength="8" placeholder="Enter your password..."> -->
+                    {{form.password1}}
+                </div>
+
+                <div id="password" class="placeholders">
+                    <label id="pl_password" for="text" class="">Enter Password Again</label>
+                    <!-- <input required id="pl_password" type="password" name="password" maxlength="8" placeholder="Enter your password..."> -->
+                    {{form.password2}}
+                </div>
+
+                <!-- <div class="terms-conditions">
+                    <input required type="checkbox" name="vehicle1" value="Bike">
+                    <p id="terms-conditions">I have read the terms and conditions of this company and accepted the privacy policy.</p>
+                </div> -->
+                {% if form.errors %}
+                    {{form.errors}}
+                    <br>
+                {% endif %}
+                
+            
+                <button id="a-submit" type="submit">Create User</button>
+
+              </form> 
+
+        </div>
+
+        <script>
+            // Query all input fields
+            var form_fields = document.getElementsByTagName('input')
+            form_fields[1].placeholder = 'First Name..';
+            form_fields[2].placeholder = 'Last Name..';
+            form_fields[3].placeholder = 'Username..';
+            form_fields[4].placeholder = 'Email..';
+            form_fields[5].placeholder = 'Password..';
+            form_fields[6].placeholder = 'Password..';
+
+            for (var field in form_fields) {
+                form_fields[field].className += ' form-control'
+            }
+        </script>
+    </body>
+</html>
 {% endblock %}
