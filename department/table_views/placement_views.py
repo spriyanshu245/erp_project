@@ -23,8 +23,10 @@ class Placement1Create(CreateView):
     form_class = Placement1Form
     template_name = "placement_custom1.html"
 
+
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)    
+        context = super().get_context_data(**kwargs)   
+ 
         context['header'] = 'Numerical information about placement'
         context['events'] = self.model.objects.all()
         context['years'] = Placement1.objects.values_list('year', flat=True)
@@ -33,7 +35,11 @@ class Placement1Create(CreateView):
         context['update_link'] = "place1_update"
         context['delete_link'] = "place1_delete"
         context['tab_link'] = "placement_tabs.html"
-        context['myFilter'] = Place1Filter()
+
+        context['myFilter'] = Place1Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['myFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'])
+        # context['testprint'] = print(context['pk_year'])
 
         return context
 

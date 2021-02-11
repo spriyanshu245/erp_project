@@ -8,7 +8,6 @@
 
     <div class="col-sm-9">
     {% load custom_filters %}
-    {% if events %}
     <div class="row">
       <div class="col">
         <div class="card card-body">
@@ -19,6 +18,8 @@
         </div>
       </div>
     </div>
+    {% if events %}
+    
 
     <table class="table table-bordered table-hover shadow" id="table_main" style="text-align: center;">
         <thead class="thead-dark">
@@ -38,7 +39,6 @@
                padding: 10px; 
                border: 1px solid #F1F1F1;">
                {% for instance in data %}
-               <p>print({{instance}})</p>
                  {% for field, value in instance.fields.items %}
                  <tr >
                  <td style="text-align: left; color:rgb(45, 161, 16)">{{ field }}</td>
