@@ -20,7 +20,7 @@ TEMPLATE_DIR = Path.joinpath(BASE_DIR,"department", "templates")
 
 PLACEMENT_DIR = Path.joinpath(TEMPLATE_DIR, "placement")
 DEPARTMENT_DIR = Path.joinpath(TEMPLATE_DIR, "department")
-TABS_DIR = Path.joinpath(TEMPLATE_DIR, "tabs")
+TABS_DIR = Path.joinpath(DEPARTMENT_DIR, "tabs")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'department',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

@@ -13,6 +13,7 @@ from department.forms import *
 from department.models import *
 from department.decorators import unauthenticated_user
 
+from department.filters import Place1Filter
 #------------------------------------------------ PLACEMENT VIEWS -----------------------------------------------#
 #----------------------------------------------------------------------------------------------------------------#
 
@@ -32,6 +33,8 @@ class Placement1Create(CreateView):
         context['update_link'] = "place1_update"
         context['delete_link'] = "place1_delete"
         context['tab_link'] = "placement_tabs.html"
+        context['myFilter'] = Place1Filter()
+
         return context
 
 class Placement1Update(UpdateView):

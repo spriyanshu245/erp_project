@@ -9,6 +9,17 @@
     <div class="col-sm-9">
     {% load custom_filters %}
     {% if events %}
+    <div class="row">
+      <div class="col">
+        <div class="card card-body">
+          <form action="" method="get">
+            {{myFilter.form}}
+            <button class="btn btn-primary" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <table class="table table-bordered table-hover shadow" id="table_main" style="text-align: center;">
         <thead class="thead-dark">
             <tr>
