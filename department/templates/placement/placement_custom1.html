@@ -27,6 +27,7 @@
                padding: 10px; 
                border: 1px solid #F1F1F1;">
                {% for instance in data %}
+               <p>print({{instance}})</p>
                  {% for field, value in instance.fields.items %}
                  <tr >
                  <td style="text-align: left; color:rgb(45, 161, 16)">{{ field }}</td>

@@ -16,7 +16,10 @@ from pathlib import Path
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-TEMPLATE_DIR = Path.joinpath(BASE_DIR,"department", "templates", "department")
+TEMPLATE_DIR = Path.joinpath(BASE_DIR,"department", "templates") 
+
+PLACEMENT_DIR = Path.joinpath(TEMPLATE_DIR, "placement")
+DEPARTMENT_DIR = Path.joinpath(TEMPLATE_DIR, "department")
 TABS_DIR = Path.joinpath(TEMPLATE_DIR, "tabs")
 
 # Quick-start development settings - unsuitable for production
@@ -58,7 +61,7 @@ ROOT_URLCONF = 'erp_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR, TABS_DIR],
+        'DIRS': [TEMPLATE_DIR, DEPARTMENT_DIR, PLACEMENT_DIR, TABS_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
