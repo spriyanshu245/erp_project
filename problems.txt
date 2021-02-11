@@ -13,13 +13,19 @@
 
 2.update/ delete / record added messages post operation.
 3.downloaded excel sheet is unformatted.
-4.table vertical and horizonal scrollable. ---------------------------------------------------done
+4.table vertical and horizonal scrollable. ---------------------------------------------------#done
 5.one click download - 'department app' tables.
-6.context['note'] - (yellow cell ) fetch from views and display in add_records.html below ----done
+6.context['note'] - (yellow cell ) fetch from views and display in add_records.html below ----#done
 7.import / export student data from excel sheet in django database table.
 
 
 Model Related---------------
 1. department is foreign key based. "ondelete=models.CASCADE" will delete entire database on deletion of respective department.
-2. sector field = choices or text
+
+2. sector field = choices or text ? ----------------------------------------------------------#done
+    ------2.1 Sector is a choice field check choices.py
+
 3. location field = if map can be added or not.
+    ------3.1 is map really required ? only address would be enough
+
+8. Add a Success Alert message on adding a new record in views or in html file.

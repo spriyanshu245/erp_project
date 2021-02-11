@@ -68,7 +68,10 @@
     </tr>
     </thead>
   
-    <tbody>
+    <tbody id="table_row" style="font-weight: bold; 
+        color: #687a6d; 
+        padding: 10px; 
+        border: 1px solid #F1F1F1;">
         {% for instance in count_data %}
           {% for field, value in instance.fields.items %}
           <tr >

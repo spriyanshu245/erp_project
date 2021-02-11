@@ -231,6 +231,13 @@ urlpatterns = [
 #-------------------------------------------------------------------------------------------------------------------
 # PLACEMENT TABLES
 						
+    path('placement1/', views.Placement1Create.as_view(), name="place1"),
+    path('placement1/update/<int:pk>/', views.Placement1Update.as_view(), name="place1_update"),
+    path('placement1/delete/<int:pk>/', views.Placement1Delete.as_view(), name="place1_delete"),
+    path('placement1/placement_chart/', views.placement_chart, name='placement_chart'),
+    path('placement1/salary_chart/', views.salary_chart, name='salary_chart'),
+
+
     path('placement2/', views.Placement2Create.as_view(), name="place2"),
     path('placement2/update/<int:pk>/', views.Placement2Update.as_view(), name="place2_update"),
     path('placement2/delete/<int:pk>/', views.Placement2Delete.as_view(), name="place2_delete"),

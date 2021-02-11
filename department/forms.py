@@ -745,6 +745,20 @@ class  EcellCountForm(forms.ModelForm):
         }
 
 #--------------------------------PLACEMENT SHEET-----------------------------------------------------
+class  Placement1Form(forms.ModelForm):
+    class Meta:
+        model =  Placement1
+        fields = "__all__"
+        widgets = {
+            "year": forms.Select(attrs={'class': 'form-control'}),
+            "companies_Visited": forms.NumberInput(attrs={'class': 'form-control'}),
+            "students_Placed": forms.NumberInput(attrs={'class': 'form-control'}),
+            "students_Placed_Percentage": forms.NumberInput(attrs={'class':'form-control'}),
+            "max_Salary": forms.NumberInput(attrs={'class':'form-control'}),
+            "min_Salary": forms.NumberInput(attrs={'class':'form-control'}),
+            "average_Salary": forms.NumberInput(attrs={'class':'form-control'})
+        }
+
 class  Placement2Form(forms.ModelForm):
     class Meta:
         model =  Placement2

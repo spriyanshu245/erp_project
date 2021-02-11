@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include tab_link %}
+
+<div class="row">
+    {% include 'add_record.html' %}
+
+    <div class="col-sm-9">
+    {% load custom_filters %}
+    {% if events %}
+    <table class="table table-bordered table-hover shadow" id="table_main" style="text-align: center;">
+        <thead class="thead-dark">
+            <tr>
+               <th scope="col" style="text-align: center;">{{ header }}</th>
+               <th><select class="form-control" name="years">
+                    {% for instance in years %}
+                    <option value="{{ instance }}">{{ instance }}</option>
+                    {% endfor %}
+                   </select></th>
+               <th scope="col" style="text-align: center;">Action</th>
+           </tr>
+           </thead>
+         
+           <tbody id="table_row" style="font-weight: bold; 
+               color: #687a6d; 
+               padding: 10px; 
+               border: 1px solid #F1F1F1;">
+               {% for instance in data %}
+                 {% for field, value in instance.fields.items %}
+                 <tr >
+                 <td style="text-align: left; color:rgb(45, 161, 16)">{{ field }}</td>
+                 <td>{{ value }}</td>
+                 {% endfor %}
+                 <td>
+                     <a href="{% url update_link pk=instance.pk %}" class="btn btn-outline-success btn-sm">Update</a>
+                     <a href="{% url delete_link pk=instance.pk %}" class="btn btn-outline-danger btn-sm inline">Delete</a>
+                 </td>
+               </tr>
+                  
+             
+               {% endfor %}
+           </tbody>
+
+    </table>
+    {% else %}
+        <h4 class="text-center alert alert-info"> {{header}} </h4>
+        <h4 class="text-center alert alert-warning">No Records Found !</h4>
+    {% endif %}
+    </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script> 
+  <body class="container-fluid"> 
+    <div class="row"> 
+      <h2>PLACEMENT CHARTS</h2> 
+    </div> 
+    <hr /> 
+    <div class="row"> 
+      <div class="col-sm-5"> 
+        <canvas id="placement_chart" data-url="{% url 'placement_chart' %}"></canvas> 
+      </div> 
+      <div class="col-sm-5"> 
+        <canvas id="salary_chart" data-url="{% url 'salary_chart' %}"></canvas> 
+      </div> 
+    </div> 
+
+  <script>
+    $(function () {
+
+      var $placementChart = $("#placement_chart");
+      $.ajax({
+        url: $placementChart.data("url"),
+        success: function (data) {
+
+          var ctx = $placementChart[0].getContext("2d");
+
+          new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: data.labels,
+              datasets: [{
+                label: 'Companies Visited',
+                data: data.data1,
+                backgroundColor:'rgba(54, 162, 235, 0.3)',
+                borderColor:'rgba(54, 162, 235, 1)', 
+                borderWidth: 1},
+                {
+                label: 'Students Placed',
+                data: data.data2,
+                backgroundColor:'rgba(255, 159, 64, 0.3)', 
+                borderColor:'rgba(255, 159, 64, 1)', 
+                borderWidth: 1}
+                ]          
+            },
+            options: {
+                scales: {
+                yAxes: [
+                  {
+                    scaleLabel: {
+                      display: true,
+                      labelString: "Numbers",
+                    },
+                  },
+                ],
+                xAxes: [
+                  {
+                    scaleLabel: {
+                      display: true,
+                      labelString: "Year",
+                    },
+                  },
+                ],
+              },
+              responsive: true,
+              legend: {
+                position: 'top',
+              },
+              title: {
+                display: false,
+                text: 'Placement Bar Chart'
+              }
+            }
+          });
+        }
+      });
+
+      var $salaryChart = $("#salary_chart");
+      $.ajax({
+        url: $salaryChart.data("url"),
+        success: function (data) {
+
+          var ctx = $salaryChart[0].getContext("2d");
+
+          new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: data.labels,
+              datasets: [{
+                label: 'Maximun Package Offered',
+                data: data.data1,
+                backgroundColor:'rgba(255, 206, 86, 0.3)',
+                borderColor:'rgba(255, 206, 86, 1)',
+                borderWidth: 1},
+                {
+                label: 'Minimum Package Offered',
+                data: data.data2,
+                backgroundColor:'rgba(75, 192, 192, 0.3)',
+                borderColor:'rgba(75, 192, 192, 1)', 
+                borderWidth: 1},
+                {
+                label: 'Average Package Offered',
+                data: data.data3,
+                backgroundColor:'rgba(153, 102, 255, 0.3)', 
+                borderColor:'rgba(153, 102, 255, 1)',
+                borderWidth: 1}
+                ]          
+            },
+            options: {
+                scales: {
+                yAxes: [
+                  {
+                    scaleLabel: {
+                      display: true,
+                      labelString: "Package",
+                    },
+                  },
+                ],
+                xAxes: [
+                  {
+                    scaleLabel: {
+                      display: true,
+                      labelString: "Year",
+                    },
+                  },
+                ],
+              },
+              responsive: true,
+              legend: {
+                position: 'top',
+              },
+              title: {
+                display: false,
+                text: 'Salary Bar Chart'
+              }
+            }
+          });
+        }
+      });
+
+
+    });
+
+  </script>
+
+{% endblock %}
+
+
+
+<!-- charts done using chart.js and async call through ajax -->

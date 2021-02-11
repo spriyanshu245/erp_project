@@ -1,0 +1,79 @@
+{% block tabs %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<style>
+    .nav-tabs li a {
+      color: rgb(25, 124, 108);
+    }
+</style>
+
+<div>
+  <h4 class="text-center alert alert-primary">Library</h4>
+</div>
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link {% if nbar == 'library' %}active{% endif %}" 
+        href="{% url 'library' %}">Library Information</a>
+    </li>
+    
+  </ul>
+<br>
+
+<div>
+  <form class="form-inline mr-auto mb-4 d-flex justify-content-end" onkeydown="return event.key != 'Enter';">
+    <i class="fa fa-search"></i>
+    <input id="search" class="form-control mr-sm-2" style="margin-left: 0.7em" type="text" placeholder="Search Table..">
+    <button class="btn btn-outline-success btn-m" onclick="DownloadCsv('table_main')"><i class="fa fa-download"></i> Download</button>
+    {% if events %}
+    <button class="btn btn-outline-secondary btn-m" type="button" data-toggle="collapse" data-target="#contentId" aria-expanded="false"
+        aria-controls="contentId"><i class="fa fa-list"></i> Show Counts</button>
+    {% endif %}
+  </form>
+</div>
+
+{% block counts %}
+{% load custom_filters %}
+{% if events %}
+<div class="collapse" id="contentId">
+  <table class="table table-bordered table-hover shadow" id="table_main" style="text-align: center;">
+
+    <thead class="thead-dark">
+     <tr>
+        <th scope="col" style="text-align: center; position: sticky; top: 0;">No</th>
+        {% for instance in count_data %}
+            {% if forloop.first %}
+                {% for field, value in instance.fields.items %}
+                    <th scope="col" style="text-align: center; position: sticky; top: 0;">{{ field|replace_to_space }}</th>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+        <th scope="col" style="text-align: center; position: sticky; top: 0;">Action</th>
+        
+    </tr>
+    </thead>
+
+    <tbody id="table_row" style="font-weight: bold; 
+    color: #687a6d; 
+    padding: 10px; 
+    border: 1px solid #F1F1F1;">
+        {% for instance in count_data %}
+        <tr >
+            <td>{{forloop.counter}}</td>
+            {% for field, value in instance.fields.items %}
+            <td  style="text-align: left;">{{ value }}</td>
+            {% endfor %}
+            <td>
+                <a href="{% url count_update pk=instance.pk %}" class="btn btn-outline-success btn-sm">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+   </tbody>
+
+ </table>
+</div>
+{% endif %}
+{% endblock %}
+
+{% endblock %}

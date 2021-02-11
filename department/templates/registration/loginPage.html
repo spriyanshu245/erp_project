@@ -29,20 +29,11 @@
                     <a class="button" href="{% url 'register' %}" id="a-submit">Register</a>
 
                     <div class="alert alert-warning alert-dismissible" role="alert">
-                        <button type="button" class="fade" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
                         {% for message in messages%}
                         <p>{{message}}</p> 
                         {% endfor %}            
-                        
-                {% for message in messages %}
-                <div class="alert alert-secondary" role="alert">
-                    {{message}}
-                </div>
-                {% endfor %}
-              </form> 
 
+              </form> 
         </div>
     </body>
 </html>

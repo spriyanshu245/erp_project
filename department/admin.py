@@ -106,6 +106,14 @@ admin.site.register(Ecell)
 admin.site.register(EcellCount)
 
 
+admin.site.register(Placement1)
+admin.site.register(Placement2)
+admin.site.register(Placement3)
+admin.site.register(Placement4)
+admin.site.register(Placement5)
+
+
+
 
 
 

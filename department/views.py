@@ -1,9 +1,9 @@
 from django.views.generic import (CreateView, DetailView, UpdateView, DeleteView)
-from django.forms.models import model_to_dict
 from django.core import serializers
 from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.shortcuts import redirect, render, HttpResponseRedirect
+from django.http import JsonResponse
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -1969,7 +1969,7 @@ class ExtraAct6Delete(DeleteView):
         context['cancel_link'] = "extra_curr_6"
         return context
 
-#-------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------
 #2] Activities Conducted By E- Cell
 class EcellCreate(CreateView):
     model = Ecell
@@ -2021,15 +2021,88 @@ class EcellDelete(DeleteView):
         context['cancel_link'] = "e_cell"
         return context
 
+
 ####################################################################################################################
-# PLACEMENT VIEWS
+#                                                       PLACEMENT VIEWS
 ####################################################################################################################
 
-#-------------------------------------------------------------------------------------------------------------------
 # Numerical information about placement  								
+class Placement1Create(CreateView):
+    model = Placement1
+    form_class = Placement1Form
+    template_name = "placement_custom1.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)    
+        context['header'] = 'Numerical information about placement'
+        context['events'] = self.model.objects.all()
+        context['years'] = Placement1.objects.values_list('year', flat=True)
+        context['data'] = serializers.serialize( "python", self.model.objects.all().filter(year=2021) )
+        context['nbar'] = "place1_tab"
+        context['update_link'] = "place1_update"
+        context['delete_link'] = "place1_delete"
+        context['tab_link'] = "placement_tabs.html"
+        return context
 
-#-------------------------------------------------------------------------------------------------------------------
+class Placement1Update(UpdateView):
+    model = Placement1
+    form_class = Placement1Form
+    template_name = "form_update.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Numerical information about Placement'
+        return context
+
+class Placement1Delete(DeleteView):
+    model = Placement1
+    success_url = reverse_lazy("place1")
+    template_name = "form_delete.html"
+    context_object_name = "model_instance"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cancel_link'] = "place1"
+        return context
+    
+def placement_chart(request):
+        labels = []
+        data1 = []
+        data2 = []
+
+        queryset = Placement1.objects.values().order_by('year')
+        for entry in queryset:
+            labels.append(entry['year'])
+            data1.append(entry['companies_Visited'])
+            data2.append(entry['students_Placed'])
+        
+        return JsonResponse(data={
+            'labels': labels,
+            'data1': data1,
+            'data2': data2,
+        })
+
+def salary_chart(request):
+        labels = []
+        data1 = []
+        data2 = []
+        data3 = []
+
+        queryset = Placement1.objects.values().order_by('year')
+        for entry in queryset:
+            labels.append(entry['year'])
+            data1.append(entry['max_Salary'])
+            data2.append(entry['min_Salary'])
+            data3.append(entry['average_Salary'])
+        
+        return JsonResponse(data={
+            'labels': labels,
+            'data1': data1,
+            'data2': data2,
+            'data3': data3,
+        })
+
+#-------------------------------------------------------------------------------------------------
 # List of companies visited  for campus placement in specified period								
 class Placement2Create(CreateView):
     model = Placement2
@@ -2071,7 +2144,7 @@ class Placement2Delete(DeleteView):
         context['cancel_link'] = "place2"
         return context
 
-#--------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------
 #List of companies for which students appeared at other campus in specified period								
 class Placement3Create(CreateView):
     model = Placement3

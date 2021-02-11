@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator # used on line 912
 
 # Questionable fields
 # level, student_ID_number
@@ -898,11 +899,28 @@ def save(self, *args, **kwargs):
 
 
 #-------------------------------------------------------------------------------------------------------------------
-# PLACEMENT TABLES
-#-------------------------------------------------------------------------------------------------------------------
+                                        #PLACEMENT
 
-#-------------------------------------------------------------------------------------------------------------------
-# List of companies visited  for campus placement in specified period								
+#1] Numerical information about placement  
+class Placement1(models.Model):
+    year = models.IntegerField(('year'),unique=True, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    companies_Visited = models.PositiveIntegerField(('Number of Companies visited for Campus Recruitment'))
+    students_Placed = models.PositiveIntegerField(('Number of Students Placed'))
+    students_Placed_Percentage = models.PositiveIntegerField(('Percentage of students placed'))
+    max_Salary = models.PositiveIntegerField(('Maximum Salary offered (p.a.)'), default=100000
+                                                , validators=[MinValueValidator(100000), MaxValueValidator(10000000)])
+    min_Salary = models.PositiveIntegerField(('Minimum Salary offered (p.a.)'), default=100000
+                                                , validators=[MinValueValidator(100000), MaxValueValidator(10000000)])
+    average_Salary = models.PositiveIntegerField(('Average of salary offered (p.a.)'), default=100000
+                                                , validators=[MinValueValidator(100000), MaxValueValidator(10000000)])
+
+    def __str__(self):
+        return str(self.year)
+
+    def get_absolute_url(self):
+        return reverse('place1',)
+
+#2] List of companies visited  for campus placement in specified period								
 # No.	Name of company		Sector	Discipline	Dates of Drive	No of eligible students 	No of  students offered jobs	Package
 class Placement2(models.Model):
     name_of_company = models.CharField(max_length=150)
@@ -919,7 +937,7 @@ class Placement2(models.Model):
     def get_absolute_url(self):
         return reverse('place2',)
 
-#List of companies for which students appeared at other campus in specified period								
+#3] List of companies for which students appeared at other campus in specified period								
 #No.	Name of company		Sector	Location (College/Industry)	Date of Walk-in	No. of students appeared	No. of students offered job	Package
 class Placement3(models.Model):
     name_of_company = models.CharField(max_length=150)
@@ -952,7 +970,7 @@ class Placement4(models.Model):
     def get_absolute_url(self):
         return reverse('place4',)
 
-#List of Students Opted for Entrepreneurship/Self Employment   (During specified period)								
+#4] List of Students Opted for Entrepreneurship/Self Employment   (During specified period)								
 #No	Name of Student		Discipline	Type of Self Employment (Start up /NGO)		Name of Firm/Company		Products /Services offered
 class Placement5(models.Model):
     name_of_student = models.CharField(max_length=150)
