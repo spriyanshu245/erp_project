@@ -69,7 +69,7 @@
                 <span class="navbar-toggler-icon"></span>
         </button>
       
-    <div class="collapse navbar-collapse" id="navbarSupportedContent ">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent " style="font-size: medium;">
           <ul class="navbar-nav ml-auto align-items-end">
             <li class="nav-item active ml-auto" >
               <a class="nav-link" href="#">Department <span class="sr-only">(current)</span></a>
@@ -80,28 +80,38 @@
             <li class="nav-item ml-auto">
               <a class="nav-link " href="#">Library</a>
             </li>
-
-              <!-- Dropdown for login logut profile page  -->
-            <li class="nav-item dropdown">  
-             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              {{ user.username }}
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  {% if user.is_authenticated %}
-                    <a class="dropdown-item" href="{% url 'logoutPage' %}">Log out</a>
-                  {% else %}
-                    <a class="dropdown-item" href="/loginPage">Login</a>
-                  {% endif %}
-                <a class="dropdown-item" href="#">Export</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Profile</a>
-              </div>
-            </li>
-
-             
           
           </ul>
+              
+		  <!-- Dropdown for login logut profile page  -->
+		  <div class="collapse navbar-collapse float-right" id="navbarSupportedContent " style="font-size: medium;">
+			<ul class="navbar-nav ml-auto">
+			  
+			  <li class="nav-item dropdown">
+				{% if user.is_authenticated %}  
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				 Hello {{ user.username }}
+				 </a>
+				 <div class="dropdown-menu" aria-labelledby="navbarDropdown">					 
+					 <a class="dropdown-item" href="#">Export</a>
+					 <a class="dropdown-item" href="#">Another action</a>
+					 <div class="dropdown-divider"></div>
+					 <a class="dropdown-item" href="#">Profile</a>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'logoutPage' %}">Log out</a>  
+				</li>
+				{% else %}
+				<li class="nav-item">
+					<a class="nav-link" href="/loginPage">Login</a>
+				</li>
+				{% endif %}
+			</ul>
+		  </div>
+
+		  
+	</div>
           <!-- For search bar
           <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -155,13 +165,6 @@
     <br>
     <br>
     <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
     
 <script>
     //Jquery
