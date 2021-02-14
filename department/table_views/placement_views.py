@@ -35,6 +35,7 @@ class Placement1Create(CreateView):
         context['update_link'] = "place1_update"
         context['delete_link'] = "place1_delete"
         context['tab_link'] = "placement_tabs.html"
+        context['sheet'] = "placement"
 
         context['myFilter'] = Place1Filter(self.request.GET, queryset=context['events'])
         context['events'] = context['myFilter'].qs
@@ -117,6 +118,8 @@ class Placement2Create(CreateView):
         context['update_link'] = "place2_update"
         context['delete_link'] = "place2_delete"
         context['tab_link'] = "placement_tabs.html"
+        context['sheet'] = "placement"
+
 
         # context['count_data'] = serializers.serialize( "python", EcellCount.objects.all() )
         # context['count_update'] = "e_cell_count_update"
@@ -159,6 +162,7 @@ class Placement3Create(CreateView):
         context['update_link'] = "place3_update"
         context['delete_link'] = "place3_delete"
         context['tab_link'] = "placement_tabs.html"
+        context['sheet'] = "placement"
         return context
 
 class Placement3Update(UpdateView):
@@ -198,6 +202,7 @@ class Placement4Create(CreateView):
         context['update_link'] = "place4_update"
         context['delete_link'] = "place4_delete"
         context['tab_link'] = "placement_tabs.html"
+        context['sheet'] = "placement"
         return context
 
 class Placement4Update(UpdateView):
@@ -237,6 +242,7 @@ class Placement5Create(CreateView):
         context['update_link'] = "place5_update"
         context['delete_link'] = "place5_delete"
         context['tab_link'] = "placement_tabs.html"
+        context['sheet'] = "placement"
         return context
 
 class Placement5Update(UpdateView):
