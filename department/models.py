@@ -906,7 +906,7 @@ class Placement1(models.Model):
     year = models.IntegerField(('year'),unique=True, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     companies_Visited = models.PositiveIntegerField(('Number of Companies visited for Campus Recruitment'))
     students_Placed = models.PositiveIntegerField(('Number of Students Placed'))
-    students_Placed_Percentage = models.PositiveIntegerField(('Percentage of students placed'))
+    students_Placed_Percentage = models.PositiveIntegerField(('Percentage of students placed'), default=1)
     max_Salary = models.PositiveIntegerField(('Maximum Salary offered (p.a.)'), default=100000
                                                 , validators=[MinValueValidator(100000), MaxValueValidator(10000000)])
     min_Salary = models.PositiveIntegerField(('Minimum Salary offered (p.a.)'), default=100000

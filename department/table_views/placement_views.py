@@ -29,18 +29,13 @@ class Placement1Create(CreateView):
  
         context['header'] = 'Numerical information about placement'
         context['events'] = self.model.objects.all()
-        context['years'] = Placement1.objects.values_list('year', flat=True)
-        context['data'] = serializers.serialize( "python", self.model.objects.all())
         context['nbar'] = "place1_tab"
         context['update_link'] = "place1_update"
         context['delete_link'] = "place1_delete"
         context['tab_link'] = "placement_tabs.html"
-
         context['myFilter'] = Place1Filter(self.request.GET, queryset=context['events'])
         context['events'] = context['myFilter'].qs
         context['data'] = serializers.serialize( "python", context['events'])
-        # context['testprint'] = print(context['pk_year'])
-
         return context
 
 class Placement1Update(UpdateView):
