@@ -42,7 +42,7 @@ function DownloadCsv(table_id) {
           // Push escaped string
           row.push('"' + data + '"');
       }
-      csv.push(row.join(';'));
+      csv.push(row.join(','));
   }
   var csv_string = csv.join('\n');
   // Download it

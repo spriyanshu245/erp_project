@@ -25,6 +25,7 @@ class StudentResultCreate(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Students Result in various examinations'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -73,6 +74,7 @@ class DeptEvent1Create(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Events Organized by Department'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -115,6 +117,7 @@ class DeptEvent2Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Events Organized by Department (For Nearby Schools)'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -158,6 +161,7 @@ class DeptProEvent3Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Department Events With Professional Bodies'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -199,6 +203,7 @@ class DeptFacultyDev4Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Departmental Faculty Development Programs'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -239,6 +244,7 @@ class DeptStudPart5Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = "Student's Inter-Institute Participation"
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -279,6 +285,7 @@ class DeptStartUp6Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Start-Ups'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -324,6 +331,7 @@ class ResProject1Create(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Research projects in the specified period'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -396,6 +404,7 @@ class ResFunds2Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Funds received for research for projects'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -437,6 +446,7 @@ class ResInternational3Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Research papers published in International journals'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -477,6 +487,7 @@ class ResNational4Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Research papers published in National journals'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -517,6 +528,7 @@ class ConfInternational5Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Paper presented in International Conferences'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -557,6 +569,7 @@ class ConfNational6Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Paper presented in National Conferences'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -597,6 +610,7 @@ class ResIndustrial7Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Research papers authored with industrial persons'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -637,6 +651,7 @@ class FacEvents8Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Events for faculty members (FDP/Webinar/Seminar/STTP/Workshops/Others)'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -677,6 +692,7 @@ class ProfessionalPrac9Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Participation in Professional Practices (Curriculum Revision/Syllabus Development)'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -717,6 +733,7 @@ class FacPatents10Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'List of Faculty Patents/IPR'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -757,6 +774,7 @@ class NationalAttend11Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Details of National Conference attended'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -797,6 +815,7 @@ class InternationalAttend12Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Details of International Conference attended'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -839,6 +858,7 @@ class FacAchieveCreate(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Achievement List'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -879,10 +899,11 @@ class FacBookCreate(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Books & Monographs Published'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
-        context['nbar'] = "fac_achieve"
+        context['nbar'] = "fac_book"
         context['update_link'] = "fac_book_update"
         context['delete_link'] = "fac_book_delete"
         context['tab_link'] = "fac_tabs.html"
@@ -927,6 +948,7 @@ class IndInst1Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Industrial Visit  of Faculty (Visits accompanied with students should be excluded)'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -967,6 +989,7 @@ class IndInst2Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Training of Faculty by Industry'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1008,6 +1031,7 @@ class IndInst3Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Faculty Providing training to Industry'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1047,6 +1071,7 @@ class IndInst4Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Faculty on board of Industry'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1086,6 +1111,7 @@ class IndInst5Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Industrial people on various Boards/Committee of Institute or Department '
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1125,6 +1151,7 @@ class IndInst6Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Faculty patents leading to industry products'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1164,6 +1191,7 @@ class IndInst7Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Sponsored Projects (Faculty only)'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1203,6 +1231,7 @@ class IndInst8Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Consultancy Projects/Advisory Services'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1242,6 +1271,7 @@ class IndInst9Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'MOU Information'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1283,6 +1313,7 @@ class CurGuestLect1Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Guest Lectures (General Topics)'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1323,6 +1354,7 @@ class CurExptLect2Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Expert Lectures'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1363,6 +1395,7 @@ class CurStudTrain3Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Student Internship/Industrial Training'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1403,6 +1436,7 @@ class CurStudVisit4Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Student Industrial Visit'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1443,6 +1477,7 @@ class CurStudSponsor5Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Students Sponsored Projects'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1485,6 +1520,7 @@ class StudFac1Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Mentoring System to help students at individual level'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1524,6 +1560,7 @@ class StudFac2Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Self Learning facilities for students'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1563,6 +1600,7 @@ class StudFac3Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Achievement of Students in Competitive Exam '
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1602,6 +1640,7 @@ class StudFac4Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Capability Enhancement and Development Activities'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1641,6 +1680,7 @@ class StudFac5Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Professional development / administrative training  programmes organized'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1682,6 +1722,7 @@ class ExtraCurr1Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Sports (This information to be provided by Physical/Sports Director)'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1721,6 +1762,7 @@ class ExtraCurr2Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Names of winners at various levels of  sports tournaments'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1760,6 +1802,7 @@ class CulturalAct3Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Awards won in cultural competitions/Club activities'
         context['events'] = self.model.objects.all()
         context['nbar'] = "extra_curr_3"
@@ -1815,6 +1858,7 @@ class SocialAct4Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Information about social activities held'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1854,6 +1898,7 @@ class CentersAct5Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Activities of Various Centers/Cells (ISTE/Research/Skill Development Center etc)'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1893,6 +1938,7 @@ class ExtraAct6Create(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Extra Activities/Acheivement(if any)'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -1932,6 +1978,7 @@ class EcellCreate(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "department"
         context['header'] = 'Activities Conducted By E- Cell'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
