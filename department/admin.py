@@ -113,6 +113,10 @@ admin.site.register(Placement4)
 admin.site.register(Placement5)
 
 
+admin.site.register(Library1)
+admin.site.register(Library2)
+
+
 
 
 

@@ -745,6 +745,7 @@ class  EcellCountForm(forms.ModelForm):
         }
 
 #--------------------------------PLACEMENT SHEET-----------------------------------------------------
+
 class  Placement1Form(forms.ModelForm):
     class Meta:
         model =  Placement1
@@ -812,6 +813,38 @@ class  Placement5Form(forms.ModelForm):
             "products_or_services_offered": forms.TextInput(attrs={'class': 'form-control'})
         }
 
+#--------------------------------LIBRARY SHEET-----------------------------------------------------
+
+class  Library1Form(forms.ModelForm):
+    class Meta:
+        model =  Library1
+        fields = "__all__"
+        widgets = {
+            "year": forms.Select(attrs={'class': 'form-control'}),
+            "month": forms.Select(attrs={'class': 'form-control'}),
+            "total_Books": forms.NumberInput(attrs={'class': 'form-control'}),
+            "books_Added_This_Month": forms.NumberInput(attrs={'class': 'form-control'}),
+            "new_Books_Cost": forms.NumberInput(attrs={'class':'form-control'}),
+            "number_of_Volumes": forms.NumberInput(attrs={'class':'form-control'}),
+            "number_of_International_Journals": forms.NumberInput(attrs={'class':'form-control'}),
+            "number_of_National_Journals": forms.NumberInput(attrs={'class':'form-control'}),
+            "current_Periodicals": forms.NumberInput(attrs={'class':'form-control'}),
+            "thesis_and_Dissertations": forms.NumberInput(attrs={'class':'form-control'}),
+            "video_Recordings_open_NPTEL_or_DMS_close": forms.NumberInput(attrs={'class':'form-control'}),
+        }
+
+class  Library2Form(forms.ModelForm):
+    class Meta:
+        model =  Library2
+        exclude = ('total',)
+        widgets = {
+            "details": forms.TextInput(attrs={'class':'form-control'}),
+            "civil": forms.NumberInput(attrs={'class':'form-control'}),
+            "computer": forms.NumberInput(attrs={'class':'form-control'}),
+            "E_andTC": forms.NumberInput(attrs={'class':'form-control'}),
+            "mechanical": forms.NumberInput(attrs={'class':'form-control'}),
+            "first_Year": forms.NumberInput(attrs={'class':'form-control'}),
+        }
 
 #-------------------------------------------USERS-----------------------------------------------------
 class UserForm(forms.ModelForm):

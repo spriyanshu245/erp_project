@@ -11,6 +11,7 @@ from django.contrib.auth import login, logout, authenticate
 
 from department.forms import *
 from department.models import *
+from .library_views import *
 from department.decorators import unauthenticated_user
 
 #--------------------------------------- DEPARTMENT VIEWS -----------------------------------------#

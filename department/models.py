@@ -894,9 +894,7 @@ def save(self, *args, **kwargs):
     super(EcellCount, self).save(*args, **kwargs)
  else : pass
 
-
 # one_entry = Entry.objects.get(pk=1)
-
 
 #-------------------------------------------------------------------------------------------------------------------
                                         #PLACEMENT
@@ -906,7 +904,7 @@ class Placement1(models.Model):
     year = models.IntegerField(('year'),unique=True, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     companies_Visited = models.PositiveIntegerField(('Number of Companies visited for Campus Recruitment'))
     students_Placed = models.PositiveIntegerField(('Number of Students Placed'))
-    students_Placed_Percentage = models.PositiveIntegerField(('Percentage of students placed'))
+    students_Placed_Percentage = models.PositiveIntegerField(('Percentage of students placed'), default=1)
     max_Salary = models.PositiveIntegerField(('Maximum Salary offered (p.a.)'), default=100000
                                                 , validators=[MinValueValidator(100000), MaxValueValidator(10000000)])
     min_Salary = models.PositiveIntegerField(('Minimum Salary offered (p.a.)'), default=100000
@@ -984,6 +982,51 @@ class Placement5(models.Model):
 
     def get_absolute_url(self):
         return reverse('place5',)
+
+
+#-------------------------------------------------------------------------------------------------------------------
+                                        #LIBRARY
+
+#1] Numerical information about placement
+class Library1(models.Model):
+    year = models.IntegerField(('Year'),unique=True, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    month = models.CharField(('Month'),unique=True, choices=MONTH_CHOICES, default=datetime.datetime.now().month, max_length=150)
+    total_Books = models.PositiveIntegerField(('Total Number of Books'))
+    books_Added_This_Month = models.PositiveIntegerField(('Number of Books added This Month'))
+    new_Books_Cost = models.PositiveIntegerField(('Cost spent on new books This Month (Rs.)'))
+    number_of_Volumes = models.PositiveIntegerField(('Number of Volumes'))
+    number_of_International_Journals = models.PositiveIntegerField(('Number of International Journals'))
+    number_of_National_Journals = models.PositiveIntegerField(('Number of National Journals'))
+    current_Periodicals  = models.PositiveIntegerField(('Current Periodicals'))
+    thesis_and_Dissertations  = models.PositiveIntegerField(('Thesis & Dissertations'))
+    video_Recordings_open_NPTEL_or_DMS_close  = models.PositiveIntegerField(('Video Recordings (NPTEL/DMS)'))
+
+    def __str__(self):
+        return str(self.year)
+
+    def get_absolute_url(self):
+        return reverse('library1',)
+
+#2] Library Usage  
+class Library2(models.Model):
+    details =  models.CharField(max_length=250)
+    civil = models.PositiveIntegerField(default=1)
+    computer = models.PositiveIntegerField(default=10)
+    E_andTC = models.PositiveIntegerField(default=10)
+    mechanical = models.PositiveIntegerField(default=10)
+    first_Year = models.PositiveIntegerField(default=10)
+    total = models.PositiveIntegerField(default=10)
+
+    def save(self, *args, **kwargs):
+        self.total = (self.civil + self.computer + self.E_andTC + self.mechanical + self.first_Year)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.details
+
+    def get_absolute_url(self):
+        return reverse('library1',)
+
 
 ##__________________________________________________________________________________________________
 class Profile(models.Model):

@@ -28,24 +28,30 @@
 8.Department and Placement tables are not similar in width. 
 
 9.Placement tables are shown altogether. Pagination may work.
+    Scrollbar should be enough---------------
 
-8. After Logout user can go back to Logged in page.
+10. After Logout user can go back to Logged in page.
+    working already---------------
 
-9. Library still not done.
+11. Library still not done.
+    Done-----------
+    11.1 Doubt ! do we need to put year and month filters in "Library Usage" Table ?
 
-10. In some pages blank yellow box is show below add_records box.
 
-11. User Accounts
+12. In some pages blank yellow box is show below add_records box.
+    That is to add any note if Applicable, plaese checkout 'context[Note]' in views.py and add relevant note for user.
+    Plese refer point '6' above.
+
+13. User Accounts
 
 Model Related---------------
 1. department is foreign key based. "ondelete=models.CASCADE" will delete entire database on deletion of respective department.
 
 2. sector field = choices or text ? ----------------------------------------------------------#done
-    ------2.1 Sector is a choice field check choices.py
+    ------2.1 Sector is a choice field, check choices.py
 
 3. location field = if map can be added or not. ----------------------------------------------#done
-    ------3.1 is map really required ? only address would be enough
-            I guess so
+    ------3.1 is map really required ? only address would be enough I guess so
 
-8. Add a Success Alert message on adding a new record in views or in html file.
+4. Add a Success Alert message on adding a new record in views or in html file.
 

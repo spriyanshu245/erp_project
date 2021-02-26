@@ -138,8 +138,24 @@ APPROVAL=(
 
 # Year Dropdown choice designed for Placement table queries
 YEAR_CHOICES = []
-for r in range(1980, (datetime.datetime.now().year+1)):
+for r in range(2008, (datetime.datetime.now().year+1)):
     YEAR_CHOICES.append((r,r))
+
+MONTH_CHOICES=(
+    ('Janaury','Janaury'),
+    ('February','February'),
+    ('March','March'),
+    ('April','April'),
+    ('May','May'),
+    ('June','June'),
+    ('July','July'),
+    ('August','August'),
+    ('September','September'),
+    ('October','October'),
+    ('November','November'),
+    ('December','December'),
+    )
+
 
 ROLE=(
     ('admin','admin'),
