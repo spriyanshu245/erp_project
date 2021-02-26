@@ -25,7 +25,7 @@
 
 7.import / export student data from excel sheet in django database table.
 
-8.Department and Placement tables are not similar in width.
+8.Department and Placement tables are not similar in width. 
 
 9.Placement tables are shown altogether. Pagination may work.
 
