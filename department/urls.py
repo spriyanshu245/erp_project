@@ -1,5 +1,5 @@
-from django.urls import path
 from django.conf.urls import url
+from django.urls import path
 from department import views
 from django.contrib.auth import views as auth_views
 
@@ -229,7 +229,7 @@ urlpatterns = [
 
 ####################################################################################################################
 #-------------------------------------------------------------------------------------------------------------------
-# PLACEMENT TABLES
+# PLACEMENT
 						
     path('placement1/', views.Placement1Create.as_view(), name="place1"),
     path('placement1/update/<int:pk>/', views.Placement1Update.as_view(), name="place1_update"),
@@ -253,6 +253,15 @@ urlpatterns = [
     path('placement5/', views.Placement5Create.as_view(), name="place5"),
     path('placement5/update/<int:pk>/', views.Placement5Update.as_view(), name="place5_update"),
     path('placement5/delete/<int:pk>/', views.Placement5Delete.as_view(), name="place5_delete"),
+
+####################################################################################################################
+#-------------------------------------------------------------------------------------------------------------------
+# LIBRARY
+    path('library1/', views.Library1Create.as_view(), name="library1"),
+    path('library1/update/<int:pk>/', views.Library1Update.as_view(), name="library1_update"),
+    path('library1/delete/<int:pk>/', views.Library1Delete.as_view(), name="library1_delete"),
+    path('library2/update/<int:pk>/', views.Library2Update.as_view(), name="library2_update"),
+
 
 ]
 

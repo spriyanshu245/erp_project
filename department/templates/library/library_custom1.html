@@ -1,9 +1,50 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load custom_filters %}
-
 {% block content %}
 {% include tab_link %}
+{% load custom_filters %}
+
+{% block counts %}
+{% if count_data %}
+
+  <table class="table table-bordered table-hover shadow" id="table_main" style="text-align: center;">
+
+    <thead class="thead-dark">
+     <tr>
+        <th scope="col" style="text-align: center; position: sticky; top: 0;">No</th>
+        {% for instance in count_data %}
+            {% if forloop.first %}
+                {% for field, value in instance.fields.items %}
+                    <th scope="col" style="text-align: center; position: sticky; top: 0;">{{ field|replace_to_space }}</th>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+        <th scope="col" style="text-align: center; position: sticky; top: 0;">Action</th>
+        
+    </tr>
+    </thead>
+
+    <tbody id="table_row" style="font-weight: bold; 
+    color: #687a6d; 
+    padding: 10px; 
+    border: 1px solid #F1F1F1;">
+        {% for instance in count_data %}
+        <tr >
+            <td>{{forloop.counter}}</td>
+            {% for field, value in instance.fields.items %}
+            <td  style="text-align: left;">{{ value }}</td>
+            {% endfor %}
+            <td>
+                <a href="{% url count_update pk=instance.pk %}" class="btn btn-outline-success btn-sm">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+   </tbody>
+
+ </table>
+
+{% endif %}
+{% endblock %}
 
 <div class="row">
     {% include 'add_record.html' %}
@@ -14,7 +55,7 @@
       <div class="col">
         <div class="card card-body">
           <form action="" method="get">
-            {{myFilter.form}}
+            {{Library1Filter.form}}
             <button class="btn btn-primary" type="submit">Search</button>
           </form>
         </div>

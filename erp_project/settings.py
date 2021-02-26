@@ -18,7 +18,8 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = Path.joinpath(BASE_DIR,"department", "templates") 
 
-PLACEMENT_DIR = Path.joinpath(TEMPLATE_DIR, "placement")
+PLACEMENT_DIR = Path.joinpath(TEMPLATE_DIR, "library")
+LIBRARY_DIR = Path.joinpath(TEMPLATE_DIR, "placement")
 DEPARTMENT_DIR = Path.joinpath(TEMPLATE_DIR, "department")
 TABS_DIR = Path.joinpath(DEPARTMENT_DIR, "tabs")
 
@@ -62,7 +63,7 @@ ROOT_URLCONF = 'erp_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR, DEPARTMENT_DIR, PLACEMENT_DIR, TABS_DIR],
+        'DIRS': [TEMPLATE_DIR, DEPARTMENT_DIR, PLACEMENT_DIR, LIBRARY_DIR, TABS_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -26,18 +26,18 @@ class Placement1Create(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)   
- 
+        context['sheet'] = "placement"
         context['header'] = 'Numerical information about placement'
         context['events'] = self.model.objects.all()
         context['nbar'] = "place1_tab"
         context['update_link'] = "place1_update"
         context['delete_link'] = "place1_delete"
         context['tab_link'] = "placement_tabs.html"
-        context['sheet'] = "placement"
 
         context['myFilter'] = Place1Filter(self.request.GET, queryset=context['events'])
         context['events'] = context['myFilter'].qs
-        context['data'] = serializers.serialize( "python", context['events'])
+        context['data'] = serializers.serialize( "python", context['events'])[:1]
+
         return context
 
 class Placement1Update(UpdateView):
@@ -62,9 +62,7 @@ class Placement1Delete(DeleteView):
         return context
     
 def placement_chart(request):
-        labels = []
-        data1 = []
-        data2 = []
+        labels, data1, data2 = [],[],[]
 
         queryset = Placement1.objects.values().order_by('year')
         for entry in queryset:
@@ -79,10 +77,7 @@ def placement_chart(request):
         })
 
 def salary_chart(request):
-        labels = []
-        data1 = []
-        data2 = []
-        data3 = []
+        labels, data1, data2, data3 = [],[],[],[]
 
         queryset = Placement1.objects.values().order_by('year')
         for entry in queryset:

@@ -78,7 +78,7 @@
               <a class="nav-link {% if sheet == 'placement' %}active{% endif %}" href="{% url 'place1' %}">Placement</a>
             </li>
             <li class="nav-item ml-auto">
-              <a class="nav-link " href="#">Library</a>
+              <a class="nav-link {% if sheet == 'library' %}active{% endif %}" href="{% url 'library1' %}">Library</a>
             </li>
           
           </ul>
@@ -100,7 +100,7 @@
 					</div>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="{% url 'logoutPage' %}">Log out</a>  
+					<a class="nav-link" href="{% url 'logoutPage' %}">Logout</a>  
 				</li>
 				{% else %}
 				<li class="nav-item">
