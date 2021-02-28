@@ -1,40 +1,68 @@
-{% load static %}
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>BVCOEL Login</title>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="{% static 'department/css/loginPage.css'%}">
-        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
-    </head>
-    <body>
-        <div class="container">
-            <h1 id="main-title">BVCOEL</h1>
-            <p id="subtitle">Login</p>
+ {% extends "base.html" %} 
+ {% load static %}
+ {%block head%}
+ <link rel="stylesheet" href="{% static 'department/css/loginPage.css'%}">
+ {% endblock %}
+ {% block content %}
+<div class="login-wrap">
+	<div class="login-html">
+     {% for message in messages%}
+                        <p class="warning">{{message}}</p> 
+                        {% endfor %}    
+		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+		<div class="login-form">
+			<div class="sign-in-htm">
             <form action="" method="POST">
-                {% csrf_token %}
-
-                <div id="username" class="placeholders">
-                    <label id="pl_username" for="text" class="">Username (up to 10 characters)</label>
-                    <input required id="pl_username" type="text" name="username" maxlength="10" placeholder="Enter your username...">
-                </div>
-
-                <div id="password" class="placeholders">
-                    <label id="pl_password" for="text" class="">Enter Password</label>
-                    <input required id="pl_password" type="password" name="password" maxlength="8" placeholder="Enter your password...">
-                </div>
-                
-                    <button id="a-submit" type="submit">Login</button>
-                    <a class="button" href="{% url 'register' %}" id="a-submit">Register</a>
-
-                    <div class="alert alert-warning alert-dismissible" role="alert">
-                        {% for message in messages%}
-                        <p>{{message}}</p> 
-                        {% endfor %}            
-
-              </form> 
-        </div>
-    </body>
-</html>
-
+             {% csrf_token %}
+				<div class="group" id="username">
+					   <label id="pl_username" for="text" class="label">Username (up to 10 characters)</label>
+                    <input required id="pl_username" class="input" type="text" name="username" maxlength="10" placeholder="Enter your username...">
+				</div>
+				<div class="group" id="password">
+                <label id="pl_password" for="text" class="label">Enter Password</label>
+                    <input required id="pl_password" class="input" type="password" name="password" maxlength="8" placeholder="Enter your password...">
+				</div>
+				<div class="group">
+					<input id="check" type="checkbox" class="check" checked>
+					<label for="check"><span class="icon"></span> Keep me Signed in</label>
+				</div>
+				<div class="group">
+					<input type="submit" class="button" value="Sign In">
+				</div>
+				<div class="hr"></div>
+				<div class="foot-lnk">
+					<a href="#forgot">Forgot Password?</a>
+				</div>
+            
+			</div>
+			<div class="sign-up-htm">
+				<div class="group">
+					<label for="user" class="label">Username</label>
+					<input id="user" type="text" class="input">
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Password</label>
+					<input id="pass" type="password" class="input" ">
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Repeat Password</label>
+					<input id="pass" type="password" class="input" data-type="password">
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Email Address</label>
+					<input id="pass" type="text" class="input">
+				</div>
+				<div class="group">
+					<input type="submit" class="button" value="Sign Up">
+				</div>
+				<div class="hr"></div>
+				<div class="foot-lnk">
+					<label for="tab-1">Already Member?</a>
+				</div>
+                </form>
+			</div>
+		</div>
+	</div>
+</div>
+{%endblock%}
