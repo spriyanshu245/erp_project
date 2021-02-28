@@ -1,0 +1,15 @@
+{
+    "id": 6,
+    "username": "wated",  
+    "email": "sd@sd.sd", 
+    "first_name": "sd",
+    "role" :"admin",
+    "dept":"comp",
+    "data1":[{"tableHead1":"tableData1","tableHead2":"tabledata1"},{"tableHead1":"tableData2","tableHead2":"tabledata2"},{"tableHead1":"tableData3","tableHead2":"tabledata3"},],
+    "dataEffi":[
+                    ["tableHead1","tableHead2"],
+                    ["tableData1","tableData1"],
+                    ["tableData2","tableData2"],
+                    ["tableData3","tableData3"],
+                ]
+}
