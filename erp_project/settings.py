@@ -17,7 +17,6 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = Path.joinpath(BASE_DIR,"department", "templates") 
-
 PLACEMENT_DIR = Path.joinpath(TEMPLATE_DIR, "library")
 LIBRARY_DIR = Path.joinpath(TEMPLATE_DIR, "placement")
 DEPARTMENT_DIR = Path.joinpath(TEMPLATE_DIR, "department")
@@ -49,6 +48,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -56,6 +56,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "department.redirectLogin.AuthRequiredMiddleware",
+    
+    
 ]
 
 ROOT_URLCONF = 'erp_project.urls'
