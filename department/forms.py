@@ -14,7 +14,10 @@ class CreateUserForm(UserCreationForm):
         # fields = ['username', 'email', 'password1', 'password2']
         fields = ['username','first_name','last_name', 'email', 'password1', 'password2']
 
-
+# class ExtendedUserForm(forms.ModelForm):
+#     class Meta:
+#         model = ExtendedUser
+#         fields = ['user.username','user.first_name','user.last_name', 'user.email', 'user.password1', 'user.password2', 'department']
 
 # Students Result in various examinations during specified period 
 class AddStudentResult(forms.ModelForm):
@@ -853,6 +856,7 @@ class UserForm(forms.ModelForm):
         fields = ('first_name', 'last_name', 'email')
 
 class ProfileForm(forms.ModelForm):
+    # profile_image = forms.ImageField()
     class Meta:
         model = Profile
-        fields = ('role', 'dept')
+        fields = ('department',)

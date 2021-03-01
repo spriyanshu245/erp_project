@@ -165,6 +165,15 @@ ROLE=(
     ('non-teach','non-teach')
     )
     
+DEPT_ROLE = (
+    ('Non-Teaching','Non-Teaching'),
+    ('Computer Science','Computer Science'),
+    ('Electronics and Telecommunication','Electronics and Telecommunication'),
+    ('Mechanical','Mechanical'),
+    ('Civil','Civil'),
+    ('Other','Other')
+)
+
 DEPT_PEM=(
     ('ALLD','ALLD'),
     ('COMP','COMP'),

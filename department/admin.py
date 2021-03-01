@@ -30,6 +30,7 @@ admin.site.register(User, CustomUserAdmin)
 
 admin.site.register(Profile)
 admin.site.register(Department)
+admin.site.register(ExtendedUser)
 
 
 admin.site.register(StudentResult)

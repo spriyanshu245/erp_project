@@ -2,10 +2,12 @@ from django.conf.urls import url
 from django.urls import path
 from department import views
 from django.contrib.auth import views as auth_views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     # Test Pages
-   path('testPage/', views.testPage, name="test"),
+   path('testPage/', views.testRegisterPage, name="test"),
 
 #---------------------------------------------------------------
     # Registration Page and Logins
@@ -265,4 +267,5 @@ urlpatterns = [
 
 ]
 
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 #handler404 = ''

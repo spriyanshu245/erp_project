@@ -1,29 +1,25 @@
 {% load static %}
 
-<!-- 
-    
-    Green Registration Form, by Xavier Mod 
-
-    v1.0 1/02/19
-
-    Created by Xavier Mod | hi.xavier.mod@gmail.com | 2019
-
--->
-
 <!DOCTYPE html>
 <html>
     <head>
         <title>Form Registration</title>
         <meta charset="UTF-8">
         <!-- <link rel="stylesheet" href="css.css"> -->
-        <link rel="stylesheet" href="{% static 'department/css/test.css'%}">
+        <!-- <link rel="stylesheet" href="{% static 'department/css/test.css'%}"> -->
 
     </head>
     <body>
         <div class="alert alert-secondary" role="alert">
-            <p>Hello</p>
+            <p>Register</p>
         </div>
 
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+            <input type="submit" value="Submit">
+        </form>
         
 
         <script>
