@@ -904,7 +904,7 @@ class Placement1(models.Model):
     year = models.IntegerField(('year'),unique=True, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     companies_Visited = models.PositiveIntegerField(('Number of Companies visited for Campus Recruitment'))
     students_Placed = models.PositiveIntegerField(('Number of Students Placed'))
-    students_Placed_Percentage = models.PositiveIntegerField(('Percentage of students placed'), default=1)
+    students_Placed_Percentage = models.PositiveIntegerField(('Percentage of students placed'))
     max_Salary = models.PositiveIntegerField(('Maximum Salary offered (p.a.)'), default=100000
                                                 , validators=[MinValueValidator(100000), MaxValueValidator(10000000)])
     min_Salary = models.PositiveIntegerField(('Minimum Salary offered (p.a.)'), default=100000
@@ -989,17 +989,17 @@ class Placement5(models.Model):
 
 #1] Numerical information about placement
 class Library1(models.Model):
-    year = models.IntegerField(('Year'),unique=True, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
-    month = models.CharField(('Month'),unique=True, choices=MONTH_CHOICES, default=datetime.datetime.now().month, max_length=150)
-    total_Books = models.PositiveIntegerField(('Total Number of Books'))
-    books_Added_This_Month = models.PositiveIntegerField(('Number of Books added This Month'))
-    new_Books_Cost = models.PositiveIntegerField(('Cost spent on new books This Month (Rs.)'))
-    number_of_Volumes = models.PositiveIntegerField(('Number of Volumes'))
-    number_of_International_Journals = models.PositiveIntegerField(('Number of International Journals'))
-    number_of_National_Journals = models.PositiveIntegerField(('Number of National Journals'))
-    current_Periodicals  = models.PositiveIntegerField(('Current Periodicals'))
-    thesis_and_Dissertations  = models.PositiveIntegerField(('Thesis & Dissertations'))
-    video_Recordings_open_NPTEL_or_DMS_close  = models.PositiveIntegerField(('Video Recordings (NPTEL/DMS)'))
+    year = models.IntegerField(('Year'), choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    month = models.CharField(('Month'),choices=MONTH_CHOICES, default='January', max_length=150)
+    total_Books = models.PositiveIntegerField(('Total Number of Books'), default=0)
+    books_Added_This_Month = models.PositiveIntegerField(('Number of Books added This Month'), default=0)
+    new_Books_Cost = models.PositiveIntegerField(('Cost spent on new books This Month (Rs.)'), default=0)
+    number_of_Volumes = models.PositiveIntegerField(('Number of Volumes'), default=0)
+    number_of_International_Journals = models.PositiveIntegerField(('Number of International Journals'), default=0)
+    number_of_National_Journals = models.PositiveIntegerField(('Number of National Journals'), default=0)
+    current_Periodicals  = models.PositiveIntegerField(('Current Periodicals'), default=0)
+    thesis_and_Dissertations  = models.PositiveIntegerField(('Thesis & Dissertations'), default=0)
+    video_Recordings_open_NPTEL_or_DMS_close  = models.PositiveIntegerField(('Video Recordings (NPTEL/DMS)'), default=0)
 
     def __str__(self):
         return str(self.year)
@@ -1009,8 +1009,10 @@ class Library1(models.Model):
 
 #2] Library Usage  
 class Library2(models.Model):
+    year = models.IntegerField(('Year'), choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    month = models.CharField(('Month'), choices=MONTH_CHOICES, default='January', max_length=150)
     details =  models.CharField(max_length=250)
-    civil = models.PositiveIntegerField(default=1)
+    civil = models.PositiveIntegerField(default=10)
     computer = models.PositiveIntegerField(default=10)
     E_andTC = models.PositiveIntegerField(default=10)
     mechanical = models.PositiveIntegerField(default=10)

@@ -836,7 +836,7 @@ class  Library1Form(forms.ModelForm):
 class  Library2Form(forms.ModelForm):
     class Meta:
         model =  Library2
-        exclude = ('total',)
+        exclude = ('year','month','total',)
         widgets = {
             "details": forms.TextInput(attrs={'class':'form-control'}),
             "civil": forms.NumberInput(attrs={'class':'form-control'}),

@@ -13,10 +13,14 @@ class Place1Filter(django_filters.FilterSet):
 
 
 class Library1Filter(django_filters.FilterSet):
-    def __init__(self, *args, **kwargs):
-        super(Library1Filter, self).__init__(*args, **kwargs)
-        self.form.initial['year'] = 2021
 
     class Meta:
         model = Library1
+        fields = ['year','month']
+
+
+class Library2Filter(django_filters.FilterSet):
+
+    class Meta:
+        model = Library2
         fields = ['year','month']
