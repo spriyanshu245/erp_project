@@ -10,5 +10,5 @@ class AuthRequiredMiddleware(MiddlewareMixin):
             pass
         elif not request.user.is_authenticated :
             pass
-            return HttpResponseRedirect(LOGIN_PAGE) # or http response
+           # return HttpResponseRedirect(LOGIN_PAGE) # or http response
         return None

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'department',
     'django_filters',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -135,4 +136,4 @@ STATICFILES_DIRS = [
 
 LOGIN_REDIRECT_URL='/'
 LOGOUT_REDIRECT_URL='/'
-AUTH_PROFILE_MODULE='department.models.Profile'
+AUTH_PROFILE_MODULE='department.Profile'

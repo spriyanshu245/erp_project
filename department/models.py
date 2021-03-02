@@ -46,6 +46,7 @@ class StudentResult(models.Model):
     def get_absolute_url(self):
         return reverse('stud_result',)
     
+    
 
 
 
@@ -1036,6 +1037,11 @@ class Profile(models.Model):
 
     def __str__(self):  # __unicode__ for Python 2
         return self.user.username
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+
+    post_save.connect(create_user_profile, sender=User)
 
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
