@@ -61,33 +61,25 @@ def logoutPage(request):
 
 #------------------------------TEST PAGE----------------------------------
 def testRegisterPage(request):
-    
-
     if request.method == "POST":
-        user_form = CreateUserForm(request.POST)
-        profile_form = ProfileForm(request.POST)
+        form = ExtendedUserCreationForm(request.POST)
+        profile_form = UserProfileForm(request.POST)
 
-        if user_form.is_valid() and profile_form.is_valid():
-            dept = profile_form.cleaned_data.get('department')
-            # prof_img = profile_form.cleaned_data.get('profile_image')
-            user_form.save()
-            newextendeduser = ExtendedUser(user=user_form, department=dept)
-            newextendeduser.save()
-            login(request, user_form)
-            print("Account Successfully created")
-            # messages.success(request, 'Account successfully created for ' + user.username)
-            return redirect("/")
-        else:
-            print(user_form.errors)
-            print(profile_form.errors)
+        if form.is_valid() and profile_form.is_valid():
+            user = form.save()
+
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
+
     else:
-        user_form = CreateUserForm()
-        profile_form = ProfileForm()
+        form = ExtendedUserCreationForm()
+        profile_form = UserProfileForm()
 
     context = {
-        'profile_form':profile_form, 
-        'user_form':user_form
-        }
+        'form':form,
+        'profile_form':profile_form,
+    }
 
     return render(request, 'test.html', context)
 

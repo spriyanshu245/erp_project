@@ -1037,23 +1037,19 @@ class Profile(models.Model):
     def __str__(self):  # __unicode__ for Python 2
         return self.user.username
 
-#Extended User Model
-class ExtendedUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    department = models.TextField(max_length=50, choices=DEPT_ROLE, default="Other",blank=True)
-    # img = models.ImageField(null=True, blank=True, upload_to = "profile_images/", default="profile_images/default_profile_image.jpg")
-
-    def __str__(self):  # __unicode__ for Python 2
-        return self.user.username
-
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
     instance.profile.save()
 
-
-
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    department = models.CharField(choices=DEPARTMENTS, max_length=150, default="Computer Science")
+
+    def __str__(self):
+        return self.user.username

@@ -23,13 +23,23 @@ class StudentResultCreate(CreateView):
     model = StudentResult
     form_class = AddStudentResult
     template_name = 'create_form.html'
+
+    def form_valid(self, form):
+        form.instance.department = self.request.user.profile.department
+        return super().form_valid(form)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Students Result in various examinations'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        context['dept'] = self.request.user.profile.department
+        # if self.request.user.is_superuser:
+        #     context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        # else:
+        context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "stud_result"
         context['update_link'] = "stud_result_update"
         context['delete_link'] = "stud_result_delete"

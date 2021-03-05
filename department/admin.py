@@ -30,8 +30,7 @@ admin.site.register(User, CustomUserAdmin)
 
 admin.site.register(Profile)
 admin.site.register(Department)
-admin.site.register(ExtendedUser)
-
+admin.site.register(UserProfile)
 
 admin.site.register(StudentResult)
 list_display = ('department','Class','exam_Type','subject','exam_Date','appeared','passed','percentage')
