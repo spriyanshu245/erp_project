@@ -1,0 +1,103 @@
+{% extends "base.html" %} 
+{% load static %}
+{%block head%}
+<link rel="stylesheet" href="{% static 'department/css/style.css'%}">
+{% endblock %}
+
+
+{% block content %}
+
+
+
+<div class="about-section">
+
+    <h1>About Us Page</h1>
+    <p>Some text about who we are and what we do.</p>
+    <p>Resize the browser window to see that this page is responsive by the way.</p>
+  </div>
+  
+  <img src="{% static "department/images/ERP_banner.png" %}" width="200" height="200" alt="logo"  />
+  <h2 style="text-align:center">Who we are</h2>
+  <div class="row">
+    <div class="column">
+      <div class="card">
+        <img src="/w3images/team1.jpg" alt="Jane" style="width:100%">
+        <div class="container">
+          <h2>Prof. Avinash M Ingole</h2>
+          <p class="title">Mentor</p>
+          <p>Computer Engineering </p>
+          <p>avinash.ingole@bharatividyapeeth.edu</p>
+          <p><button class="button">Contact</button></p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="column">
+      <div class="card">
+        <img src="/w3images/team2.jpg" alt="Mike" style="width:100%">
+        <div class="container">
+          <h2>Priyanshu Singh</h2>
+          <p class="title">Developer</p>
+          <p >TE Computer Engineering</p>
+          <p>mike@example.com</p>
+          <p><button class="button">Contact</button></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="card">
+        <img src="/w3images/team2.jpg" alt="Mike" style="width:100%">
+        <div class="container">
+          <h2>Saurav </h2>
+          <p class="title">Developer</p>
+          <p>TE Computer Engineering</p>
+          <p>mike@example.com</p>
+          <p><button class="button">Contact</button></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="card">
+        <img src="/w3images/team2.jpg" alt="Mike" style="width:100%">
+        <div class="container">
+          <h2>Shubham Bhavsar</h2>
+          <p class="title">Developer</p>
+          <p>TE Computer Engineering</p>
+          <p>mike@example.com</p>
+          <p><button class="button">Contact</button></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="card">
+        <img src="/w3images/team2.jpg" alt="Mike" style="width:100%">
+        <div class="container">
+          <h2>Chandramani Pandey</h2>
+          <p class="title">Developer</p>
+          <p>TE Computer Engineering</p>
+          <p>mike@example.com</p>
+          <p><button class="button">Contact</button></p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="column">
+      <div class="card">
+        <img src="/w3images/team3.jpg" alt="John" style="width:100%">
+        <div class="container">
+          <h2>Tushar Sharma</h2>
+          <p class="title">Developer</p>
+          <p>TE Computer Engineering</p>
+          <p>john@example.com</p>
+          <p><button class="button">Contact</button></p>
+        </div>
+      </div>
+    </div>
+  </div>
+{%endblock%}
+
+
+

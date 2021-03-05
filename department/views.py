@@ -65,6 +65,9 @@ def testPage(request):
     return render(request, 'registration/register.html', context)
 
 
+#------------------------About us --------------------------
+def aboutus(request):
+    return render(request,'about_us.html/')
 
 
 
