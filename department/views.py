@@ -111,6 +111,9 @@ def testRegisterPage(request):
 
     return render(request, 'test.html', context)
 
+def test2(request):
+    context = {}
+    return render(request, 'test2.html', context)
 
 #------------------------About us --------------------------
 def aboutus(request):
