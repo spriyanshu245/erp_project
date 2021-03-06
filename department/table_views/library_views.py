@@ -13,7 +13,7 @@ from department.forms import *
 from department.models import *
 from department.decorators import unauthenticated_user
 
-from department.filters import Library1Filter
+from department.filters import Library1Filter, Library2Filter
 #------------------------------------------------ LIBRARY VIEWS -----------------------------------------------#
 #----------------------------------------------------------------------------------------------------------------#
 
@@ -32,11 +32,10 @@ class Library1Create(CreateView):
         context['update_link'] = "library1_update"
         context['delete_link'] = "library1_delete"
         context['tab_link'] = "library_tabs.html"
-
         context['Library1Filter'] = Library1Filter(self.request.GET, queryset=context['events'])
         context['events'] = context['Library1Filter'].qs
         context['data'] = serializers.serialize( "python", context['events'])[:1]
-
+    
         if Library2.objects.count() !=4:
             Library2.objects.all().delete()
             Library2.objects.create(details="Number of Faculties Visited",civil=1, computer=1, E_andTC=1, mechanical=1, first_Year=1, pk=1)
@@ -45,7 +44,8 @@ class Library1Create(CreateView):
             Library2.objects.create(details="Number of Student Transactions",civil=1, computer=1, E_andTC=1, mechanical=1, first_Year=1, pk=4)
         else : pass
 
-        context['count_data'] = serializers.serialize( "python", Library2.objects.all() )
+        context['Library2Filter'] = Library2Filter(self.request.GET, queryset=Library2.objects.all())
+        context['count_data'] = serializers.serialize( "python", context['Library2Filter'].qs)
         context['count_update'] = "library2_update"
         return context
 

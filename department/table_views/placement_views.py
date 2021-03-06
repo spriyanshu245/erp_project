@@ -34,8 +34,8 @@ class Placement1Create(CreateView):
         context['delete_link'] = "place1_delete"
         context['tab_link'] = "placement_tabs.html"
 
-        context['myFilter'] = Place1Filter(self.request.GET, queryset=context['events'])
-        context['events'] = context['myFilter'].qs
+        context['Place1Filter'] = Place1Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['Place1Filter'].qs
         context['data'] = serializers.serialize( "python", context['events'])[:1]
 
         return context

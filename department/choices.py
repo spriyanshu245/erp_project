@@ -142,7 +142,7 @@ for r in range(2008, (datetime.datetime.now().year+1)):
     YEAR_CHOICES.append((r,r))
 
 MONTH_CHOICES=(
-    ('Janaury','Janaury'),
+    ('January','January'),
     ('February','February'),
     ('March','March'),
     ('April','April'),

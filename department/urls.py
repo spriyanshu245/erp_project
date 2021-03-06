@@ -6,6 +6,10 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     # Test Pages
    path('testPage/', views.testPage, name="test"),
+   
+   
+   # About us page
+   path('about_us',views.aboutus, name ="about"),
 
 #---------------------------------------------------------------
     # Registration Page and Logins

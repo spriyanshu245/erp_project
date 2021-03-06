@@ -5,8 +5,19 @@
 {% load custom_filters %}
 
 {% block counts %}
-{% if count_data %}
 
+  <div class="row">
+      <div class="col">
+        <div class="card card-body">
+          <form action="" method="get">
+            {{Library2Filter.form}}
+            <button class="btn btn-primary" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+{% if count_data %}
   <table class="table table-bordered table-hover shadow" id="table_main" style="text-align: center;">
 
     <thead class="thead-dark">
@@ -42,8 +53,9 @@
    </tbody>
 
  </table>
-
-{% endif %}
+  {% else %}
+          <h4 class="text-center alert alert-warning">No Records Found !</h4>
+  {% endif %}
 {% endblock %}
 
 <div class="row">
