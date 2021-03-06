@@ -8,9 +8,9 @@ from django.contrib.auth.models import User
 #class UserAdmin(admin.ModelAdmin):
 
 class ProfileInline(admin.StackedInline):
-    model = Profile
+    model = UserProfile
     can_delete = False
-    verbose_name_plural = 'Profile'
+    verbose_name_plural = 'User Profile'
     fk_name = 'user'
 
 class CustomUserAdmin(UserAdmin):
@@ -30,7 +30,7 @@ admin.site.register(User, CustomUserAdmin)
 
 admin.site.register(Profile)
 admin.site.register(Department)
-
+admin.site.register(UserProfile)
 
 admin.site.register(StudentResult)
 list_display = ('department','Class','exam_Type','subject','exam_Date','appeared','passed','percentage')
