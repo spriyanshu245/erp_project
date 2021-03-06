@@ -38,7 +38,7 @@ class StudentResultCreate(CreateView):
         context['sheet'] = "department"
         context['header'] = 'Students Result in various examinations'
         context['events'] = self.model.objects.all()
-
+        print(self.request.user.userprofile.department)
         context['dept'] = self.request.user.userprofile.department
         # if self.request.user.is_superuser:
         #     context['data'] = serializers.serialize( "python", self.model.objects.all() )
