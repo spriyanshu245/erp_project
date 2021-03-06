@@ -20,7 +20,7 @@ class AddStudentResult(forms.ModelForm):
         self.request = kwargs.pop("request")
         super(AddStudentResult, self).__init__(*args, **kwargs)
         self.fields['department'].initial = self.request.user.userprofile.department
-        self.fields['department'].widget.attrs['disabled'] = True
+        self.fields['department'].widget.attrs['readonly'] = True
 
     class Meta:
         model = StudentResult

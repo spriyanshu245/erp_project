@@ -62,6 +62,11 @@ class StudentResultUpdate(UpdateView):
     form_class = AddStudentResult
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(StudentResultUpdate, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Students Result in various examinations'
