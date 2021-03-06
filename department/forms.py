@@ -20,14 +20,14 @@ class AddStudentResult(forms.ModelForm):
         self.request = kwargs.pop("request")
         super(AddStudentResult, self).__init__(*args, **kwargs)
         self.fields['department'].initial = self.request.user.userprofile.department
-
+        self.fields['department'].widget.attrs['readonly'] = True
 
     class Meta:
         model = StudentResult
         fields = ['department','Class','exam_Type','subject','exam_Date','appeared','passed']
         #adding bootstrap classes to form inputs
         widgets = {
-            'department' : forms.Select(attrs={'class':'form-control',}),
+            'department' : forms.TextInput(attrs={'class':'form-control'}),
             'Class' : forms.Select(attrs={'class':'form-control'}),
             'exam_Type': forms.Select(attrs={'class':'form-control'}),
             'subject': forms.Select (attrs={'class':'form-control'}),   

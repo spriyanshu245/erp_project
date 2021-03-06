@@ -1,111 +1,177 @@
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
+/* New Login Page */
 body {
-    background-color: rgb(27, 233, 112);
-    font-family: "Montserrat", sans-serif;
+    color: #000;
+    overflow-x: hidden;
+    height: 100%;
+    background-color: #e2e2e2;
+    background-repeat: no-repeat
 }
 
-.container {
-    margin: 40px auto;
-    background-color: white;
-    /* border: 2px red solid; */
-    border-radius: 5px;
-    width: 400px;
-    height: 670px;
-    box-shadow: 2px 3px 10px rgb(184, 184, 184);
+.card0 {
+    box-shadow: 0px 4px 8px 0px #757575;
+    border-radius: 0px
 }
 
-/* Sign Up */
-#main-title {
-    /* border: 2px red solid; */
-    text-align: center;
-    font-size: 25px;
-    padding: 30px 30px 10px 30px;
-    font-weight: 700;
-    color: rgb(20, 20, 20);
-} 
-
-/* It only takes a minute! */
-#subtitle {
-    text-align: center;
-    font-size: 14px;
-    color: rgb(70, 70, 70);
+.card2 {
+    margin: 0px 40px
 }
 
-form {
-    /* border: 2px red solid; */
-    padding: 20px 40px 20px 40px;
-    
+.logo {
+    width: 200px;
+    height: 100px;
+    margin-top: 20px;
+    margin-left: 35px
 }
 
-.placeholders {
-    /* border: 2px red solid; */
-    height: 85px;
+.image {
+    width: 360px;
+    height: 280px
 }
 
-.placeholders > label {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 12px;
-    /* border: 2px red solid; */
+.border-line {
+    border-right: 1px solid #EEEEEE
 }
 
-.placeholders input {
-    /* border: 2px red solid; */
-    width: 100%;
+.facebook {
+    background-color: #3b5998;
+    color: #fff;
+    font-size: 18px;
+    padding-top: 5px;
+    border-radius: 50%;
+    width: 35px;
     height: 35px;
+    cursor: pointer
 }
 
-input::placeholder {
-    font-family: 'Montserrat';
-    /* border: 2px red solid; */
+.twitter {
+    background-color: #1DA1F2;
+    color: #fff;
+    font-size: 18px;
+    padding-top: 5px;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer
 }
 
-.terms-conditions {
-    /* border: 2px red solid; */
+.linkedin {
+    background-color: #2867B2;
+    color: #fff;
+    font-size: 18px;
+    padding-top: 5px;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer
 }
 
-#terms-conditions {
-    display: inline;
-    font-size: 13px;
-    color: black;
-    /* border: 2px red solid; */
+.line {
+    height: 1px;
+    width: 45%;
+    background-color: #E0E0E0;
+    margin-top: 10px
 }
 
-#a-submit {
-        display: block;
-        margin: auto;
-        text-align: center;
-        padding: 10px 30px 10px 30px;
-        font-family: 'Montserrat', 'sans-serif';
-        border: 1px solid rgb(27, 233, 112);
-        background-color: white;
-        border-radius: 3px;
-        cursor: pointer;
-        width: 100%;
-        font-size: 14px;
-        color: rgb(27, 233, 112);
-        font-weight: 700;
-        -webkit-transition: all 0.43s ease;
+.or {
+    width: 10%;
+    font-weight: bold
 }
 
-
-#a-submit:hover {
-    border: 1px solid rgb(27, 233, 112);
-    background-color: rgb(27, 233, 112);
-    color: white;
-    width: 50%;
-    /* box-shadow: 2px 3px 10px rgb(211, 211, 211); */
+.text-sm {
+    font-size: 14px !important
 }
 
-#a-submit:active {
-    width: 40%;
-    /* box-shadow: 2px 3px 10px rgb(211, 211, 211); */
+::placeholder {
+    color: #BDBDBD;
+    opacity: 1;
+    font-weight: 300
+}
+
+:-ms-input-placeholder {
+    color: #BDBDBD;
+    font-weight: 300
+}
+
+::-ms-input-placeholder {
+    color: #BDBDBD;
+    font-weight: 300
+}
+
+input,
+textarea {
+    padding: 10px 12px 10px 12px;
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+    margin-bottom: 5px;
+    margin-top: 2px;
+    width: 100%;
+    box-sizing: border-box;
+    color: #2C3E50;
+    font-size: 14px;
+    letter-spacing: 1px
+}
+
+input:focus,
+textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #304FFE;
+    outline-width: 0
+}
+
+button:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    outline-width: 0
+}
+
+a {
+    color: inherit;
+    cursor: pointer
+}
+
+.btn-blue {
+    background-color: #1A237E;
+    width: 150px;
+    color: #fff;
+    border-radius: 2px
+}
+
+.btn-login {
+    width: 150px;
+}
+
+.btn-blue:hover {
+    background-color: #000;
+    cursor: pointer
+}
+
+.bg-blue {
+    color: #fff;
+    background-color: #1A237E
+}
+
+@media screen and (max-width: 991px) {
+    .logo {
+        margin-left: 0px
+    }
+
+    .image {
+        width: 300px;
+        height: 220px
+    }
+
+    .border-line {
+        border-right: none
+    }
+
+    .card2 {
+        border-top: 1px solid #EEEEEE !important;
+        margin: 0px 15px
+    }
 }

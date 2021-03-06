@@ -99,6 +99,8 @@ def testRegisterPage(request):
             profile = profile_form.save(commit=False)
             profile.user = user
             profile.save()
+            messages.success(request, 'Account successfully created for ' + user)
+            return redirect("loginPage")
 
     else:
         form = ExtendedUserCreationForm()
@@ -111,6 +113,9 @@ def testRegisterPage(request):
 
     return render(request, 'test.html', context)
 
+def test2(request):
+    context = {}
+    return render(request, 'test2.html', context)
 
 #------------------------About us --------------------------
 def aboutus(request):

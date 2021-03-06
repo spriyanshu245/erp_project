@@ -8,6 +8,7 @@ from django.conf import settings
 urlpatterns = [
     # Test Pages
    path('testPage/', views.testRegisterPage, name="test"),
+   path('test2/', views.test2, name="test2"),
     # About us page
    path('about_us',views.aboutus, name ="about"),
 #---------------------------------------------------------------
