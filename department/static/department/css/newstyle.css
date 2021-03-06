@@ -6,3 +6,10 @@
 .logout {
     margin-right: 20px;
 }
+
+#table_row {
+    font-weight: bold; 
+    color: #687a6d; 
+    padding: 10px; 
+    border: 1px solid #F1F1F1;
+}
