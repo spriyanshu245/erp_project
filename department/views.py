@@ -99,6 +99,8 @@ def testRegisterPage(request):
             profile = profile_form.save(commit=False)
             profile.user = user
             profile.save()
+            messages.success(request, 'Account successfully created for ' + user)
+            return redirect("loginPage")
 
     else:
         form = ExtendedUserCreationForm()
