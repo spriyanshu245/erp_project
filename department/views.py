@@ -31,7 +31,7 @@ def registerPage(request):
             user = form.cleaned_data.get('username')
             messages.success(request, 'Account successfully created for ' + user)
             return redirect("loginPage")
-
+        
     context = {'form':form}
     return render(request, 'registration/register.html', context)
 
@@ -60,9 +60,28 @@ def logoutPage(request):
     return redirect('/loginPage')
 
 #------------------------------TEST PAGE----------------------------------
-def testPage(request):
-    context = {}
-    return render(request, 'registration/register.html', context)
+def testRegisterPage(request):
+    if request.method == "POST":
+        form = ExtendedUserCreationForm(request.POST)
+        profile_form = UserProfileForm(request.POST)
+
+        if form.is_valid() and profile_form.is_valid():
+            user = form.save()
+
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
+
+    else:
+        form = ExtendedUserCreationForm()
+        profile_form = UserProfileForm()
+
+    context = {
+        'form':form,
+        'profile_form':profile_form,
+    }
+
+    return render(request, 'test.html', context)
 
 
 #------------------------About us --------------------------

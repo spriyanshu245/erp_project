@@ -2,15 +2,14 @@ from django.conf.urls import url
 from django.urls import path
 from department import views
 from django.contrib.auth import views as auth_views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     # Test Pages
-   path('testPage/', views.testPage, name="test"),
-   
-   
-   # About us page
+   path('testPage/', views.testRegisterPage, name="test"),
+    # About us page
    path('about_us',views.aboutus, name ="about"),
-
 #---------------------------------------------------------------
     # Registration Page and Logins
     path('login/', auth_views.LoginView.as_view(),name="login"),
@@ -269,4 +268,5 @@ urlpatterns = [
 
 ]
 
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 #handler404 = ''
