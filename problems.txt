@@ -56,5 +56,5 @@ Model Related---------------
 4. Add a Success Alert message on adding a new record in views or in html file.
 
 6-3-21
-1.user profiles not shown in admin page in users but profiles is shown
-2.
+1.user profiles not shown in admin page in users but profiles is shown _______________________#Done
+2.percentage field does not check excess percentage like appeared = 10 and passed = 12 percentage = 120..this should not happen.

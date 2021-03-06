@@ -14,17 +14,13 @@ class CreateUserForm(UserCreationForm):
         # fields = ['username', 'email', 'password1', 'password2']
         fields = ['username','first_name','last_name', 'email', 'password1', 'password2']
 
-# class ExtendedUserForm(forms.ModelForm):
-#     class Meta:
-#         model = ExtendedUser
-#         fields = ['user.username','user.first_name','user.last_name', 'user.email', 'user.password1', 'user.password2', 'department']
-
 # Students Result in various examinations during specified period 
 class AddStudentResult(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop("request")
         super(AddStudentResult, self).__init__(*args, **kwargs)
-        self.fields['department'].initial = self.request.user.profile.department
+        self.fields['department'].initial = self.request.user.userprofile.department
+
 
     class Meta:
         model = StudentResult
@@ -855,33 +851,33 @@ class  Library2Form(forms.ModelForm):
         }
 
 #-------------------------------------------USERS-----------------------------------------------------
-class UserForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ('first_name', 'last_name', 'email')
+# class UserForm(forms.ModelForm):
+#     class Meta:
+#         model = User
+#         fields = ('first_name', 'last_name', 'email')
 
-class ProfileForm(forms.ModelForm):
-    # profile_image = forms.ImageField()
-    class Meta:
-        model = Profile
-        fields = ('department',)
+# class ProfileForm(forms.ModelForm):
+#     # profile_image = forms.ImageField()
+#     class Meta:
+#         model = Profile
+#         fields = ('department',)
 
 #Shubham User Model_______________________________
 class ExtendedUserCreationForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-    first_name = forms.CharField(max_length=30)
-    last_name = forms.CharField(max_length=30)
+    # email = forms.EmailField(required=True)
+    # first_name = forms.CharField(max_length=30)
+    # last_name = forms.CharField(max_length=30)
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'first_name', 'last_name', 'password1', 'password2']
+        # fields = ['username', 'email', 'first_name', 'last_name', 'password1', 'password2']
+        fields = ['username', 'email', 'password1', 'password2']
 
     def save(self, commit=True):
         user = super().save(commit=False)
-
         user.email = self.cleaned_data['email']
-        user.first_name = self.cleaned_data['first_name']
-        user.last_name = self.cleaned_data['last_name']
+        # user.first_name = self.cleaned_data['first_name']
+        # user.last_name = self.cleaned_data['last_name']
 
         if commit:
             user.save()
