@@ -21,13 +21,17 @@ class CreateUserForm(UserCreationForm):
 
 # Students Result in various examinations during specified period 
 class AddStudentResult(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddStudentResult, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.profile.department
 
     class Meta:
         model = StudentResult
         fields = ['department','Class','exam_Type','subject','exam_Date','appeared','passed']
         #adding bootstrap classes to form inputs
         widgets = {
-            'department' : forms.Select(attrs={'class':'form-control' }),
+            'department' : forms.Select(attrs={'class':'form-control',}),
             'Class' : forms.Select(attrs={'class':'form-control'}),
             'exam_Type': forms.Select(attrs={'class':'form-control'}),
             'subject': forms.Select (attrs={'class':'form-control'}),   
