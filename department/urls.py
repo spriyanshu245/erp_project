@@ -15,7 +15,7 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(),name="login"),
     path('logout/', auth_views.LogoutView.as_view(),name="logout"),
     
-    # Shubham Login Pages
+    # Login Pages
     path('register/', views.registerPage, name="register"),
     path('loginPage/', views.loginPage, name = "loginPage"),
     path('logoutPage/', views.logoutPage, name = "logoutPage"),

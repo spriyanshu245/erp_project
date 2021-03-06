@@ -22,18 +22,46 @@ from department.table_views.placement_views import *
 #------------------------------LOGIN VIEWS-------------------------------------------------------
 
 def registerPage(request):
-    form = CreateUserForm()
 
     if request.method == "POST":
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'Account successfully created for ' + user)
+        form = ExtendedUserCreationForm(request.POST)
+        profile_form = UserProfileForm(request.POST)
+
+        if form.is_valid() and profile_form.is_valid():
+            user = form.save()
+
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
+
+            print(user.username)
+            messages.success(request, 'Account successfully created for ' ) #Add user.username here
             return redirect("loginPage")
-        
-    context = {'form':form}
+
+    else:
+        form = ExtendedUserCreationForm()
+        profile_form = UserProfileForm()
+
+    context = {
+        'form':form,
+        'profile_form':profile_form,
+    }
+
     return render(request, 'registration/register.html', context)
+    ##################################
+
+    # form = CreateUserForm()
+
+    # if request.method == "POST":
+    #     form = CreateUserForm(request.POST)
+    #     if form.is_valid():
+    #         form.save()
+    #         user = form.cleaned_data.get('username')
+    #         messages.success(request, 'Account successfully created for ' + user)
+    #         return redirect("loginPage")
+        
+    # context = {'form':form}
+    # return render(request, 'registration/register.html', context)
 
 @unauthenticated_user
 def loginPage(request):
