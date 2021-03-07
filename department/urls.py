@@ -1,22 +1,24 @@
-from django.conf.urls import url
-from django.urls import path
+from django.conf.urls import url 
+from django.urls import path , include
 from department import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-     path('api-auth/department/<slug:title>/<slug:stitle>/<slug:ttitle>', views.jsonApiDept,name="jsonApi"),
-     path('api-auth/department/<slug:title>/<slug:stitle>', views.jsonApiDept,name="jsonApi"),
-     path('api-auth/department/<slug:title>/', views.jsonApiDept,name="jsonApi"),
-     path('api-auth/placement/<slug:title>/', views.jsonApiPlace,name="jsonApi"),
-     path('api-auth/library/<slug:title>/', views.jsonApiLib,name="jsonApi"),
+    path('api-auth/department/<slug:title>/<slug:stitle>/<slug:ttitle>', views.jsonApiDept,name="jsonApi"),
+    path('api-auth/department/<slug:title>/<slug:stitle>', views.jsonApiDept,name="jsonApi"),
+    path('api-auth/department/<slug:title>/', views.jsonApiDept,name="jsonApi"),
+    path('api-auth/placement/<slug:title>/', views.jsonApiPlace,name="jsonApi"),
+    path('api-auth/library/<slug:title>/', views.jsonApiLib,name="jsonApi"),
     # Test Pages
-   path('testPage/', views.testPage, name="test"),
+    path('testPage/', views.testPage, name="test"),
 
 #---------------------------------------------------------------
     # Registration Page and Logins
     path('login/', auth_views.LoginView.as_view(),name="login"),
     path('logout/', auth_views.LogoutView.as_view(),name="logout"),
-    
+    #path('forget-pass/', auth_views.PasswordResetView.as_view(),name="pass_reset"),
+    #path('forgot-pass/done',auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    url('^', include('django.contrib.auth.urls')),
     # Shubham Login Pages
     path('register/', views.registerPage, name="register"),
     path('loginPage/', views.loginPage, name = "loginPage"),

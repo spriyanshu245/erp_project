@@ -37,7 +37,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'adminlte3_theme',
+   # 'adminlte3_theme',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'department',
     'django_filters',
     'rest_framework',
-         'adminlte3',
+    #'adminlte3',
 ]
 
 MIDDLEWARE = [
@@ -129,6 +129,14 @@ USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'heroku.acc.sd.1@gmail.com'
+EMAIL_HOST_PASSWORD = 'vdrsadtygialmtxy' #past the key or password app here
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'bvcoel'
+
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
