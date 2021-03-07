@@ -4,11 +4,15 @@ from department import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('api-auth/department/<slug:title>/<slug:stitle>/<slug:ttitle>', views.jsonApiDept,name="jsonApi"),
-    path('api-auth/department/<slug:title>/<slug:stitle>', views.jsonApiDept,name="jsonApi"),
-    path('api-auth/department/<slug:title>/', views.jsonApiDept,name="jsonApi"),
-    path('api-auth/placement/<slug:title>/', views.jsonApiPlace,name="jsonApi"),
-    path('api-auth/library/<slug:title>/', views.jsonApiLib,name="jsonApi"),
+    path('api-auth/department/<int:title>/<int:stitle>/<int:ttitle>', views.jsonApiDept,name="jsonApi"),
+    path('api-auth/department/<int:title>/<int:stitle>', views.jsonApiDept,name="jsonApi"),
+    path('api-auth/department/<int:title>/', views.jsonApiDept,name="jsonApi"),
+    path('api-auth/placement/<int:title>/', views.jsonApiPlace,name="jsonApi"),
+    path('api-auth/library/<int:title>/', views.jsonApiLib,name="jsonApi"),
+    path('api-auth/department', views.jsonApiLib,name="jsonApi"),
+    path('api-auth/placement/', views.jsonApiPlace,name="jsonApi"),
+    path('api-auth/library/', views.jsonApiLib,name="jsonApi"),
+    path('api-auth/', views.jsonApiLib,name="jsonApi"),
     # Test Pages
     path('testPage/', views.testPage, name="test"),
 

@@ -478,9 +478,77 @@ class Library :
             return serializers.serialize("json",Library2.objects.all())      
 
 
+def extractFieldJson(JsonStr):
+    data=json.loads(JsonStr)
+    extractS=[]
+    for i in data:
+        extractS.append(i["fields"])
+    return json.dumps(extractS)
 
+import io
+import pandas as pd
+def getAllXls(option=0):
+    buffer = io.BytesIO()
+    writer = pd.ExcelWriter(buffer,engine='xlsxwriter')
+    if 1 : #option=1:
+        pd.DataFrame(json.loads(extractFieldJson(department.STUDENTS_ACADEMIC_PERFORMANCE.getJson()))).to_excel(writer, sheet_name='STUDENTS_ACADEMIC_PERFORMANCE')
+        pd.DataFrame(json.loads(extractFieldJson(department.DEPARTMENTAL_ACTIVITIES.dept_act1.getJson()))).to_excel(writer, sheet_name='dept_act1')
+        pd.DataFrame(json.loads(extractFieldJson(department.DEPARTMENTAL_ACTIVITIES.dept_act2.getJson()))).to_excel(writer, sheet_name='dept_act2')
+        pd.DataFrame(json.loads(extractFieldJson(department.DEPARTMENTAL_ACTIVITIES.dept_act3.getJson()))).to_excel(writer, sheet_name='dept_act3')
+        pd.DataFrame(json.loads(extractFieldJson(department.DEPARTMENTAL_ACTIVITIES.dept_act4.getJson()))).to_excel(writer, sheet_name='dept_act4')
+        pd.DataFrame(json.loads(extractFieldJson(department.DEPARTMENTAL_ACTIVITIES.dept_act5.getJson()))).to_excel(writer, sheet_name='dept_act5')
+        pd.DataFrame(json.loads(extractFieldJson(department.DEPARTMENTAL_ACTIVITIES.dept_act6.getJson()))).to_excel(writer, sheet_name='dept_act6')
+        pd.DataFrame(json.loads(extractFieldJson(department.FACULTY_CONTRIBUTION.reserch_PP.fac_cont1.getJson()))).to_excel(writer, sheet_name='fac_cont1')
+        pd.DataFrame(json.loads(extractFieldJson(department.FACULTY_CONTRIBUTION.reserch_PP.fac_cont2.getJson()))).to_excel(writer, sheet_name='fac_cont2')
+        pd.DataFrame(json.loads(extractFieldJson(department.FACULTY_CONTRIBUTION.reserch_PP.fac_cont3.getJson()))).to_excel(writer, sheet_name='fac_cont3')
+        pd.DataFrame(json.loads(extractFieldJson(department.FACULTY_CONTRIBUTION.reserch_PP.fac_cont4.getJson()))).to_excel(writer, sheet_name='fac_cont4')
+        pd.DataFrame(json.loads(extractFieldJson(department.FACULTY_CONTRIBUTION.reserch_PP.fac_cont5.getJson()))).to_excel(writer, sheet_name='fac_cont5')
+        pd.DataFrame(json.loads(extractFieldJson(department.FACULTY_CONTRIBUTION.reserch_PP.fac_cont6.getJson()))).to_excel(writer, sheet_name='fac_cont6')
+        pd.DataFrame(json.loads(extractFieldJson(department.FACULTY_CONTRIBUTION.reserch_PP.fac_cont7.getJson()))).to_excel(writer, sheet_name='fac_cont7')
+        pd.DataFrame(json.loads(extractFieldJson(department.FACULTY_CONTRIBUTION.reserch_PP.fac_cont8.getJson()))).to_excel(writer, sheet_name='fac_cont8')
+        pd.DataFrame(json.loads(extractFieldJson(department.FACULTY_CONTRIBUTION.reserch_PP.fac_cont9.getJson()))).to_excel(writer, sheet_name='fac_cont9')
+        pd.DataFrame(json.loads(extractFieldJson(department.FACULTY_CONTRIBUTION.reserch_PP.fac_cont10.getJson()))).to_excel(writer, sheet_name='fac_cont10')
+        pd.DataFrame(json.loads(extractFieldJson(department.FACULTY_CONTRIBUTION.reserch_PP.fac_cont11.getJson()))).to_excel(writer, sheet_name='fac_cont11')
+        pd.DataFrame(json.loads(extractFieldJson(department.FACULTY_CONTRIBUTION.reserch_PP.fac_cont12.getJson()))).to_excel(writer, sheet_name='fac_cont12')
+        pd.DataFrame(json.loads(extractFieldJson(department.FACULTY_CONTRIBUTION.FACULTY_ACHIEVEMENTS.getJson()))).to_excel(writer, sheet_name='FACULTY_ACHIEVEMENTS')
+        pd.DataFrame(json.loads(extractFieldJson(department.FACULTY_CONTRIBUTION.BOOKS_MONOGRAPHS_PUBLISHED.getJson()))).to_excel(writer, sheet_name='BOOKS_MONOGRAPHS_PUBLISHED')
+        pd.DataFrame(json.loads(extractFieldJson(department.INDUSTRY_INSTITUTE_INTERACTION.Industrial_Visit_Faculty.getJson()))).to_excel(writer, sheet_name='Industrial_Visit_Faculty')
+        pd.DataFrame(json.loads(extractFieldJson(department.INDUSTRY_INSTITUTE_INTERACTION.Training_Faculty_Industry.getJson()))).to_excel(writer, sheet_name='Training_Faculty_Industry')
+        pd.DataFrame(json.loads(extractFieldJson(department.INDUSTRY_INSTITUTE_INTERACTION.Faculty_Providing_training_industry.getJson()))).to_excel(writer, sheet_name='Fac_Providing_train_industry')
+        pd.DataFrame(json.loads(extractFieldJson(department.INDUSTRY_INSTITUTE_INTERACTION.Faculty_board_Industry.getJson()))).to_excel(writer, sheet_name='Faculty_board_Industry')
+        pd.DataFrame(json.loads(extractFieldJson(department.INDUSTRY_INSTITUTE_INTERACTION.Industrial_people_various_Boards.getJson()))).to_excel(writer, sheet_name='Industrial_people_various_Board')
+        pd.DataFrame(json.loads(extractFieldJson(department.INDUSTRY_INSTITUTE_INTERACTION.Faculty_patents_leading.getJson()))).to_excel(writer, sheet_name='Faculty_patents_leading')
+        pd.DataFrame(json.loads(extractFieldJson(department.INDUSTRY_INSTITUTE_INTERACTION.Sponsored_Projects.getJson()))).to_excel(writer, sheet_name='Sponsored_Projects')
+        pd.DataFrame(json.loads(extractFieldJson(department.INDUSTRY_INSTITUTE_INTERACTION.Consultancy_Projects.getJson()))).to_excel(writer, sheet_name='Consultancy_Projects')
+        pd.DataFrame(json.loads(extractFieldJson(department.INDUSTRY_INSTITUTE_INTERACTION.MOU_Information.getJson()))).to_excel(writer, sheet_name='MOU_Information')
+        pd.DataFrame(json.loads(extractFieldJson(department.CURRICULUM_INPUT.Guest_Lectures.getJson()))).to_excel(writer, sheet_name='Guest_Lectures')
+        pd.DataFrame(json.loads(extractFieldJson(department.CURRICULUM_INPUT.Expert_Lectures.getJson()))).to_excel(writer, sheet_name='Expert_Lectures')
+        pd.DataFrame(json.loads(extractFieldJson(department.CURRICULUM_INPUT.Student_Internship_Training.getJson()))).to_excel(writer, sheet_name='Student_Internship_Training')
+        pd.DataFrame(json.loads(extractFieldJson(department.CURRICULUM_INPUT.Student_Industrial_Visit.getJson()))).to_excel(writer, sheet_name='Student_Industrial_Visit')
+        pd.DataFrame(json.loads(extractFieldJson(department.CURRICULUM_INPUT.Students_Sponsored_Projects.getJson()))).to_excel(writer, sheet_name='Students_Sponsored_Projects')
+        pd.DataFrame(json.loads(extractFieldJson(department.STUDENT_FACULTY_SUPPORT_SYSTEM.Mentoring_System_help_students_at_individual_level.getJson()))).to_excel(writer, sheet_name='Mentoring_System_stud')
+        pd.DataFrame(json.loads(extractFieldJson(department.STUDENT_FACULTY_SUPPORT_SYSTEM.Self_Learning_facilities_for_students.getJson()))).to_excel(writer, sheet_name='Self_Lear_facilities_for_stud')
+        pd.DataFrame(json.loads(extractFieldJson(department.STUDENT_FACULTY_SUPPORT_SYSTEM.Achievement_of_Students_Competitive_Exam.getJson()))).to_excel(writer, sheet_name='Achievement_Stud_Comp_Exam')
+        pd.DataFrame(json.loads(extractFieldJson(department.STUDENT_FACULTY_SUPPORT_SYSTEM.Capability_Enhancement_Development_Activities.getJson()))).to_excel(writer, sheet_name='Capability_Enhancement')
+        pd.DataFrame(json.loads(extractFieldJson(department.STUDENT_FACULTY_SUPPORT_SYSTEM.Number_of_professional_development_organized.getJson()))).to_excel(writer, sheet_name='No_pro_development_organized')
+        pd.DataFrame(json.loads(extractFieldJson(department.EXTRA_CURRICULAR_ACTIVITIES.sports_tournaments.getJson()))).to_excel(writer, sheet_name='sports_tournaments')
+        pd.DataFrame(json.loads(extractFieldJson(department.EXTRA_CURRICULAR_ACTIVITIES.winners_sports_tournaments.getJson()))).to_excel(writer, sheet_name='winners_sports_tournaments')
+        pd.DataFrame(json.loads(extractFieldJson(department.Cultural_Activities.students_participated_cultural.getJson()))).to_excel(writer, sheet_name='students_participated_cultural')
+        pd.DataFrame(json.loads(extractFieldJson(department.Cultural_Activities.Awards_won_cultural_competitions.getJson()))).to_excel(writer, sheet_name='Awards_won_cultural_competition')
+        pd.DataFrame(json.loads(extractFieldJson(department.Social_Activities.Information_about_social_activities.getJson()))).to_excel(writer, sheet_name='Social_Activities')
+        pd.DataFrame(json.loads(extractFieldJson(department.Extra_Activities.getJson()))).to_excel(writer, sheet_name='Extra_Activities')
+        pd.DataFrame(json.loads(extractFieldJson(department.E_Cell.Activity_Conducted_ECell.getJson()))).to_excel(writer, sheet_name='Activity_Conducted_ECell')
+        pd.DataFrame(json.loads(extractFieldJson(department.E_Cell.Numerical_information_about_research_activities.getJson()))).to_excel(writer, sheet_name='Num_info_research_activities')
+        
+        
+        
 
         
+    writer.save()
+    return buffer
+    
+def json2table(*jsonStr):
+    pass
 
                 
         

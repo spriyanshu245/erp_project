@@ -75,14 +75,20 @@ from django.http import HttpResponse
 @login_required
 def jsonApiDept(request,title="",stitle="",ttitle=""):
     #request GET:minor filter 
-    #UserData = (list(User.objects.filter(id=request.user.id).values('username','id','email','first_name')))+(list(Profile.objects.filter(id=request.user.id).values('dept','role',)))
+    # UserData = (list(User.objects.filter(id=request.user.id).values('username','id','email','first_name')))+(list(Profile.objects.filter(id=request.user.id).values('dept','role',)))
     #UserData[0] = username id email fname
     #UserData[1] = role dept
     if request.method == "GET":
         pass
-    return  HttpResponse(department.STUDENTS_ACADEMIC_PERFORMANCE.getJson(), content_type='application/json')
+    
+    data = getAllXls().getvalue()
+    response = HttpResponse(data,content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename=dept%s.xlsx' % datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+    return response 
 
- 
+    #return  HttpResponse(department.STUDENTS_ACADEMIC_PERFORMANCE.getJson(), content_type='application/json')
+
+
 
     
     
@@ -102,10 +108,15 @@ def jsonApiDept(request,title="",stitle="",ttitle=""):
 
 
 #############-replica
+import datetime
 @login_required
-def jsonApiPlace(request,title=None):
-    data={"name":h1}
-    return JsonResponse(data)
+def jsonApiPlace(request,title=None,stitle=None,ttitle=None):
+    data = getAllXls()
+    response = HttpResponse(data,content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename=dept%s.xlsx' % datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+    return response 
+
+    pass
 
 
 @login_required
