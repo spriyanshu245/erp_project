@@ -1,14 +1,45 @@
  {% extends "base.html" %} 
  {% load static %}
  {%block head%}
- <link rel="stylesheet" href="{% static 'department/css/loginPage.css'%}">
+ <link rel="stylesheet" href="{% static 'department/css/test.css' %}">
+ <!-- <link rel="stylesheet" href="{% static 'department/css/loginPage.css'%}"> -->
  {% endblock %}
- {% block content %}
+{% block content %}
+	<div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+		<!-- <div class="card card0 border-0"> -->
+			<div class="row d-flex">
+				<div class="col-lg-6" style="margin: auto;">
+					<div class="card2 card border-0 px-4 py-5">
+						<h1 class="" style="margin: auto;">Faculty Login</h1>
+						<form action="" method="POST">
+							{% csrf_token %}
+							<div class="row px-3"> <label class="mb-1">
+									<h6 class="mb-0 text-sm">Username</h6>
+								</label> <input class="mb-4" type="text" name="username" placeholder="Username.."> </div>
+							<div class="row px-3"> <label class="mb-1">
+									<h6 class="mb-0 text-sm">Password</h6>
+								</label> <input type="password" name="password" placeholder="Enter password"> </div>
+							<div class="row px-3 mb-4">
+								<div class="custom-control custom-checkbox custom-control-inline"> <input id="chk1" type="checkbox" name="chk" class="custom-control-input"> <label for="chk1" class="custom-control-label text-sm">Remember me</label> </div> <a href="#" class="ml-auto mb-0 text-sm">Forgot Password?</a>
+							</div>
+							<div class="row mb-3 px-3"> 
+								<button type="submit" class="btn btn-success btn-login text-center">Login</button> 
+							</div>
+						</form>
+						{% for message in messages%}
+							<p class="warning">{{message}}</p> 
+						{% endfor %}
+					 </div>
+				 </div>
+			 </div>
+		 </div>
+	 </div>
+ {% endblock %}
+
+
 <div class="login-wrap">
 	<div class="login-html">
-     {% for message in messages%}
-                        <p class="warning">{{message}}</p> 
-                        {% endfor %}    
+         
 		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
 		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
 		<div class="login-form">
@@ -65,4 +96,3 @@
 		</div>
 	</div>
 </div>
-{%endblock%}

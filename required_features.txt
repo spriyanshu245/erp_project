@@ -4,3 +4,4 @@
 4. Chained dropdown.
 5. Created at(timestamp) for every table.
 6. Template for User profile, includes updating user logged in.
+7. 
