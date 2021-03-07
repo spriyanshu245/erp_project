@@ -5,3 +5,6 @@
 5. Created at(timestamp) for every table.
 6. Template for User profile, includes updating user logged in.
 7. 
+
+7-3-21
+1. Build Register Page
