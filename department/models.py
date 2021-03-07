@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
-from django.core.validators import MaxValueValidator, MinValueValidator, ValidationError # used on line 912
+from django.core.validators import MaxValueValidator, MinValueValidator # used on line 912
 
 # Questionable fields
 # level, student_ID_number
@@ -36,16 +36,8 @@ class StudentResult(models.Model):
     percentage = models.DecimalField(("Percentage"), default=0 ,decimal_places=2 , max_digits=10)
     objects = models.Manager()
 
-
-    def clean(self):
-        cleaned_data = super(StudentResult, self).clean()
-        if self.passed > self.appeared:
-            raise ValidationError('Invalid Number of Passed Students')
-        return cleaned_data
-
     def save(self, *args, **kwargs):
-        if (self.passed <= self.appeared):
-            self.percentage = (self.passed / self.appeared)* 100 
+        self.percentage = (self.passed / self.appeared)* 100
         super().save(*args, **kwargs)
 
     def __str__(self):
