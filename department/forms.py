@@ -872,6 +872,12 @@ class ExtendedUserCreationForm(UserCreationForm):
         model = User
         # fields = ['username', 'email', 'first_name', 'last_name', 'password1', 'password2']
         fields = ['username', 'email', 'password1', 'password2']
+    
+    def __init__(self, *args, **kwargs):
+        super(ExtendedUserCreationForm, self).__init__(*args, **kwargs)
+
+        for fieldname in ['username', 'password1', 'password2']:
+            self.fields[fieldname].help_text = None
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -887,3 +893,6 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = {'department'}
+        widgets = {
+            'department': forms.Select(attrs={'class':'form-control'})
+        }
