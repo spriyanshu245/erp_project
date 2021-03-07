@@ -26,7 +26,7 @@
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
   {% block head %} 
 
-          {% endblock head %}
+  {% endblock head %}
 </head>
 <body>
 
@@ -74,7 +74,8 @@
         </button>
       
     <div class="collapse navbar-collapse" id="navbarSupportedContent " style="font-size: medium;">
-          <ul class="navbar-nav ml-auto align-items-end">
+      {% if user.is_authenticated %}    
+      <ul class="navbar-nav ml-auto align-items-end">
             <li class="nav-item ml-auto" >
               <a class="nav-link {% if sheet == 'department' %}active{% endif %}" href="{% url 'stud_result' %}">Department</a>
             </li>
@@ -84,8 +85,8 @@
             <li class="nav-item ml-auto">
               <a class="nav-link {% if sheet == 'library' %}active{% endif %}" href="{% url 'library1' %}">Library</a>
             </li>
-          
           </ul>
+        {% endif %}
               
 		  <!-- Dropdown for login logut profile page  -->
 		  <div class="collapse navbar-collapse float-right" id="navbarSupportedContent " style="font-size: medium;">
