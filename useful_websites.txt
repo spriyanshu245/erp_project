@@ -1,0 +1,3 @@
+Login using Email: https://stackoverflow.com/questions/37332190/django-login-with-email
+ 
+
