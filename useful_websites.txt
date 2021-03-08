@@ -1,1 +1,3 @@
-Login using Email/Username: https://rahmanfadhil.com/django-login-with-email/
+Login using Email: https://stackoverflow.com/questions/37332190/django-login-with-email
+ 
+

@@ -141,3 +141,5 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL='/'
 LOGOUT_REDIRECT_URL='/'
 AUTH_PROFILE_MODULE='department.models.Profile'
+
+AUTHENTICATION_BACKENDS = ['department.models.EmailBackend']
