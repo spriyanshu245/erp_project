@@ -21,10 +21,12 @@ class AddStudentResult(forms.ModelForm):
         super(AddStudentResult, self).__init__(*args, **kwargs)
         self.fields['department'].initial = self.request.user.userprofile.department
         self.fields['department'].widget.attrs['readonly'] = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
 
     class Meta:
         model = StudentResult
-        fields = ['department','Class','exam_Type','subject','exam_Date','appeared','passed']
+        fields = ['department','Class','exam_Type','subject','exam_Date','appeared','passed','created_by']
         #adding bootstrap classes to form inputs
         widgets = {
             'department' : forms.TextInput(attrs={'class':'form-control'}),

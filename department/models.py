@@ -34,6 +34,7 @@ class StudentResult(models.Model):
     appeared = models.IntegerField(null=False, blank=False)
     passed = models.IntegerField(null=False, blank=False)
     percentage = models.DecimalField(("Percentage"), default=0 ,decimal_places=2 , max_digits=10)
+    created_by = models.CharField(max_length=30, blank=True)
     objects = models.Manager()
 
     def save(self, *args, **kwargs):

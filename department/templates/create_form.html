@@ -8,9 +8,16 @@
     
     {% include 'add_record.html' %}
      <div class="col-sm-9">
-
+        <div class=" card card-body">
+            <form action="" method="get">
+                {{DeptFilter.form}}
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
         {% if events %}
+        
         <h4 class="text-center alert alert-primary"> {{header}} </h4>
+        
         <div style="height: 600px; overflow-x:auto; overflow-y:auto;">
         <table class="table table-bordered table-hover shadow sortable" id="table_main" style="text-align: center;">
 
@@ -20,7 +27,10 @@
                 {% for instance in data %}
                     {% if forloop.first %}
                         {% for field, value in instance.fields.items %}
+                            {% if field == 'created_by'%}
+                            {% else %}
                             <th scope="col" style="text-align: center; position: sticky; top: 0;">{{ field|replace_to_space }}</th>
+                            {% endif %}
                         {% endfor %}
                     {% endif %}
                 {% endfor %}
@@ -37,7 +47,11 @@
                 <tr >
                     <td>{{forloop.counter}}</td>
                     {% for field, value in instance.fields.items %}
-                    <td>{{ value }}</td>
+                    <!-- Skipping Fields -->
+                    {% if field == 'created_by'%}               
+                    {% else %}
+                        <td>{{ value }}</td>
+                    {% endif %}
                     {% endfor %}
                     <td>
                         <a href="{% url update_link pk=instance.pk %}" class="btn btn-outline-success btn-sm">Update</a>
