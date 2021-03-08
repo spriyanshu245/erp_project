@@ -13,7 +13,7 @@ from department.forms import *
 from department.models import *
 from .library_views import *
 from department.decorators import unauthenticated_user
-
+from department.filters import *
 #--------------------------------------- DEPARTMENT VIEWS -----------------------------------------#
 #--------------------------------------------------------------------------------------------------#
 
@@ -38,12 +38,14 @@ class StudentResultCreate(CreateView):
         context['sheet'] = "department"
         context['header'] = 'Students Result in various examinations'
         context['events'] = self.model.objects.all()
-        print(self.request.user.userprofile.department)
+        print(self.model.__name__)
         context['dept'] = self.request.user.userprofile.department
-        # if self.request.user.is_superuser:
-        #     context['data'] = serializers.serialize( "python", self.model.objects.all() )
-        # else:
-        context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+        if self.request.user.is_staff:
+            context['DeptFilter'] = DepartmentFilter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
 
         context['nbar'] = "stud_result"
         context['update_link'] = "stud_result_update"
@@ -98,6 +100,14 @@ class DeptEvent1Create(CreateView):
         context['sheet'] = "department"
         context['header'] = 'Events Organized by Department'
         context['events'] = self.model.objects.all()
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = DeptEvent1Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
         context['nbar'] = "dept_act_1"
         context['update_link'] = "dept_act_1_update"
@@ -185,6 +195,14 @@ class DeptProEvent3Create(CreateView):
         context['sheet'] = "department"
         context['header'] = 'Department Events With Professional Bodies'
         context['events'] = self.model.objects.all()
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = DeptProEvent3Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+        
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
         context['nbar'] = "dept_act_3"
         context['update_link'] = "dept_act_3_update"
@@ -227,6 +245,14 @@ class DeptFacultyDev4Create(CreateView):
         context['sheet'] = "department"
         context['header'] = 'Departmental Faculty Development Programs'
         context['events'] = self.model.objects.all()
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = DeptFacultyDev4Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
         context['nbar'] = "dept_act_4"
         context['update_link'] = "dept_act_4_update"
@@ -269,6 +295,14 @@ class DeptStudPart5Create(CreateView):
         context['header'] = "Student's Inter-Institute Participation"
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = DeptStudPart5Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "dept_act_5"
         context['update_link'] = "dept_act_5_update"
         context['delete_link'] = "dept_act_5_delete"
@@ -356,6 +390,14 @@ class ResProject1Create(CreateView):
         context['header'] = 'Research projects in the specified period'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = ResProject1Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "fac_contri_1"
         context['update_link'] = "fac_contri_1_update"
         context['delete_link'] = "fac_contri_1_delete"
@@ -471,6 +513,14 @@ class ResInternational3Create(CreateView):
         context['header'] = 'Research papers published in International journals'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = ResInternational3Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "fac_contri_3"
         context['update_link'] = "fac_contri_3_update"
         context['delete_link'] = "fac_contri_3_delete"
@@ -512,6 +562,14 @@ class ResNational4Create(CreateView):
         context['header'] = 'Research papers published in National journals'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = ResNational4Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "fac_contri_4"
         context['update_link'] = "fac_contri_4_update"
         context['delete_link'] = "fac_contri_4_delete"
@@ -553,6 +611,14 @@ class ConfInternational5Create(CreateView):
         context['header'] = 'Paper presented in International Conferences'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = ConfInternational5Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "fac_contri_5"
         context['update_link'] = "fac_contri_5_update"
         context['delete_link'] = "fac_contri_5_delete"
@@ -594,6 +660,14 @@ class ConfNational6Create(CreateView):
         context['header'] = 'Paper presented in National Conferences'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = ConfNational6Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "fac_contri_6"
         context['update_link'] = "fac_contri_6_update"
         context['delete_link'] = "fac_contri_6_delete"
@@ -676,6 +750,14 @@ class FacEvents8Create(CreateView):
         context['header'] = 'Events for faculty members (FDP/Webinar/Seminar/STTP/Workshops/Others)'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = FacEvents8Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "fac_contri_8"
         context['update_link'] = "fac_contri_8_update"
         context['delete_link'] = "fac_contri_8_delete"
@@ -717,6 +799,14 @@ class ProfessionalPrac9Create(CreateView):
         context['header'] = 'Participation in Professional Practices (Curriculum Revision/Syllabus Development)'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = ProfessionalPrac9Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+        
         context['nbar'] = "fac_contri_9"
         context['update_link'] = "fac_contri_9_update"
         context['delete_link'] = "fac_contri_9_delete"
@@ -758,6 +848,14 @@ class FacPatents10Create(CreateView):
         context['header'] = 'List of Faculty Patents/IPR'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = FacPatents10Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "fac_contri_10"
         context['update_link'] = "fac_contri_10_update"
         context['delete_link'] = "fac_contri_10_delete"
@@ -799,6 +897,14 @@ class NationalAttend11Create(CreateView):
         context['header'] = 'Details of National Conference attended'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = NationalAttend11Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "fac_contri_11"
         context['update_link'] = "fac_contri_11_update"
         context['delete_link'] = "fac_contri_11_delete"
@@ -840,6 +946,14 @@ class InternationalAttend12Create(CreateView):
         context['header'] = 'Details of International Conference attended'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = InternationalAttend12Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "fac_contri_12"
         context['update_link'] = "fac_contri_12_update"
         context['delete_link'] = "fac_contri_12_delete"
@@ -883,6 +997,14 @@ class FacAchieveCreate(CreateView):
         context['header'] = 'Achievement List'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = FacAchieveFilter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "fac_achieve"
         context['update_link'] = "fac_achieve_update"
         context['delete_link'] = "fac_achieve_delete"
@@ -973,6 +1095,14 @@ class IndInst1Create(CreateView):
         context['header'] = 'Industrial Visit  of Faculty (Visits accompanied with students should be excluded)'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = IndFacvisit1Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "ind_inst_1_tab"
         context['update_link'] = "ind_inst_1_update"
         context['delete_link'] = "ind_inst_1_delete"
@@ -1014,6 +1144,14 @@ class IndInst2Create(CreateView):
         context['header'] = 'Training of Faculty by Industry'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = IndInst2Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "ind_inst_2_tab"
         context['update_link'] = "ind_inst_2_update"
         context['delete_link'] = "ind_inst_2_delete"
@@ -1056,6 +1194,14 @@ class IndInst3Create(CreateView):
         context['header'] = 'Faculty Providing training to Industry'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = IndInst3Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "ind_inst_3_tab"
         context['update_link'] = "ind_inst_3_update"
         context['delete_link'] = "ind_inst_3_delete"
@@ -1096,6 +1242,14 @@ class IndInst4Create(CreateView):
         context['header'] = 'Faculty on board of Industry'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = IndInst4Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "ind_inst_4_tab"
         context['update_link'] = "ind_inst_4_update"
         context['delete_link'] = "ind_inst_4_delete"
@@ -1296,6 +1450,14 @@ class IndInst9Create(CreateView):
         context['header'] = 'MOU Information'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = IndInst9Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "ind_inst_9_tab"
         context['update_link'] = "ind_inst_9_update"
         context['delete_link'] = "ind_inst_9_delete"
@@ -1338,6 +1500,14 @@ class CurGuestLect1Create(CreateView):
         context['header'] = 'Guest Lectures (General Topics)'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = CurGuestLect1Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "cur_input_1"
         context['update_link'] = "cur_input_1_update"
         context['delete_link'] = "cur_input_1_delete"
@@ -1379,6 +1549,14 @@ class CurExptLect2Create(CreateView):
         context['header'] = 'Expert Lectures'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = CurExptLect2Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "cur_input_2"
         context['update_link'] = "cur_input_2_update"
         context['delete_link'] = "cur_input_2_delete"
@@ -1420,6 +1598,14 @@ class CurStudTrain3Create(CreateView):
         context['header'] = 'Student Internship/Industrial Training'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = CurStudTrain3Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "cur_input_3"
         context['update_link'] = "cur_input_3_update"
         context['delete_link'] = "cur_input_3_delete"
@@ -1461,6 +1647,14 @@ class CurStudVisit4Create(CreateView):
         context['header'] = 'Student Industrial Visit'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = CurStudVisit4Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "cur_input_4"
         context['update_link'] = "cur_input_4_update"
         context['delete_link'] = "cur_input_4_delete"
@@ -1545,6 +1739,14 @@ class StudFac1Create(CreateView):
         context['header'] = 'Mentoring System to help students at individual level'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = ProfessionalPrac9Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "stud_fac_1"
         context['update_link'] = "stud_fac_1_update"
         context['delete_link'] = "stud_fac_1_delete"
