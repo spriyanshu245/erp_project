@@ -12,6 +12,7 @@ from django.contrib.auth import login, logout, authenticate
 from department.forms import *
 from department.models import *
 from .library_views import *
+from department.filters import StudentResultFilter
 from department.decorators import unauthenticated_user
 
 #--------------------------------------- DEPARTMENT VIEWS -----------------------------------------#
@@ -37,13 +38,17 @@ class StudentResultCreate(CreateView):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Students Result in various examinations'
-        context['events'] = self.model.objects.all()
         print(self.request.user.userprofile.department)
         context['dept'] = self.request.user.userprofile.department
+        context['events'] = self.model.objects.filter(department=context['dept'])
         # if self.request.user.is_superuser:
         #     context['data'] = serializers.serialize( "python", self.model.objects.all() )
         # else:
-        context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
+        context['DateFilter'] = StudentResultFilter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DateFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'])
+        # context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
 
         context['nbar'] = "stud_result"
         context['update_link'] = "stud_result_update"

@@ -136,6 +136,15 @@ APPROVAL=(
     ('Other','Other'),
 )
 
+#Library2.Details choices
+DETAILS =(
+    ('', 'Choose...'),
+    ('Number of Faculties Visited','Number of Faculties Visited'),
+    ('Number of Students Visited','Number of Students Visited'),
+    ('Number of Faculty Transctions','Number of Faculty Transctions'),
+    ('Number of Student Transactions','Number of Student Transactions'),
+)
+
 # Year Dropdown choice designed for Placement table queries
 YEAR_CHOICES = []
 for r in range(2008, (datetime.datetime.now().year+1)):

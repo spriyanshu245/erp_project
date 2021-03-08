@@ -61,7 +61,7 @@ Model Related---------------
 7-3-21
 1.Get new login page working..._____________________________#Done
 2. Remember me functionality in login. IG it is not required.
-3. Forgot password functionality.
+3. Forgot password functionality.___________________________#Done by Sourabh, just need to integrate
 
 ---------------------------------MAJOR ISSUES-----------------------------------------
 1. department is foreign key based. "ondelete=models.CASCADE" will delete entire database on deletion of respective department.
@@ -69,3 +69,8 @@ Model Related---------------
     What if we get same error while deploying recent update on college server and college has started filling data. 
     Deleting database might not be an option there.
 3. Backup System.
+
+
+8-3-21
+1. setting default value in django-filters.
+2.

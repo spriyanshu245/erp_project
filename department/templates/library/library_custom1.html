@@ -12,7 +12,9 @@
           <form action="" method="get">
             {{Library2Filter.form}}
             <button class="btn btn-primary" type="submit">Search</button>
-            <a style="float: right; padding: 15px;"href="#" class="card card-link btn btn-outline-success btn-sm">Add Record</a>
+            <a style="float: right; padding: 15px;" 
+               href="{% url 'library2_create' %}" 
+               class="card card-link btn btn-outline-success btn-sm font-weight-bold">+ Add Record</a>
           </form>
         </div>
       </div>
