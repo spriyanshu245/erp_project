@@ -12,6 +12,7 @@ from django.contrib.auth import login, logout, authenticate
 from department.forms import *
 from department.models import *
 from .library_views import *
+from department.filters import StudentResultFilter
 from department.decorators import unauthenticated_user
 from department.filters import *
 #--------------------------------------- DEPARTMENT VIEWS -----------------------------------------#
@@ -40,12 +41,18 @@ class StudentResultCreate(CreateView):
         context['events'] = self.model.objects.all()
         print(self.model.__name__)
         context['dept'] = self.request.user.userprofile.department
-        if self.request.user.is_staff:
-            context['DeptFilter'] = DepartmentFilter(self.request.GET, queryset=context['events'])
-            context['events'] = context['DeptFilter'].qs
-            context['data'] = serializers.serialize( "python", context['events'])
-        else:
-            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
+        # if self.request.user.is_staff:
+        #     context['DeptFilter'] = DepartmentFilter(self.request.GET, queryset=context['events'])
+        #     context['events'] = context['DeptFilter'].qs
+        #     context['data'] = serializers.serialize( "python", context['events'])
+        # else:
+        #     context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
+        context['DateFilter'] = StudentResultFilter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DateFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'])
+        # context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
 
         context['nbar'] = "stud_result"
         context['update_link'] = "stud_result_update"

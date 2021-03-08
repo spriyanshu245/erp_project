@@ -2,7 +2,7 @@
 2. One click export full department table data. Filters, department, from and to date(for admins only).
 3. Date Filter(from,to) for all tables.
 4. Chained dropdown.
-5. Created at(timestamp) for every table.
+5. Created at(timestamp) for every table.-----------------------------------------------Done
 6. Template for User profile, includes updating user logged in.
 7. 
 

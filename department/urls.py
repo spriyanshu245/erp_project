@@ -264,9 +264,8 @@ urlpatterns = [
     path('library1/', views.Library1Create.as_view(), name="library1"),
     path('library1/update/<int:pk>/', views.Library1Update.as_view(), name="library1_update"),
     path('library1/delete/<int:pk>/', views.Library1Delete.as_view(), name="library1_delete"),
+    path('library2/create/',views.Library2Create.as_view(), name ="library2_create"),
     path('library2/update/<int:pk>/', views.Library2Update.as_view(), name="library2_update"),
-
-
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

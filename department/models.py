@@ -20,11 +20,19 @@ class Department(models.Model):
     def __str__(self):
         return self.department
 
+class TimestampedModel(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+        ordering = ['-created_at', '-updated_at']
+
 #-------------------------------------------------------------------------------------
                         # STUDENTS ACADEMIC PERFORMANCE
                         
 # Students Result in various examinations during specified period 
-class StudentResult(models.Model):
+class StudentResult(TimestampedModel,models.Model):
     # department = models.CharField(max_length = 150, choices=DEPARTMENTS, default='Computer Science')
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
     Class = models.CharField(max_length = 150, choices=CLASS, default='')
@@ -990,7 +998,7 @@ class Placement5(models.Model):
 
 #1] Numerical information about placement
 class Library1(models.Model):
-    year = models.IntegerField(('Year'), choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    year = models.IntegerField(('Year'),unique_for_year=True, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     month = models.CharField(('Month'),choices=MONTH_CHOICES, default='January', max_length=150)
     total_Books = models.PositiveIntegerField(('Total Number of Books'), default=0)
     books_Added_This_Month = models.PositiveIntegerField(('Number of Books added This Month'), default=0)
@@ -1012,7 +1020,7 @@ class Library1(models.Model):
 class Library2(models.Model):
     year = models.IntegerField(('Year'), choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     month = models.CharField(('Month'), choices=MONTH_CHOICES, default='January', max_length=150)
-    details =  models.CharField(max_length=250)
+    details =  models.CharField(max_length=250, choices=DETAILS, default='')
     civil = models.PositiveIntegerField(default=10)
     computer = models.PositiveIntegerField(default=10)
     E_andTC = models.PositiveIntegerField(default=10)
@@ -1030,7 +1038,11 @@ class Library2(models.Model):
     def get_absolute_url(self):
         return reverse('library1',)
 
-
+# validate year, month and detail to be combined unique in table ###########
+# Template for add library record
+# filter default value
+# Add number of students visited VS month graph for all dept.
+# date filter for all tables 
 ##__________________________________________________________________________________________________
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

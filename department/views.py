@@ -8,10 +8,10 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
-from .forms import *
-from .models import *
 from .decorators import unauthenticated_user
 
+from .models import *
+from .forms import *
 from department.table_views.department_views import *
 from department.table_views.placement_views import *
 
