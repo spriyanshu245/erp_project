@@ -12,11 +12,12 @@ from .forms import *
 from .models import *
 from .decorators import unauthenticated_user
 from django.http import JsonResponse
-
+from django.contrib.auth.models import User
 from department.table_views.department_views import *
 from department.table_views.placement_views import *
 
 from .handler import *
+User._meta.get_field('email')._unique = True
 # Custom templates
 
 # Create your views here.
@@ -37,6 +38,9 @@ def registerPage(request):
     context = {'form':form}
     return render(request, 'registration/register.html', context)
 
+
+EMAIL_REGEX = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"
+import re
 @unauthenticated_user
 def loginPage(request):
     context = {}
@@ -44,9 +48,13 @@ def loginPage(request):
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
-
+        try :
+            if re.match(EMAIL_REGEX,username):
+               username=User.objects.get(email=username.lower()).username
+        except :
+            pass
         user = authenticate(request, username=username, password=password)
-        
+            
         if user is not None:
             login(request, user)
             return redirect('/')
@@ -73,17 +81,22 @@ def testPage(request):
 ################
 from django.http import HttpResponse
 @login_required
-def jsonApiDept(request,title="",stitle="",ttitle=""):
+def jsonApiDept(request,title=0,stitle=0,ttitle=0):
     #request GET:minor filter 
     # UserData = (list(User.objects.filter(id=request.user.id).values('username','id','email','first_name')))+(list(Profile.objects.filter(id=request.user.id).values('dept','role',)))
     #UserData[0] = username id email fname
     #UserData[1] = role dept
     if request.method == "GET":
-        pass
+        formate = request.GET.get('format') or "json"
+    if formate == "json":
+        data = getAllXls(2).getvalue()
+        response =JsonResponse(json.loads(data),safe=False)
+    elif formate == "xls":
+        data = getAllXls(1).getvalue()
+        response = HttpResponse(data,content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename=dept%s.xlsx' % datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
     
-    data = getAllXls().getvalue()
-    response = HttpResponse(data,content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    response['Content-Disposition'] = 'attachment; filename=dept%s.xlsx' % datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+        
     return response 
 
     #return  HttpResponse(department.STUDENTS_ACADEMIC_PERFORMANCE.getJson(), content_type='application/json')
