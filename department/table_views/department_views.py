@@ -44,7 +44,7 @@ class StudentResultCreate(CreateView):
         context['is_HOD'] = False
         context['logged_user'] = self.request.user.username
         context['hod_events'] = self.model.objects.filter(department=context['dept'])
-        context['faculty_events'] = self.model.objects.filter(department=context['dept'], created_by=self.request.user.username)
+        context['faculty_events'] = self.model.objects.filter(department=context['dept'])
 
         if self.request.user.is_staff:
             context['DeptFilter'] = StudentResultFilter(self.request.GET, queryset=context['events'])

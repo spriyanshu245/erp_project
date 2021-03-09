@@ -64,8 +64,6 @@
             padding: 10px; 
             border: 1px solid #F1F1F1;">
                 {% for instance in data %}
-                {{logged_user}}
-                {{instance.fields.items.}}
                 <tr >
                     <td>{{forloop.counter}}</td>
                     {% for field, value in instance.fields.items %}
@@ -82,6 +80,15 @@
                         <a href="{% url update_link pk=instance.pk %}" class="btn btn-outline-success btn-sm">Update</a>
                         <a href="{% url delete_link pk=instance.pk %}" class="btn btn-outline-danger btn-sm inline">Delete</a>
                     </td>
+                    {% else %}
+                        {% for field, value in instance.fields.items %}
+                            {% if field == 'created_by' and value == logged_user %}
+                            <td>
+                                <a href="{% url update_link pk=instance.pk %}" class="btn btn-outline-success btn-sm">Update</a>
+                                <a href="{% url delete_link pk=instance.pk %}" class="btn btn-outline-danger btn-sm inline">Delete</a>
+                            </td>
+                            {% endif %}
+                        {% endfor %}
                     {% endif %}
                 </tr>
                 {% endfor %}
