@@ -46,7 +46,11 @@
                 {% for instance in data %}
                     {% if forloop.first %}
                         {% for field, value in instance.fields.items %}
-                            {% if field == "created_by_" %}         
+                        
+                            {% if is_staff %}
+                                <th scope="col" style="text-align: center; position: sticky; top: 0;">{{ field|replace_to_space }}</th>
+                            <!-- Skipping Fields -->
+                            {% elif field == "created_by_" %}         
                             {% elif field == "updated_at"%}
                             {% elif field == "created_at" %}
                             {% else %}
@@ -67,8 +71,11 @@
                 <tr >
                     <td>{{forloop.counter}}</td>
                     {% for field, value in instance.fields.items %}
+
+                    {% if is_staff %}
+                        <td>{{ value }}</td>
                     <!-- Skipping Fields -->
-                    {% if field == 'created_by_'%}  
+                    {% elif field == 'created_by_'%}  
                     {% elif field == "updated_at"%}
                     {% elif field == "created_at" %}             
                     {% else %}

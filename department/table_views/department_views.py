@@ -57,6 +57,7 @@ class StudentResultCreate(CreateView):
             context['DeptFilter'] = StudentResultFilter(self.request.GET, queryset=context['faculty_events'])
         context['events'] = context['DeptFilter'].qs
         context['data'] = serializers.serialize( "python", context['events'] )
+        print(context['data'])
 
         context['nbar'] = "stud_result"
         context['update_link'] = "stud_result_update"
@@ -105,6 +106,11 @@ class DeptEvent1Create(CreateView):
     model = DeptEvent1
     form_class = AddDeptEvent1
     template_name = 'create_form.html'
+
+    def get_form_kwargs(self):
+        kwargs = super(DeptEvent1Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

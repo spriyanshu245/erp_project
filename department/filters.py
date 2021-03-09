@@ -16,29 +16,7 @@ class StudentResultFilter(django_filters.FilterSet):
         fields = ['department','from_date','to_date']
 
 
-class Place1Filter(django_filters.FilterSet):
-    def __init__(self, *args, **kwargs):
-        super(Place1Filter, self).__init__(*args, **kwargs)
-        self.form.initial['year'] = datetime.datetime.now().year
 
-    class Meta:
-        model = Placement1
-        fields = ['year']
-
-
-
-class Library1Filter(django_filters.FilterSet):
-
-    class Meta:
-        model = Library1
-        fields = ['year','month']
-
-
-class Library2Filter(django_filters.FilterSet):
-
-    class Meta:
-        model = Library2
-        fields = ['year','month']
 
 #Department filters
 
@@ -176,10 +154,35 @@ class ExtraAct6Filter(django_filters.FilterSet):
     class Meta:
         model = ExtraAct6
         fields = ['department']
+        
 
-#Placement Filters        
+#                                          Placement Filters        
+class Place1Filter(django_filters.FilterSet):
+    def __init__(self, *args, **kwargs):
+        super(Place1Filter, self).__init__(*args, **kwargs)
+        self.form.initial['year'] = datetime.datetime.now().year
+
+    class Meta:
+        model = Placement1
+        fields = ['year']
+
 class Placement4Filter(django_filters.FilterSet):
     class Meta:
         model = Placement4
         fields = ['department']
+
+
+#                                            Placement Filters   
+class Library1Filter(django_filters.FilterSet):
+
+    class Meta:
+        model = Library1
+        fields = ['year','month']
+
+
+class Library2Filter(django_filters.FilterSet):
+
+    class Meta:
+        model = Library2
+        fields = ['year','month']
         

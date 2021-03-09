@@ -22,10 +22,13 @@ class AddStudentResult(forms.ModelForm):
         self.request = kwargs.pop("request")
         super(AddStudentResult, self).__init__(*args, **kwargs)
         self.fields['department'].initial = self.request.user.userprofile.department
-        if not self.request.user.is_staff:
-            self.fields['department'].widget.attrs['readonly'] = True
         self.fields['created_by'].initial = self.request.user.username
         self.fields['created_by'].widget = forms.HiddenInput()
+        if not self.request.user.is_staff:
+            self.fields['department'].widget.attrs['readonly'] = True
+            self.fields['department'].widget.attrs['disabled'] = True
+            # self.fields['created_by'].initial = self.request.user.username
+            # self.fields['created_by'].widget = forms.HiddenInput()
 
     class Meta():
         model = StudentResult
