@@ -39,20 +39,24 @@ class StudentResultCreate(CreateView):
         context['sheet'] = "department"
         context['header'] = 'Students Result in various examinations'
         context['events'] = self.model.objects.all()
-        print(self.model.__name__)
         context['dept'] = self.request.user.userprofile.department
+        context['is_staff'] = self.request.user.is_staff
+        context['is_HOD'] = False
+        context['logged_user'] = self.request.user.username
+        context['hod_events'] = self.model.objects.filter(department=context['dept'])
+        context['faculty_events'] = self.model.objects.filter(department=context['dept'], created_by=self.request.user.username)
 
-        # if self.request.user.is_staff:
-        #     context['DeptFilter'] = DepartmentFilter(self.request.GET, queryset=context['events'])
-        #     context['events'] = context['DeptFilter'].qs
-        #     context['data'] = serializers.serialize( "python", context['events'])
-        # else:
-        #     context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
-
-        context['DateFilter'] = StudentResultFilter(self.request.GET, queryset=context['events'])
-        context['events'] = context['DateFilter'].qs
-        context['data'] = serializers.serialize( "python", context['events'])
-        # context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+        if self.request.user.is_staff:
+            context['DeptFilter'] = StudentResultFilter(self.request.GET, queryset=context['events'])
+        elif self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+                context['DeptFilter'] = StudentResultFilter(self.request.GET, queryset=context['hod_events'])
+        else:
+            context['DeptFilter'] = StudentResultFilter(self.request.GET, queryset=context['faculty_events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
 
         context['nbar'] = "stud_result"
         context['update_link'] = "stud_result_update"
@@ -1834,6 +1838,14 @@ class StudFac3Create(CreateView):
         context['header'] = 'Achievement of Students in Competitive Exam '
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = StudFac3Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "stud_fac_3"
         context['update_link'] = "stud_fac_3_update"
         context['delete_link'] = "stud_fac_3_delete"
@@ -2172,6 +2184,14 @@ class ExtraAct6Create(CreateView):
         context['header'] = 'Extra Activities/Acheivement(if any)'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = ExtraAct6Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "extra_curr_6"
         context['update_link'] = "extra_curr_6_update"
         context['delete_link'] = "extra_curr_6_delete"

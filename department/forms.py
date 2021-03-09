@@ -16,11 +16,15 @@ class CreateUserForm(UserCreationForm):
 
 # Students Result in various examinations during specified period 
 class AddStudentResult(forms.ModelForm):
+    is_staff = False
+
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop("request")
         super(AddStudentResult, self).__init__(*args, **kwargs)
         self.fields['department'].initial = self.request.user.userprofile.department
-        self.fields['department'].widget.attrs['readonly'] = True
+        if not self.request.user.is_staff:
+            self.fields['department'].widget.attrs['readonly'] = True
+            self.fields['department'].widget.attrs['disabled'] = True
         self.fields['created_by'].initial = self.request.user.username
         self.fields['created_by'].widget = forms.HiddenInput()
 
@@ -29,7 +33,7 @@ class AddStudentResult(forms.ModelForm):
         fields = ['department','Class','exam_Type','subject','exam_Date','appeared','passed','created_by']
         #adding bootstrap classes to form inputs
         widgets = {
-            'department' : forms.TextInput(attrs={'class':'form-control'}),
+            'department' : forms.Select(attrs={'class':'form-control'}),
             'Class' : forms.Select(attrs={'class':'form-control'}),
             'exam_Type': forms.Select(attrs={'class':'form-control'}),
             'subject': forms.Select (attrs={'class':'form-control'}),   
@@ -37,6 +41,7 @@ class AddStudentResult(forms.ModelForm):
             'appeared': forms.NumberInput(attrs={'class':'form-control'}),
             'passed': forms.NumberInput(attrs={'class':'form-control'}),
         }
+            
 
 
 #-------------------------------------------------------------------------------------

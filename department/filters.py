@@ -13,7 +13,7 @@ class StudentResultFilter(django_filters.FilterSet):
 
     class Meta:
         model = StudentResult
-        fields = ['from_date','to_date']
+        fields = ['department','from_date','to_date']
 
 
 class Place1Filter(django_filters.FilterSet):
@@ -41,10 +41,6 @@ class Library2Filter(django_filters.FilterSet):
         fields = ['year','month']
 
 #Department filters
-class StudentFilter(django_filters.FilterSet):
-    class Meta:
-        model = StudentResult
-        fields = ['department']
 
 class DeptEvent1Filter(django_filters.FilterSet):
     class Meta:

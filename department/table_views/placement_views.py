@@ -13,7 +13,7 @@ from department.forms import *
 from department.models import *
 from department.decorators import unauthenticated_user
 
-from department.filters import Place1Filter
+from department.filters import *
 #------------------------------------------------ PLACEMENT VIEWS -----------------------------------------------#
 #----------------------------------------------------------------------------------------------------------------#
 
@@ -189,6 +189,14 @@ class Placement4Create(CreateView):
         context['header'] = 'Student Placement Data'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        if self.request.user.is_staff:
+            context['DeptFilter'] = Placement4Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+        else:
+            context['data'] = serializers.serialize( "python", self.model.objects.filter(department=context['dept']) )
+
         context['nbar'] = "place4_tab"
         context['update_link'] = "place4_update"
         context['delete_link'] = "place4_delete"
