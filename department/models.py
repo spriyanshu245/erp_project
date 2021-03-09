@@ -62,7 +62,7 @@ class StudentResult(TimestampedModel,models.Model):
                           # DEPARTMENTAL ACTIVITIES
 
 #1] Information about events organized by department
-class DeptEvent1(models.Model):
+class DeptEvent1(TimestampedModel,models.Model):
     department = models.ForeignKey(Department, on_delete=models.CASCADE, default=1)
     event_type = models.CharField(("Event Type"),max_length=150)
     event_name = models.CharField(("Event Name"),max_length=150)
