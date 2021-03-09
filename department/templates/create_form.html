@@ -5,30 +5,38 @@
 {% include tab_link %}
 
 <div class="row">
-{% include 'add_record.html' %}
-  <div class="col-sm-9">
     
     {% include 'add_record.html' %}
-     <div class="col-sm-9">
-        <div class=" card card-body">
+        <div class="col-sm-9">
+        {% if is_staff %}
+            <div class=" card card-body">
             <form action="" method="get">
-                {{DeptFilter.form}}
+                <!-- {{DeptFilter.form}} <br> -->
+                {% for field in DeptFilter.form %}
+                    <b>{{field.label}}:</b>
+                    {{field}}
+                {% endfor %}
                 <button class="btn btn-primary" type="submit">Search</button>
             </form>
         </div>
+        {% else %}
+        <div class=" card card-body">
+            <form action="" method="get">
+                {% for field in DeptFilter.form %}
+                {% if field.label != 'Department' %}
+                    <b>{{field.label}}:</b>
+                    {{field}}
+                {% endif %}
+                {% endfor %}
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+        
+        {% endif %}
         {% if events %}
         
         <h4 class="text-center alert alert-primary"> {{header}} </h4>
-        <div class="row">
-          <div class="col">
-            <div class="card card-body">
-              <form action="" method="get">
-                {{DateFilter.form}}
-                <button class="btn btn-primary" type="submit">Search</button>
-              </form>
-            </div>
-          </div>
-        </div>
+        
         <div style="height: 600px; overflow-x:auto; overflow-y:auto;">
         <table class="table table-bordered table-hover shadow sortable" id="table_main" style="text-align: center;">
 
@@ -38,7 +46,9 @@
                 {% for instance in data %}
                     {% if forloop.first %}
                         {% for field, value in instance.fields.items %}
-                            {% if field == 'created_by'%}
+                            {% if field == "created_by_" %}         
+                            {% elif field == "updated_at"%}
+                            {% elif field == "created_at" %}
                             {% else %}
                             <th scope="col" style="text-align: center; position: sticky; top: 0;">{{ field|replace_to_space }}</th>
                             {% endif %}
@@ -49,25 +59,30 @@
                 
             </tr>
             </thead>
-
             <tbody id="table_row" style="font-weight: bold; 
             color: #687a6d; 
             padding: 10px; 
             border: 1px solid #F1F1F1;">
                 {% for instance in data %}
+                {{logged_user}}
+                {{instance.fields.items.}}
                 <tr >
                     <td>{{forloop.counter}}</td>
                     {% for field, value in instance.fields.items %}
                     <!-- Skipping Fields -->
-                    {% if field == 'created_by'%}               
+                    {% if field == 'created_by_'%}  
+                    {% elif field == "updated_at"%}
+                    {% elif field == "created_at" %}             
                     {% else %}
                         <td>{{ value }}</td>
                     {% endif %}
                     {% endfor %}
+                    {% if is_staff or is_HOD %}
                     <td>
                         <a href="{% url update_link pk=instance.pk %}" class="btn btn-outline-success btn-sm">Update</a>
                         <a href="{% url delete_link pk=instance.pk %}" class="btn btn-outline-danger btn-sm inline">Delete</a>
                     </td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
            </tbody>
