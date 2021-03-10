@@ -72,5 +72,5 @@ Model Related---------------
 
 
 8-3-21
-1. setting default value in django-filters.
-2.
+1. setting default value in django-filters.________#Done
+2. date filter not added in studfac1 because of charfield for multiple dates.

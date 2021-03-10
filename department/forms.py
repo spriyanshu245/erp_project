@@ -16,26 +16,24 @@ class CreateUserForm(UserCreationForm):
 
 # Students Result in various examinations during specified period 
 class AddStudentResult(forms.ModelForm):
-    is_staff = False
+    disabled_fields = ('department',)
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop("request")
         super(AddStudentResult, self).__init__(*args, **kwargs)
         self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
         self.fields['created_by'].initial = self.request.user.username
         self.fields['created_by'].widget = forms.HiddenInput()
-        if not self.request.user.is_staff:
-            self.fields['department'].widget.attrs['readonly'] = True
-            self.fields['department'].widget.attrs['disabled'] = True
-            # self.fields['created_by'].initial = self.request.user.username
-            # self.fields['created_by'].widget = forms.HiddenInput()
 
     class Meta():
         model = StudentResult
         fields = ['department','Class','exam_Type','subject','exam_Date','appeared','passed','created_by']
         #adding bootstrap classes to form inputs
         widgets = {
-            'department' : forms.TextInput(attrs={'class':'form-control'}),
+            'department' : forms.Select(attrs={'class':'form-control'}),
             'Class' : forms.Select(attrs={'class':'form-control'}),
             'exam_Type': forms.Select(attrs={'class':'form-control'}),
             'subject': forms.Select (attrs={'class':'form-control'}),   
@@ -51,9 +49,21 @@ class AddStudentResult(forms.ModelForm):
 
 #1] Information about events organized by department
 class AddDeptEvent1(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddDeptEvent1, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model = DeptEvent1
-        fields = ['department','event_type','event_name','guest_name','guest_Affiliation','no_of_Participants','from_date','to_date']
+        fields = ['department','event_type','event_name','guest_name','guest_Affiliation','no_of_Participants','from_date','to_date','created_by']
         widgets = {
             'department' : forms.Select(attrs={'class':'form-control'}),
             'event_type': forms.TextInput(attrs={'class':'form-control'}),
@@ -67,9 +77,22 @@ class AddDeptEvent1(forms.ModelForm):
 
 #2] Information about events organized by department (For nearby schools only) 
 class AddDeptEvent2(forms.ModelForm):
+    # disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddDeptEvent2, self).__init__(*args, **kwargs)
+        # self.fields['department'].initial = self.request.user.userprofile.department
+        # if not self.request.user.is_staff:
+        #     for field in self.disabled_fields:
+        #         self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = DeptEvent2
-        fields = ['activity_name','school','school_Contact','faculty_name','no_of_Participants','from_date','to_date']
+        fields = ['activity_name','school','school_Contact','faculty_name','no_of_Participants',
+            'from_date','to_date','created_by']
         widgets = {
             'activity_name': forms.TextInput(attrs={'class':'form-control'}),
             'school': forms.TextInput(attrs={'class':'form-control'}),
@@ -82,9 +105,22 @@ class AddDeptEvent2(forms.ModelForm):
 
 #3] Information about events organized by department in association with Professional bodies
 class AddDeptProEvent3(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddDeptProEvent3, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = DeptProEvent3
-        fields = ['department','activity','resourse_person','resourse_person_contact','no_of_Participants','from_date','to_date']
+        fields = ['department','activity','resourse_person','resourse_person_contact','no_of_Participants',
+            'from_date','to_date','created_by']
         #adding bootstrap classes to form inputs
         widgets = {
             'department': forms.Select(attrs={'class':'form-control'}),
@@ -98,9 +134,22 @@ class AddDeptProEvent3(forms.ModelForm):
 
 #4] Information about Faculty Development Programs organized by department 
 class AddDeptFacultyDev4(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddDeptFacultyDev4, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = DeptFacultyDev4
-        fields = ['department','program','agency','amount_Sponsored','from_date','to_date','no_of_Participants','level']
+        fields = ['department','program','agency','amount_Sponsored',
+            'from_date','to_date','no_of_Participants','level','created_by']
         widgets = {
             'department': forms.Select(attrs={'class':'form-control'}),
             'program' : forms.TextInput(attrs={'class':'form-control'}),
@@ -114,9 +163,22 @@ class AddDeptFacultyDev4(forms.ModelForm):
 
 #5] Participation in inter-institute events by students 
 class AddDeptStudPart5(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddDeptStudPart5, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = DeptStudPart5
-        fields = ['department','student_name','event_type','event_name','organising_Institute','from_date','to_date','no_of_Participants','level','awards']
+        fields = ['department','student_name','event_type','event_name','organising_Institute',
+            'from_date','to_date','no_of_Participants','level','awards','created_by']
         widgets = {
             'department': forms.Select(attrs={'class':'form-control'}),
             'student_name': forms.TextInput(attrs={'class':'form-control'}),
@@ -132,9 +194,15 @@ class AddDeptStudPart5(forms.ModelForm):
 
 #6] Start-Up
 class AddDeptStartUp6(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddDeptStartUp6, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model = DeptStartUp6
-        fields = ['startup_name','startup_nature','start_date','founder','LLP_number','website','team_members']
+        fields = ['startup_name','startup_nature','start_date','founder','LLP_number','website','team_members','created_by']
         widgets = {
             'startup_name': forms.TextInput(attrs={'class':'form-control'}),
             'startup_nature' : forms.TextInput(attrs={'class':'form-control'}),
@@ -151,9 +219,21 @@ class AddDeptStartUp6(forms.ModelForm):
 
 #1] Research projects in the specified period
 class AddResProject1(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddResProject1, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = ResProject1
-        fields = ['title','department','name','date','agency','other']
+        fields = ['title','department','name','date','agency','other','created_by']
         widgets = {
             'title': forms.TextInput(attrs={'class':'form-control'}),
             'department': forms.Select(attrs={'class':'form-control'}),
@@ -165,9 +245,15 @@ class AddResProject1(forms.ModelForm):
 
 #2] Funds received for research for projects
 class AddResFunds2(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddResFunds2, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model = ResFunds2
-        fields = ['funding_agency','grants_recieved','grants_utilized','remaining_grant']
+        fields = ['funding_agency','grants_recieved','grants_utilized','remaining_grant','created_by']
         widgets = {
              'funding_agency': forms.TextInput(attrs={'class':'form-control'}),
              'grants_recieved': forms.NumberInput(attrs={'class':'form-control'}),
@@ -177,9 +263,21 @@ class AddResFunds2(forms.ModelForm):
 
 #3] Research papers published in International journals in the specified period
 class AddResInternational3(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddResInternational3, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = ResInternational3
-        fields = ['title','department','authors_name','journal_name','date_of_publication','volume_Issue_ICV','amount','approval','url']
+        fields = ['title','department','authors_name','journal_name','date_of_publication','volume_Issue_ICV','amount','approval','url','created_by']
         widgets = {
             'title': forms.TextInput(attrs={'class':'form-control'}),
             'department': forms.Select(attrs={'class':'form-control'}),
@@ -194,9 +292,21 @@ class AddResInternational3(forms.ModelForm):
 
 #4] Research papers published in national journals in the specified period
 class AddResNational4(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddResNational4, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = ResNational4
-        fields = ['title','department','authors_name','journal_name','date_of_Publication','volume_Issue_ICV','amount','approval','url']
+        fields = ['title','department','authors_name','journal_name','date_of_Publication','volume_Issue_ICV','amount','approval','url','created_by']
         widgets = {
             'title': forms.TextInput(attrs={'class':'form-control'}),
             'department': forms.Select(attrs={'class':'form-control'}),
@@ -211,9 +321,21 @@ class AddResNational4(forms.ModelForm):
 
 #5] Paper presented in International Conferences in the specified periodclass ResNational4(models.Model):
 class AddConfInternational5(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddConfInternational5, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = ConfInternational5
-        fields = ['title','department','authors_Name','conference_Name','oraganised_by','date','amount','location','url']
+        fields = ['title','department','authors_Name','conference_Name','oraganised_by','date','amount','location','url','created_by']
         widgets = {
             'title': forms.TextInput(attrs={'class':'form-control'}),
             'department': forms.Select(attrs={'class':'form-control'}),
@@ -228,9 +350,21 @@ class AddConfInternational5(forms.ModelForm):
 
 #6] Paper presented in National Conferences in the specified period
 class AddConfNational6(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddConfNational6, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = ConfNational6
-        fields = ['title','department','authors_Name','conference_Name','oraganised_by','date','amount','location','url']
+        fields = ['title','department','authors_Name','conference_Name','oraganised_by','date','amount','location','url','created_by']
         widgets = {
             'title': forms.TextInput(attrs={'class':'form-control'}),
             'department': forms.Select(attrs={'class':'form-control'}),
@@ -246,9 +380,15 @@ class AddConfNational6(forms.ModelForm):
 
 #7] Research papers authored with industrial persons
 class AddResIndustrial7(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddResIndustrial7, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = ResIndustrial7
-        fields = ['title','authors_Name','co_Author_Name','name_of_Company','date','name_of_Conference_or_Journal','location','url']
+        fields = ['title','authors_Name','co_Author_Name','name_of_Company','date','name_of_Conference_or_Journal','location','url','created_by']
         widgets = {
             'title': forms.TextInput(attrs={'class':'form-control'}),
             'authors_Name': forms.TextInput(attrs={'class':'form-control'}),
@@ -262,9 +402,22 @@ class AddResIndustrial7(forms.ModelForm):
 
 #8] Events for faculty members (FDP/Webinar/Seminar/STTP/Workshops/Others)
 class AddFacEvents8(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddFacEvents8, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = FacEvents8
-        fields = ['event_Type','event_Name','name_of_Faculty','department','date','level','amount','organising_Institute']
+        fields = ['event_Type','event_Name','name_of_Faculty','department','date','level',
+            'amount','organising_Institute','created_by']
         widgets = {
             'event_Type': forms.TextInput(attrs={'class':'form-control'}),
             'event_Name': forms.TextInput(attrs={'class':'form-control'}),
@@ -278,9 +431,21 @@ class AddFacEvents8(forms.ModelForm):
 
 #9] Participation in Professional Practices (Curriculum Revision/Syllabus Development/Others)
 class AddProfessionalPrac9(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddProfessionalPrac9, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = ProfessionalPrac9
-        fields = ['faculty_Name','department','professional_Practice_Type','designation','organising_Institute','date']
+        fields = ['faculty_Name','department','professional_Practice_Type','designation','organising_Institute','date','created_by']
         widgets = {
             'faculty_Name': forms.TextInput(attrs={'class':'form-control'}),
             'department': forms.Select(attrs={'class':'form-control'}),
@@ -292,9 +457,21 @@ class AddProfessionalPrac9(forms.ModelForm):
 
 #10] List of Faculty Patents/IPR
 class AddFacPatents10(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddFacPatents10, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = FacPatents10
-        fields = ['faculty_Name','department','invention_Title','patent_Number','date','patent_Status']
+        fields = ['faculty_Name','department','invention_Title','patent_Number','date','patent_Status','created_by']
         widgets = {
             'faculty_Name': forms.TextInput(attrs={'class':'form-control'}),
             'department': forms.Select(attrs={'class':'form-control'}),
@@ -306,9 +483,21 @@ class AddFacPatents10(forms.ModelForm):
 
 #11] Details of National Conference attended
 class AddNationalAttend11(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddNationalAttend11, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = NationalAttend11
-        fields = ['faculty_Name','department','conference_Name','organised_By','date','amount','location']
+        fields = ['faculty_Name','department','conference_Name','organised_By','date','amount','location','created_by']
         widgets = {
             'faculty_Name': forms.TextInput(attrs={'class':'form-control'}),
             'department': forms.Select(attrs={'class':'form-control'}),
@@ -321,9 +510,21 @@ class AddNationalAttend11(forms.ModelForm):
 
 #12] Details of International Conference attended
 class AddInternationalAttend12(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddInternationalAttend12, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = InternationalAttend12
-        fields = ['faculty_Name','department','conference_Name','organised_By','date','amount','location']
+        fields = ['faculty_Name','department','conference_Name','organised_By','date','amount','location','created_by']
         widgets = {
             'faculty_Name': forms.TextInput(attrs={'class':'form-control'}),
             'department': forms.Select(attrs={'class':'form-control'}),
@@ -338,9 +539,21 @@ class AddInternationalAttend12(forms.ModelForm):
 
 #1] Faculty Acheivements
 class AddFacAchieve(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddFacAchieve, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = FacAchieve
-        fields = ['faculty_Name','department','achievement','level','dates',]
+        fields = ['faculty_Name','department','achievement','level','dates','created_by']
         widgets = {
             'faculty_Name': forms.TextInput(attrs={'class':'form-control'}),
             'department': forms.Select(attrs={'class':'form-control'}),
@@ -352,15 +565,21 @@ class AddFacAchieve(forms.ModelForm):
 
 #2] Names of books/Chapters/Manuals/ Monographs published
 class AddFacBook(forms.ModelForm):
-        class Meta:
-            model = FacBook
-            fields = ['title','author_name','publication','ISBN']
-            widgets = {
-                'title': forms.TextInput(attrs={'class':'form-control'}),
-                'author_name' : forms.TextInput(attrs={'class':'form-control'}),
-                'publication': forms.TextInput(attrs={'class':'form-control'}),
-                'ISBN': forms.NumberInput(attrs={'class':'form-control'}),
-            }
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddFacBook, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
+    class Meta:
+        model = FacBook
+        fields = ['title','author_name','publication','ISBN','created_by']
+        widgets = {
+            'title': forms.TextInput(attrs={'class':'form-control'}),
+            'author_name' : forms.TextInput(attrs={'class':'form-control'}),
+            'publication': forms.TextInput(attrs={'class':'form-control'}),
+            'ISBN': forms.NumberInput(attrs={'class':'form-control'}),
+        }
 
 
 #--------------------------------------------------------------------------------------------------
@@ -368,9 +587,21 @@ class AddFacBook(forms.ModelForm):
 
 #1]Industrial Visit  of Faculty (Visits accompanied with students should be excluded)
 class IndFacVisit1Form(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(IndFacVisit1Form, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = IndFacvisit1
-        fields = ('faculty','department','company','sector','purpose','from_date','to_date','outcome')
+        fields = ('faculty','department','company','sector','purpose','from_date','to_date','outcome','created_by')
         widgets = {
             'faculty': forms.TextInput(attrs={'class':'form-control'}),
             'department': forms.Select(attrs={'class':'form-control'}),
@@ -383,9 +614,21 @@ class IndFacVisit1Form(forms.ModelForm):
         }
 
 class IndInst2Form(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(IndInst2Form, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = IndInst2
-        fields = ('name_of_faculty','department','name_of_company','sector','title_of_training','from_date','to_date','outcome')
+        fields = ('name_of_faculty','department','name_of_company','sector','title_of_training','from_date','to_date','outcome','created_by')
         widgets = {
             'name_of_faculty': forms.TextInput(attrs={'class':'form-control'}),
             'department': forms.Select(attrs={'class':'form-control'}),
@@ -398,9 +641,21 @@ class IndInst2Form(forms.ModelForm):
         }
 
 class IndInst3Form(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(IndInst3Form, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = IndInst3
-        fields = ('name_of_faculty','department','name_of_company','sector','title_of_training','from_date','to_date','outcome')
+        fields = ('name_of_faculty','department','name_of_company','sector','title_of_training','from_date','to_date','outcome','created_by')
         widgets = {
             'name_of_faculty': forms.TextInput(attrs={'class':'form-control'}),
             'department': forms.Select(attrs={'class':'form-control'}),
@@ -413,9 +668,22 @@ class IndInst3Form(forms.ModelForm):
         }
 
 class IndInst4Form(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(IndInst4Form, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = IndInst4
-        fields = ('name_of_faculty','department','name_of_company','date_of_appointment','type_of_board','designation_of_faculty','meeting_date')
+        fields = ('name_of_faculty','department','name_of_company','date_of_appointment','type_of_board',
+            'designation_of_faculty','meeting_date','created_by')
         widgets = {
             'name_of_faculty': forms.TextInput(attrs={'class':'form-control'}),
             'department': forms.Select(attrs={'class':'form-control'}),
@@ -427,9 +695,15 @@ class IndInst4Form(forms.ModelForm):
         }
 
 class IndInst5Form(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(IndInst5Form, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model = IndInst5
-        fields = ('type_of_board','name_of_industry_member','designation','name_of_company','sector','tenure')
+        fields = ('type_of_board','name_of_industry_member','designation','name_of_company','sector','tenure','created_by')
         widgets = {
             'type_of_board': forms.TextInput(attrs={'class':'form-control'}),
             'name_of_industry_member': forms.TextInput(attrs={'class':'form-control'}),
@@ -440,9 +714,16 @@ class IndInst5Form(forms.ModelForm):
         }
 
 class IndInst6Form(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(IndInst6Form, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model = IndInst6
-        fields = ('name_of_faculty','title_of_invention','patent_no','date_of_grant','name_of_company','sector','date_of_adoption')
+        fields = ('name_of_faculty','title_of_invention','patent_no','date_of_grant','name_of_company',
+            'sector','date_of_adoption','created_by')
         widgets = {
             'name_of_faculty': forms.TextInput(attrs={'class':'form-control'}),
             'title_of_invention': forms.TextInput(attrs={'class':'form-control'}),
@@ -454,9 +735,16 @@ class IndInst6Form(forms.ModelForm):
             }
 
 class IndInst7Form(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(IndInst7Form, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model = IndInst7
-        fields = ('title_of_project','name_of_coordinator','name_of_sponsoring_company','duration_from','duration_to','grant_received','status_of_project')
+        fields = ('title_of_project','name_of_coordinator','name_of_sponsoring_company','duration_from','duration_to',
+            'grant_received','status_of_project','created_by')
         widgets = {
             'title_of_project': forms.TextInput(attrs={'class':'form-control'}),
             'name_of_coordinator': forms.TextInput(attrs={'class':'form-control'}),
@@ -468,9 +756,15 @@ class IndInst7Form(forms.ModelForm):
         }
 
 class IndInst8Form(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(IndInst8Form, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model = IndInst8
-        fields = ('name_of_faculty','name_of_company','title_of_project','revenue_generated','dates_from','dates_to','status_of_project')
+        fields = ('name_of_faculty','name_of_company','title_of_project','revenue_generated','dates_from','dates_to','status_of_project','created_by')
         widgets = {
             'name_of_faculty': forms.TextInput(attrs={'class':'form-control'}),
             'name_of_company': forms.TextInput(attrs={'class':'form-control'}),
@@ -482,9 +776,21 @@ class IndInst8Form(forms.ModelForm):
         }
 
 class IndInst9Form(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(IndInst9Form, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = IndInst9
-        fields = ('department','name_of_faculty_coordinator','name_of_company','sector','date_of_MOU','purpose_of_MOU')
+        fields = ('department','name_of_faculty_coordinator','name_of_company','sector','date_of_MOU','purpose_of_MOU','created_by')
         widgets = {
             'department': forms.Select(attrs={'class':'form-control'}),
             'name_of_faculty_coordinator': forms.TextInput(attrs={'class':'form-control'}),
@@ -500,9 +806,21 @@ class IndInst9Form(forms.ModelForm):
 
 #1] Guest Lectures (General Topics)
 class AddCurGuestLect1(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddCurGuestLect1, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = CurGuestLect1
-        fields = ['guest','organization','designation','topic','department','date','no_of_Participants']
+        fields = ['guest','organization','designation','topic','department','date','no_of_Participants','created_by']
         widgets = {
             'guest': forms.TextInput(attrs={'class':'form-control'}),
             'organization' : forms.TextInput(attrs={'class':'form-control'}),
@@ -516,9 +834,21 @@ class AddCurGuestLect1(forms.ModelForm):
             
 #2] Expert Lectures (Subject-Specific Topics)
 class AddCurExptLect2(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddCurExptLect2, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = CurExptLect2
-        fields = ['guest','organization','designation','topic','department','date','no_of_Participants']
+        fields = ['guest','organization','designation','topic','department','date','no_of_Participants','created_by']
         widgets = {
             'guest': forms.TextInput(attrs={'class':'form-control'}),
             'organization' : forms.TextInput(attrs={'class':'form-control'}),
@@ -532,9 +862,21 @@ class AddCurExptLect2(forms.ModelForm):
 
 #3] Student Internship/Industrial Training 
 class AddCurStudTrain3(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddCurStudTrain3, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = CurStudTrain3
-        fields = ['department','student_name','company','sector','from_date','to_date']
+        fields = ['department','student_name','company','sector','from_date','to_date','created_by']
         widgets = {
             'department': forms.Select(attrs={'class':'form-control'}),
             'student_name': forms.TextInput(attrs={'class':'form-control'}),
@@ -547,9 +889,21 @@ class AddCurStudTrain3(forms.ModelForm):
 
 #4] Student Industrial Visit 
 class AddCurStudVisit4(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddCurStudVisit4, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = CurStudVisit4
-        fields = ['department','company','sector','faculty_Name','no_of_Students','from_date','to_date']
+        fields = ['department','company','sector','faculty_Name','no_of_Students','from_date','to_date','created_by']
         widgets = {
             'department': forms.Select(attrs={'class':'form-control'}),
             'company': forms.TextInput(attrs={'class':'form-control'}),
@@ -562,9 +916,15 @@ class AddCurStudVisit4(forms.ModelForm):
 
 #5] Students Sponsored Projects
 class AddCurStudSponsor5(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AddCurStudSponsor5, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model = CurStudSponsor5
-        fields = ['title','company_Representative','sponsoring_Company','from_date','to_date','grant','status']
+        fields = ['title','company_Representative','sponsoring_Company','from_date','to_date','grant','status','created_by']
         widgets = {
             'title': forms.TextInput(attrs={'class':'form-control'}),
             'company_Representative': forms.TextInput(attrs={'class':'form-control'}),
@@ -579,9 +939,16 @@ class AddCurStudSponsor5(forms.ModelForm):
 #--------------------------------------------------------------------------------------------------
                                     # STUDENT /FACULTY SUPPORT SYSTEM
 class StudFac1Form(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(StudFac1Form, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model = StudFac1
-        fields = ('department','class_or_division','type_of_meeting_open_GFM_or_HOD_close','name_of_faculty','type_of_mentoring','dates_of_mentoring_activity')
+        fields = ('department','class_or_division','type_of_meeting_open_GFM_or_HOD_close','name_of_faculty','type_of_mentoring',
+            'dates_of_mentoring_activity','created_by')
         widgets = {
             'department': forms.Select(attrs={'class':'form-control'}),
             'class_or_division': forms.TextInput(attrs={'class':'form-control'}),
@@ -592,9 +959,16 @@ class StudFac1Form(forms.ModelForm):
         }
 
 class StudFac2Form(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(StudFac2Form, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model = StudFac2
-        fields = ("class_or_division","type_of_self_learning_facility","name_of_subject","no_of_student_participated","date","certificate_or_award_received_by_students")
+        fields = ("class_or_division","type_of_self_learning_facility","name_of_subject","no_of_student_participated",
+            "date","certificate_or_award_received_by_students",'created_by')
         widgets = {
             "class_or_division": forms.TextInput(attrs={'class':'form-control'}),
             "type_of_self_learning_facility": forms.Select(attrs={'class':'form-control'}),
@@ -605,9 +979,22 @@ class StudFac2Form(forms.ModelForm):
         }
 
 class StudFac3Form(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(StudFac3Form, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = StudFac3
-        fields = ("name_of_student","department","name_of_competitive_exam_appeard_or_qualified","competitive_exam_seat_no","score")
+        fields = ("name_of_student","department","name_of_competitive_exam_appeard_or_qualified",
+            "competitive_exam_seat_no","score",'created_by')
         widgets = {
             "name_of_student": forms.TextInput(attrs={'class':'form-control'}),
             "department": forms.Select(attrs={'class':'form-control'}),
@@ -618,9 +1005,15 @@ class StudFac3Form(forms.ModelForm):
         }
 
 class StudFac4Form(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(StudFac4Form, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model = StudFac4
-        fields = ("name_of_activity","date_of_implementation","no_of_students_enrolled","agencies_involved")
+        fields = ("name_of_activity","date_of_implementation","no_of_students_enrolled","agencies_involved",'created_by')
         widgets = {
             "name_of_activity": forms.Select(attrs={'class':'form-control'}),
             "date_of_implementation": DateInput(attrs={'class':'form-control'}),
@@ -629,9 +1022,16 @@ class StudFac4Form(forms.ModelForm):
         }
 
 class StudFac5Form(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(StudFac5Form, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model = StudFac5
-        fields = ("title_of_the_professional_development_program","organized_for_faculty_or_staff","organizing_department","duration_open_from_close","duration_open_to_close","no_of_Participants","agencies_involved")
+        fields = ("title_of_the_professional_development_program","organized_for_faculty_or_staff","organizing_department",
+            "duration_open_from_close","duration_open_to_close","no_of_Participants","agencies_involved",'created_by')
         widgets = {
             "title_of_the_professional_development_program": forms.TextInput(attrs={'class':'form-control'}),
             "organized_for_faculty_or_staff": forms.TextInput(attrs={'class':'form-control'}),
@@ -645,9 +1045,15 @@ class StudFac5Form(forms.ModelForm):
 #--------------------------------------------------------------------------------------------------
                                     # EXTRA CURRICULAR ACTIVITIES
 class ExtraCurr1Form(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(ExtraCurr1Form, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model = ExtraCurr1
-        fields = ("activity","organized_by","level","date","no_of_Students_Participated")
+        fields = ("activity","organized_by","level","date","no_of_Students_Participated",'created_by')
         widgets = {
             "activity": forms.TextInput(attrs={'class': 'form-control'}),
             "organized_by": forms.TextInput(attrs={'class': 'form-control'}),
@@ -657,18 +1063,36 @@ class ExtraCurr1Form(forms.ModelForm):
         }
 
 class ExtraCurr2Form(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(ExtraCurr2Form, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model = ExtraCurr2
-        fields = ("name_of_the_sport_or_team","student_ID_number","name_of_department","level","rank")
+        fields = ("name_of_the_sport_or_team","student_ID_number","department","level","rank",'created_by')
         widgets = {
             "name_of_the_sport_or_team": forms.TextInput(attrs={'class': 'form-control'}),
             "student_ID_number": forms.TextInput(attrs={'class': 'form-control'}),
-            "name_of_department": forms.Select(attrs={'class':'form-control'}),
+            "department": forms.Select(attrs={'class':'form-control'}),
             "level": forms.TextInput(attrs={'class': 'form-control'}),
             "rank": forms.NumberInput(attrs={'class':'form-control'}),
         }
 
 class  CulturalCount3Form(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(CulturalCount3Form, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model =  CulturalCount3
         fields = '__all__'
@@ -679,9 +1103,15 @@ class  CulturalCount3Form(forms.ModelForm):
         }
          
 class  CulturalAct3Form(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(CulturalAct3Form, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model =  CulturalAct3
-        fields = ("event_Name","organized_By","level","date","Prize_Won_or_Medal","no_of_Students_Participated")
+        fields = ("event_Name","organized_By","level","date","Prize_Won_or_Medal","no_of_Students_Participated",'created_by')
         widgets = {
             "event_Name": forms.TextInput(attrs={'class': 'form-control'}),
             "organized_By": forms.TextInput(attrs={'class': 'form-control'}),
@@ -692,6 +1122,12 @@ class  CulturalAct3Form(forms.ModelForm):
         }
 
 class  SocialAct4Form(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(SocialAct4Form, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model =  SocialAct4
         fields = '__all__'
@@ -706,6 +1142,12 @@ class  SocialAct4Form(forms.ModelForm):
         }
 
 class  CentersAct5Form(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(CentersAct5Form, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model =  CentersAct5
         fields = '__all__'
@@ -719,6 +1161,19 @@ class  CentersAct5Form(forms.ModelForm):
         }
 
 class  ExtraAct6Form(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(ExtraAct6Form, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
+
     class Meta:
         model =  ExtraAct6
         fields = '__all__'
@@ -733,6 +1188,12 @@ class  ExtraAct6Form(forms.ModelForm):
 #--------------------------------------------------------------------------------------------------
                                     # E - CELL
 class EcellForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(EcellForm, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model = Ecell
         fields = '__all__'
@@ -745,6 +1206,12 @@ class EcellForm(forms.ModelForm):
         }
 
 class  EcellCountForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(EcellCountForm, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model =  EcellCount
         fields = '__all__'
@@ -760,6 +1227,12 @@ class  EcellCountForm(forms.ModelForm):
 #--------------------------------PLACEMENT SHEET-----------------------------------------------------
 
 class  Placement1Form(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(Placement1Form, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model =  Placement1
         fields = "__all__"
@@ -774,6 +1247,12 @@ class  Placement1Form(forms.ModelForm):
         }
 
 class  Placement2Form(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(Placement2Form, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model =  Placement2
         fields = "__all__"
@@ -788,6 +1267,12 @@ class  Placement2Form(forms.ModelForm):
         }
 
 class  Placement3Form(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(Placement3Form, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model =  Placement3
         fields = "__all__"
@@ -802,6 +1287,18 @@ class  Placement3Form(forms.ModelForm):
         }
 
 class  Placement4Form(forms.ModelForm):
+    disabled_fields = ('department',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(Placement4Form, self).__init__(*args, **kwargs)
+        self.fields['department'].initial = self.request.user.userprofile.department
+        if not self.request.user.is_staff:
+            for field in self.disabled_fields:
+                self.fields[field].disabled = True
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+    
     class Meta:
         model =  Placement4
         fields = "__all__"
@@ -815,6 +1312,12 @@ class  Placement4Form(forms.ModelForm):
         }
 
 class  Placement5Form(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(Placement5Form, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model =  Placement5
         fields = "__all__"
@@ -829,6 +1332,12 @@ class  Placement5Form(forms.ModelForm):
 #--------------------------------LIBRARY SHEET-----------------------------------------------------
 
 class  Library1Form(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(Library1Form, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model =  Library1
         fields = "__all__"
@@ -847,6 +1356,12 @@ class  Library1Form(forms.ModelForm):
         }
 
 class  Library2Form(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(Library2Form, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.request.user.username
+        self.fields['created_by'].widget = forms.HiddenInput()
+
     class Meta:
         model =  Library2
         exclude = ('total',)

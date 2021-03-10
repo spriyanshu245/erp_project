@@ -13,6 +13,9 @@
 1. Design user roles.
     admin department filter._______________#added
     from to filter
+        Filters ________#Done for department tables only
+        forms
+        department views and placement views
     
 2. email field for signup____________________#Done
  

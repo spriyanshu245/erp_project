@@ -56,8 +56,6 @@ class StudentResult(TimestampedModel,models.Model):
         return reverse('stud_result',)
     
 
-
-
 #-------------------------------------------------------------------------------------
                           # DEPARTMENTAL ACTIVITIES
 
@@ -71,6 +69,7 @@ class DeptEvent1(TimestampedModel,models.Model):
     no_of_Participants = models.IntegerField(("No of Participants"))
     from_date = models.DateField(("From"), default=date.today,auto_now=False, auto_now_add=False)
     to_date = models.DateField(("To"), default=date.today,auto_now=False, auto_now_add=False)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.event_name
@@ -87,6 +86,7 @@ class DeptEvent2(models.Model):
     no_of_Participants = models.IntegerField(("No of Participants"))
     from_date = models.DateField(("From"), default=date.today,auto_now=False, auto_now_add=False)
     to_date = models.DateField(("To"), default=date.today,auto_now=False, auto_now_add=False)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.activity_name
@@ -103,6 +103,7 @@ class DeptProEvent3(models.Model):
     no_of_Participants = models.IntegerField(("No of Participants"))
     from_date = models.DateField(("From"), default=date.today,auto_now=False, auto_now_add=False)
     to_date = models.DateField(("To"), default=date.today,auto_now=False, auto_now_add=False)
+    created_by = models.CharField(max_length=30, blank=True)
     objects = models.Manager()
 
     def __str__(self):
@@ -121,6 +122,7 @@ class DeptFacultyDev4(models.Model):
     to_date = models.DateField(("To"), default=date.today,auto_now=False, auto_now_add=False)
     no_of_Participants = models.IntegerField(("No of Participants"))
     level = models.CharField(max_length=150)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.program
@@ -140,6 +142,7 @@ class DeptStudPart5(models.Model):
     no_of_Participants = models.IntegerField(("No of Participants"))
     level = models.CharField(max_length=150)
     awards = models.CharField(("Recognition Awards"), max_length=264)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.student_name
@@ -156,6 +159,7 @@ class DeptStartUp6(models.Model):
     LLP_number = models.IntegerField(("LLP number"))
     website = models.URLField(max_length=150)
     team_members = models.CharField(max_length=500)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.startup_name
@@ -175,6 +179,7 @@ class ResProject1(models.Model):
     date = models.DateField(default=date.today,auto_now=False, auto_now_add=False)
     agency = models.CharField(max_length=150)
     other = models.CharField(max_length=150)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.title
@@ -189,6 +194,7 @@ class ResFunds2(models.Model):
     grants_recieved = models.IntegerField(default=0)
     grants_utilized = models.IntegerField(default=0)
     remaining_grant = models.IntegerField(default=0)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.funding_agency
@@ -208,6 +214,7 @@ class ResInternational3(models.Model):
     amount = models.IntegerField(("Amount (if paid by institute)"), default=0)
     approval = models.CharField(max_length=150, choices=APPROVAL, default='')
     url = models.URLField(max_length=150)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.title
@@ -227,6 +234,7 @@ class ResNational4(models.Model):
     amount = models.IntegerField(("Amount (if paid by institute)"), default=0)
     approval = models.CharField(max_length=150, choices=APPROVAL, default='')
     url = models.URLField(max_length=150)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.title
@@ -245,6 +253,7 @@ class ConfInternational5(models.Model):
     amount = models.IntegerField(("Amount (if paid by institute)"), default=0)
     location = models.CharField(max_length=150, null=True)
     url = models.URLField(max_length=150, null=True)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.title
@@ -264,6 +273,7 @@ class ConfNational6(models.Model):
     amount = models.IntegerField(("Amount (if paid by institute)"), default=0)
     location = models.CharField(max_length=150)
     url = models.URLField(max_length=150, null=True)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.title
@@ -282,6 +292,7 @@ class ResIndustrial7(models.Model):
     name_of_Conference_or_Journal = models.CharField(('Name of Conference/Details of Journal'),max_length=150) #tweak
     location = models.CharField(max_length=150)
     url = models.URLField(max_length=150, null=True)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.title
@@ -299,6 +310,7 @@ class FacEvents8(models.Model):
     level = models.CharField(max_length=150)
     amount = models.IntegerField(default=0)
     organising_Institute = models.CharField(max_length=150)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.event_Type
@@ -315,6 +327,7 @@ class ProfessionalPrac9(models.Model):
     designation = models.CharField(('Designation in Professional Practices'),max_length=150)
     organising_Institute = models.CharField(max_length=150)
     date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.faculty_Name
@@ -331,6 +344,7 @@ class FacPatents10(models.Model):
     patent_Number = models.IntegerField(('Patent/Application Number'))
     date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
     patent_Status = models.CharField(("Current Status of Patent"), max_length=150)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.faculty_Name
@@ -348,6 +362,7 @@ class NationalAttend11(models.Model):
     date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
     amount = models.IntegerField(('Amount (if paid by institute)'), default=0)
     location = models.CharField(max_length=150)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.faculty_Name
@@ -364,6 +379,7 @@ class InternationalAttend12(models.Model):
     date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
     amount = models.IntegerField(('Amount (if paid by institute)'), default=0)
     location = models.CharField(max_length=150)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.faculty_Name
@@ -382,6 +398,7 @@ class FacAchieve(models.Model):
     achievement = models.CharField(max_length=150)
     level = models.CharField(max_length=150)
     dates = models.DateField(("Dates"), default=date.today,auto_now=False, auto_now_add=False)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.faculty_Name
@@ -396,6 +413,7 @@ class FacBook(models.Model):
     author_name = models.CharField(("Name of author(s)"),max_length=150)
     publication = models.CharField(("Publication"),max_length=150)
     ISBN = models.IntegerField(("ISBN number"))
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.title
@@ -417,6 +435,7 @@ class IndFacvisit1(models.Model):
     from_date = models.DateField(("Dates (From)"), default=date.today, auto_now=False, auto_now_add=False)
     to_date = models.DateField(("Dates (To)"), default=date.today,auto_now=False, auto_now_add=False)
     outcome = models.TextField()
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.faculty
@@ -435,6 +454,7 @@ class IndInst2(models.Model):
     from_date = models.DateField(("Dates (From)"), default=date.today, auto_now=False, auto_now_add=False)
     to_date = models.DateField(("Dates (To)"), default=date.today,auto_now=False, auto_now_add=False)
     outcome = models.TextField()
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.name_of_faculty
@@ -454,6 +474,7 @@ class IndInst3(models.Model):
     from_date = models.DateField(("Dates (From)"), default=date.today, auto_now=False, auto_now_add=False)
     to_date = models.DateField(("Dates (To)"), default=date.today,auto_now=False, auto_now_add=False)
     outcome = models.TextField()
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.name_of_faculty
@@ -473,6 +494,7 @@ class IndInst4(models.Model):
     type_of_board = models.CharField(("Type of Board/Council"), max_length=150) # whether foreign key or not and values
     designation_of_faculty = models.CharField(max_length=150) # whether foreign key or not
     meeting_date = models.DateField(("Meeting Date(if any)"),blank=True)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.name_of_faculty
@@ -490,6 +512,7 @@ class IndInst5(models.Model):
     name_of_company = models.CharField(max_length=250)
     sector = models.CharField(choices=SECTOR, max_length=150)
     tenure = models.CharField(max_length=100)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.name_of_industry_member
@@ -508,6 +531,7 @@ class IndInst6(models.Model):
     name_of_company = models.CharField(max_length=256)
     sector = models.CharField(choices=SECTOR, max_length=150)
     date_of_adoption = models.DateField(default=date.today, auto_now=False, auto_now_add=False)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.name_of_faculty
@@ -526,6 +550,7 @@ class IndInst7(models.Model):
     duration_to = models.DateField(("Duration(To)"), default=date.today, auto_now=False, auto_now_add=False)
     grant_received = models.CharField(max_length=150, choices=GRANT, default='No')
     status_of_project = models.CharField(max_length=150)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.title_of_project
@@ -544,6 +569,7 @@ class IndInst8(models.Model):
     dates_from = models.DateField(("Dates (From)"), default=date.today, auto_now=False, auto_now_add=False)
     dates_to = models.DateField(("Dates (To)"), default=date.today, auto_now=False, auto_now_add=False)
     status_of_project = models.CharField(max_length=150)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.name_of_faculty
@@ -561,6 +587,7 @@ class IndInst9(models.Model):
     sector = models.CharField(max_length=150, choices=SECTOR)
     date_of_MOU = models.DateField(default=date.today, auto_now=False, auto_now_add=False)
     purpose_of_MOU = models.TextField()
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return (self.name_of_company)
@@ -581,6 +608,7 @@ class CurGuestLect1(models.Model):
     department = models.ForeignKey(Department, on_delete=models.CASCADE, default=1)
     date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
     no_of_Participants = models.IntegerField(("No of Participants"))
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.guest
@@ -598,6 +626,7 @@ class CurExptLect2(models.Model):
     department = models.ForeignKey(Department, on_delete=models.CASCADE, default=1)
     date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
     no_of_Participants = models.IntegerField(("No of Participants"))
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.guest
@@ -617,6 +646,7 @@ class CurStudTrain3(models.Model):
     sector = models.CharField(max_length=250)
     from_date = models.DateField(("Duration (From)"), default=date.today, auto_now=False, auto_now_add=False)
     to_date = models.DateField(("Duration (To)"), default=date.today,auto_now=False, auto_now_add=False)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.student_name
@@ -633,6 +663,7 @@ class CurStudVisit4(models.Model):
     no_of_Students = models.IntegerField(("No of Students"))
     from_date = models.DateField(("Duration (From)"), default=date.today, auto_now=False, auto_now_add=False)
     to_date = models.DateField(("Duration (To)"), default=date.today,auto_now=False, auto_now_add=False)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.company
@@ -649,6 +680,7 @@ class CurStudSponsor5(models.Model):
     to_date = models.DateField(("Duration (To)"), default=date.today,auto_now=False, auto_now_add=False)
     grant = models.CharField(("Grant Received"), max_length=150, choices=GRANT, default='No')
     status = models.CharField(max_length=150)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.title
@@ -677,6 +709,7 @@ class StudFac1(models.Model):
     name_of_faculty = models.CharField(max_length=150)
     type_of_mentoring = models.CharField(max_length=150)
     dates_of_mentoring_activity = models.CharField(max_length=150)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.class_or_division
@@ -693,6 +726,7 @@ class StudFac2(models.Model):
     no_of_student_participated = models.PositiveIntegerField()
     date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
     certificate_or_award_received_by_students = models.CharField(("Certificate/Award Received by students (if any)"),max_length=150, blank=True)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.class_or_division
@@ -708,6 +742,7 @@ class StudFac3(models.Model):
     name_of_competitive_exam_appeard_or_qualified = models.CharField(max_length=150, choices=COMPETITIVE_EXAM, default=1)
     competitive_exam_seat_no = models.CharField(max_length=150)
     score = models.FloatField()
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.name_of_student
@@ -722,6 +757,7 @@ class StudFac4(models.Model):
     date_of_implementation = models.DateField(default=date.today, auto_now=False, auto_now_add=False)
     no_of_students_enrolled = models.PositiveIntegerField()
     agencies_involved = models.CharField(max_length=250)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.name_of_activity
@@ -739,6 +775,7 @@ class StudFac5(models.Model):
     duration_open_to_close = models.DateField(("Duration (To)"),default=date.today, auto_now=False, auto_now_add=False)
     no_of_Participants = models.PositiveIntegerField()
     agencies_involved = models.CharField(max_length=250)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.title_of_the_professional_development_program
@@ -757,6 +794,7 @@ class ExtraCurr1(models.Model):
     level = models.CharField(max_length=150)
     date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
     no_of_Students_Participated = models.PositiveIntegerField()
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.activity
@@ -770,9 +808,10 @@ class ExtraCurr1(models.Model):
 class ExtraCurr2(models.Model):
     name_of_the_sport_or_team = models.CharField(("Name of the Sport / Team"), max_length=250)
     student_ID_number = models.CharField(max_length=100)
-    name_of_department = models.ForeignKey(Department, default=1, on_delete=models.CASCADE)
+    department = models.ForeignKey(Department, default=1, on_delete=models.CASCADE)
     level = models.CharField(max_length=100)
     rank = models.PositiveIntegerField(default=1)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.student_ID_number
@@ -786,6 +825,7 @@ class CulturalCount3(models.Model):
     no_of_events = models.PositiveIntegerField(default=12)
     solo_Performances = models.PositiveIntegerField(default=10)
     team_Performances = models.PositiveIntegerField(default=10)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -806,6 +846,7 @@ class CulturalAct3(models.Model,):
     date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
     Prize_Won_or_Medal = models.CharField(("Prize Won/ Medal"), max_length=150)
     no_of_Students_Participated = models.PositiveIntegerField()
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.event_Name
@@ -823,6 +864,7 @@ class SocialAct4(models.Model):
     no_of_People_Benefited = models.CharField(("No. of people benefited"), max_length=150)
     date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
     Awards_or_Recognition_open_if_any_close = models.CharField(("Awards/Recognition (if any)"), max_length=150)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.activity_Name
@@ -838,6 +880,7 @@ class CentersAct5(models.Model):
     date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
     level = models.CharField(max_length=150)
     no_of_Participants = models.PositiveIntegerField()
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.Center_or_Cell
@@ -852,6 +895,7 @@ class ExtraAct6(models.Model):
     activity = models.CharField(max_length=256)
     date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
     achievement = models.CharField(max_length=150)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.faculty
@@ -870,6 +914,7 @@ class Ecell(models.Model):
     level = models.CharField(max_length=100)
     date = models.DateField(("Date"), default=date.today,auto_now=False, auto_now_add=False)
     no_of_Students_Participated = models.PositiveIntegerField()
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.activity
@@ -885,6 +930,7 @@ class EcellCount(models.Model):
     E_andTC = models.PositiveIntegerField(default=10)
     mechanical = models.PositiveIntegerField(default=10)
     first_Year = models.PositiveIntegerField(default=10)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.activity_Name
@@ -920,6 +966,7 @@ class Placement1(models.Model):
                                                 , validators=[MinValueValidator(100000), MaxValueValidator(10000000)])
     average_Salary = models.PositiveIntegerField(('Average of salary offered (p.a.)'), default=100000
                                                 , validators=[MinValueValidator(100000), MaxValueValidator(10000000)])
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return str(self.year)
@@ -937,6 +984,7 @@ class Placement2(models.Model):
     no_of_eligible_students = models.PositiveIntegerField()
     no_of_students_offered_jobs = models.PositiveIntegerField()
     package = models.PositiveIntegerField()
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.name_of_company
@@ -954,6 +1002,7 @@ class Placement3(models.Model):
     no_of_students_appeared = models.PositiveIntegerField()
     no_of_students_offered_jobs = models.PositiveIntegerField()
     package = models.PositiveIntegerField()
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.name_of_company
@@ -970,6 +1019,7 @@ class Placement4(models.Model):
     date_of_selection = models.DateField(("Date of Selection"), default=date.today,auto_now=False, auto_now_add=False)
     package = models.PositiveIntegerField()
     appointment_reference_no = models.CharField(max_length=150)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.name_of_student
@@ -985,6 +1035,7 @@ class Placement5(models.Model):
     type_of_self_employment = models.CharField(choices=(("Start up", "Start up"), ("NGO", "NGO")), max_length=150)
     name_of_firm_or_company = models.CharField("Name of Firm/ Company", max_length=150)
     products_or_services_offered = models.CharField("Products/ Services offered", max_length=150)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.name_of_student
@@ -1009,6 +1060,7 @@ class Library1(models.Model):
     current_Periodicals  = models.PositiveIntegerField(('Current Periodicals'), default=0)
     thesis_and_Dissertations  = models.PositiveIntegerField(('Thesis & Dissertations'), default=0)
     video_Recordings_open_NPTEL_or_DMS_close  = models.PositiveIntegerField(('Video Recordings (NPTEL/DMS)'), default=0)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return str(self.year)
@@ -1027,6 +1079,7 @@ class Library2(models.Model):
     mechanical = models.PositiveIntegerField(default=10)
     first_Year = models.PositiveIntegerField(default=10)
     total = models.PositiveIntegerField(default=10)
+    created_by = models.CharField(max_length=30, blank=True)
 
     def save(self, *args, **kwargs):
         self.total = (self.civil + self.computer + self.E_andTC + self.mechanical + self.first_Year)

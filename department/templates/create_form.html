@@ -8,7 +8,6 @@
     
     {% include 'add_record.html' %}
         <div class="col-sm-9">
-        {% if is_staff %}
             <div class=" card card-body">
             <form action="" method="get">
                 <!-- {{DeptFilter.form}} <br> -->
@@ -19,20 +18,6 @@
                 <button class="btn btn-primary" type="submit">Search</button>
             </form>
         </div>
-        {% else %}
-        <div class=" card card-body">
-            <form action="" method="get">
-                {% for field in DeptFilter.form %}
-                {% if field.label != 'Department' %}
-                    <b>{{field.label}}:</b>
-                    {{field}}
-                {% endif %}
-                {% endfor %}
-                <button class="btn btn-primary" type="submit">Search</button>
-            </form>
-        </div>
-        
-        {% endif %}
         {% if events %}
         
         <h4 class="text-center alert alert-primary"> {{header}} </h4>
@@ -46,12 +31,9 @@
                 {% for instance in data %}
                     {% if forloop.first %}
                         {% for field, value in instance.fields.items %}
-                        
-                            {% if is_staff %}
-                                <th scope="col" style="text-align: center; position: sticky; top: 0;">{{ field|replace_to_space }}</th>
                             <!-- Skipping Fields -->
-                            {% elif field == "created_by_" %}         
-                            {% elif field == "updated_at"%}
+                            {% if field == "created_by_" %}         
+                            {% elif field == "updated_at" %}
                             {% elif field == "created_at" %}
                             {% else %}
                             <th scope="col" style="text-align: center; position: sticky; top: 0;">{{ field|replace_to_space }}</th>
@@ -75,21 +57,27 @@
                     {% if is_staff %}
                         <td>{{ value }}</td>
                     <!-- Skipping Fields -->
-                    {% elif field == 'created_by_'%}  
+                    {% elif field == 'created_by_'%}    <!-- Remove this after debug-->
                     {% elif field == "updated_at"%}
                     {% elif field == "created_at" %}             
                     {% else %}
                         <td>{{ value }}</td>
                     {% endif %}
                     {% endfor %}
-                    {% if is_staff or is_HOD %}
+
+                    {% if is_staff %}
                     <td>
                         <a href="{% url update_link pk=instance.pk %}" class="btn btn-outline-success btn-sm">Update</a>
                         <a href="{% url delete_link pk=instance.pk %}" class="btn btn-outline-danger btn-sm inline">Delete</a>
                     </td>
                     {% else %}
                         {% for field, value in instance.fields.items %}
-                            {% if field == 'created_by' and value == logged_user %}
+                            {% if is_HOD and value == user_dept %}
+                            <td>
+                                <a href="{% url update_link pk=instance.pk %}" class="btn btn-outline-success btn-sm">Update</a>
+                                <a href="{% url delete_link pk=instance.pk %}" class="btn btn-outline-danger btn-sm inline">Delete</a>
+                            </td>    
+                            {% elif field == 'created_by' and value == logged_user and not is_HOD %}
                             <td>
                                 <a href="{% url update_link pk=instance.pk %}" class="btn btn-outline-success btn-sm">Update</a>
                                 <a href="{% url delete_link pk=instance.pk %}" class="btn btn-outline-danger btn-sm inline">Delete</a>
@@ -97,6 +85,7 @@
                             {% endif %}
                         {% endfor %}
                     {% endif %}
+
                 </tr>
                 {% endfor %}
            </tbody>
