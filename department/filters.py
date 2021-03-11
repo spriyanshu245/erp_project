@@ -172,7 +172,7 @@ class IndInst4Filter(django_filters.FilterSet):
     to_meeting_date = DateFilter(widget=DateInput,field_name='meeting_date', lookup_expr='lte', label='To')
 
     class Meta:
-        model = StudentResult
+        model = IndInst4
         fields = ['department','from_appointment_date','to_appointment_date','from_meeting_date','to_meeting_date']
         
 class IndInst9Filter(django_filters.FilterSet):
@@ -201,7 +201,7 @@ class CurExptLect2Filter(django_filters.FilterSet):
         
 class CurStudTrain3Filter(django_filters.FilterSet):
     from_date = DateFilter(widget=DateInput,field_name='from_date', lookup_expr='gte', label='From')
-    to_date = DateFilter(widget=DateInput,field_name='to_date', lookup_expr='lte', label='To')
+    to_date = DateFilter(widget=DateInput,field_name='from_date', lookup_expr='lte', label='To')
 
     class Meta:
         model = CurStudTrain3
@@ -234,7 +234,8 @@ class ExtraAct6Filter(django_filters.FilterSet):
         fields = ['department','from_date','to_date']
         
 
-#                                          Placement Filters        
+#                                          Placement Filters
+   
 class Place1Filter(django_filters.FilterSet):
     def __init__(self, *args, **kwargs):
         super(Place1Filter, self).__init__(*args, **kwargs)
@@ -253,7 +254,8 @@ class Placement4Filter(django_filters.FilterSet):
         fields = ['department','from_date','to_date']
 
 
-#                                            Placement Filters   
+#                                            Placement Filters
+
 class Library1Filter(django_filters.FilterSet):
 
     class Meta:

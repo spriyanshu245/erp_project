@@ -141,6 +141,11 @@ class DeptEvent1Update(UpdateView):
     form_class = AddDeptEvent1
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(DeptEvent1Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Events Organized by Department'
@@ -192,15 +197,18 @@ class DeptEvent2Create(CreateView):
         context['delete_link'] = "dept_act_2_delete"
         context['tab_link'] = "dept_act_tabs.html"
         context['note'] = "Activities like SanganakSadhana, Swachha-Bharat Mission can be included. Don’t include NSS activities here."
-
         return context
-
 
 
 class DeptEvent2Update(UpdateView):
     model = DeptEvent2
     form_class = AddDeptEvent2
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(DeptEvent2Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -263,6 +271,11 @@ class DeptProEvent3Update(UpdateView):
     form_class = AddDeptProEvent3
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(DeptProEvent3Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Department Events With Professional Bodies'
@@ -322,6 +335,11 @@ class DeptFacultyDev4Update(UpdateView):
     model = DeptFacultyDev4
     form_class = AddDeptFacultyDev4
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(DeptFacultyDev4Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -384,6 +402,11 @@ class DeptStudPart5Update(UpdateView):
     form_class = AddDeptStudPart5
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(DeptStudPart5Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = "Student's Inter-Institute Participation"
@@ -440,6 +463,11 @@ class DeptStartUp6Update(UpdateView):
     model = DeptStartUp6
     form_class = AddDeptStartUp6
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(DeptStartUp6Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -537,6 +565,11 @@ class ResProject1Update(UpdateView):
     form_class = AddResProject1
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(ResProject1Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Research projects in the specified period'
@@ -594,6 +627,11 @@ class ResFunds2Update(UpdateView):
     model = ResFunds2
     form_class = AddResFunds2
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(ResFunds2Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -655,6 +693,11 @@ class ResInternational3Update(UpdateView):
     form_class = AddResInternational3
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(ResInternational3Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Research papers published in International journals'
@@ -714,6 +757,11 @@ class ResNational4Update(UpdateView):
     model = ResNational4
     form_class = AddResNational4
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(ResNational4Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -775,6 +823,11 @@ class ConfInternational5Update(UpdateView):
     form_class = AddConfInternational5
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(ConfInternational5Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Paper presented in International Conferences'
@@ -835,6 +888,11 @@ class ConfNational6Update(UpdateView):
     form_class = AddConfNational6
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(ConfNational6Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Paper presented in National Conferences'
@@ -891,6 +949,11 @@ class ResIndustrial7Update(UpdateView):
     model = ResIndustrial7
     form_class = AddResIndustrial7
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(ResIndustrial7Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -952,6 +1015,11 @@ class FacEvents8Update(UpdateView):
     form_class = AddFacEvents8
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(FacEvents8Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Events for faculty members (FDP/Webinar/Seminar/STTP/Workshops/Others)'
@@ -1011,6 +1079,11 @@ class ProfessionalPrac9Update(UpdateView):
     model = ProfessionalPrac9
     form_class = AddProfessionalPrac9
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(ProfessionalPrac9Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1072,6 +1145,11 @@ class FacPatents10Update(UpdateView):
     form_class = AddFacPatents10
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(FacPatents10Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'List of Faculty Patents/IPR'
@@ -1132,6 +1210,11 @@ class NationalAttend11Update(UpdateView):
     form_class = AddNationalAttend11
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(NationalAttend11Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Details of National Conference attended'
@@ -1191,6 +1274,11 @@ class InternationalAttend12Update(UpdateView):
     model = InternationalAttend12
     form_class = AddInternationalAttend12
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(InternationalAttend12Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1254,6 +1342,11 @@ class FacAchieveUpdate(UpdateView):
     form_class = AddFacAchieve
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(FacAchieveUpdate, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Achievement List'
@@ -1314,6 +1407,11 @@ class FacBookUpdate(UpdateView):
     model = FacBook
     form_class = AddFacBook
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(FacBookUpdate, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1379,6 +1477,11 @@ class IndInst1Update(UpdateView):
     form_class = IndFacVisit1Form
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(IndInst1Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Industrial Visit  of Faculty (Visits accompanied with students should be excluded)'
@@ -1438,6 +1541,11 @@ class IndInst2Update(UpdateView):
     model = IndInst2
     form_class = IndInst2Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(IndInst2Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1499,6 +1607,11 @@ class IndInst3Update(UpdateView):
     form_class = IndInst3Form
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(IndInst3Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Faculty Providing training to Industry'
@@ -1558,6 +1671,11 @@ class IndInst4Update(UpdateView):
     form_class = IndInst4Form
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(IndInst4Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Faculty on board of Industry'
@@ -1613,6 +1731,11 @@ class IndInst5Update(UpdateView):
     model = IndInst5
     form_class = IndInst5Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(IndInst5Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1670,6 +1793,11 @@ class IndInst6Update(UpdateView):
     form_class = IndInst6Form
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(IndInst6Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Faculty patents leading to industry products'
@@ -1726,6 +1854,11 @@ class IndInst7Update(UpdateView):
     form_class = IndInst7Form
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(IndInst7Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Sponsored Projects (Faculty only)'
@@ -1781,6 +1914,11 @@ class IndInst8Update(UpdateView):
     model = IndInst8
     form_class = IndInst8Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(IndInst8Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1840,6 +1978,11 @@ class IndInst9Update(UpdateView):
     model = IndInst9
     form_class = IndInst9Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(IndInst9Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1902,6 +2045,11 @@ class CurGuestLect1Update(UpdateView):
     form_class = AddCurGuestLect1
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(CurGuestLect1Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Guest Lectures (General Topics)'
@@ -1961,6 +2109,11 @@ class CurExptLect2Update(UpdateView):
     model = CurExptLect2
     form_class = AddCurExptLect2
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(CurExptLect2Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -2022,6 +2175,11 @@ class CurStudTrain3Update(UpdateView):
     form_class = AddCurStudTrain3
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(CurStudTrain3Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Expert Lectures'
@@ -2082,6 +2240,11 @@ class CurStudVisit4Update(UpdateView):
     form_class = AddCurStudVisit4
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(CurStudVisit4Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Expert Lectures'
@@ -2138,6 +2301,11 @@ class CurStudSponsor5Update(UpdateView):
     model = CurStudSponsor5
     form_class = AddCurStudSponsor5
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(CurStudSponsor5Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -2201,6 +2369,11 @@ class StudFac1Update(UpdateView):
     form_class = StudFac1Form
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(StudFac1Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Mentoring System to help students at individual level'
@@ -2256,6 +2429,11 @@ class StudFac2Update(UpdateView):
     model = StudFac2
     form_class = StudFac2Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(StudFac2Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -2316,6 +2494,11 @@ class StudFac3Update(UpdateView):
     form_class = StudFac1Form
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(StudFac3Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Achievement of Students in Competitive Exam '
@@ -2372,6 +2555,11 @@ class StudFac4Update(UpdateView):
     form_class = StudFac4Form
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(StudFac4Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Capability Enhancement and Development Activities'
@@ -2427,6 +2615,11 @@ class StudFac5Update(UpdateView):
     model = StudFac5
     form_class = StudFac5Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(StudFac5Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -2486,6 +2679,11 @@ class ExtraCurr1Update(UpdateView):
     form_class = ExtraCurr1Form
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(ExtraCurr1Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Sports (This information to be provided by Physical/Sports Director)'
@@ -2541,6 +2739,11 @@ class ExtraCurr2Update(UpdateView):
     model = ExtraCurr2
     form_class = ExtraCurr2Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(ExtraCurr2Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -2603,6 +2806,11 @@ class CulturalAct3Update(UpdateView):
     form_class = CulturalAct3Form
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(CulturalAct3Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Awards won in cultural competitions/Club activities'
@@ -2612,6 +2820,11 @@ class CulturalCount3Update(UpdateView):
     model = CulturalCount3
     form_class = CulturalCount3Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(CulturalCount3Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -2670,6 +2883,11 @@ class SocialAct4Update(UpdateView):
     form_class = SocialAct4Form
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(SocialAct4Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Information about social activities held'
@@ -2725,6 +2943,11 @@ class CentersAct5Update(UpdateView):
     model = CentersAct5
     form_class = CentersAct5Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(CentersAct5Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -2785,6 +3008,11 @@ class ExtraAct6Update(UpdateView):
     form_class = ExtraAct6Form
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(ExtraAct6Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Extra Activities/Acheivement(if any)'
@@ -2844,6 +3072,11 @@ class EcellUpdate(UpdateView):
     form_class = EcellForm
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(EcellUpdate, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Activities Conducted By E - Cell'
@@ -2853,6 +3086,11 @@ class EcellCountUpdate(UpdateView):
     model = EcellCount
     form_class = EcellCountForm
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(EcellCountUpdate, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
