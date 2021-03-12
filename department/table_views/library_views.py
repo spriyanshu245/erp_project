@@ -22,7 +22,12 @@ class Library1Create(CreateView):
     model = Library1
     form_class = Library1Form
     template_name = 'library_custom1.html'
-    
+
+    def get_form_kwargs(self):
+        kwargs = super(Library1Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "library"
@@ -48,6 +53,11 @@ class Library1Update(UpdateView):
     form_class = Library1Form
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(Library1Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Numerical information'
@@ -72,10 +82,20 @@ class Library2Create(CreateView):
     form_class = Library2Form
     template_name = 'add_record.html'
 
+    def get_form_kwargs(self):
+        kwargs = super(Library2Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
 class Library2Update(UpdateView):
     model = Library2
     form_class = Library2Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(Library2Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
