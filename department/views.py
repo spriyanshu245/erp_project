@@ -48,20 +48,6 @@ def registerPage(request):
     }
 
     return render(request, 'registration/register.html', context)
-    ##################################
-
-    # form = CreateUserForm()
-
-    # if request.method == "POST":
-    #     form = CreateUserForm(request.POST)
-    #     if form.is_valid():
-    #         form.save()
-    #         user = form.cleaned_data.get('username')
-    #         messages.success(request, 'Account successfully created for ' + user)
-    #         return redirect("loginPage")
-        
-    # context = {'form':form}
-    # return render(request, 'registration/register.html', context)
 
 @unauthenticated_user
 def loginPage(request):
