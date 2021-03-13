@@ -1104,6 +1104,9 @@ class Library2(TimestampedModel,models.Model):
 # Add number of students visited VS month graph for all dept.
 # date filter for all tables 
 ##__________________________________________________________________________________________________
+from django.contrib.auth.models import User
+User._meta.get_field('email').blank = False
+
 class Profile(TimestampedModel,models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     department = models.TextField(max_length=50, choices=DEPT_ROLE, default="Other",blank=True)
@@ -1112,15 +1115,15 @@ class Profile(TimestampedModel,models.Model):
     def __str__(self):  # __unicode__ for Python 2
         return self.user.username
 
-@receiver(post_save, sender=User)
-def create_or_update_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-    instance.profile.save()
+# @receiver(post_save, sender=User)
+# def create_or_update_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Profile.objects.create(user=instance)
+#     instance.profile.save()
 
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+# @receiver(post_save, sender=User)
+# def save_user_profile(sender, instance, **kwargs):
+#     instance.profile.save()
 
 class UserProfile(TimestampedModel,models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -1128,6 +1131,16 @@ class UserProfile(TimestampedModel,models.Model):
 
     def __str__(self):
         return self.user.username
+
+@receiver(post_save, sender=User)
+def create_or_update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+    instance.userprofile.save()
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.userprofile.save()
 
 #_____________________________________BACKEND MODELS____________________________________________
 from django.contrib.auth import get_user_model
