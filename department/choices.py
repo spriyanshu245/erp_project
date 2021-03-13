@@ -1,6 +1,6 @@
 import datetime
 
-DEPARTMENTS = (('', 'Choose...'),
+DEPARTMENTS = (
     ('Computer Science','Computer Science'),
     ('Electronics and Telecommunication','Electronics and Telecommunication'),
     ('Mechanical','Mechanical'),
@@ -136,6 +136,15 @@ APPROVAL=(
     ('Other','Other'),
 )
 
+#Library2.Details choices
+DETAILS =(
+    ('', 'Choose...'),
+    ('Number of Faculties Visited','Number of Faculties Visited'),
+    ('Number of Students Visited','Number of Students Visited'),
+    ('Number of Faculty Transctions','Number of Faculty Transctions'),
+    ('Number of Student Transactions','Number of Student Transactions'),
+)
+
 # Year Dropdown choice designed for Placement table queries
 YEAR_CHOICES = []
 for r in range(2008, (datetime.datetime.now().year+1)):
@@ -165,6 +174,15 @@ ROLE=(
     ('non-teach','non-teach')
     )
     
+DEPT_ROLE = (
+    ('Non-Teaching','Non-Teaching'),
+    ('Computer Science','Computer Science'),
+    ('Electronics and Telecommunication','Electronics and Telecommunication'),
+    ('Mechanical','Mechanical'),
+    ('Civil','Civil'),
+    ('Other','Other')
+)
+
 DEPT_PEM=(
     ('ALLD','ALLD'),
     ('COMP','COMP'),

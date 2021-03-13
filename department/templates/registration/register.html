@@ -1,97 +1,56 @@
+{% extends 'base.html'%}
 {% load static %}
+{% load crispy_forms_tags %}
+{% block head %}
+<!-- <link rel="stylesheet" href="{% static 'department/css/test.css' %}"> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+
+{% endblock %}
 {% block content %}
-
-<!-- 
-    
-    Green Registration Form, by Xavier Mod 
-
-    v1.0 1/02/19
-
-    Created by Xavier Mod | hi.xavier.mod@gmail.com | 2019
-
--->
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Registration</title>
-        <meta charset="UTF-8">
-        <!-- <link rel="stylesheet" href="css.css"> -->
-        <link rel="stylesheet" href="{% static 'department/css/test.css'%}">
-
-    </head>
-    <body>
-        <div class="container">
-            <h1 id="main-title">BVCOEL</h1>
-            <p id="subtitle">User Registration</p>
-            <form action="" method="POST">
+    <div class="card mt-5" >
+        <div class="card-body">
+            {% for message in messages%}
+				<p class="alert alert-success">{{message}}</p> 
+			{% endfor %}
+            <div class="jumbotron">
+                <h2>Register New User:</h2>
+            </div>
+            <form action="" method="post">
                 {% csrf_token %}
-                <div id="first-name" class="placeholders">
-                    <label id="pl_first_name" for="text" class="">First name</label>
-                    <!-- <input required id="pl_first_name" type="text" name="firstname" placeholder="Enter your first name..."> -->
-                    {{form.first_name}}
+                <div class="col-md-12">
+                    <div class="form-row">
+                        <div class="form-group col-md-6 mb-0">
+                            {{ form.username|as_crispy_field}}
+                        </div>
+                        <div class="form-group col-md-6 mb-0">
+                            {{ form.email|as_crispy_field}}
+                        </div>
+                    </div>
                 </div>
-
-                <div id="first-name" class="placeholders">
-                    <label id="pl_first_name" for="text" class="">Last name</label>
-                    <!-- <input required id="pl_first_name" type="text" name="firstname" placeholder="Enter your first name..."> -->
-                    {{form.last_name}}
-                </div>
-
-                <div id="username" class="placeholders">
-                    <label id="pl_username" for="text" class="">Username (up to 10 characters)</label>
-                    <!-- <input required id="pl_username" type="text" name="username" maxlength="8" placeholder="Enter your username..."> -->
-                    {{form.username}}
-                </div>
-
-                <div id="email" class="placeholders">
-                    <label id="pl_email" for="text" class="">Email</label>
-                    <!-- <input required id="pl_email" type="email" name="email" placeholder="Enter your email..."> -->
-                    {{form.email}}
-                </div>
-
-                <div id="password" class="placeholders">
-                    <label id="pl_password" for="text" class="">Enter Password</label>
-                    <!-- <input required id="pl_password" type="password" name="password" maxlength="8" placeholder="Enter your password..."> -->
-                    {{form.password1}}
-                </div>
-
-                <div id="password" class="placeholders">
-                    <label id="pl_password" for="text" class="">Enter Password Again</label>
-                    <!-- <input required id="pl_password" type="password" name="password" maxlength="8" placeholder="Enter your password..."> -->
-                    {{form.password2}}
-                </div>
-
-                <!-- <div class="terms-conditions">
-                    <input required type="checkbox" name="vehicle1" value="Bike">
-                    <p id="terms-conditions">I have read the terms and conditions of this company and accepted the privacy policy.</p>
-                </div> -->
-                {% if form.errors %}
-                    {{form.errors}}
-                    <br>
-                {% endif %}
-                
-            
-                <button id="a-submit" type="submit">Create User</button>
-
-              </form> 
+                    <div class="col-md-6">
+                        {{ form.password1|as_crispy_field }}
+                        {{ form.password2|as_crispy_field }}
+                        {{ profile_form|crispy }}
+                        <br>
+                        <input type="submit" class="btn btn-primary" value="Create User">
+                    </div>
+            </form>
 
         </div>
 
-        <script>
-            // Query all input fields
-            var form_fields = document.getElementsByTagName('input')
-            form_fields[1].placeholder = 'First Name..';
-            form_fields[2].placeholder = 'Last Name..';
-            form_fields[3].placeholder = 'Username..';
-            form_fields[4].placeholder = 'Email..';
-            form_fields[5].placeholder = 'Password..';
-            form_fields[6].placeholder = 'Password..';
+    </div>
 
-            for (var field in form_fields) {
-                form_fields[field].className += ' form-control'
-            }
-        </script>
-    </body>
-</html>
+    <script>
+        // Query all input fields
+        var form_fields = document.getElementsByTagName('input')
+        form_fields[1].placeholder = 'Username..';
+        form_fields[2].placeholder = 'Email..';
+        form_fields[3].placeholder = 'Password..';
+        form_fields[4].placeholder = 'Confirm Password..';
+
+        // for (var field in form_fields) {
+        //     form_fields[field].className += ' form-control'
+        // }
+    </script>
 {% endblock %}

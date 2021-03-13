@@ -28,3 +28,5 @@ from django.test import TestCase
 
 ## for selecting specific fields inserializer
 #context['data'] = serializers.serialize('python', list(self.model.objects.all()),exclude=('no_of_events','solo_Performances'))
+
+# 'some_other_field2': forms.DateInput(attrs={'readonly': True}),

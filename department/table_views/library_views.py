@@ -1,4 +1,4 @@
-from django.views.generic import (CreateView, DetailView, UpdateView, DeleteView)
+from django.views.generic import (CreateView, DetailView,ListView, UpdateView, DeleteView)
 from django.core import serializers
 from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
@@ -8,10 +8,10 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
+from department.decorators import unauthenticated_user
 
 from department.forms import *
 from department.models import *
-from department.decorators import unauthenticated_user
 
 from department.filters import Library1Filter, Library2Filter
 #------------------------------------------------ LIBRARY VIEWS -----------------------------------------------#
@@ -22,7 +22,12 @@ class Library1Create(CreateView):
     model = Library1
     form_class = Library1Form
     template_name = 'library_custom1.html'
-    
+
+    def get_form_kwargs(self):
+        kwargs = super(Library1Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "library"
@@ -35,38 +40,27 @@ class Library1Create(CreateView):
         context['Library1Filter'] = Library1Filter(self.request.GET, queryset=context['events'])
         context['events'] = context['Library1Filter'].qs
         context['data'] = serializers.serialize( "python", context['events'])[:1]
-    
-        if Library2.objects.count() !=4:
-            Library2.objects.all().delete()
-            Library2.objects.create(details="Number of Faculties Visited",civil=1, computer=1, E_andTC=1, mechanical=1, first_Year=1, pk=1)
-            Library2.objects.create(details="Number of Students Visited",civil=1, computer=1, E_andTC=1, mechanical=1, first_Year=1, pk=2)
-            Library2.objects.create(details="Number of Faculty Transctions",civil=1, computer=1, E_andTC=1, mechanical=1, first_Year=1, pk=3)
-            Library2.objects.create(details="Number of Student Transactions",civil=1, computer=1, E_andTC=1, mechanical=1, first_Year=1, pk=4)
-        else : pass
+
 
         context['Library2Filter'] = Library2Filter(self.request.GET, queryset=Library2.objects.all())
-        context['count_data'] = serializers.serialize( "python", context['Library2Filter'].qs)
+        context['count_data'] = serializers.serialize( "python", context['Library2Filter'].qs)[:4]
         context['count_update'] = "library2_update"
         return context
+
 
 class Library1Update(UpdateView):
     model = Library1
     form_class = Library1Form
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(Library1Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Numerical information'
-        return context
-
-class Library2Update(UpdateView):
-    model = Library2
-    form_class = Library2Form
-    template_name = "form_update.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['header'] = 'Library Usage'
         return context
 
 class Library1Delete(DeleteView):
@@ -80,6 +74,33 @@ class Library1Delete(DeleteView):
         context['cancel_link'] = "library1"
         return context
 
+#---------------------------------------------------------------------
+#Library Usage
+# Library2 Table is rendered using context of 'Library1Create' class
+class Library2Create(CreateView):
+    model = Library2
+    form_class = Library2Form
+    template_name = 'add_record.html'
+
+    def get_form_kwargs(self):
+        kwargs = super(Library2Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
+class Library2Update(UpdateView):
+    model = Library2
+    form_class = Library2Form
+    template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(Library2Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Library Usage'
+        return context
 
 
 

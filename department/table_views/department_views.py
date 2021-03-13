@@ -12,8 +12,9 @@ from django.contrib.auth import login, logout, authenticate
 from department.forms import *
 from department.models import *
 from .library_views import *
+from department.filters import StudentResultFilter
 from department.decorators import unauthenticated_user
-
+from department.filters import *
 #--------------------------------------- DEPARTMENT VIEWS -----------------------------------------#
 #--------------------------------------------------------------------------------------------------#
 
@@ -24,12 +25,35 @@ class StudentResultCreate(CreateView):
     form_class = AddStudentResult
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(StudentResultCreate, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
+    # def form_valid(self, form):
+    #     form.instance.department = self.request.user.profile.department
+    #     return super().form_valid(form)
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Students Result in various examinations'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['is_HOD'] = False
+        
+        context['DeptFilter'] = StudentResultFilter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "stud_result"
         context['update_link'] = "stud_result_update"
         context['delete_link'] = "stud_result_delete"
@@ -46,6 +70,11 @@ class StudentResultUpdate(UpdateView):
     model = StudentResult
     form_class = AddStudentResult
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(StudentResultUpdate, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -73,12 +102,32 @@ class DeptEvent1Create(CreateView):
     form_class = AddDeptEvent1
     template_name = 'create_form.html'
 
+    def get_form_kwargs(self):
+        kwargs = super(DeptEvent1Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Events Organized by Department'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['user_dept'] = self.request.user.userprofile.department
+        print(type(context['user_dept']))
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+        context['logged_user'] = self.request.user.username
+
+        context['DeptFilter'] = DeptEvent1Filter(self.request.GET, queryset=context['events'])
+        context['events']= context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+        
         context['nbar'] = "dept_act_1"
         context['update_link'] = "dept_act_1_update"
         context['delete_link'] = "dept_act_1_delete"
@@ -91,6 +140,11 @@ class DeptEvent1Update(UpdateView):
     model = DeptEvent1
     form_class = AddDeptEvent1
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(DeptEvent1Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -116,26 +170,48 @@ class DeptEvent2Create(CreateView):
     form_class = AddDeptEvent2
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(DeptEvent2Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Events Organized by Department (For Nearby Schools)'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+        
+        context['DeptFilter'] = DeptEvent2Filter(self.request.GET, queryset=context['events'])
+        context['events']= context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+        
         context['nbar'] = "dept_act_2"
         context['update_link'] = "dept_act_2_update"
         context['delete_link'] = "dept_act_2_delete"
         context['tab_link'] = "dept_act_tabs.html"
         context['note'] = "Activities like SanganakSadhana, Swachha-Bharat Mission can be included. Don’t include NSS activities here."
-
         return context
-
 
 
 class DeptEvent2Update(UpdateView):
     model = DeptEvent2
     form_class = AddDeptEvent2
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(DeptEvent2Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -159,13 +235,32 @@ class DeptProEvent3Create(CreateView):
     model = DeptProEvent3
     form_class = AddDeptProEvent3
     template_name = 'create_form.html'
+
+    def get_form_kwargs(self):
+        kwargs = super(DeptProEvent3Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Department Events With Professional Bodies'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+        
+        context['DeptFilter'] = DeptProEvent3Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+     
         context['nbar'] = "dept_act_3"
         context['update_link'] = "dept_act_3_update"
         context['delete_link'] = "dept_act_3_delete"
@@ -178,6 +273,11 @@ class DeptProEvent3Update(UpdateView):
     model = DeptProEvent3
     form_class = AddDeptProEvent3
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(DeptProEvent3Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -202,12 +302,31 @@ class DeptFacultyDev4Create(CreateView):
     form_class = AddDeptFacultyDev4
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(DeptFacultyDev4Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Departmental Faculty Development Programs'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+        
+        context['DeptFilter'] = DeptFacultyDev4Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "dept_act_4"
         context['update_link'] = "dept_act_4_update"
         context['delete_link'] = "dept_act_4_delete"
@@ -219,6 +338,11 @@ class DeptFacultyDev4Update(UpdateView):
     model = DeptFacultyDev4
     form_class = AddDeptFacultyDev4
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(DeptFacultyDev4Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -243,12 +367,32 @@ class DeptStudPart5Create(CreateView):
     form_class = AddDeptStudPart5
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(DeptStudPart5Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = "Student's Inter-Institute Participation"
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = DeptStudPart5Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "dept_act_5"
         context['update_link'] = "dept_act_5_update"
         context['delete_link'] = "dept_act_5_delete"
@@ -260,6 +404,11 @@ class DeptStudPart5Update(UpdateView):
     model = DeptStudPart5
     form_class = AddDeptStudPart5
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(DeptStudPart5Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -284,12 +433,31 @@ class DeptStartUp6Create(CreateView):
     form_class = AddDeptStartUp6
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(DeptStartUp6Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Start-Ups'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = DeptStartUp6Filter(self.request.GET, queryset=context['events'])
+        context['events']= context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "dept_act_6"
         context['update_link'] = "dept_act_6_update"
         context['delete_link'] = "dept_act_6_delete"
@@ -301,6 +469,11 @@ class DeptStartUp6Update(UpdateView):
     model = DeptStartUp6
     form_class = AddDeptStartUp6
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(DeptStartUp6Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -330,12 +503,32 @@ class ResProject1Create(CreateView):
     form_class = AddResProject1
     template_name = 'create_form.html'
 
+    def get_form_kwargs(self):
+        kwargs = super(ResProject1Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Research projects in the specified period'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = ResProject1Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "fac_contri_1"
         context['update_link'] = "fac_contri_1_update"
         context['delete_link'] = "fac_contri_1_delete"
@@ -378,6 +571,11 @@ class ResProject1Update(UpdateView):
     form_class = AddResProject1
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(ResProject1Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Research projects in the specified period'
@@ -401,14 +599,32 @@ class ResFunds2Create(CreateView):
     model = ResFunds2
     form_class = AddResFunds2
     template_name = 'create_form.html'
-
+   
+    def get_form_kwargs(self):
+        kwargs = super(ResFunds2Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Funds received for research for projects'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = ResFunds2Filter(self.request.GET, queryset=context['events'])
+        context['events']= context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "fac_contri_2"
         context['update_link'] = "fac_contri_2_update"
         context['delete_link'] = "fac_contri_2_delete"
@@ -420,6 +636,11 @@ class ResFunds2Update(UpdateView):
     model = ResFunds2
     form_class = AddResFunds2
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(ResFunds2Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -445,12 +666,31 @@ class ResInternational3Create(CreateView):
     form_class = AddResInternational3
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(ResInternational3Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Research papers published in International journals'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = ResInternational3Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "fac_contri_3"
         context['update_link'] = "fac_contri_3_update"
         context['delete_link'] = "fac_contri_3_delete"
@@ -461,6 +701,11 @@ class ResInternational3Update(UpdateView):
     model = ResInternational3
     form_class = AddResInternational3
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(ResInternational3Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -486,12 +731,31 @@ class ResNational4Create(CreateView):
     form_class = AddResNational4
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(ResNational4Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Research papers published in National journals'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = ResNational4Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "fac_contri_4"
         context['update_link'] = "fac_contri_4_update"
         context['delete_link'] = "fac_contri_4_delete"
@@ -502,6 +766,11 @@ class ResNational4Update(UpdateView):
     model = ResNational4
     form_class = AddResNational4
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(ResNational4Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -527,12 +796,31 @@ class ConfInternational5Create(CreateView):
     form_class = AddConfInternational5
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(ConfInternational5Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Paper presented in International Conferences'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = ConfInternational5Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "fac_contri_5"
         context['update_link'] = "fac_contri_5_update"
         context['delete_link'] = "fac_contri_5_delete"
@@ -543,6 +831,11 @@ class ConfInternational5Update(UpdateView):
     model = ConfInternational5
     form_class = AddConfInternational5
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(ConfInternational5Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -568,12 +861,31 @@ class ConfNational6Create(CreateView):
     form_class = AddConfNational6
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(ConfNational6Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Paper presented in National Conferences'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = ConfNational6Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "fac_contri_6"
         context['update_link'] = "fac_contri_6_update"
         context['delete_link'] = "fac_contri_6_delete"
@@ -584,6 +896,11 @@ class ConfNational6Update(UpdateView):
     model = ConfNational6
     form_class = AddConfNational6
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(ConfNational6Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -609,12 +926,31 @@ class ResIndustrial7Create(CreateView):
     form_class = AddResIndustrial7
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(ResIndustrial7Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Research papers authored with industrial persons'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = ResIndustrial7Filter(self.request.GET, queryset=context['events'])
+        context['events']= context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "fac_contri_7"
         context['update_link'] = "fac_contri_7_update"
         context['delete_link'] = "fac_contri_7_delete"
@@ -625,6 +961,11 @@ class ResIndustrial7Update(UpdateView):
     model = ResIndustrial7
     form_class = AddResIndustrial7
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(ResIndustrial7Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -650,12 +991,31 @@ class FacEvents8Create(CreateView):
     form_class = AddFacEvents8
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(FacEvents8Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Events for faculty members (FDP/Webinar/Seminar/STTP/Workshops/Others)'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+    
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+    
+        context['DeptFilter'] = FacEvents8Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "fac_contri_8"
         context['update_link'] = "fac_contri_8_update"
         context['delete_link'] = "fac_contri_8_delete"
@@ -666,6 +1026,11 @@ class FacEvents8Update(UpdateView):
     model = FacEvents8
     form_class = AddFacEvents8
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(FacEvents8Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -691,12 +1056,31 @@ class ProfessionalPrac9Create(CreateView):
     form_class = AddProfessionalPrac9
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(ProfessionalPrac9Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Participation in Professional Practices (Curriculum Revision/Syllabus Development)'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = ProfessionalPrac9Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "fac_contri_9"
         context['update_link'] = "fac_contri_9_update"
         context['delete_link'] = "fac_contri_9_delete"
@@ -707,6 +1091,11 @@ class ProfessionalPrac9Update(UpdateView):
     model = ProfessionalPrac9
     form_class = AddProfessionalPrac9
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(ProfessionalPrac9Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -732,12 +1121,31 @@ class FacPatents10Create(CreateView):
     form_class = AddFacPatents10
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(FacPatents10Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'List of Faculty Patents/IPR'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = FacPatents10Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+        
         context['nbar'] = "fac_contri_10"
         context['update_link'] = "fac_contri_10_update"
         context['delete_link'] = "fac_contri_10_delete"
@@ -748,6 +1156,11 @@ class FacPatents10Update(UpdateView):
     model = FacPatents10
     form_class = AddFacPatents10
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(FacPatents10Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -773,12 +1186,31 @@ class NationalAttend11Create(CreateView):
     form_class = AddNationalAttend11
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(NationalAttend11Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Details of National Conference attended'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = NationalAttend11Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+        
         context['nbar'] = "fac_contri_11"
         context['update_link'] = "fac_contri_11_update"
         context['delete_link'] = "fac_contri_11_delete"
@@ -789,6 +1221,11 @@ class NationalAttend11Update(UpdateView):
     model = NationalAttend11
     form_class = AddNationalAttend11
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(NationalAttend11Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -814,12 +1251,31 @@ class InternationalAttend12Create(CreateView):
     form_class = AddInternationalAttend12
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(InternationalAttend12Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Details of International Conference attended'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = InternationalAttend12Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+        
         context['nbar'] = "fac_contri_12"
         context['update_link'] = "fac_contri_12_update"
         context['delete_link'] = "fac_contri_12_delete"
@@ -830,6 +1286,11 @@ class InternationalAttend12Update(UpdateView):
     model = InternationalAttend12
     form_class = AddInternationalAttend12
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(InternationalAttend12Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -857,12 +1318,31 @@ class FacAchieveCreate(CreateView):
     form_class = AddFacAchieve
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(FacAchieveCreate, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Achievement List'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = FacAchieveFilter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+        
         context['nbar'] = "fac_achieve"
         context['update_link'] = "fac_achieve_update"
         context['delete_link'] = "fac_achieve_delete"
@@ -873,6 +1353,11 @@ class FacAchieveUpdate(UpdateView):
     model = FacAchieve
     form_class = AddFacAchieve
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(FacAchieveUpdate, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -898,12 +1383,31 @@ class FacBookCreate(CreateView):
     form_class = AddFacBook
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(FacBookCreate, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Books & Monographs Published'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = FacBookFilter(self.request.GET, queryset=context['events'])
+        context['events']= context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "fac_book"
         context['update_link'] = "fac_book_update"
         context['delete_link'] = "fac_book_delete"
@@ -918,6 +1422,11 @@ class FacBookUpdate(UpdateView):
     model = FacBook
     form_class = AddFacBook
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(FacBookUpdate, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -947,12 +1456,31 @@ class IndInst1Create(CreateView):
     template_name = 'create_form.html'
     context_object_name = 'ind_inst_1_instance'
     
+    def get_form_kwargs(self):
+        kwargs = super(IndInst1Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Industrial Visit  of Faculty (Visits accompanied with students should be excluded)'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = IndFacvisit1Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+        
         context['nbar'] = "ind_inst_1_tab"
         context['update_link'] = "ind_inst_1_update"
         context['delete_link'] = "ind_inst_1_delete"
@@ -963,6 +1491,11 @@ class IndInst1Update(UpdateView):
     model = IndFacvisit1
     form_class = IndFacVisit1Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(IndInst1Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -988,12 +1521,31 @@ class IndInst2Create(CreateView):
     template_name = 'create_form.html'
     # context_object_name = 'ind_inst_2_instance'
     
+    def get_form_kwargs(self):
+        kwargs = super(IndInst2Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Training of Faculty by Industry'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = IndInst2Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+        
         context['nbar'] = "ind_inst_2_tab"
         context['update_link'] = "ind_inst_2_update"
         context['delete_link'] = "ind_inst_2_delete"
@@ -1004,6 +1556,11 @@ class IndInst2Update(UpdateView):
     model = IndInst2
     form_class = IndInst2Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(IndInst2Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1017,7 +1574,6 @@ class IndInst2Delete(DeleteView):
     template_name = "form_delete.html"
     context_object_name = "model_instance"
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cancel_link'] = "ind_inst_2"
@@ -1030,12 +1586,31 @@ class IndInst3Create(CreateView):
     form_class = IndInst3Form
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(IndInst3Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Faculty Providing training to Industry'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = IndInst3Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+        
         context['nbar'] = "ind_inst_3_tab"
         context['update_link'] = "ind_inst_3_update"
         context['delete_link'] = "ind_inst_3_delete"
@@ -1046,6 +1621,11 @@ class IndInst3Update(UpdateView):
     model = IndInst3
     form_class = IndInst3Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(IndInst3Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1070,12 +1650,31 @@ class IndInst4Create(CreateView):
     form_class = IndInst4Form
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(IndInst4Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Faculty on board of Industry'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = IndInst4Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+        
         context['nbar'] = "ind_inst_4_tab"
         context['update_link'] = "ind_inst_4_update"
         context['delete_link'] = "ind_inst_4_delete"
@@ -1086,6 +1685,11 @@ class IndInst4Update(UpdateView):
     model = IndInst4
     form_class = IndInst4Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(IndInst4Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1110,12 +1714,31 @@ class IndInst5Create(CreateView):
     form_class = IndInst5Form
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(IndInst5Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Industrial people on various Boards/Committee of Institute or Department '
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = IndInst5Filter(self.request.GET, queryset=context['events'])
+        context['events']= context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "ind_inst_5_tab"
         context['update_link'] = "ind_inst_5_update"
         context['delete_link'] = "ind_inst_5_delete"
@@ -1126,6 +1749,11 @@ class IndInst5Update(UpdateView):
     model = IndInst5
     form_class = IndInst5Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(IndInst5Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1150,12 +1778,31 @@ class IndInst6Create(CreateView):
     form_class = IndInst6Form
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(IndInst6Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Faculty patents leading to industry products'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = IndInst6Filter(self.request.GET, queryset=context['events'])
+        context['events']= context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "ind_inst_6_tab"
         context['update_link'] = "ind_inst_6_update"
         context['delete_link'] = "ind_inst_6_delete"
@@ -1166,6 +1813,11 @@ class IndInst6Update(UpdateView):
     model = IndInst6
     form_class = IndInst6Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(IndInst6Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1190,12 +1842,31 @@ class IndInst7Create(CreateView):
     form_class = IndInst7Form
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(IndInst7Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Sponsored Projects (Faculty only)'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = IndInst7Filter(self.request.GET, queryset=context['events'])
+        context['events']= context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "ind_inst_7_tab"
         context['update_link'] = "ind_inst_7_update"
         context['delete_link'] = "ind_inst_7_delete"
@@ -1206,6 +1877,11 @@ class IndInst7Update(UpdateView):
     model = IndInst7
     form_class = IndInst7Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(IndInst7Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1230,12 +1906,31 @@ class IndInst8Create(CreateView):
     form_class = IndInst8Form
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(IndInst8Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Consultancy Projects/Advisory Services'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = IndInst8Filter(self.request.GET, queryset=context['events'])
+        context['events']= context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "ind_inst_8_tab"
         context['update_link'] = "ind_inst_8_update"
         context['delete_link'] = "ind_inst_8_delete"
@@ -1246,6 +1941,11 @@ class IndInst8Update(UpdateView):
     model = IndInst8
     form_class = IndInst8Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(IndInst8Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1270,12 +1970,31 @@ class IndInst9Create(CreateView):
     form_class = IndInst9Form
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(IndInst9Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'MOU Information'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+     
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+   
+        context['DeptFilter'] = IndInst9Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+        
         context['nbar'] = "ind_inst_9_tab"
         context['update_link'] = "ind_inst_9_update"
         context['delete_link'] = "ind_inst_9_delete"
@@ -1286,6 +2005,11 @@ class IndInst9Update(UpdateView):
     model = IndInst9
     form_class = IndInst9Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(IndInst9Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1312,12 +2036,31 @@ class CurGuestLect1Create(CreateView):
     form_class = AddCurGuestLect1
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(CurGuestLect1Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Guest Lectures (General Topics)'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = CurGuestLect1Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+        
         context['nbar'] = "cur_input_1"
         context['update_link'] = "cur_input_1_update"
         context['delete_link'] = "cur_input_1_delete"
@@ -1328,6 +2071,11 @@ class CurGuestLect1Update(UpdateView):
     model = CurGuestLect1
     form_class = AddCurGuestLect1
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(CurGuestLect1Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1353,12 +2101,31 @@ class CurExptLect2Create(CreateView):
     form_class = AddCurExptLect2
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(CurExptLect2Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Expert Lectures'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = CurExptLect2Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+        
         context['nbar'] = "cur_input_2"
         context['update_link'] = "cur_input_2_update"
         context['delete_link'] = "cur_input_2_delete"
@@ -1369,6 +2136,11 @@ class CurExptLect2Update(UpdateView):
     model = CurExptLect2
     form_class = AddCurExptLect2
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(CurExptLect2Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1394,12 +2166,31 @@ class CurStudTrain3Create(CreateView):
     form_class = AddCurStudTrain3
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(CurStudTrain3Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Student Internship/Industrial Training'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = CurStudTrain3Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+        
         context['nbar'] = "cur_input_3"
         context['update_link'] = "cur_input_3_update"
         context['delete_link'] = "cur_input_3_delete"
@@ -1410,6 +2201,11 @@ class CurStudTrain3Update(UpdateView):
     model = CurStudTrain3
     form_class = AddCurStudTrain3
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(CurStudTrain3Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1435,12 +2231,31 @@ class CurStudVisit4Create(CreateView):
     form_class = AddCurStudVisit4
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(CurStudVisit4Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Student Industrial Visit'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = CurStudVisit4Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+        
         context['nbar'] = "cur_input_4"
         context['update_link'] = "cur_input_4_update"
         context['delete_link'] = "cur_input_4_delete"
@@ -1451,6 +2266,11 @@ class CurStudVisit4Update(UpdateView):
     model = CurStudVisit4
     form_class = AddCurStudVisit4
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(CurStudVisit4Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1476,12 +2296,31 @@ class CurStudSponsor5Create(CreateView):
     form_class = AddCurStudSponsor5
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(CurStudSponsor5Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Students Sponsored Projects'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = CurStudSponsor5Filter(self.request.GET, queryset=context['events'])
+        context['events']= context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "cur_input_5"
         context['update_link'] = "cur_input_5_update"
         context['delete_link'] = "cur_input_5_delete"
@@ -1492,6 +2331,11 @@ class CurStudSponsor5Update(UpdateView):
     model = CurStudSponsor5
     form_class = AddCurStudSponsor5
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(CurStudSponsor5Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1519,12 +2363,31 @@ class StudFac1Create(CreateView):
     form_class = StudFac1Form
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(StudFac1Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Mentoring System to help students at individual level'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = StudFac1Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+        
         context['nbar'] = "stud_fac_1"
         context['update_link'] = "stud_fac_1_update"
         context['delete_link'] = "stud_fac_1_delete"
@@ -1535,6 +2398,11 @@ class StudFac1Update(UpdateView):
     model = StudFac1
     form_class = StudFac1Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(StudFac1Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1559,12 +2427,31 @@ class StudFac2Create(CreateView):
     form_class = StudFac2Form
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(StudFac2Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Self Learning facilities for students'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = StudFac2Filter(self.request.GET, queryset=context['events'])
+        context['events']= context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "stud_fac_2"
         context['update_link'] = "stud_fac_2_update"
         context['delete_link'] = "stud_fac_2_delete"
@@ -1575,6 +2462,11 @@ class StudFac2Update(UpdateView):
     model = StudFac2
     form_class = StudFac2Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(StudFac2Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1599,12 +2491,31 @@ class StudFac3Create(CreateView):
     form_class = StudFac3Form
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(StudFac3Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Achievement of Students in Competitive Exam '
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = StudFac3Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+        
         context['nbar'] = "stud_fac_3"
         context['update_link'] = "stud_fac_3_update"
         context['delete_link'] = "stud_fac_3_delete"
@@ -1615,6 +2526,11 @@ class StudFac3Update(UpdateView):
     model = StudFac3
     form_class = StudFac1Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(StudFac3Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1639,12 +2555,31 @@ class StudFac4Create(CreateView):
     form_class = StudFac4Form
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(StudFac4Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Capability Enhancement and Development Activities'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = StudFac4Filter(self.request.GET, queryset=context['events'])
+        context['events']= context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "stud_fac_4"
         context['update_link'] = "stud_fac_4_update"
         context['delete_link'] = "stud_fac_4_delete"
@@ -1655,6 +2590,11 @@ class StudFac4Update(UpdateView):
     model = StudFac4
     form_class = StudFac4Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(StudFac4Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1679,12 +2619,31 @@ class StudFac5Create(CreateView):
     form_class = StudFac5Form
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(StudFac5Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Professional development / administrative training  programmes organized'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = StudFac5Filter(self.request.GET, queryset=context['events'])
+        context['events']= context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "stud_fac_5"
         context['update_link'] = "stud_fac_5_update"
         context['delete_link'] = "stud_fac_5_delete"
@@ -1695,6 +2654,11 @@ class StudFac5Update(UpdateView):
     model = StudFac5
     form_class = StudFac5Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(StudFac5Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1721,12 +2685,31 @@ class ExtraCurr1Create(CreateView):
     form_class = ExtraCurr1Form
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(ExtraCurr1Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Sports (This information to be provided by Physical/Sports Director)'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = ExtraCurr1Filter(self.request.GET, queryset=context['events'])
+        context['events']= context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "extra_curr_1"
         context['update_link'] = "extra_curr_1_update"
         context['delete_link'] = "extra_curr_1_delete"
@@ -1737,6 +2720,11 @@ class ExtraCurr1Update(UpdateView):
     model = ExtraCurr1
     form_class = ExtraCurr1Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(ExtraCurr1Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1761,12 +2749,31 @@ class ExtraCurr2Create(CreateView):
     form_class = ExtraCurr2Form
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(ExtraCurr2Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Names of winners at various levels of  sports tournaments'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = ExtraCurr2Filter(self.request.GET, queryset=context['events'])
+        context['events']= context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "extra_curr_2"
         context['update_link'] = "extra_curr_2_update"
         context['delete_link'] = "extra_curr_2_delete"
@@ -1777,6 +2784,11 @@ class ExtraCurr2Update(UpdateView):
     model = ExtraCurr2
     form_class = ExtraCurr2Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(ExtraCurr2Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1801,13 +2813,32 @@ class CulturalAct3Create(CreateView):
     form_class = CulturalAct3Form
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(CulturalAct3Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Awards won in cultural competitions/Club activities'
         context['events'] = self.model.objects.all()
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = CulturalAct3Filter(self.request.GET, queryset=context['events'])
+        context['events']= context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "extra_curr_3"
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
         context['update_link'] = "extra_curr_3_update"
         context['delete_link'] = "extra_curr_3_delete"
         context['tab_link'] = "extra_curr_tabs.html"
@@ -1823,6 +2854,11 @@ class CulturalAct3Update(UpdateView):
     form_class = CulturalAct3Form
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(CulturalAct3Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Awards won in cultural competitions/Club activities'
@@ -1832,6 +2868,11 @@ class CulturalCount3Update(UpdateView):
     model = CulturalCount3
     form_class = CulturalCount3Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(CulturalCount3Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1857,12 +2898,31 @@ class SocialAct4Create(CreateView):
     form_class = ExtraCurr2Form
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(SocialAct4Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Information about social activities held'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = SocialAct4Filter(self.request.GET, queryset=context['events'])
+        context['events']= context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "extra_curr_4"
         context['update_link'] = "extra_curr_4_update"
         context['delete_link'] = "extra_curr_4_delete"
@@ -1873,6 +2933,11 @@ class SocialAct4Update(UpdateView):
     model = SocialAct4
     form_class = SocialAct4Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(SocialAct4Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1897,12 +2962,31 @@ class CentersAct5Create(CreateView):
     form_class = CentersAct5Form
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(CentersAct5Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Activities of Various Centers/Cells (ISTE/Research/Skill Development Center etc)'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = CenterAct5Filter(self.request.GET, queryset=context['events'])
+        context['events']= context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+
         context['nbar'] = "extra_curr_5"
         context['update_link'] = "extra_curr_5_update"
         context['delete_link'] = "extra_curr_5_delete"
@@ -1913,6 +2997,11 @@ class CentersAct5Update(UpdateView):
     model = CentersAct5
     form_class = CentersAct5Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(CentersAct5Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1937,12 +3026,31 @@ class ExtraAct6Create(CreateView):
     form_class = ExtraAct6Form
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(ExtraAct6Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Extra Activities/Acheivement(if any)'
         context['events'] = self.model.objects.all()
-        context['data'] = serializers.serialize( "python", self.model.objects.all() )
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+        context['DeptFilter'] = ExtraAct6Filter(self.request.GET, queryset=context['events'])
+        context['events'] = context['DeptFilter'].qs
+        context['data'] = serializers.serialize( "python", context['events'] )
+        
         context['nbar'] = "extra_curr_6"
         context['update_link'] = "extra_curr_6_update"
         context['delete_link'] = "extra_curr_6_delete"
@@ -1953,6 +3061,11 @@ class ExtraAct6Update(UpdateView):
     model = ExtraAct6
     form_class = ExtraAct6Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(ExtraAct6Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1977,11 +3090,27 @@ class EcellCreate(CreateView):
     form_class = EcellForm
     template_name = 'create_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(EcellCreate, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sheet'] = "department"
         context['header'] = 'Activities Conducted By E- Cell'
         context['events'] = self.model.objects.all()
+        
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
         context['nbar'] = "e_cell"
         context['update_link'] = "e_cell_update"
@@ -1997,6 +3126,11 @@ class EcellUpdate(UpdateView):
     form_class = EcellForm
     template_name = "form_update.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(EcellUpdate, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Activities Conducted By E - Cell'
@@ -2006,6 +3140,11 @@ class EcellCountUpdate(UpdateView):
     model = EcellCount
     form_class = EcellCountForm
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(EcellCountUpdate, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

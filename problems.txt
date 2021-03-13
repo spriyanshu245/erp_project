@@ -45,7 +45,6 @@
 13. User Accounts
 
 Model Related---------------
-1. department is foreign key based. "ondelete=models.CASCADE" will delete entire database on deletion of respective department.
 
 2. sector field = choices or text ? ----------------------------------------------------------#done
     ------2.1 Sector is a choice field, check choices.py
@@ -55,3 +54,23 @@ Model Related---------------
 
 4. Add a Success Alert message on adding a new record in views or in html file.
 
+6-3-21
+1.user profiles not shown in admin page in users but profiles is shown _______________________#Done
+2.percentage field does not check excess percentage like appeared = 10 and passed = 12 percentage = 120..this should not happen.------#Done
+
+7-3-21
+1.Get new login page working..._____________________________#Done
+2. Remember me functionality in login. IG it is not required.
+3. Forgot password functionality.___________________________#Done by Sourabh, just need to integrate
+
+---------------------------------MAJOR ISSUES-----------------------------------------
+1. department is foreign key based. "ondelete=models.CASCADE" will delete entire database on deletion of respective department.
+2. Sometimes we get column error due to inconsistancies between db.sqlite on different systems. 
+    What if we get same error while deploying recent update on college server and college has started filling data. 
+    Deleting database might not be an option there.
+3. Backup System.
+
+
+8-3-21
+1. setting default value in django-filters.________#Done
+2. date filter not added in studfac1 because of charfield for multiple dates.

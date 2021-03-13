@@ -3,9 +3,9 @@
   <h4 class="text-center alert alert-info">Add new Record</h4>
   <form action="" method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{form.as_p}}
     <div>
-      <input type="submit" class="btn btn-success" value="Add" />
+      <input type="submit" class="btn btn-success" id="create_record" value="Add" />
       <br>
       <br>
       <div class="alert alert-warning alert-dismissible" role="alert">

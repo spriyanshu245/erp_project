@@ -13,7 +13,7 @@ from department.forms import *
 from department.models import *
 from department.decorators import unauthenticated_user
 
-from department.filters import Place1Filter
+from department.filters import *
 #------------------------------------------------ PLACEMENT VIEWS -----------------------------------------------#
 #----------------------------------------------------------------------------------------------------------------#
 
@@ -23,6 +23,10 @@ class Placement1Create(CreateView):
     form_class = Placement1Form
     template_name = "placement_custom1.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(Placement1Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)   
@@ -44,6 +48,11 @@ class Placement1Update(UpdateView):
     model = Placement1
     form_class = Placement1Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(Placement1Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -100,8 +109,14 @@ class Placement2Create(CreateView):
     form_class = Placement2Form
     template_name = "create_form.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(Placement2Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "placement"
         context['header'] = 'List of companies visited  for campus placement in specified period'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -109,7 +124,6 @@ class Placement2Create(CreateView):
         context['update_link'] = "place2_update"
         context['delete_link'] = "place2_delete"
         context['tab_link'] = "placement_tabs.html"
-        context['sheet'] = "placement"
 
 
         # context['count_data'] = serializers.serialize( "python", EcellCount.objects.all() )
@@ -120,6 +134,11 @@ class Placement2Update(UpdateView):
     model = Placement2
     form_class = Placement2Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(Placement2Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -144,8 +163,14 @@ class Placement3Create(CreateView):
     form_class = Placement3Form
     template_name = "create_form.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(Placement3Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "placement"
         context['header'] = 'List of companies for which students appeared at other campus in specified period'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -153,13 +178,17 @@ class Placement3Create(CreateView):
         context['update_link'] = "place3_update"
         context['delete_link'] = "place3_delete"
         context['tab_link'] = "placement_tabs.html"
-        context['sheet'] = "placement"
         return context
 
 class Placement3Update(UpdateView):
     model = Placement3
     form_class = Placement3Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(Placement3Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -184,22 +213,48 @@ class Placement4Create(CreateView):
     form_class = Placement4Form
     template_name = "create_form.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(Placement4Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "placement"
         context['header'] = 'Student Placement Data'
         context['events'] = self.model.objects.all()
+        print(context['events'])
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
+
+        context['is_staff'] = self.request.user.is_staff
+        context['logged_user'] = self.request.user.username
+        context['user_dept'] = self.request.user.userprofile.department
+        if self.request.user.groups.exists():
+            group = self.request.user.groups.all()[0].name
+            if group in ["HOD"]:
+                context['is_HOD'] = True
+        else:
+            context['HOD'] = False
+
+            context['DeptFilter'] = Placement4Filter(self.request.GET, queryset=context['events'])
+            context['events'] = context['DeptFilter'].qs
+            context['data'] = serializers.serialize( "python", context['events'])
+
         context['nbar'] = "place4_tab"
         context['update_link'] = "place4_update"
         context['delete_link'] = "place4_delete"
         context['tab_link'] = "placement_tabs.html"
-        context['sheet'] = "placement"
         return context
 
 class Placement4Update(UpdateView):
     model = Placement4
     form_class = Placement4Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(Placement4Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -224,8 +279,14 @@ class Placement5Create(CreateView):
     form_class = Placement5Form
     template_name = "create_form.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(Placement5Create, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['sheet'] = "placement"
         context['header'] = 'List of Students Opted for Entrepreneurship/Self Employment (During specified period)'
         context['events'] = self.model.objects.all()
         context['data'] = serializers.serialize( "python", self.model.objects.all() )
@@ -233,13 +294,17 @@ class Placement5Create(CreateView):
         context['update_link'] = "place5_update"
         context['delete_link'] = "place5_delete"
         context['tab_link'] = "placement_tabs.html"
-        context['sheet'] = "placement"
         return context
 
 class Placement5Update(UpdateView):
     model = Placement5
     form_class = Placement5Form
     template_name = "form_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(Placement5Update, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

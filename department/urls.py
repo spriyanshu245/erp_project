@@ -2,14 +2,20 @@ from django.conf.urls import url
 from django.urls import path, include
 from department import views
 from django.contrib.auth import views as auth_views
+from django.conf.urls.static import static
+from django.conf import settings
 
+
+
+    
+handler404 =  'department.views.handler404'
 urlpatterns = [
     # Test Pages
-   path('testPage/', views.testPage, name="test"),
-   
-   # About us page
-   path('about_us',views.aboutus, name ="about"),
 
+   path('testPage/', views.testRegisterPage, name="test"),
+   path('test2/', views.test2, name="test2"),
+    # About us page
+   path('about_us',views.aboutus, name ="about"),
 #---------------------------------------------------------------
 
     path('api-auth/department/<int:title>/<int:stitle>/<int:ttitle>', views.jsonApiDept,name="jsonApi"),
@@ -26,7 +32,6 @@ urlpatterns = [
 
     #still messy
     # Registration Page and Logins
-
     url('^', include('django.contrib.auth.urls')),
     path('register/', views.registerPage, name="register"),
     path('login/', views.loginPage, name = "loginPage"),
@@ -279,9 +284,9 @@ urlpatterns = [
     path('library1/', views.Library1Create.as_view(), name="library1"),
     path('library1/update/<int:pk>/', views.Library1Update.as_view(), name="library1_update"),
     path('library1/delete/<int:pk>/', views.Library1Delete.as_view(), name="library1_delete"),
+    path('library2/create/',views.Library2Create.as_view(), name ="library2_create"),
     path('library2/update/<int:pk>/', views.Library2Update.as_view(), name="library2_update"),
-
-
 ]
 
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 #handler404 = ''

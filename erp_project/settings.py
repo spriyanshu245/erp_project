@@ -29,7 +29,7 @@ TABS_DIR = Path.joinpath(DEPARTMENT_DIR, "tabs")
 SECRET_KEY = '_z90!&@q%-1)uqlb$g6^%lyri8)0@5r#6vbk)rqnqn=v3a0twb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = not bool(os.getenv("DEBUG_DJ") or False)
 
 ALLOWED_HOSTS = ['*']
 #actual website when it deploy
@@ -45,7 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'department',
     'django_filters',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     
@@ -139,7 +142,11 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+MEDIA_ROOT =  Path.joinpath(BASE_DIR, 'department', 'media') 
+MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL='/'
 LOGOUT_REDIRECT_URL='/'
 AUTH_PROFILE_MODULE='department.models.Profile'
+
+AUTHENTICATION_BACKENDS = ['department.models.EmailBackend']

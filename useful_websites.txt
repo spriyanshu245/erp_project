@@ -1,0 +1,4 @@
+Login using Email: https://stackoverflow.com/questions/37332190/django-login-with-email
+Timestamped Model: https://stackoverflow.com/questions/8016412/in-django-do-models-have-a-default-timestamp-field
+
+

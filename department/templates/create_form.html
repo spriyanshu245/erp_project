@@ -5,11 +5,23 @@
 {% include tab_link %}
 
 <div class="row">
+    
     {% include 'add_record.html' %}
-     <div class="col-sm-9">
-
+        <div class="col-sm-9">
+            <div class=" card card-body">
+            <form action="" method="get">
+                <!-- {{DeptFilter.form}} <br> -->
+                {% for field in DeptFilter.form %}
+                    <b>{{field.label}}:</b>
+                    {{field}}
+                {% endfor %}
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
         {% if events %}
+        
         <h4 class="text-center alert alert-primary"> {{header}} </h4>
+        
         <div style="height: 600px; overflow-x:auto; overflow-y:auto;">
         <table class="table table-bordered table-hover shadow sortable" id="table_main" style="text-align: center;">
 
@@ -19,7 +31,15 @@
                 {% for instance in data %}
                     {% if forloop.first %}
                         {% for field, value in instance.fields.items %}
+                            {% if is_staff %}
                             <th scope="col" style="text-align: center; position: sticky; top: 0;">{{ field|replace_to_space }}</th>
+                            <!-- Skipping Fields -->
+                            {% elif field == "created_by_" %}         
+                            {% elif field == "updated_at" %}
+                            {% elif field == "created_at" %}
+                            {% else %}
+                            <th scope="col" style="text-align: center; position: sticky; top: 0;">{{ field|replace_to_space }}</th>
+                            {% endif %}
                         {% endfor %}
                     {% endif %}
                 {% endfor %}
@@ -27,7 +47,6 @@
                 
             </tr>
             </thead>
-
             <tbody id="table_row" style="font-weight: bold; 
             color: #687a6d; 
             padding: 10px; 
@@ -36,16 +55,42 @@
                 <tr >
                     <td>{{forloop.counter}}</td>
                     {% for field, value in instance.fields.items %}
-                    <td>{{ value }}</td>
+
+                    {% if is_staff %}
+                        <td>{{ value }}</td>
+                    <!-- Skipping Fields -->
+                    {% elif field == 'created_by_'%}    <!-- Remove this after debug-->
+                    {% elif field == "updated_at" %}
+                    {% elif field == "created_at" %}             
+                    {% else %}
+                        <td>{{ value }}</td>
+                    {% endif %}
                     {% endfor %}
+
+                    {% if is_staff %}
                     <td>
                         <a href="{% url update_link pk=instance.pk %}" class="btn btn-outline-success btn-sm">Update</a>
                         <a href="{% url delete_link pk=instance.pk %}" class="btn btn-outline-danger btn-sm inline">Delete</a>
                     </td>
+                    {% else %}
+                        {% for field, value in instance.fields.items %}
+                            {% if is_HOD and value == user_dept %}
+                            <td>
+                                <a href="{% url update_link pk=instance.pk %}" class="btn btn-outline-success btn-sm">Update</a>
+                                <a href="{% url delete_link pk=instance.pk %}" class="btn btn-outline-danger btn-sm inline">Delete</a>
+                            </td>    
+                            {% elif field == 'created_by' and value == logged_user and not is_HOD %}
+                            <td>
+                                <a href="{% url update_link pk=instance.pk %}" class="btn btn-outline-success btn-sm">Update</a>
+                                <a href="{% url delete_link pk=instance.pk %}" class="btn btn-outline-danger btn-sm inline">Delete</a>
+                            </td>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
                 </tr>
                 {% endfor %}
            </tbody>
-
          </table>
         </div>
 
@@ -53,6 +98,7 @@
         <h4 class="text-center alert alert-info"> {{header}} </h4>
         <h4 class="text-center alert alert-warning">No Records Found !</h4>
         {% endif %}
+        
      </div>
    </div>
 {% endblock %}

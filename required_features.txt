@@ -1,0 +1,29 @@
+1. Django admin panel add new record for user to be displayed.
+2. One click export full department table data. Filters, department, from and to date(for admins only).
+3. Date Filter(from,to) for all tables.-----------------------------------------Remaining for non-department tables
+4. Chained dropdown.
+5. Created at(timestamp) for every table.-----------------------------------------------Done
+6. Template for User profile, includes updating user logged in.
+7. Auto backup every month.
+
+-------------------------------------------------------------------------------------------------
+7-3-21
+1. Build Register Page______________________#Done
+
+8-3-21
+1. Design user roles.
+    admin department filter._______________#added
+    from to filter_________________________#added
+        Filters _________#Done for department tables only.
+        forms____________#Done.
+        department views and placement views__________#Done.
+2. email field for signup____________________#Done.
+
+10-3-21
+1. Add faculty created_by filter for downloading export.
+    This adds a text field.
+2. Add decorator for register new user for non-admins.____________#Done
+3. Add created_at and updated_at at every model.__________________#Done
+
+12-3-21
+4. Add filters to non_department tables___________________________

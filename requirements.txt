@@ -6,3 +6,4 @@ selenium==3.141.0
 webdriver-manager==2.5.3
 django-filter==2.3.0
 djangoajax==3.2
+django-crispy-forms==1.11.1
