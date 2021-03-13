@@ -1146,13 +1146,21 @@ def save_user_profile(sender, instance, **kwargs):
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 
+EMAIL_REGEX = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"
+import re
 class EmailBackend(ModelBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
         UserModel = get_user_model()
         try:
-            user = UserModel.objects.get(email=username)
+            if re.match(EMAIL_REGEX,username):
+                user = UserModel.objects.get(email=username)
+            else :
+                user = UserModel.objects.get(username=username)
         except UserModel.DoesNotExist:
-            return None
+            try :
+                user = UserModel.objects.get(username=username)
+            except :
+                pass
         else:
             if user.check_password(password):
                 return user
