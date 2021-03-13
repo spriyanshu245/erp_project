@@ -15,6 +15,9 @@ from .decorators import unauthenticated_user
 from department.table_views.department_views import *
 from department.table_views.placement_views import *
 
+
+from django.http import HttpResponse
+from .handler import *
 # Custom templates
 
 # Create your views here.
@@ -69,5 +72,27 @@ def testPage(request):
 def aboutus(request):
     return render(request,'about_us.html/')
 
-
+############JsonAPi
+@login_required
+def jsonApiDept(request,title=0,stitle=0,ttitle=0):
+    if request.method == "GET":
+        formate = request.GET.get('format') or "json"
+    if formate == "json":
+        data = getAllXls(2).getvalue()
+        response =JsonResponse(json.loads(data),safe=False)
+    elif formate == "xls":
+        data = getAllXls(1).getvalue()
+        response = HttpResponse(data,content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename=dept%s.xlsx' % datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+    
+    return response 
+@login_required
+def ProfileApi(request,username):
+    if request.user.username != username :
+        pass
+        #return HttpResponse(status=401)
+    #TODO update as per User model
+    ProfileData = list(User.objects.filter(id=request.user.id).values('username','id','email','first_name'))+list(Profile.objects.filter(id=request.user.id).values('dept','role',))
+    print (ProfileData)
+    return JsonResponse(ProfileData,safe=False)
 

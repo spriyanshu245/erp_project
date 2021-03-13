@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from django.urls import path
+from django.urls import path, include
 from department import views
 from django.contrib.auth import views as auth_views
 
@@ -7,15 +7,30 @@ urlpatterns = [
     # Test Pages
    path('testPage/', views.testPage, name="test"),
    
-   
    # About us page
    path('about_us',views.aboutus, name ="about"),
 
 #---------------------------------------------------------------
+
+    path('api-auth/department/<int:title>/<int:stitle>/<int:ttitle>', views.jsonApiDept,name="jsonApi"),
+    path('api-auth/department/<int:title>/<int:stitle>', views.jsonApiDept,name="jsonApi"),
+    path('api-auth/department/<int:title>/', views.jsonApiDept,name="jsonApi"),
+    #path('api-auth/placement/<int:title>/', views.jsonApiPlace,name="jsonApi"),
+    #path('api-auth/library/<int:title>/', views.jsonApiLib,name="jsonApi"),
+    path('api-auth/department/', views.jsonApiDept,name="jsonApi"),
+   # path('api-auth/placement/', views.jsonApiPlace,name="jsonApi"),
+   # path('api-auth/library/', views.jsonApiLib,name="jsonApi"),
+    #path('api-auth/', views.jsonApiLib,name="jsonApi"),
+    #path('api-auth/u/<slug:username>', views.ProfileApi,name="ProfileApi"),
+    #path('api-auth/pp/<int:pk>', views.ProfileImgApi,name="ProfileImgApi"),
+
+    #still messy
     # Registration Page and Logins
-    path('login/', auth_views.LoginView.as_view(),name="login"),
-    path('logout/', auth_views.LogoutView.as_view(),name="logout"),
-    
+
+    url('^', include('django.contrib.auth.urls')),
+    path('register/', views.registerPage, name="register"),
+    path('login/', views.loginPage, name = "loginPage"),
+    path('logout/', views.logoutPage, name = "logoutPage"),
     # Shubham Login Pages
     path('register/', views.registerPage, name="register"),
     path('loginPage/', views.loginPage, name = "loginPage"),

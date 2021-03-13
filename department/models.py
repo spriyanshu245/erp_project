@@ -9,7 +9,8 @@ from django.core.validators import MaxValueValidator, MinValueValidator # used o
 
 # Questionable fields
 # level, student_ID_number
-
+#unique mail
+User._meta.get_field('email')._unique = True
 # Create your models here.
 
 # Models with Primary Keys
