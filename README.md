@@ -1,3 +1,4 @@
+
   # COLLEGE ERP
 
 ## Table of Contents
@@ -66,3 +67,6 @@ python3 Autostud.py <numberOfstudents>
 ## Usage <a name = "usage"></a>
 
 Add notes about how to use the system.
+<br>
+![ERP_snapshot2](https://user-images.githubusercontent.com/59028345/115144907-c2338300-a06c-11eb-8ba8-b3106a1c0ed3.jpeg)
+![ERP_snapshot1](https://user-images.githubusercontent.com/59028345/115144915-c6f83700-a06c-11eb-9724-ba3787620f9e.jpeg)
