@@ -1,4 +1,4 @@
-# Project Title
+  # COLLEGE ERP
 
 ## Table of Contents
 
@@ -9,7 +9,7 @@
 
 ## About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+A Python based Django Application for enterprise to manage college records and reports.
 
 ## Getting Started <a name = "getting_started"></a>
 
