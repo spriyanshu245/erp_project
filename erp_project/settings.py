@@ -31,7 +31,7 @@ SECRET_KEY = '_z90!&@q%-1)uqlb$g6^%lyri8)0@5r#6vbk)rqnqn=v3a0twb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = not bool(os.getenv("DEBUG_DJ") or False)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://erp-project-django.herokuapp.com/','127.0.0.1','*']
 #actual website when it deploy
 
 # Application definition
