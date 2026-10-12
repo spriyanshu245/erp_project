@@ -1,4 +1,23 @@
 {% extends 'placement/base.html' %}
-{% block content %} 
-<h2>Update student</h2>
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-sm-5">
+    <h4 class="text-center alert alert-info">Update Record #{{ student.id }}</h4>
+    <form action="" method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" class="btn btn-primary" value="Update" />
+      <a href="{% url 'show_student' %}" class="btn btn-outline-secondary">Cancel</a>
+      {% if messages %}
+      <ul class="messages mt-3">
+        {% for msg in messages %}
+        <li class="list-unstyled">
+          <div class="alert alert-{{ msg.level_tag }}" role="alert">{{ msg.message }}</div>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </form>
+  </div>
+</div>
 {% endblock content %}

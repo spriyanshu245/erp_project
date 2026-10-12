@@ -1,54 +1,49 @@
-# erp_project
-here the way to clone <br>
-Make sure you have added ssh keys
-<Br>
-Use following for help <br>
-https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/connecting-to-github-with-ssh
-<Br><br>
-```
-git clone git@github.com:spriyanshu245/erp_project.git
+# College ERP — Placement Tracker
 
-```
+A Django application for managing college placement records: add, list, update
+and delete placed-student entries (name, department, employer, date, package,
+reference number). Staff login required for all data views; Django admin
+included.
 
-if permission err then search how to add ssh key in github
+Stack: Django 4.2 LTS, Gunicorn, WhiteNoise, PostgreSQL (via `DATABASE_URL`)
+on Heroku with SQLite fallback for local development.
 
+## Local setup
 
-make changes and save
-```
-git add . # . refer all files
-git add <name> # single file / foldername
-```
-commit
-```
-git commit -m "usefull msg / changes "
-
-```
-push to github server
+```sh
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env   # then edit SECRET_KEY etc.
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
 ```
 
-git push 
+Open http://127.0.0.1:8000/ and log in with the superuser account.
 
+## Environment variables
 
-```
-Dependencies Installations :
-```
-djnago == 3.0 and above
-mysql server
-django-filters
+| Variable        | Purpose                                        |
+|-----------------|------------------------------------------------|
+| `SECRET_KEY`    | Django secret key (generate a fresh one; never commit it) |
+| `DEBUG`         | `True`/`False` (default `True` for local dev)   |
+| `ALLOWED_HOSTS` | Comma-separated hosts (e.g. `.herokuapp.com,yourdomain.tech`) |
+| `DATABASE_URL`  | Postgres URL. Unset → local `db.sqlite3` (gitignored) |
 
-```
-To get this project up and running locally on your computer:
+## Deploy to Heroku
 
-Set up the Python development environment. We recommend using a Python virtual environment.
-<br>
-Assuming you have Python setup, run the following commands (if you're on Windows you may use py or py -3 instead of python to start Python):
+```sh
+heroku create your-app-name
+heroku addons:create heroku-postgresql:essential-0
+heroku config:set SECRET_KEY="$(python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())')"
+heroku config:set DEBUG=False
+heroku config:set ALLOWED_HOSTS="your-app-name.herokuapp.com,yourdomain.tech"
+git push heroku modernize/erp-project:main
+```
 
-```
-pip3 install -r requirements.txt
-python3 manage.py makemigrations
-python3 manage.py migrate
-python3 manage.py collectstatic
-python3 manage.py test # Run the standard tests. These should all pass.
-python3 manage.py createsuperuser # Create a superuser
-python3 manage.py runserver
-```
+The `release` phase in the Procfile runs migrations automatically.
+Static files are served by WhiteNoise (`collectstatic` runs at build).
+
+> Note: an old `db.sqlite3` with demo data was previously committed to this
+> repo and has been removed. If you cloned before that cleanup, rotate any
+> credentials that may have been exposed and do not reuse the old database file.

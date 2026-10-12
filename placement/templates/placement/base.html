@@ -11,6 +11,15 @@
 <body>
     <div class="container mt-5">
         <h2 class="text-center alert alert-info">Placement Cell student record</h2>
+        <div class="d-flex justify-content-end align-items-center mb-3">
+          {% if user.is_authenticated %}
+            <span class="mr-3 text-muted">Signed in as <strong>{{ user.username }}</strong></span>
+            <form action="{% url 'logout' %}" method="post" class="d-inline ml-2">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-secondary btn-sm">Logout</button>
+            </form>
+          {% endif %}
+        </div>
         {% block content %} 
         {% endblock content %}
     </div>

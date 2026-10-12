@@ -50,7 +50,7 @@
             <td style="text-align: center;">{{st.package}}</td>
             <td style="text-align: center;">{{st.ref_no}}</td>
             <td>
-               <a href="#" class="btn btn-outline-secondary btn-sm">Edit</a> 
+               <a href="{% url 'update' st.id %}" class="btn btn-outline-secondary btn-sm">Edit</a> 
                <form action="{% url 'delete' st.id %}" method="POST" class="d-inline">
                 {% csrf_token %}
                    <input type="submit" class="btn btn-outline-danger btn-sm" value="Delete">

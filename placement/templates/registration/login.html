@@ -1,0 +1,18 @@
+{% extends 'placement/base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-sm-4">
+    <h4 class="text-center alert alert-info">Login</h4>
+    {% if form.errors %}
+      <div class="alert alert-danger" role="alert">Invalid username or password. Please try again.</div>
+    {% endif %}
+    <form method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" class="btn btn-primary btn-block" value="Login" />
+      <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+    <p class="text-muted mt-3"><small>Use a staff account created via <code>createsuperuser</code>.</small></p>
+  </div>
+</div>
+{% endblock content %}
